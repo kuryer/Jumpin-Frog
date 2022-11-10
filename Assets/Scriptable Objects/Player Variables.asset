@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b704ad51234904a8c9f01be0a0fd78, type: 3}
+  m_Name: Player Variables
+  m_EditorClassIdentifier: 
+  moveSpeed: 220
+  acceleration: 120
+  decceleration: 140
+  velPower: 1
+  generalGravity: 34
+  inAirAccelerationBasic: 18
+  inAirDeccelerationBasic: 1
+  fallClampSpeed: 475
+  jumpPower: 2700
+  jumpCutMultiplier: 0.9
+  fallGravity: 45
+  coyoteTime: 0.08
+  jumpBuffer: 0.1
+  jumpTightenerTime: 20
+  jumpThightenerGravity: 34
+  wallSlideSpeed: 240
+  wallGravity: 9
+  wallJumpDirectionBalance: 0.65
+  wallJumpPowerModifier: 1.5
+  wallGrabJumpBuffer: 0.1
+  wallGrabBuffer: 0.1
+  swingJumpForce: 45
+  swingJumpBalance: 0.4
+  SwingJumpBuffer: 0
+  swingBoostForce: 600
+  swingBoostBalance: 0.4
+  swingMoveSpeed: 450
+  accelerationSwing: 23
+  conccelerationSwing: 0
+  deccelerationSwing: 0
+  swingMovementPower: 1
+  swingGravity: 30
+  swingBuffer: 0.3
+  afterSwingJumpPower: 2600
+  swingSpeedPercentage: 0.7
+  lineWidth: 75
+  respawnTime: 0.3
