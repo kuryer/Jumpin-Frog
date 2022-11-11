@@ -95,6 +95,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Animations")]
     PlayerAnimations playerAnims;
+    [SerializeField] GameObject JumpCircle;
+    [SerializeField] Transform jumpCircleSpawnPoint;
     enum AnimationState
     {
         Idle_Player,
@@ -146,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("movement funcion: " + movement.Method.Name.ToString());
         }
+        gameObject.transform.localPosition = gameObject.transform.position;
 
     }
     private void FixedUpdate()
@@ -326,6 +329,7 @@ public class PlayerMovement : MonoBehaviour
             if(isSwinging)
                 StopSwing();
             Debug.Log(rb.velocity.y);
+            SpawnJumpCircle();
             Vector2 direction = new Vector2(SwingJumpDirectionX() * X * playerVars.swingJumpBalance, SwingJumpDirectionY() * (1f - playerVars.swingJumpBalance) /* * Mathf.Sign(rb.velocity.y)*/);
             playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
             float movePercent = MovePercentage();
@@ -937,6 +941,12 @@ public class PlayerMovement : MonoBehaviour
             playerAnims.ChangeAnimationState(AnimationState.Idle_Player.ToString());
             //Debug.Log("yo 3");
         }
+    }
+    void SpawnJumpCircle()
+    {
+        GameObject circle = Instantiate(JumpCircle, jumpCircleSpawnPoint);
+        gameObject.transform.localPosition = gameObject.transform.position;
+        Debug.Log("Halooo");
     }
 
     #endregion
