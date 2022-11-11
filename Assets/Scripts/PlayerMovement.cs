@@ -138,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
         velocityYText.text = "Velocity x Swing: " + SwingSignVelocityX();
 
         Timer();
+        ChangeSpring();
 
         DetectSideOfAnimation();
 
@@ -339,7 +340,7 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(rb.velocity.x) > 150f)
             return 150f;
         else
-            return rb.velocity.x;
+            return Mathf.Abs(rb.velocity.x);
     }
     float SwingJumpDirectionY()
     {
@@ -448,7 +449,7 @@ public class PlayerMovement : MonoBehaviour
     void VelocityCut()
     {
         Debug.Log("Before Velocity Cut: " + rb.velocity);
-        rb.velocity = new Vector2(rb.velocity.x / 2f, rb.velocity.y / 2f);
+        rb.velocity = new Vector2(rb.velocity.x / playerVars.swingVelocityCut, rb.velocity.y / playerVars.swingVelocityCut);
         Debug.Log("After Velocity Cut: " + rb.velocity);
     }
 
@@ -773,6 +774,13 @@ public class PlayerMovement : MonoBehaviour
         if (SwingDown)
             lastSwingPressed = playerVars.swingBuffer;
         
+    }
+    void ChangeSpring()
+    {
+        if (distJoint.frequency != playerVars.springFrequency)
+            distJoint.frequency = playerVars.springFrequency;
+        if (distJoint.dampingRatio != playerVars.springDamping)
+            distJoint.dampingRatio = playerVars.springDamping;
     }
     float XMovement()
     {

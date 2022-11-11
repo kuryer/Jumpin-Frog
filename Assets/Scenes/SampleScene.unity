@@ -74632,7 +74632,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 2.4
   m_DampingRatio: 0.2
-  m_Frequency: 2
+  m_Frequency: 1.7
 --- !u!114 &2110171136
 MonoBehaviour:
   m_ObjectHideFlags: 0

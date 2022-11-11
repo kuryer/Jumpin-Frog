@@ -33,19 +33,19 @@ MonoBehaviour:
   wallJumpPowerModifier: 1.5
   wallGrabJumpBuffer: 0.1
   wallGrabBuffer: 0.1
-  swingJumpForce: 45
+  swingJumpForce: 48
   swingJumpBalance: 0.4
   SwingJumpBuffer: 0
-  swingBoostForce: 600
+  swingBoostForce: 550
   swingBoostBalance: 0.4
-  swingMoveSpeed: 450
-  accelerationSwing: 23
+  swingMoveSpeed: 650
+  accelerationSwing: 16
   conccelerationSwing: 0
   deccelerationSwing: 0
   swingMovementPower: 1
   swingGravity: 30
   swingBuffer: 0.3
   afterSwingJumpPower: 2600
-  swingSpeedPercentage: 0.7
+  swingSpeedPercentage: 0.9
   lineWidth: 75
   respawnTime: 0.3

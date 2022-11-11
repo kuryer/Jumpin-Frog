@@ -38,6 +38,9 @@ public class PlayerVarsSO : ScriptableObject
     public float swingBoostForce;
     public float swingBoostBalance;
     [Header("Swinging")]
+    public float springFrequency;
+    public float springDamping;
+    public float swingVelocityCut;
     public float swingMoveSpeed;
     public float accelerationSwing;
     public float conccelerationSwing;
