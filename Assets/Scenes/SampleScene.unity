@@ -25370,7 +25370,7 @@ MonoBehaviour:
   playerRotationFix: 90
   exitBarHeight: 20
   JumpCircle: {fileID: 3593269304060940393, guid: da915433f8fb5244580b618870838abf, type: 3}
-  jumpCircleSpawnPoint: {fileID: 2090525051}
+  jumpCircleposition: 20
 --- !u!50 &2090525049
 Rigidbody2D:
   serializedVersion: 4

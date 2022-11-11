@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Animations")]
     PlayerAnimations playerAnims;
     [SerializeField] GameObject JumpCircle;
-    [SerializeField] Transform jumpCircleSpawnPoint;
+    [SerializeField] float jumpCircleposition;
     enum AnimationState
     {
         Idle_Player,
@@ -148,8 +148,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("movement funcion: " + movement.Method.Name.ToString());
         }
-        gameObject.transform.localPosition = gameObject.transform.position;
-
     }
     private void FixedUpdate()
     {
@@ -944,8 +942,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void SpawnJumpCircle()
     {
-        GameObject circle = Instantiate(JumpCircle, jumpCircleSpawnPoint);
-        gameObject.transform.localPosition = gameObject.transform.position;
+        Instantiate(JumpCircle, new Vector3(transform.position.x, transform.position.y - jumpCircleposition, transform.position.z), Quaternion.identity);
         Debug.Log("Halooo");
     }
 
