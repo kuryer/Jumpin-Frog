@@ -50,5 +50,9 @@ MonoBehaviour:
   swingBuffer: 0.3
   afterSwingJumpPower: 2600
   swingSpeedPercentage: 0.9
+  slingPower: 4000
+  slingBalance: 0.4
+  slingGravity: 25
+  slingGravityChangeTime: 0.7
   lineWidth: 75
   respawnTime: 0.3

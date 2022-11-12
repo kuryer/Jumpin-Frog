@@ -24,7 +24,8 @@ public class PlayerMovement : MonoBehaviour
         JumpTightener,
         Falling,
         WallGrab,
-        Swing
+        Swing,
+        Sling
     }
     gravityState GravityState;
 
@@ -70,6 +71,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 innerRaycastOffset;
     private bool canCornerCorrect;
 
+    [Header("Sling")]
+    bool canSling;
+    Rigidbody2D slingPointRB;
 
     [Header("Swing")]
     SpringJoint2D distJoint;
@@ -131,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
         jump();
 
         if (canSwing || isSwinging) Swing();
+        if (canSling) Sling();
         if (isSwinging) LineRendering();
         if (canWallJump) WallJump();
         if(!isWallPauseJumping && !isSwinging) WallGrab();
@@ -376,6 +381,46 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+    #region Sling
+
+    public void SetCanSlingTrue(Rigidbody2D slingRB)
+    {
+        slingPointRB = slingRB;
+        canSling = true;
+    }
+    public void SetCanSlingFalse()
+    {
+        canSling = false;
+    }
+    void Sling()
+    {
+        if(lastSwingPressed > 0f && !isGrounded)
+        {
+            rb.velocity = Vector2.zero;
+            rb.AddForce(SlingDirection() * playerVars.slingPower, ForceMode2D.Impulse);
+            Debug.Log(SlingDirection());
+            SetCanSlingFalse();
+            StartCoroutine(SlingGravityTimer());
+        }
+    }
+    IEnumerator SlingGravityTimer()
+    {
+        SwitchGravity(gravityState.Sling);
+        Debug.Log("yo 1");
+        yield return new WaitForSeconds(playerVars.slingGravityChangeTime);
+        Debug.Log("yo 2");
+        if(GravityState.Equals(gravityState.Sling))
+            SwitchGravity(gravityState.Falling);
+    }
+    Vector2 SlingDirection()
+    {
+        Vector2 direction = slingPointRB.position - rb.position;
+        direction = new Vector2(direction.x * playerVars.slingBalance, direction.y * (1f - playerVars.slingBalance));
+        return direction.normalized;
+    }
+
+    #endregion
+
 
     #region Swing
     void SwingRotation()
@@ -610,43 +655,15 @@ public class PlayerMovement : MonoBehaviour
                     gravityStateText.text = "Gravity State: Swing";
                     break;
                 }
+            case gravityState.Sling:
+                {
+                    rb.gravityScale = playerVars.slingGravity;
+                    GravityState = gravityState.Sling;
+                    gravityStateText.text = "Gravity State: Sling";
+                    break;
+                }
         }
     }
-    /*
-    private void JumpGravity()
-    {
-        if (isSwinging)
-        {
-            rb.gravityScale = playerVars.swingGravity;
-            return;
-        }
-        if(IsFalling() && !isGrounded || !JumpHold && !isGrounded && !isWallJumping)
-        {
-            rb.gravityScale = gravityScale * playerVars.fallGravityMultiplier;
-        }
-        else if(!isGrabbing)
-        {
-            rb.gravityScale = gravityScale;
-        }
-    }
-    bool IsFalling()
-    {
-        if (isGrounded || isGrabbing)
-        {
-            isFalling = false;
-            return false;
-        }
-        if (rb.velocity.y > playerVars.jumpFallBorder && !isGrounded)
-        {
-            isFalling = true;
-        }
-        if (rb.velocity.y < playerVars.jumpFallBorder && isFalling && !isGrounded || rb.velocity.y < 0f)
-        {
-            return true;
-        }
-        return false;
-    }
-    */
     void FallChecker()
     {
         if (rb.velocity.y < 0 && lastGroundedTime <= 0f && !isGrabbing && !isSwinging && GravityState.Equals(gravityState.Normal) || rb.velocity.y < 0 && lastGroundedTime <= 0f && !isGrabbing && !isSwinging && GravityState.Equals(gravityState.JumpTightener))

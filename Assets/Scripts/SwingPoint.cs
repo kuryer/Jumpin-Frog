@@ -59,6 +59,7 @@ public class SwingPoint : MonoBehaviour
 
     #endregion
 
+
     #region Variables
     Vector2 Position()
     {
