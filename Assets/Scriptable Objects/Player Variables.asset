@@ -19,7 +19,7 @@ MonoBehaviour:
   generalGravity: 34
   inAirAccelerationBasic: 18
   inAirDeccelerationBasic: 1
-  fallClampSpeed: 475
+  fallClampSpeed: 488
   jumpPower: 2700
   jumpCutMultiplier: 0.9
   fallGravity: 45
@@ -33,15 +33,15 @@ MonoBehaviour:
   wallJumpPowerModifier: 1.5
   wallGrabJumpBuffer: 0.1
   wallGrabBuffer: 0.1
-  swingJumpForce: 48
+  swingJumpForce: 50
   swingJumpBalance: 0.4
   SwingJumpBuffer: 0
-  swingBoostForce: 450
+  swingBoostForce: 400
   swingBoostBalance: 0.4
   springFrequency: 2.4
   springDamping: 0.2
   swingVelocityCut: 1.3
-  swingMoveSpeed: 650
+  swingMoveSpeed: 700
   accelerationSwing: 16
   conccelerationSwing: 0
   deccelerationSwing: 0
@@ -50,9 +50,9 @@ MonoBehaviour:
   swingBuffer: 0.3
   afterSwingJumpPower: 2600
   swingSpeedPercentage: 0.9
-  slingPower: 4000
+  slingPower: 5000
   slingBalance: 0.4
-  slingGravity: 25
+  slingGravity: 30
   slingGravityChangeTime: 0.7
   lineWidth: 75
   respawnTime: 0.3

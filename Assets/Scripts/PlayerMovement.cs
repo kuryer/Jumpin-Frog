@@ -74,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Sling")]
     bool canSling;
     Rigidbody2D slingPointRB;
+    SlingPoint sPoint;
 
     [Header("Swing")]
     SpringJoint2D distJoint;
@@ -279,7 +280,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb.velocity.y > 0.1f && !JumpHold && !jumpCut)
         {
-            //Debug.Log("Jump Cut Used");
+            Debug.Log("Jump Cut Used");
             jumpCut = true;
             rb.AddForce(Vector2.down * rb.velocity.y * playerVars.jumpCutMultiplier, ForceMode2D.Impulse);
             SwitchGravity(gravityState.Falling);
@@ -381,10 +382,12 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+
     #region Sling
 
-    public void SetCanSlingTrue(Rigidbody2D slingRB)
+    public void SetCanSlingTrue(Rigidbody2D slingRB, SlingPoint slingPoint)
     {
+        sPoint = slingPoint;
         slingPointRB = slingRB;
         canSling = true;
     }
@@ -398,17 +401,19 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             rb.AddForce(SlingDirection() * playerVars.slingPower, ForceMode2D.Impulse);
-            Debug.Log(SlingDirection());
+            //Debug.Log(SlingDirection());
             SetCanSlingFalse();
+            sPoint.HideArrow();
             StartCoroutine(SlingGravityTimer());
+            jump = WaitingJump;
         }
     }
     IEnumerator SlingGravityTimer()
     {
         SwitchGravity(gravityState.Sling);
-        Debug.Log("yo 1");
+        //Debug.Log("yo 1");
         yield return new WaitForSeconds(playerVars.slingGravityChangeTime);
-        Debug.Log("yo 2");
+        //Debug.Log("yo 2");
         if(GravityState.Equals(gravityState.Sling))
             SwitchGravity(gravityState.Falling);
     }
