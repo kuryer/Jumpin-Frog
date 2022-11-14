@@ -34,10 +34,10 @@ MonoBehaviour:
   wallGrabJumpBuffer: 0.1
   wallGrabBuffer: 0.1
   swingJumpForce: 50
-  swingJumpBalance: 0.4
+  swingJumpBalance: 0.35
   SwingJumpBuffer: 0
-  swingBoostForce: 400
-  swingBoostBalance: 0.4
+  swingBoostForce: 350
+  swingBoostBalance: 0.35
   springFrequency: 2.4
   springDamping: 0.2
   swingVelocityCut: 1.3

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlingPoint : MonoBehaviour
 {
-    [SerializeField] GameObject arrow;
+    GameObject arrow;
     SpriteRenderer arrowRenderer;
     GameObject player;
     bool showArrow;
