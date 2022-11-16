@@ -399,12 +399,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(lastSwingPressed > 0f && !isGrounded)
         {
+            StartCoroutine(SlingGravityTimer());
             rb.velocity = Vector2.zero;
             rb.AddForce(SlingDirection() * playerVars.slingPower, ForceMode2D.Impulse);
             //Debug.Log(SlingDirection());
             SetCanSlingFalse();
             sPoint.HideArrow();
-            StartCoroutine(SlingGravityTimer());
             jump = WaitingJump;
         }
     }
