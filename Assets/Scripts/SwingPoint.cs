@@ -8,6 +8,7 @@ public class SwingPoint : MonoBehaviour
     [SerializeField] Animator swingPointAnim;
     [SerializeField] float cooldown;
     bool isSwinging;
+    bool canSwing;
     private void Start()
     {
         thisScript = gameObject.GetComponent<SwingPoint>();    
@@ -20,12 +21,25 @@ public class SwingPoint : MonoBehaviour
             PlayInRangeAnimation();
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if(collision.transform.position.y < transform.position.y && !canSwing)
+            {
+                Helpers.PlayerMovement.SetCanSwingTrue(Position(), GetComponent<Rigidbody2D>(), thisScript);
+                PlayInRangeAnimation();
+                canSwing = true;
+            }
+        }
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             Helpers.PlayerMovement.SetCanSwingFalse();
             PlayOutOfRangeAnimation();
+            canSwing = false;
         }
     }
     #region Animations
