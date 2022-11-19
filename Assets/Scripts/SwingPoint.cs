@@ -17,8 +17,8 @@ public class SwingPoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Helpers.PlayerMovement.SetCanSwingTrue(Position(), GetComponent<Rigidbody2D>(), thisScript);
-            PlayInRangeAnimation();
+            //Helpers.PlayerMovement.SetCanSwingTrue(Position(), GetComponent<Rigidbody2D>(), thisScript);
+            //PlayInRangeAnimation();
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

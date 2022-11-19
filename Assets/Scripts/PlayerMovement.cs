@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float groundRayLength;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float rayOffset;
-    [SerializeField] float groundRayPosition;
+    [SerializeField] Vector3 groundRayPosition;
     [SerializeField] bool isGrounded;
 
 
@@ -403,6 +403,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.AddForce(SlingDirection() * playerVars.slingPower, ForceMode2D.Impulse);
             //Debug.Log(SlingDirection());
+            lastSwingPressed = 0f;
             SetCanSlingFalse();
             sPoint.HideArrow();
             jump = WaitingJump;
@@ -702,11 +703,11 @@ public class PlayerMovement : MonoBehaviour
     void CheckCollisions()
     {
         //Ground Collision
-        isGrounded = Physics2D.Raycast(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z), Vector3.down, groundRayLength, groundLayer) || 
-            Physics2D.Raycast(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z) - (2 * groundRayoffset), Vector3.down, groundRayLength, groundLayer) ||
-            Physics2D.Raycast(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z) - groundRayoffset, Vector3.down, groundRayLength, groundLayer) ||
-            Physics2D.Raycast(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z) + (2 * groundRayoffset), Vector3.down, groundRayLength, groundLayer) ||
-            Physics2D.Raycast(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z) + groundRayoffset, Vector3.down, groundRayLength, groundLayer);
+        isGrounded = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, groundLayer) || 
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * groundRayoffset), Vector3.down, groundRayLength, groundLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - groundRayoffset, Vector3.down, groundRayLength, groundLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * groundRayoffset), Vector3.down, groundRayLength, groundLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + groundRayoffset, Vector3.down, groundRayLength, groundLayer);
 
         //Corner Collisions
         canCornerCorrect = Physics2D.Raycast(transform.position + edgeRaycastOffset, Vector2.up, topRaycastLength, groundLayer) &&
@@ -753,11 +754,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 basePosition = new Vector3(transform.position.x, transform.position.y + wallRayPosition, transform.position.z);
         Gizmos.color = Color.green;
         //Ground Rays
-        Gizmos.DrawRay(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z), Vector3.down * groundRayLength);
-        Gizmos.DrawRay(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z) - groundRayoffset, Vector3.down * groundRayLength);
-        Gizmos.DrawRay(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z) - (2 * groundRayoffset), Vector3.down * groundRayLength);
-        Gizmos.DrawRay(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z) + (2 * groundRayoffset), Vector3.down * groundRayLength);
-        Gizmos.DrawRay(new Vector3(transform.position.x + groundRayPosition, transform.position.y, transform.position.z) + groundRayoffset, Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition), Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition) - groundRayoffset, Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition) - (2 * groundRayoffset), Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition) + (2 * groundRayoffset), Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition) + groundRayoffset, Vector3.down * groundRayLength);
 
         //Wall Rays
         Gizmos.DrawRay(new Vector3(transform.position.x, transform.position.y + wallRayPosition, transform.position.z) + wallRayoffset, Vector3.right * wallRayLength);

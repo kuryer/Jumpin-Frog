@@ -52,13 +52,13 @@ public class EntranceScript : MonoBehaviour
     private void FixedUpdate()
     {
         //Left Raycast
-        RaycastHit2D hitL = Physics2D.Raycast(transform.position - new Vector3(leftRayOffset, 0, 0), Vector3.up);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position - new Vector3(leftRayOffset, 0, 0), Vector3.up, 8);
         if (hitL.collider != null && hitL.collider.CompareTag("Player") && virtualCamera2.Priority.Equals(2))
         {
             GoSecond();
         }
         //Right Raycast
-        RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(rightRayOffset, 0, 0), Vector3.up);
+        RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(rightRayOffset, 0, 0), Vector3.up, 8);
         if (hitR.collider != null && hitR.collider.CompareTag("Player") && virtualCamera1.Priority.Equals(2))
         {
             GoFirst();
