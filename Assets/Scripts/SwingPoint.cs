@@ -31,6 +31,12 @@ public class SwingPoint : MonoBehaviour
                 PlayInRangeAnimation();
                 canSwing = true;
             }
+            else if(collision.transform.position.y > transform.position.y && canSwing)
+            {
+                Helpers.PlayerMovement.SetCanSwingFalse();
+                PlayOutOfRangeAnimation();
+                canSwing = false;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

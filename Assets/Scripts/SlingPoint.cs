@@ -34,17 +34,22 @@ public class SlingPoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (collision.transform.position.y < transform.position.y)
+            if (collision.transform.position.y < transform.position.y && !canSling)
             {
-                if (!canSling)
-                {
-                    Helpers.PlayerMovement.SetCanSlingTrue(GetComponent<Rigidbody2D>(), gameObject.GetComponent<SlingPoint>());
-                    player = collision.gameObject;
-                    ShowArrow();
-                    showArrow = true;
-                    canSling = true;
-                    Debug.Log("Show Arrow");
-                }
+                Helpers.PlayerMovement.SetCanSlingTrue(GetComponent<Rigidbody2D>(), gameObject.GetComponent<SlingPoint>());
+                player = collision.gameObject;
+                ShowArrow();
+                showArrow = true;
+                canSling = true;
+                Debug.Log("Show Arrow");
+            }
+            else if(collision.transform.position.y > transform.position.y && canSling)
+            {
+                Helpers.PlayerMovement.SetCanSlingFalse();
+                HideArrow();
+                showArrow = false;
+                canSling = false;
+                arrowRenderer.enabled = false;
             }
         }
     }

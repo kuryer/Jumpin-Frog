@@ -501,9 +501,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void VelocityCut()
     {
-        Debug.Log("Before Velocity Cut: " + rb.velocity);
+        //Debug.Log("Before Velocity Cut: " + rb.velocity);
         rb.velocity = new Vector2(rb.velocity.x / playerVars.swingVelocityCut, rb.velocity.y / playerVars.swingVelocityCut);
-        Debug.Log("After Velocity Cut: " + rb.velocity);
+        //Debug.Log("After Velocity Cut: " + rb.velocity);
     }
 
     void SwingBoost()
