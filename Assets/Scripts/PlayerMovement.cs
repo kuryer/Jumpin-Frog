@@ -80,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
     SpringJoint2D distJoint;
     [SerializeField] bool canSwing;
     [SerializeField] float playerRotationFix;
-    [SerializeField] float exitBarHeight;
     bool isSwinging;
     SwingPoint swingScript;
     Rigidbody2D swingPointRB;
@@ -112,6 +111,9 @@ public class PlayerMovement : MonoBehaviour
     }
     SpriteRenderer spriteRenderer;
 
+    [Header("Camera Blend")]
+    Vector2 savedVelocity;
+    bool isBlending;
 
     #region Updates and Start
 
@@ -132,6 +134,8 @@ public class PlayerMovement : MonoBehaviour
     {
         GatherInput();
         FallChecker();
+
+        if (isBlending) return;
 
         jump();
 
@@ -157,7 +161,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (isBlending) return;
+
         CheckCollisions();
+
         if (isSwinging) SwingRotation();
         if (canMove) movement();
         if (canCornerCorrect) CornerCorrect(rb.velocity.y);
@@ -455,7 +462,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartSwing();
         }
-        if(isSwinging && SwingUp || isSwinging && transform.position.y >= swingTransform.position.y - exitBarHeight && swingBoosterCheck)
+        if(isSwinging && SwingUp || isSwinging && transform.position.y >= swingTransform.position.y - playerVars.exitBarHeight && swingBoosterCheck)
         {
             StopSwing();
         }
@@ -850,7 +857,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void SwingBoosterChecker()
     {
-        if(isSwinging && transform.position.y < swingTransform.position.y - exitBarHeight && !swingBoosterCheck)
+        if(isSwinging && transform.position.y < swingTransform.position.y - playerVars.exitBarHeight && !swingBoosterCheck)
         {
             swingBoosterCheck = true;
         }
@@ -967,6 +974,22 @@ public class PlayerMovement : MonoBehaviour
     {
         Instantiate(JumpCircle, new Vector3(transform.position.x, transform.position.y - jumpCircleposition, transform.position.z), Quaternion.identity);
         Debug.Log("Halooo");
+    }
+
+    #endregion
+
+    #region Camera Blend
+
+    public void StartBlend()
+    {
+        savedVelocity = rb.velocity;
+        isBlending = true;
+        rb.velocity = Vector2.zero;
+    }
+    public void EndBlend()
+    {
+        isBlending = false;
+        rb.velocity = savedVelocity;
     }
 
     #endregion

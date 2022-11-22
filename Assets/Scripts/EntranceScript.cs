@@ -39,26 +39,37 @@ public class EntranceScript : MonoBehaviour
     {
         virtualCamera2.Priority = 2;
         virtualCamera1.Priority = 1;
+        PauseMovement();
         Debug.Log("Go First");
     }
     void GoSecond()
     {
         virtualCamera2.Priority = 1;
         virtualCamera1.Priority = 2;
+        PauseMovement();
         Debug.Log("Go Second");
 
     }
-
+    void PauseMovement()
+    {
+        StartCoroutine(IPauseMovement());
+    }
+    IEnumerator IPauseMovement()
+    {
+        Helpers.PlayerMovement.StartBlend();
+        yield return new WaitForSeconds(.5f);
+        Helpers.PlayerMovement.EndBlend();
+    }
     private void FixedUpdate()
     {
         //Left Raycast
-        RaycastHit2D hitL = Physics2D.Raycast(transform.position - new Vector3(leftRayOffset, 0, 0), Vector3.up, 8);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position - new Vector3(leftRayOffset, 0, 0), Vector3.up, 80);
         if (hitL.collider != null && hitL.collider.CompareTag("Player") && virtualCamera2.Priority.Equals(2))
         {
             GoSecond();
         }
         //Right Raycast
-        RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(rightRayOffset, 0, 0), Vector3.up, 8);
+        RaycastHit2D hitR = Physics2D.Raycast(transform.position + new Vector3(rightRayOffset, 0, 0), Vector3.up, 80);
         if (hitR.collider != null && hitR.collider.CompareTag("Player") && virtualCamera1.Priority.Equals(2))
         {
             GoFirst();

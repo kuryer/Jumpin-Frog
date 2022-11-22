@@ -50,6 +50,7 @@ public class PlayerVarsSO : ScriptableObject
     public float swingBuffer;
     public float afterSwingJumpPower;
     public float swingSpeedPercentage;
+    public float exitBarHeight;
     [Header("Sling")]
     public float slingPower;
     public float slingBalance;
