@@ -982,6 +982,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartBlend()
     {
+        playerAnims.ChangeAnimationState(AnimationState.Idle_Player.ToString());
         savedVelocity = rb.velocity;
         isBlending = true;
         rb.velocity = Vector2.zero;
