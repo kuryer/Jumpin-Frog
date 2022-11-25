@@ -44,3 +44,6 @@ TagManager:
   - name: Terrain
     uniqueID: 4243511339
     locked: 0
+  - name: Points
+    uniqueID: 3566463259
+    locked: 0
