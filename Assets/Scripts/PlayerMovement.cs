@@ -528,8 +528,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 direction = new Vector2(10f * X * playerVars.swingBoostBalance, 10f * (1f - playerVars.swingBoostBalance));
         playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
         float movePercent = MovePercentage();
-        rb.velocity = Vector2.zero;
-        rb.AddForce(direction * playerVars.swingBoostForce * movePercent, ForceMode2D.Impulse);
+        //rb.velocity = Vector2.zero;
+        //rb.AddForce(direction * playerVars.swingBoostForce * movePercent, ForceMode2D.Impulse);
         jump = WaitingJump;
         //Debug.Log("magnitude: " + rb.velocity.magnitude.ToString() + /*", Transform.right " + transRight.ToString() + */", direction: " + direction.ToString());
     }
@@ -973,7 +973,6 @@ public class PlayerMovement : MonoBehaviour
     void SpawnJumpCircle()
     {
         Instantiate(JumpCircle, new Vector3(transform.position.x, transform.position.y - jumpCircleposition, transform.position.z), Quaternion.identity);
-        Debug.Log("Halooo");
     }
 
     #endregion

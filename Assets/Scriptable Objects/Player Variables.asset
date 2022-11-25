@@ -17,7 +17,7 @@ MonoBehaviour:
   decceleration: 140
   velPower: 1
   generalGravity: 34
-  inAirAccelerationBasic: 18
+  inAirAccelerationBasic: 15
   inAirDeccelerationBasic: 1
   fallClampSpeed: 490
   jumpPower: 2700
@@ -33,11 +33,11 @@ MonoBehaviour:
   wallJumpPowerModifier: 1.5
   wallGrabJumpBuffer: 0.1
   wallGrabBuffer: 0.1
-  swingJumpForce: 54
-  swingJumpBalance: 0.35
+  swingJumpForce: 58
+  swingJumpBalance: 0.4
   SwingJumpBuffer: 0
-  swingBoostForce: 350
-  swingBoostBalance: 0.35
+  swingBoostForce: 0
+  swingBoostBalance: 0.1
   springFrequency: 2.5
   springDamping: 0.2
   swingVelocityCut: 1.3
