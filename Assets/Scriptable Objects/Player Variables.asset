@@ -21,7 +21,7 @@ MonoBehaviour:
   inAirDeccelerationBasic: 1
   fallClampSpeed: 490
   jumpPower: 2700
-  jumpCutMultiplier: 0.9
+  jumpCutMultiplier: 2.2
   fallGravity: 45
   coyoteTime: 0.08
   jumpBuffer: 0.1

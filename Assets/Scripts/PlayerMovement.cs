@@ -285,7 +285,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void JumpCut()
     {
-        if (rb.velocity.y > 0.1f && !JumpHold && !jumpCut)
+        if (!isGrounded && rb.velocity.y > 0.1f && !JumpHold && !jumpCut)
         {
             Debug.Log("Jump Cut Used");
             jumpCut = true;
