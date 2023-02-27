@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 15631
+  controlID: 13867
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 15632
+  controlID: 13868
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 15633
+  controlID: 13818
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -282,7 +282,7 @@ MonoBehaviour:
       containerId: overlay-toolbar__top
       floating: 0
       collapsed: 0
-      displayed: 1
+      displayed: 0
       snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -442,9 +442,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 144.694, y: -7.459591, z: 1.3722911}
+    m_Target: {x: 201.72287, y: 619.07074, z: -17.200193}
     speed: 2
-    m_Value: {x: 144.694, y: -7.459591, z: 1.3722911}
+    m_Value: {x: 201.72287, y: 619.07074, z: -17.200193}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -495,9 +495,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 5.8634286
+    m_Target: 1368.6777
     speed: 2
-    m_Value: 5.8634286
+    m_Value: 1368.6777
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -609,7 +609,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 5ad7ffff12ecffff00f4ffff0efbffff
+      m_ExpandedIDs: 6cb0ffff9ab1ffffecb5ffffeebaffff2ebcffffdcbdffff06f4ffff12f4ffff8cf4ffff0efbffff76600000b2600000d2600000027900006e790000fa860000668700008a87000074890000e0890000f4890000088a00000c8a0000b48c0000208d0000488d00004c8d0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 15585
+  controlID: 13869
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: AnimatorControllerTool
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -677,15 +677,15 @@ MonoBehaviour:
     y: 0
     width: 774
     height: 337
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 12}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 12}
   - {fileID: 13}
   - {fileID: 14}
   - {fileID: 15}
-  m_Selected: 0
+  m_Selected: 2
   m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
@@ -745,7 +745,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 24606
+  m_LastSelectedObjectID: 36082
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -777,6 +777,7 @@ MonoBehaviour:
   m_ViewTransforms:
     m_KeySerializationHelper:
     - {fileID: -744501571109555967, guid: 69d38345a9553d94c852e4f2f83485f3, type: 2}
+    - {fileID: 2515890837799385079, guid: bcf47a1af2fed2e48b7e92b8c5724bec, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.5647619
       e01: 0
@@ -794,10 +795,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 0.96554714
+      e01: 0
+      e02: 0
+      e03: 83.49358
+      e10: 0
+      e11: 0.96554714
+      e12: 0
+      e13: 12.485334
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 69d38345a9553d94c852e4f2f83485f3, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: bcf47a1af2fed2e48b7e92b8c5724bec, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -744501571109555967, guid: 69d38345a9553d94c852e4f2f83485f3, type: 2}
+  - m_Target: {fileID: 2515890837799385079, guid: bcf47a1af2fed2e48b7e92b8c5724bec, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1005,8 +1022,8 @@ MonoBehaviour:
     y: 0
     width: 747
     height: 337
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 232, y: 271}
+  m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -1053,22 +1070,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\UnityHub\Jumpin Frog\Jumpin-Frog
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 84620000
-    m_LastClickedID: 25220
-    m_ExpandedIDs: 00000000826200008462000086620000886200008a62000000ca9a3b
+    m_SelectedIDs: 62630000
+    m_LastClickedID: 25442
+    m_ExpandedIDs: 00000000386300003a6300003c6300003e6300004063000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1096,7 +1113,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000826200008462000086620000886200008a62000000ca9a3b
+    m_ExpandedIDs: 00000000386300003a6300003c6300003e6300004063000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1123,8 +1140,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000507500005892000082750000e662000084770000
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c6230000507500005892000082750000e66200008477000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
