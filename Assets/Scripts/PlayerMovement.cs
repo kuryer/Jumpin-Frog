@@ -16,8 +16,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 wallRayoffset;
 
 
+    //[SerializeField] TextMeshProUGUI gravityStateText;
     [Header("Gravity")]
-    [SerializeField] TextMeshProUGUI gravityStateText;
+    gravityState GravityState;
     enum gravityState
     {
         Normal,
@@ -27,13 +28,13 @@ public class PlayerMovement : MonoBehaviour
         Swing,
         Sling
     }
-    gravityState GravityState;
 
 
     [Header("Movement")]
     [SerializeField] PlayerVarsSO playerVars;
-    [SerializeField] TextMeshProUGUI velocityXText;
-    [SerializeField] TextMeshProUGUI velocityYText;
+    //[SerializeField] TextMeshProUGUI velocityXText;
+    //[SerializeField] TextMeshProUGUI velocityXSwingText;
+    //[SerializeField] TextMeshProUGUI velocityYText;
     public delegate void MovementDelegate();
     public delegate void JumpDelegate();
     MovementDelegate movement;
@@ -88,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
     bool SwingDown;
     bool SwingUp;
     bool swingBoosterCheck;
-    bool swingJumped;
+    //bool swingJumped;
     float swingJumpBuffer;
 
 
@@ -107,7 +108,8 @@ public class PlayerMovement : MonoBehaviour
         Run_Player,
         Jump_Player,
         Fall_Player,
-        WallGrab_Player
+        WallGrab_Player,
+        Swing_Player
     }
     SpriteRenderer spriteRenderer;
 
@@ -146,8 +148,9 @@ public class PlayerMovement : MonoBehaviour
         if(!isWallPauseJumping && !isSwinging) WallGrab();
 
 
-        velocityXText.text = "Velocity x: " + rb.velocity.x;
-        velocityYText.text = "Velocity x Swing: " + SwingSignVelocityX();
+        //velocityXText.text = "Velocity x: " + rb.velocity.x;
+        //velocityXSwingText.text = "Velocity x Swing: " + SwingSignVelocityX();
+        //velocityYText.text = "Velocity Y: " + rb.velocity.y;
 
         Timer();
         ChangeSpring();
@@ -168,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
         if (isSwinging) SwingRotation();
         if (canMove) movement();
         if (canCornerCorrect) CornerCorrect(rb.velocity.y);
-        if (rb.velocity.y < 0f && !isGrounded && !isGrabbing) FallClamp();
+        if (rb.velocity.y < 0f && !isGrounded && !isGrabbing && !isSwinging) FallClamp();
     }
     #endregion
 
@@ -176,6 +179,7 @@ public class PlayerMovement : MonoBehaviour
     #region Movements
     private void BasicMovement()
     {
+
         //calcualte the direction we want to move in and our desired velocity
         float maxSpeed = X * playerVars.moveSpeed;
         //calculate difference between current velocity and desired velocity
@@ -184,12 +188,21 @@ public class PlayerMovement : MonoBehaviour
         float accelRate = (Mathf.Abs(maxSpeed) > 0.01f) ? playerVars.acceleration : playerVars.decceleration;
         //applies acceleration to speed difference, the raises to a set power so acceleration increases with higher speeds
         //finally multiplies by sign to reapply direction
-        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.velPower) * Mathf.Sign(speedDif);
-            
+        //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.velPower) * Mathf.Sign(speedDif);
+        float movement = (Mathf.Abs(speedDif) * accelRate) * Mathf.Sign(speedDif);
+        //anti-clipping calculations
+        //movement *= (Mathf.Abs(rb.velocity.x) < .001f && X == 0) ? 0f : 1f;
+
         rb.AddForce(movement * Vector2.right);
 
-        if (Mathf.Abs(rb.velocity.x) < 1f)
-            rb.velocity = new Vector2(0f, rb.velocity.y);
+        
+        if (Mathf.Abs(rb.velocity.x) < 0f && Mathf.Abs(rb.velocity.x) != 0f)
+        {
+            Debug.Log("siema to ten system eo");
+            //Debug.Log(movement.ToString());
+            rb.velocity.Set(0f, rb.velocity.y);
+        }
+        
     }
     void InAirMovement()
     {
@@ -213,8 +226,9 @@ public class PlayerMovement : MonoBehaviour
         
         float maxSpeed = X * playerVars.swingMoveSpeed;
 
-        float speedDif = maxSpeed - (rb.velocity.magnitude * X);
-
+        //float speedDif = maxSpeed - (rb.velocity.magnitude * X);
+        float speedDif = maxSpeed - rb.velocity.x;
+        
         speedDif = Mathf.Sign(speedDif) == Mathf.Sign(maxSpeed) ? speedDif : 0f;
 
         float accelRate = SwingAccelRate();
@@ -322,6 +336,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(((Vector2.up * playerVars.wallJumpDirectionBalance) + (Vector2.right * (1f - playerVars.wallJumpDirectionBalance))) * playerVars.jumpPower * playerVars.wallJumpPowerModifier, ForceMode2D.Impulse);
             }
 
+            jump = WaitingJump;
             movement = InAirMovement;
         }
     }
@@ -336,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
             //CZY JA POTRZEBUJE TERAZ TEGO BALANSU ALBO PROCENTA Z PREDKOSCI JAK MAM JUZ POGRUPOWANY X I Y NA ODDZIELNE PARTIE I DZIA£AJ¥ ONE ODDZIELNIE???
             //MOZNABY POPRÓBOWAÆ BEZ TEGO BALANSU ITD.
             Debug.Log("SwingJump");
-            swingJumped = true;
+            //swingJumped = true;
             if(isSwinging)
                 StopSwing();
             Debug.Log(rb.velocity.y);
@@ -469,16 +484,18 @@ public class PlayerMovement : MonoBehaviour
     }
     void StartSwing()
     {
-        swingJumped = false;
+        //swingJumped = false;
         lastSwingPressed = 0f;
         distJoint.enabled = true;
         lineRenderer.enabled = true;
         SwitchGravity(gravityState.Swing);
         VelocityCut();
+        playerAnims.ChangeAnimationState(AnimationState.Swing_Player.ToString());
         isSwinging = true;
         swingScript.PlaySwingAnimation();
         movement = SwingingMovement;
-        jump = SwingJump;
+        //jump = SwingJump;
+        jump = WaitingJump;
     }
     void StopSwing()
     {
@@ -490,8 +507,11 @@ public class PlayerMovement : MonoBehaviour
         canSwing = false;
         rb.rotation = 0f;
         swingBoosterCheck = false;
+        /*
         if(!swingJumped)
             StartCoroutine(SwingJumpBuffer());
+        */
+        SwingBoost();
         movement = InAirMovement;
         JumpThightenerQueue();
     }
@@ -529,7 +549,7 @@ public class PlayerMovement : MonoBehaviour
         playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
         float movePercent = MovePercentage();
         //rb.velocity = Vector2.zero;
-        //rb.AddForce(direction * playerVars.swingBoostForce * movePercent, ForceMode2D.Impulse);
+        rb.AddForce(direction * playerVars.swingBoostForce * movePercent, ForceMode2D.Impulse);
         jump = WaitingJump;
         //Debug.Log("magnitude: " + rb.velocity.magnitude.ToString() + /*", Transform.right " + transRight.ToString() + */", direction: " + direction.ToString());
     }
@@ -614,11 +634,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (onRightWall && X >= 0f)
         {
-            rb.velocity = new Vector2(1f, 0f);
+            rb.velocity = new Vector2(2f, 0f);
         }
         else if (onLeftWall && X <= 0f)
         {
-            rb.velocity = new Vector2(-1f, 0f);
+            rb.velocity = new Vector2(-2f, 0f);
         }
     }
 
@@ -636,14 +656,14 @@ public class PlayerMovement : MonoBehaviour
                 {
                     rb.gravityScale = playerVars.generalGravity;
                     GravityState = gravityState.Normal;
-                    gravityStateText.text = "Gravity State: Normal";
+                    //gravityStateText.text = "Gravity State: Normal";
                     break;
                 }
             case gravityState.JumpTightener:
                 {
                     rb.gravityScale = playerVars.jumpThightenerGravity;
                     GravityState = gravityState.JumpTightener;
-                    gravityStateText.text = "Gravity State: Jump Thightener";
+                    //gravityStateText.text = "Gravity State: Jump Thightener";
                     break;
                 }
             case gravityState.Falling:
@@ -651,28 +671,28 @@ public class PlayerMovement : MonoBehaviour
                     //playerAnims.ChangeAnimationState(AnimationState.Fall_Player.ToString());
                     rb.gravityScale = playerVars.fallGravity;
                     GravityState = gravityState.Falling;
-                    gravityStateText.text = "Gravity State: Falling";
+                    //gravityStateText.text = "Gravity State: Falling";
                     break;
                 }
             case gravityState.WallGrab:
                 {
                     rb.gravityScale = playerVars.wallGravity;
                     GravityState = gravityState.WallGrab;
-                    gravityStateText.text = "Gravity State: Wall Grab";
+                    //gravityStateText.text = "Gravity State: Wall Grab";
                     break;
                 }
             case gravityState.Swing:
                 {
                     rb.gravityScale = playerVars.swingGravity;
                     GravityState = gravityState.Swing;
-                    gravityStateText.text = "Gravity State: Swing";
+                    //gravityStateText.text = "Gravity State: Swing";
                     break;
                 }
             case gravityState.Sling:
                 {
                     rb.gravityScale = playerVars.slingGravity;
                     GravityState = gravityState.Sling;
-                    gravityStateText.text = "Gravity State: Sling";
+                    //gravityStateText.text = "Gravity State: Sling";
                     break;
                 }
         }
@@ -693,8 +713,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void JumpThightenerQueue()
     {
-        StopCoroutine(JumpThightenerTimer());
-        StartCoroutine(JumpThightenerTimer());
+        //StopCoroutine(JumpThightenerTimer());
+        //StartCoroutine(JumpThightenerTimer());
     }
     void FallClamp()
     {
@@ -976,6 +996,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
+
 
     #region Camera Blend
 

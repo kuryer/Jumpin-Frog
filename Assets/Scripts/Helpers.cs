@@ -6,6 +6,8 @@ public static class Helpers
 {
     private static PlayerMovement playerMovement;
     private static PlayerHealth playerHealth;
+    private static GameManagerScript gameManager;
+
     public static PlayerMovement PlayerMovement
     {
         get
@@ -20,6 +22,14 @@ public static class Helpers
         {
             if (playerHealth == null) playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
             return playerHealth;
+        }
+    }
+    public static GameManagerScript GameManager
+    {
+        get
+        {
+            if (gameManager == null) gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
+            return gameManager;
         }
     }
 }

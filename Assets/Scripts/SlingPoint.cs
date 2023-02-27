@@ -85,7 +85,22 @@ public class SlingPoint : MonoBehaviour
     {
         Vector2 direction = arrow.transform.position - player.transform.position;
         float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        /*
+        switch (angle)
+        {
+            case < -30:
+                arrow.transform.eulerAngles = new Vector3(0, 0, 60);
+                break;
+            case < 30:
+                arrow.transform.eulerAngles = new Vector3(0, 0, 0);
+                break;
+            case > 30:
+                arrow.transform.eulerAngles = new Vector3(0, 0, -60);
+                break;
+        }
+        */
         arrow.transform.eulerAngles = new Vector3(0, 0, -angle);
+        Debug.Log(angle);
     }
 
     #endregion

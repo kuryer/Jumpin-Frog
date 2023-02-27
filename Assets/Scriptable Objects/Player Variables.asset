@@ -12,48 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b704ad51234904a8c9f01be0a0fd78, type: 3}
   m_Name: Player Variables
   m_EditorClassIdentifier: 
-  moveSpeed: 230
-  acceleration: 120
-  decceleration: 140
+  moveSpeed: 6.9
+  acceleration: 80
+  decceleration: 120
   velPower: 1
-  generalGravity: 34
-  inAirAccelerationBasic: 15
+  generalGravity: 1.8
+  inAirAccelerationBasic: 12
   inAirDeccelerationBasic: 1
-  fallClampSpeed: 490
-  jumpPower: 2700
-  jumpCutMultiplier: 2.2
-  fallGravity: 45
+  fallClampSpeed: 16
+  jumpPower: 122
+  jumpCutMultiplier: 1.2
+  fallGravity: 2.5
   coyoteTime: 0.08
   jumpBuffer: 0.1
   jumpTightenerTime: 20
   jumpThightenerGravity: 34
-  wallSlideSpeed: 240
-  wallGravity: 9
-  wallJumpDirectionBalance: 0.65
-  wallJumpPowerModifier: 1.5
+  wallSlideSpeed: 5
+  wallGravity: 0.45
+  wallJumpDirectionBalance: 0.67
+  wallJumpPowerModifier: 1.17
   wallGrabJumpBuffer: 0.1
   wallGrabBuffer: 0.1
   swingJumpForce: 58
   swingJumpBalance: 0.4
   SwingJumpBuffer: 0
-  swingBoostForce: 0
-  swingBoostBalance: 0.1
+  swingBoostForce: 5.25
+  swingBoostBalance: 0.43
   springFrequency: 2.5
-  springDamping: 0.2
+  springDamping: 1
   swingVelocityCut: 1.3
-  swingMoveSpeed: 1000
-  accelerationSwing: 11
-  conccelerationSwing: 0
+  swingMoveSpeed: 21
+  accelerationSwing: 17
+  conccelerationSwing: 0.7
   deccelerationSwing: 0
   swingMovementPower: 1
-  swingGravity: 30
+  swingGravity: 0
   swingBuffer: 0.3
-  afterSwingJumpPower: 2600
+  afterSwingJumpPower: 1000
   swingSpeedPercentage: 0.9
-  exitBarHeight: -25
-  slingPower: 4800
-  slingBalance: 0.4
-  slingGravity: 30
-  slingGravityChangeTime: 0.7
-  lineWidth: 75
+  exitBarHeight: 1
+  slingPower: 150
+  slingBalance: 0.35
+  slingGravity: 0
+  slingGravityChangeTime: 0.25
+  lineWidth: 0.4
   respawnTime: 0.3

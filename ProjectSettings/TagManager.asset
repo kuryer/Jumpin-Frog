@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,7 @@ TagManager:
     locked: 0
   - name: Points
     uniqueID: 3566463259
+    locked: 0
+  - name: Player
+    uniqueID: 1184774389
     locked: 0
