@@ -24,7 +24,7 @@ public static class Helpers
             return playerHealth;
         }
     }
-    public static GameManagerScript GameManager
+    public static GameManagerScript GameManagerScript
     {
         get
         {

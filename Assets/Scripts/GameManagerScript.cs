@@ -9,8 +9,15 @@ public class GameManagerScript : MonoBehaviour
     private static GameManagerScript instance;
 
     [SerializeField] CanvasScript canvasScript;
-
+    [SerializeField] LevelTransitionAnimationScript TransitionScript;
+    enum TransitionAnimationState
+    {
+        CloseToLoadingScreen,
+        OpenFromLoadingScreen,
+        LoadingInactive
+    }
     bool isPaused = false;
+    bool isAnimationTransitionClosed = false;
     bool canOpenPauseMenu;
 
     private void Awake()
@@ -61,36 +68,47 @@ public class GameManagerScript : MonoBehaviour
     {
         Time.timeScale = 1;
         isPaused = false;
+        canvasScript.TogglePauseMenu(isPaused);
     }
     #endregion
 
+
+    public void SetLoadingScreenAnimationFinished(bool isClosed)
+    {
+        isAnimationTransitionClosed = isClosed;
+    }
+
     public async void LoadScene(int LevelIndex)
     {
+        TransitionScript.ChangeAnimation(TransitionAnimationState.CloseToLoadingScreen.ToString());
         var scene = SceneManager.LoadSceneAsync(LevelIndex);
         scene.allowSceneActivation = false;
-
         //cast here animation to transition into loading screen
 
         do
         {
             await System.Threading.Tasks.Task.Delay(100);
-        }while (scene.progress < .9f /* jeszcze bool odnosnie animacji*/);
+        }while (scene.progress < .9f && isAnimationTransitionClosed);
 
+        SetLoadingScreenAnimationFinished(false);
+        TransitionScript.ChangeAnimation(TransitionAnimationState.OpenFromLoadingScreen.ToString());
+        //await System.Threading.Tasks.Task.Delay(200);
         scene.allowSceneActivation = true;
-
     }
     public void LoadLevel(int LevelIndex)
     {
-        SceneManager.LoadSceneAsync(LevelIndex);
         canvasScript.ToggleMenus(LevelIndex);
         canOpenPauseMenu = true;
+        LoadScene(LevelIndex);
     }
     public void LoadMainMenu()
     {
-        SceneManager.LoadSceneAsync(0);
+        //call animation
         canvasScript.ToggleMenus(0);
         canOpenPauseMenu = false;
         SetResume();
+
+        LoadScene(0);
     }
 
 }
