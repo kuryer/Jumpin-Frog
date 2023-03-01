@@ -1317,7 +1317,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1819376155}
         m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
-        m_MethodName: LoadLevel
+        m_MethodName: LoadNextLevel
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

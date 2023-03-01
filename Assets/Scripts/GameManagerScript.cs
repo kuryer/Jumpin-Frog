@@ -19,6 +19,8 @@ public class GameManagerScript : MonoBehaviour
     bool isPaused = false;
     bool isAnimationTransitionClosed = false;
     bool canOpenPauseMenu;
+    int currentLevel;
+    int desiredLevel;
 
     private void Awake()
     {
@@ -73,33 +75,52 @@ public class GameManagerScript : MonoBehaviour
     #endregion
 
 
+    public void LoadNextLevel(int levelIndex)
+    {
+        SetDesiredLevel(levelIndex);
+        StartLevelTransition();
+    }
+
+
+
+    void StartLevelTransition()
+    {
+        TransitionScript.ChangeAnimation(TransitionAnimationState.CloseToLoadingScreen.ToString());
+    }
+
+    void SetDesiredLevel(int levelIndex)
+    {
+        desiredLevel = levelIndex;
+    }
+
+
     public void SetLoadingScreenAnimationFinished(bool isClosed)
     {
         isAnimationTransitionClosed = isClosed;
     }
 
-    public async void LoadScene(int LevelIndex)
+    public void StartLoadingNextScene()
     {
-        TransitionScript.ChangeAnimation(TransitionAnimationState.CloseToLoadingScreen.ToString());
-        var scene = SceneManager.LoadSceneAsync(LevelIndex);
-        scene.allowSceneActivation = false;
+        LoadScene();
+    }
+    void LoadScene()
+    {
+        var scene = SceneManager.LoadSceneAsync(desiredLevel);
         //cast here animation to transition into loading screen
 
-        do
+        if (scene.isDone)
         {
-            await System.Threading.Tasks.Task.Delay(100);
-        }while (scene.progress < .9f && isAnimationTransitionClosed);
-
-        SetLoadingScreenAnimationFinished(false);
-        TransitionScript.ChangeAnimation(TransitionAnimationState.OpenFromLoadingScreen.ToString());
+            currentLevel = desiredLevel;
+        }
+        //SetLoadingScreenAnimationFinished(false);
+        //TransitionScript.ChangeAnimation(TransitionAnimationState.OpenFromLoadingScreen.ToString());
         //await System.Threading.Tasks.Task.Delay(200);
-        scene.allowSceneActivation = true;
     }
-    public void LoadLevel(int LevelIndex)
+    public void LoadLevel()
     {
-        canvasScript.ToggleMenus(LevelIndex);
+        canvasScript.ToggleMenus(desiredLevel);
         canOpenPauseMenu = true;
-        LoadScene(LevelIndex);
+        LoadScene();
     }
     public void LoadMainMenu()
     {
@@ -108,7 +129,7 @@ public class GameManagerScript : MonoBehaviour
         canOpenPauseMenu = false;
         SetResume();
 
-        LoadScene(0);
+        LoadScene();
     }
 
 }

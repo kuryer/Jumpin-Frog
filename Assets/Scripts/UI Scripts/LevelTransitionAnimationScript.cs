@@ -14,8 +14,12 @@ public class LevelTransitionAnimationScript : MonoBehaviour
     }
     public void AnimationFinished()
     {
-        Helpers.GameManagerScript.SetLoadingScreenAnimationFinished(true);
+        //Helpers.GameManagerScript.SetLoadingScreenAnimationFinished(true);
         // wpisac zeby wyslal info o zmianie boola do game managera i zmienic te gowniana nazwe xdd
+    }
+    public void LoadNextLevel()
+    {
+        Helpers.GameManagerScript.StartLoadingNextScene();
     }
     public void ChangeAnimation(string newState)
     {
