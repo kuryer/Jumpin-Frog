@@ -6,7 +6,7 @@ public class LevelTransitionAnimationScript : MonoBehaviour
 {
     Animator animator;
     string currentState;
-
+ 
 
     private void Awake()
     {

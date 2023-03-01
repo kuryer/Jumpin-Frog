@@ -82,7 +82,6 @@ public class GameManagerScript : MonoBehaviour
     }
 
 
-
     void StartLevelTransition()
     {
         TransitionScript.ChangeAnimation(TransitionAnimationState.CloseToLoadingScreen.ToString());
