@@ -8,8 +8,10 @@ public class GameManagerScript : MonoBehaviour
 {
     private static GameManagerScript instance;
 
+    [SerializeField] Mask transitionMask;
     [SerializeField] CanvasScript canvasScript;
     [SerializeField] LevelTransitionAnimationScript TransitionScript;
+    [SerializeField] GameObject propPanel;
     enum TransitionAnimationState
     {
         CloseToLoadingScreen,
@@ -114,6 +116,8 @@ public class GameManagerScript : MonoBehaviour
         //SetLoadingScreenAnimationFinished(false);
         //TransitionScript.ChangeAnimation(TransitionAnimationState.OpenFromLoadingScreen.ToString());
         //await System.Threading.Tasks.Task.Delay(200);
+        FixTransition();
+        CallTransitionOpenAnimation();
     }
     public void LoadLevel()
     {
@@ -130,5 +134,16 @@ public class GameManagerScript : MonoBehaviour
 
         LoadScene();
     }
-
+    void FixTransition()
+    {
+        // open prop -> turn off mask-> turn on mask-> turn off prop -> call open animation
+        propPanel.SetActive(true);
+        transitionMask.showMaskGraphic = true;
+        transitionMask.showMaskGraphic = false;
+        propPanel.SetActive(false);
+    }
+    void CallTransitionOpenAnimation()
+    {
+        TransitionScript.ChangeAnimation(TransitionAnimationState.OpenFromLoadingScreen.ToString());
+    }
 }
