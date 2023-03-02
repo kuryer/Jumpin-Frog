@@ -104,7 +104,7 @@ public class GameManagerScript : MonoBehaviour
     {
         LoadScene();
     }
-    void LoadScene()
+    async void LoadScene()
     {
         var scene = SceneManager.LoadSceneAsync(desiredLevel);
         //cast here animation to transition into loading screen
@@ -117,7 +117,9 @@ public class GameManagerScript : MonoBehaviour
         //TransitionScript.ChangeAnimation(TransitionAnimationState.OpenFromLoadingScreen.ToString());
         //await System.Threading.Tasks.Task.Delay(200);
         FixTransition();
-        CallTransitionOpenAnimation();
+        await System.Threading.Tasks.Task.Delay(100);
+        //CallTransitionOpenAnimation();
+        Invoke("CallTransitionOpenAnimation", 2f);
     }
     public void LoadLevel()
     {
