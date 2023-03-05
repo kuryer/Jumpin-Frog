@@ -8,10 +8,8 @@ public class GameManagerScript : MonoBehaviour
 {
     private static GameManagerScript instance;
 
-    [SerializeField] Mask transitionMask;
     [SerializeField] CanvasScript canvasScript;
     [SerializeField] LevelTransitionAnimationScript TransitionScript;
-    [SerializeField] GameObject propPanel;
     enum TransitionAnimationState
     {
         CloseToLoadingScreen,
@@ -19,7 +17,6 @@ public class GameManagerScript : MonoBehaviour
         LoadingInactive
     }
     bool isPaused = false;
-    bool isAnimationTransitionClosed = false;
     bool canOpenPauseMenu;
     int currentLevel;
     int desiredLevel;
@@ -76,14 +73,19 @@ public class GameManagerScript : MonoBehaviour
     }
     #endregion
 
-
+    //To jest pierwsza funkcja przez animacj¹. Przycisk -> GameManager
     public void LoadNextLevel(int levelIndex)
     {
         SetDesiredLevel(levelIndex);
+        SetMenus();
         StartLevelTransition();
     }
 
-
+    public void SetNewLevelTransition(LevelTransitionAnimationScript transitionScript)
+    {
+        TransitionScript = transitionScript;
+    }
+    //Ta metoda zaczyna animacje do zamkniecia przejscia
     void StartLevelTransition()
     {
         TransitionScript.ChangeAnimation(TransitionAnimationState.CloseToLoadingScreen.ToString());
@@ -94,58 +96,23 @@ public class GameManagerScript : MonoBehaviour
         desiredLevel = levelIndex;
     }
 
-
-    public void SetLoadingScreenAnimationFinished(bool isClosed)
-    {
-        isAnimationTransitionClosed = isClosed;
-    }
-
+    //To jest wywo³ane z zakonczonej animacji
     public void StartLoadingNextScene()
     {
-        LoadScene();
+        LevelLoader.LoadScene(desiredLevel);
+        currentLevel = desiredLevel;
     }
-    async void LoadScene()
-    {
-        var scene = SceneManager.LoadSceneAsync(desiredLevel);
-        //cast here animation to transition into loading screen
 
-        if (scene.isDone)
-        {
-            currentLevel = desiredLevel;
-        }
-        //SetLoadingScreenAnimationFinished(false);
-        //TransitionScript.ChangeAnimation(TransitionAnimationState.OpenFromLoadingScreen.ToString());
-        //await System.Threading.Tasks.Task.Delay(200);
-        FixTransition();
-        await System.Threading.Tasks.Task.Delay(100);
-        //CallTransitionOpenAnimation();
-        Invoke("CallTransitionOpenAnimation", 2f);
-    }
-    public void LoadLevel()
+    void SetMenus()
     {
         canvasScript.ToggleMenus(desiredLevel);
-        canOpenPauseMenu = true;
-        LoadScene();
-    }
-    public void LoadMainMenu()
-    {
-        //call animation
-        canvasScript.ToggleMenus(0);
-        canOpenPauseMenu = false;
+        canOpenPauseMenu = SetPauseMenuBool();
         SetResume();
-
-        LoadScene();
     }
-    void FixTransition()
+    bool SetPauseMenuBool()
     {
-        // open prop -> turn off mask-> turn on mask-> turn off prop -> call open animation
-        propPanel.SetActive(true);
-        transitionMask.showMaskGraphic = true;
-        transitionMask.showMaskGraphic = false;
-        propPanel.SetActive(false);
-    }
-    void CallTransitionOpenAnimation()
-    {
-        TransitionScript.ChangeAnimation(TransitionAnimationState.OpenFromLoadingScreen.ToString());
+        bool canOpenPauseMenu = true;
+        if (desiredLevel == 0) canOpenPauseMenu = false;
+        return canOpenPauseMenu;
     }
 }

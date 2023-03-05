@@ -11,22 +11,21 @@ public class LevelTransitionAnimationScript : MonoBehaviour
     private void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
+        Helpers.GameManagerScript.SetNewLevelTransition(gameObject.GetComponent<LevelTransitionAnimationScript>());
     }
-    public void AnimationFinished()
-    {
-        //Helpers.GameManagerScript.SetLoadingScreenAnimationFinished(true);
-        // wpisac zeby wyslal info o zmianie boola do game managera i zmienic te gowniana nazwe xdd
-    }
-    public void LoadNextLevel()
+    public void CloseAnimationFinished()
     {
         Helpers.GameManagerScript.StartLoadingNextScene();
+    }
+    public void OpenAnimationFinished()
+    {
+
     }
     public void ChangeAnimation(string newState)
     {
         if (currentState == newState) return;
 
         animator.Play(newState);
-        //Debug.Log(newState);
         currentState = newState;
     }
 }
