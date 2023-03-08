@@ -51,7 +51,7 @@ MonoBehaviour:
   afterSwingJumpPower: 1000
   swingSpeedPercentage: 0.9
   exitBarHeight: 1
-  slingPower: 150
+  slingPower: 175
   slingBalance: 0.35
   slingGravity: 0
   slingGravityChangeTime: 0.25

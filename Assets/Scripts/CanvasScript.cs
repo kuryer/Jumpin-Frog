@@ -11,16 +11,16 @@ public class CanvasScript : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
 
-        if(instance == null)
-        {
-            instance = gameObject;
-        }
-        else
+        if(instance != null && instance != this)
         {
             Destroy(gameObject);
         }
+        else
+        {
+            instance = gameObject;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void TogglePauseMenu(bool isPaused)

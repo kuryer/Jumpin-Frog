@@ -444,6 +444,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 direction = slingPointRB.position - rb.position;
         direction = new Vector2(direction.x * playerVars.slingBalance, direction.y * (1f - playerVars.slingBalance));
+        Debug.Log(direction);
         return direction.normalized;
     }
 

@@ -18,7 +18,7 @@ public class GameManagerScript : MonoBehaviour
     }
     bool isPaused = false;
     bool canOpenPauseMenu;
-    int currentLevel;
+    int currentLevel = 0;
     int desiredLevel;
 
     private void Awake()
@@ -80,29 +80,10 @@ public class GameManagerScript : MonoBehaviour
         SetMenus();
         StartLevelTransition();
     }
-
-    public void SetNewLevelTransition(LevelTransitionAnimationScript transitionScript)
-    {
-        TransitionScript = transitionScript;
-    }
-    //Ta metoda zaczyna animacje do zamkniecia przejscia
-    void StartLevelTransition()
-    {
-        TransitionScript.ChangeAnimation(TransitionAnimationState.CloseToLoadingScreen.ToString());
-    }
-
     void SetDesiredLevel(int levelIndex)
     {
         desiredLevel = levelIndex;
     }
-
-    //To jest wywo³ane z zakonczonej animacji
-    public void StartLoadingNextScene()
-    {
-        LevelLoader.LoadScene(desiredLevel);
-        currentLevel = desiredLevel;
-    }
-
     void SetMenus()
     {
         canvasScript.ToggleMenus(desiredLevel);
@@ -114,5 +95,23 @@ public class GameManagerScript : MonoBehaviour
         bool canOpenPauseMenu = true;
         if (desiredLevel == 0) canOpenPauseMenu = false;
         return canOpenPauseMenu;
+    }
+    
+    //Ta metoda zaczyna animacje do zamkniecia przejscia
+    void StartLevelTransition()
+    {
+        TransitionScript.ChangeAnimation(TransitionAnimationState.CloseToLoadingScreen.ToString());
+    }
+
+    //To jest wywo³ane z zakonczonej animacji
+    public void StartLoadingNextScene()
+    {
+        LevelLoader.LoadScene(desiredLevel);
+        currentLevel = desiredLevel;
+    }
+
+    public void SetNewLevelTransition(LevelTransitionAnimationScript transitionScript)
+    {
+        TransitionScript = transitionScript;
     }
 }
