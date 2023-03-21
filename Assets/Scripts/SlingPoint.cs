@@ -36,7 +36,7 @@ public class SlingPoint : MonoBehaviour
         {
             if (collision.transform.position.y < transform.position.y && !canSling)
             {
-                Helpers.PlayerMovement.SetCanSlingTrue(GetComponent<Rigidbody2D>(), gameObject.GetComponent<SlingPoint>());
+                //Helpers.PlayerMovement.SetCanSlingTrue(GetComponent<Rigidbody2D>(), gameObject.GetComponent<SlingPoint>());
                 player = collision.gameObject;
                 ShowArrow();
                 showArrow = true;
@@ -45,7 +45,7 @@ public class SlingPoint : MonoBehaviour
             }
             else if(collision.transform.position.y > transform.position.y && canSling)
             {
-                Helpers.PlayerMovement.SetCanSlingFalse();
+                //Helpers.PlayerMovement.SetCanSlingFalse();
                 HideArrow();
                 showArrow = false;
                 canSling = false;
@@ -58,7 +58,7 @@ public class SlingPoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Helpers.PlayerMovement.SetCanSlingFalse();
+            //Helpers.PlayerMovement.SetCanSlingFalse();
             HideArrow();
             showArrow = false;
             canSling = false;

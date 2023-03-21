@@ -6,14 +6,14 @@ public class LevelEndDoorScript : MonoBehaviour
 {
     [SerializeField] int loadLevel;
     [SerializeField] LayerMask playerLayer;
-    [SerializeField] float rayLength;
-    [SerializeField] float yRayOffset;
+    [SerializeField] float rayLength = 1.62f;
+    [SerializeField] float yRayOffset = .17f;
     bool isPlayerInExit;
     Vector2 colliderPosition;
 
     private void Awake()
     {
-        colliderPosition = new Vector2(GetComponent<Collider2D>().bounds.center.x, GetComponent<Collider2D>().bounds.center.y - yRayOffset);   
+        colliderPosition = new Vector2(GetComponent<Collider2D>().bounds.center.x, GetComponent<Collider2D>().bounds.center.y - yRayOffset);
     }
     private void Update()
     {
@@ -23,6 +23,7 @@ public class LevelEndDoorScript : MonoBehaviour
             {
                 Debug.Log("Turn to another Level");
                 //przejscie do kolejnego poziomu
+                //zapisz przejscie tego poziomu
             }
         }
     }

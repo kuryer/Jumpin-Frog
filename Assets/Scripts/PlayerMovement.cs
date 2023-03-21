@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private bool JumpDown;
     private bool JumpHold;
     private bool JumpUp;
-    bool canMove = true;
+    bool canMove = false;
     private float lastJumpPressed;
     Vector3 groundRayoffset;
     Vector3 wallRayoffset;
@@ -32,9 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] PlayerVarsSO playerVars;
-    //[SerializeField] TextMeshProUGUI velocityXText;
-    //[SerializeField] TextMeshProUGUI velocityXSwingText;
-    //[SerializeField] TextMeshProUGUI velocityYText;
     public delegate void MovementDelegate();
     public delegate void JumpDelegate();
     MovementDelegate movement;
@@ -73,9 +70,16 @@ public class PlayerMovement : MonoBehaviour
     private bool canCornerCorrect;
 
     [Header("Sling")]
+    [SerializeField] float bubbleMagnetismStrength;
     bool canSling;
     Rigidbody2D slingPointRB;
     SlingPoint sPoint;
+    Vector2 bubblePosition;
+    BubbleScript currentBubbleScript;
+    float bubbleX;
+    float bubbleY;
+    Vector2 bubbleThrowDirection;
+
 
     [Header("Swing")]
     SpringJoint2D distJoint;
@@ -134,23 +138,24 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        GatherInput();
+        if(canMove)GatherInput();
+        GatherBubbleInput();
         FallChecker();
 
         if (isBlending) return;
 
         jump();
 
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(64, 4, 0), .5f);
+        }
         if (canSwing || isSwinging) Swing();
-        if (canSling) Sling();
+        //if (canSling) Sling();
         if (isSwinging) LineRendering();
         if (canWallJump) WallJump();
         if(!isWallPauseJumping && !isSwinging) WallGrab();
 
-
-        //velocityXText.text = "Velocity x: " + rb.velocity.x;
-        //velocityXSwingText.text = "Velocity x Swing: " + SwingSignVelocityX();
-        //velocityYText.text = "Velocity Y: " + rb.velocity.y;
 
         Timer();
         ChangeSpring();
@@ -169,9 +174,9 @@ public class PlayerMovement : MonoBehaviour
         CheckCollisions();
 
         if (isSwinging) SwingRotation();
-        if (canMove) movement();
+        /*if (canMove)*/ movement();
         if (canCornerCorrect) CornerCorrect(rb.velocity.y);
-        if (rb.velocity.y < 0f && !isGrounded && !isGrabbing && !isSwinging) FallClamp();
+        if (rb.velocity.y < 0f && !isGrounded && !isGrabbing && !isSwinging && GravityState != gravityState.Sling) FallClamp();
     }
     #endregion
 
@@ -350,25 +355,25 @@ public class PlayerMovement : MonoBehaviour
         {
             //CZY JA POTRZEBUJE TERAZ TEGO BALANSU ALBO PROCENTA Z PREDKOSCI JAK MAM JUZ POGRUPOWANY X I Y NA ODDZIELNE PARTIE I DZIA£AJ¥ ONE ODDZIELNIE???
             //MOZNABY POPRÓBOWAÆ BEZ TEGO BALANSU ITD.
-            Debug.Log("SwingJump");
+            //Debug.Log("SwingJump");
             //swingJumped = true;
             if(isSwinging)
                 StopSwing();
-            Debug.Log(rb.velocity.y);
+            //Debug.Log(rb.velocity.y);
             SpawnJumpCircle();
-            Vector2 direction = new Vector2(SwingJumpDirectionX() * X * playerVars.swingJumpBalance, SwingJumpDirectionY() * (1f - playerVars.swingJumpBalance) /* * Mathf.Sign(rb.velocity.y)*/);
+            Vector2 direction = new Vector2(SwingJumpDirectionX() * X * playerVars.swingJumpBalance, SwingJumpDirectionY() * (1f - playerVars.swingJumpBalance));
             playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
-            float movePercent = MovePercentage();
+            //float movePercent = MovePercentage();
             rb.velocity = Vector2.zero;
-            rb.AddForce(direction * playerVars.swingJumpForce * movePercent, ForceMode2D.Impulse);
+            rb.AddForce(direction * playerVars.swingJumpForce /** movePercent*/, ForceMode2D.Impulse);
             ZeroAllBuffers();
             jump = WaitingJump;
         }
     }
     float SwingJumpDirectionX()
     {
-        if (Mathf.Abs(rb.velocity.x) > 150f)
-            return 150f;
+        if (Mathf.Abs(rb.velocity.x) > 2f)
+            return 2f;
         else
             return Mathf.Abs(rb.velocity.x);
     }
@@ -376,8 +381,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb.velocity.y < 0f)
             return 0f;
-        if (rb.velocity.y > 150f)
-            return 150f;
+        if (rb.velocity.y > 2f)
+            return 2f;
         return rb.velocity.y;
     }
     void AfterSwingJump()
@@ -407,6 +412,47 @@ public class PlayerMovement : MonoBehaviour
 
     #region Sling
 
+    public void StartAdjustingToTheBubbleCenter(Vector2 bubblePos, BubbleScript bubble)
+    {
+        bubblePosition = bubblePos;
+        currentBubbleScript = bubble;
+        jumpCut = true;
+        SetCanMove(false);
+        SwitchGravity(gravityState.Sling);
+        StartCoroutine(MoveTowardsBubbleCenter());
+    }
+    
+    IEnumerator MoveTowardsBubbleCenter()
+    {
+        float timeToPop = playerVars.throwTimer;
+
+        while(timeToPop > 0f)
+        {
+            rb.position = Vector2.MoveTowards(rb.position, bubblePosition, bubbleMagnetismStrength * Time.deltaTime);
+            timeToPop -= Time.deltaTime;
+            yield return null;
+        }
+        currentBubbleScript.ThrowPlayer();
+    }
+    public void ThrowPlayer()
+    {
+        //make calculations and so on
+        //throw to the desired direction
+        SetCanMove(true);
+        StartCoroutine(SlingGravityTimer());
+        rb.AddForce(ThrowDirection() * playerVars.bubbleThrowForce, ForceMode2D.Impulse);
+        Debug.Log(ThrowDirection());
+    }
+    Vector2 ThrowDirection()
+    {
+        //tu moge sie bawic tym vertical i horizontal dashem
+        Vector2 direction;
+        direction = new Vector2(bubbleX, bubbleY).normalized;
+        direction.x *= playerVars.throwDirectionXModifier;
+        direction.y *= playerVars.throwDirectionYModifier;
+        return direction;
+    }
+    /*
     public void SetCanSlingTrue(Rigidbody2D slingRB, SlingPoint slingPoint)
     {
         sPoint = slingPoint;
@@ -431,21 +477,27 @@ public class PlayerMovement : MonoBehaviour
             jump = WaitingJump;
         }
     }
-    IEnumerator SlingGravityTimer()
-    {
-        SwitchGravity(gravityState.Sling);
-        //Debug.Log("yo 1");
-        yield return new WaitForSeconds(playerVars.slingGravityChangeTime);
-        //Debug.Log("yo 2");
-        if(GravityState.Equals(gravityState.Sling))
-            SwitchGravity(gravityState.Falling);
-    }
     Vector2 SlingDirection()
     {
         Vector2 direction = slingPointRB.position - rb.position;
         direction = new Vector2(direction.x * playerVars.slingBalance, direction.y * (1f - playerVars.slingBalance));
         Debug.Log(direction);
         return direction.normalized;
+    }
+    */
+    IEnumerator SlingGravityTimer()
+    {
+        SwitchGravity(gravityState.Sling);
+
+        yield return new WaitForSeconds(playerVars.slingGravityChangeTime);
+        Debug.Log("Slow Down");
+        SlowDownBubbleDash();
+        if(GravityState.Equals(gravityState.Sling))
+            SwitchGravity(gravityState.Falling);
+    }
+    void SlowDownBubbleDash()
+    {
+        rb.velocity /= 1.5f;
     }
 
     #endregion
@@ -495,8 +547,8 @@ public class PlayerMovement : MonoBehaviour
         isSwinging = true;
         swingScript.PlaySwingAnimation();
         movement = SwingingMovement;
-        //jump = SwingJump;
-        jump = WaitingJump;
+        jump = SwingJump;
+        //jump = WaitingJump;
     }
     void StopSwing()
     {
@@ -512,7 +564,7 @@ public class PlayerMovement : MonoBehaviour
         if(!swingJumped)
             StartCoroutine(SwingJumpBuffer());
         */
-        SwingBoost();
+        //SwingBoost();
         movement = InAirMovement;
         JumpThightenerQueue();
     }
@@ -556,7 +608,7 @@ public class PlayerMovement : MonoBehaviour
     }
     float MovePercentage()
     {
-        Debug.Log(rb.velocity.magnitude / playerVars.swingMoveSpeed);
+        //Debug.Log(rb.velocity.magnitude / playerVars.swingMoveSpeed);
 
         if ((rb.velocity.magnitude / playerVars.swingMoveSpeed) > playerVars.swingSpeedPercentage)
         {
@@ -828,13 +880,6 @@ public class PlayerMovement : MonoBehaviour
             lastSwingPressed = playerVars.swingBuffer;
         
     }
-    void ChangeSpring()
-    {
-        if (distJoint.frequency != playerVars.springFrequency)
-            distJoint.frequency = playerVars.springFrequency;
-        if (distJoint.dampingRatio != playerVars.springDamping)
-            distJoint.dampingRatio = playerVars.springDamping;
-    }
     float XMovement()
     {
         float input = Input.GetAxisRaw("Horizontal");
@@ -855,6 +900,27 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
+    }
+    void GatherBubbleInput()
+    {
+        float X = Input.GetAxisRaw("Horizontal");
+        float Y = Input.GetAxisRaw("Vertical");
+        if(X == 0 && Y == 0) return;
+        bubbleX = X;
+        bubbleY = Y;
+    }
+    public void SetCanMove(bool can)
+    {
+        canMove = can;
+        rb.velocity = Vector2.zero;
+        X = 0;
+    }
+    void ChangeSpring()
+    {
+        if (distJoint.frequency != playerVars.springFrequency)
+            distJoint.frequency = playerVars.springFrequency;
+        if (distJoint.dampingRatio != playerVars.springDamping)
+            distJoint.dampingRatio = playerVars.springDamping;
     }
     void Timer()
     {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b704ad51234904a8c9f01be0a0fd78, type: 3}
   m_Name: Player Variables
   m_EditorClassIdentifier: 
-  moveSpeed: 6.9
+  moveSpeed: 9
   acceleration: 80
   decceleration: 120
   velPower: 1
@@ -20,7 +20,7 @@ MonoBehaviour:
   inAirAccelerationBasic: 12
   inAirDeccelerationBasic: 1
   fallClampSpeed: 16
-  jumpPower: 122
+  jumpPower: 125
   jumpCutMultiplier: 1.2
   fallGravity: 2.5
   coyoteTime: 0.08
@@ -33,8 +33,8 @@ MonoBehaviour:
   wallJumpPowerModifier: 1.17
   wallGrabJumpBuffer: 0.1
   wallGrabBuffer: 0.1
-  swingJumpForce: 58
-  swingJumpBalance: 0.4
+  swingJumpForce: 95
+  swingJumpBalance: 0.35
   SwingJumpBuffer: 0
   swingBoostForce: 5.25
   swingBoostBalance: 0.43
@@ -42,18 +42,22 @@ MonoBehaviour:
   springDamping: 1
   swingVelocityCut: 1.3
   swingMoveSpeed: 21
-  accelerationSwing: 17
+  accelerationSwing: 16
   conccelerationSwing: 0.7
   deccelerationSwing: 0
   swingMovementPower: 1
   swingGravity: 0
   swingBuffer: 0.3
-  afterSwingJumpPower: 1000
+  afterSwingJumpPower: 10
   swingSpeedPercentage: 0.9
   exitBarHeight: 1
   slingPower: 175
   slingBalance: 0.35
   slingGravity: 0
-  slingGravityChangeTime: 0.25
+  slingGravityChangeTime: 0.145
+  throwTimer: 0.6
+  bubbleThrowForce: 205
+  throwDirectionXModifier: 0.9
+  throwDirectionYModifier: 0.9
   lineWidth: 0.4
   respawnTime: 0.3

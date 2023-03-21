@@ -56,6 +56,10 @@ public class PlayerVarsSO : ScriptableObject
     public float slingBalance;
     public float slingGravity;
     public float slingGravityChangeTime;
+    public float throwTimer;
+    public float bubbleThrowForce;
+    public float throwDirectionXModifier;
+    public float throwDirectionYModifier;
     [Header("Line Renderer")]
     public float lineWidth;
     [Header("Death")]

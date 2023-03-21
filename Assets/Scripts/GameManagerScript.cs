@@ -101,6 +101,7 @@ public class GameManagerScript : MonoBehaviour
     void StartLevelTransition()
     {
         TransitionScript.ChangeAnimation(TransitionAnimationState.CloseToLoadingScreen.ToString());
+        if (currentLevel != 0) Helpers.PlayerMovement.SetCanMove(false);
     }
 
     //To jest wywo³ane z zakonczonej animacji

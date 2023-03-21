@@ -19,7 +19,7 @@ public class LevelTransitionAnimationScript : MonoBehaviour
     }
     public void OpenAnimationFinished()
     {
-
+        Helpers.PlayerMovement.SetCanMove(true);
     }
     public void ChangeAnimation(string newState)
     {
