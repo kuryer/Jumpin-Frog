@@ -110,7 +110,7 @@ public class GameManagerScript : MonoBehaviour
         LevelLoader.LoadScene(desiredLevel);
         currentLevel = desiredLevel;
     }
-
+    //to jest wywo³ane po za³adowniu nowej sceny i skonczeniu animacji
     public void SetNewLevelTransition(LevelTransitionAnimationScript transitionScript)
     {
         TransitionScript = transitionScript;

@@ -1006,7 +1006,7 @@ public class PlayerMovement : MonoBehaviour
         if (isWallPauseJumping && !onAnyWall)
             isWallPauseJumping = false;
     }
-    public void DeathCheck()
+    public void SetupDeadPlayer()
     {
         distJoint.enabled = false;
         lineRenderer.enabled = false;

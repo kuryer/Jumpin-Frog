@@ -16,6 +16,10 @@ public class PlayerHealth : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    //gracz musi otrzymac info o tym gdzie jest miejsce odrodzenia
+    // gracz musi miec oddzieln¹ funkcje pod smierc oraz jej animacje
+    // potem przesun¹æ siê do miejsca odrodzenia
+    // gracz musi miec oddzieln¹ funkcjê do odrodzenia sie i animacji
     public void PlayerDeath()
     {
         StartCoroutine(RespawnTimer());
@@ -23,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
 
     IEnumerator RespawnTimer()
     {
-        movementScript.DeathCheck();
+        movementScript.SetupDeadPlayer();
         spriteRenderer.enabled = false;
         movementScript.enabled = false;
         transform.position = respawnPoint.position;
