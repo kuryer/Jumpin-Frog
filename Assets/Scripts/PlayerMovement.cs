@@ -26,7 +26,8 @@ public class PlayerMovement : MonoBehaviour
         Falling,
         WallGrab,
         Swing,
-        Sling
+        Sling,
+        Space
     }
 
 
@@ -146,10 +147,7 @@ public class PlayerMovement : MonoBehaviour
 
         jump();
 
-        if (Input.GetKey(KeyCode.E))
-        {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(64, 4, 0), .5f);
-        }
+
         if (canSwing || isSwinging) Swing();
         //if (canSling) Sling();
         if (isSwinging) LineRendering();
@@ -748,6 +746,12 @@ public class PlayerMovement : MonoBehaviour
                     //gravityStateText.text = "Gravity State: Sling";
                     break;
                 }
+            case gravityState.Space:
+                {
+                    rb.gravityScale = 0f;
+                    GravityState = gravityState.Space;
+                    break;
+                }
         }
     }
     void FallChecker()
@@ -914,6 +918,11 @@ public class PlayerMovement : MonoBehaviour
         canMove = can;
         rb.velocity = Vector2.zero;
         X = 0;
+        if (can)
+        {
+            SwitchGravity(gravityState.Normal);
+        }
+        else SwitchGravity(gravityState.Space);
     }
     void ChangeSpring()
     {
@@ -1006,7 +1015,7 @@ public class PlayerMovement : MonoBehaviour
         if (isWallPauseJumping && !onAnyWall)
             isWallPauseJumping = false;
     }
-    public void DeathCheck()
+    public void SetupVariablesAfterDeath()
     {
         distJoint.enabled = false;
         lineRenderer.enabled = false;

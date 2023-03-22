@@ -5,37 +5,66 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     PlayerMovement movementScript;
-    [SerializeField] Transform respawnPoint;
+    PlayerAnimations animationScript;
+    [SerializeField] Vector3 respawnPoint;
+    float respawnSpeed; // <- JO TU MAM CUŒ TAKIEGO NI WIM CZY TEGO UZYC CZY NIE, ZEBY RAZ USTAWIAC TE PREDKOSC CZY NI
     [SerializeField] PlayerVarsSO playerVars;
-    SpriteRenderer spriteRenderer;
-    Rigidbody2D rb;
+
+
     void Start()
     {
+        animationScript = GetComponent<PlayerAnimations>();
         movementScript = GetComponent<PlayerMovement>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        respawnSpeed = playerVars.respawnMoveTowardSpeed;
     }
 
-    public void PlayerDeath()
-    {
-        StartCoroutine(RespawnTimer());
-    }
+    #region Kill Player
 
-    IEnumerator RespawnTimer()
+    public void KillPlayer()
     {
-        movementScript.DeathCheck();
-        spriteRenderer.enabled = false;
+        movementScript.SetupVariablesAfterDeath();
+        animationScript.ChangeAnimationState("Death_Player");
+        movementScript.SetCanMove(false);
         movementScript.enabled = false;
-        transform.position = respawnPoint.position;
-        rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(playerVars.respawnTime);
-        spriteRenderer.enabled = true;
-        movementScript.enabled = true;
+        Debug.Log("hello");
     }
-    public void SetRespawnPoint(Transform newRespawnPoint)
+
+    public void StartMovingTowardRoutine()
+    {
+        StartCoroutine(MoveTowardRespawn());
+    }
+
+    IEnumerator MoveTowardRespawn()
+    {
+        while(transform.position != respawnPoint)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, respawnPoint, playerVars.respawnMoveTowardSpeed);
+            yield return null;
+        }
+        Respawn();
+    }
+
+    void Respawn()
+    {
+        animationScript.ChangeAnimationState("Respawn_Player");
+    }
+
+    public void AfterRespawnAnimation()
+    {
+        movementScript.enabled = true;
+        movementScript.SetCanMove(true);
+    }
+
+    #endregion
+
+    #region Respawn Point
+
+    public void SetRespawnPoint(Vector3 newRespawnPoint)
     {
         if (newRespawnPoint == respawnPoint) return;
 
         respawnPoint = newRespawnPoint;
     }
+
+    #endregion
 }

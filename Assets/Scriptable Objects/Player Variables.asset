@@ -60,4 +60,4 @@ MonoBehaviour:
   throwDirectionXModifier: 0.9
   throwDirectionYModifier: 0.9
   lineWidth: 0.4
-  respawnTime: 0.3
+  respawnMoveTowardSpeed: 0.3
