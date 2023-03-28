@@ -96,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
     bool swingBoosterCheck;
     //bool swingJumped;
     float swingJumpBuffer;
+    private IEnumerator slingTimer;
 
 
     [Header("Line Renderer")]
@@ -408,7 +409,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
 
-    #region Sling
+    #region Bubble
 
     public void StartAdjustingToTheBubbleCenter(Vector2 bubblePos, BubbleScript bubble)
     {
@@ -418,6 +419,7 @@ public class PlayerMovement : MonoBehaviour
         SetCanMove(false);
         SwitchGravity(gravityState.Sling);
         StartCoroutine(MoveTowardsBubbleCenter());
+        if(slingTimer != null) StopCoroutine(slingTimer);
     }
     
     IEnumerator MoveTowardsBubbleCenter()
@@ -426,10 +428,12 @@ public class PlayerMovement : MonoBehaviour
 
         while(timeToPop > 0f)
         {
+            Debug.Log("Time to pop = " + timeToPop);
             rb.position = Vector2.MoveTowards(rb.position, bubblePosition, bubbleMagnetismStrength * Time.deltaTime);
             timeToPop -= Time.deltaTime;
             yield return null;
         }
+        Debug.Log("Throw -> Bubble");
         currentBubbleScript.ThrowPlayer();
     }
     public void ThrowPlayer()
@@ -437,7 +441,8 @@ public class PlayerMovement : MonoBehaviour
         //make calculations and so on
         //throw to the desired direction
         SetCanMove(true);
-        StartCoroutine(SlingGravityTimer());
+        slingTimer = SlingGravityTimer();
+        StartCoroutine(slingTimer);
         rb.AddForce(ThrowDirection() * playerVars.bubbleThrowForce, ForceMode2D.Impulse);
         Debug.Log(ThrowDirection());
     }
@@ -488,13 +493,15 @@ public class PlayerMovement : MonoBehaviour
         SwitchGravity(gravityState.Sling);
 
         yield return new WaitForSeconds(playerVars.slingGravityChangeTime);
-        Debug.Log("Slow Down");
-        SlowDownBubbleDash();
-        if(GravityState.Equals(gravityState.Sling))
+        if (GravityState.Equals(gravityState.Sling))
+        {
             SwitchGravity(gravityState.Falling);
+            SlowDownBubbleDash();
+        }
     }
     void SlowDownBubbleDash()
     {
+        Debug.Log("Slow Down");
         rb.velocity /= 1.5f;
     }
 
