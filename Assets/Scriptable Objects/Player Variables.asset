@@ -38,15 +38,15 @@ MonoBehaviour:
   SwingJumpBuffer: 0
   swingBoostForce: 5.25
   swingBoostBalance: 0.43
-  springFrequency: 2.5
-  springDamping: 1
+  springFrequency: 2.2
+  springDamping: 0.45
   swingVelocityCut: 1
   swingMoveSpeed: 21
   accelerationSwing: 16
   conccelerationSwing: 0.7
   deccelerationSwing: 0
   swingMovementPower: 1
-  swingGravity: 0
+  swingGravity: 0.1
   swingBuffer: 0.3
   afterSwingJumpPower: 10
   swingSpeedPercentage: 0.9
