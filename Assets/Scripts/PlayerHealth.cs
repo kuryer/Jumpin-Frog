@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     PlayerMovement movementScript;
-    [SerializeField] Transform respawnPoint;
+    PlayerAnimations animationScript;
+    [SerializeField] Vector3 respawnPoint;
+    float respawnSpeed; // <- JO TU MAM CU? TAKIEGO NI WIM CZY TEGO UZYC CZY NIE, ZEBY RAZ USTAWIAC TE PREDKOSC CZY NI
     [SerializeField] PlayerVarsSO playerVars;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
@@ -16,10 +18,24 @@ public class PlayerHealth : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+
+    public void KillPlayer()
+    {
+        movementScript.SetupVariablesAfterDeath();
+        animationScript.ChangeAnimationState("Death_Player");
+        movementScript.SetCanMove(false);
+        movementScript.enabled = false;
+        Debug.Log("hello");
+    }
+
+
+
+
     //gracz musi otrzymac info o tym gdzie jest miejsce odrodzenia
     // gracz musi miec oddzieln¹ funkcje pod smierc oraz jej animacje
     // potem przesun¹æ siê do miejsca odrodzenia
     // gracz musi miec oddzieln¹ funkcjê do odrodzenia sie i animacji
+    /*
     public void PlayerDeath()
     {
         StartCoroutine(RespawnTimer());
@@ -42,4 +58,5 @@ public class PlayerHealth : MonoBehaviour
 
         respawnPoint = newRespawnPoint;
     }
+    */
 }
