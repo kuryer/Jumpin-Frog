@@ -7,17 +7,18 @@ public class PlayerHealth : MonoBehaviour
     PlayerMovement movementScript;
     PlayerAnimations animationScript;
     [SerializeField] Vector3 respawnPoint;
-    float respawnSpeed; // <- JO TU MAM CU? TAKIEGO NI WIM CZY TEGO UZYC CZY NIE, ZEBY RAZ USTAWIAC TE PREDKOSC CZY NI
+    float respawnSpeed; // <- JO TU MAM CUŒ TAKIEGO NI WIM CZY TEGO UZYC CZY NIE, ZEBY RAZ USTAWIAC TE PREDKOSC CZY NI
     [SerializeField] PlayerVarsSO playerVars;
-    SpriteRenderer spriteRenderer;
-    Rigidbody2D rb;
+
+
     void Start()
     {
+        animationScript = GetComponent<PlayerAnimations>();
         movementScript = GetComponent<PlayerMovement>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        respawnSpeed = playerVars.respawnMoveTowardSpeed;
     }
 
+    #region Kill Player
 
     public void KillPlayer()
     {
@@ -28,35 +29,42 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("hello");
     }
 
-
-
-
-    //gracz musi otrzymac info o tym gdzie jest miejsce odrodzenia
-    // gracz musi miec oddzieln¹ funkcje pod smierc oraz jej animacje
-    // potem przesun¹æ siê do miejsca odrodzenia
-    // gracz musi miec oddzieln¹ funkcjê do odrodzenia sie i animacji
-    /*
-    public void PlayerDeath()
+    public void StartMovingTowardRoutine()
     {
-        StartCoroutine(RespawnTimer());
+        StartCoroutine(MoveTowardRespawn());
     }
 
-    IEnumerator RespawnTimer()
+    IEnumerator MoveTowardRespawn()
     {
-        movementScript.SetupDeadPlayer();
-        spriteRenderer.enabled = false;
-        movementScript.enabled = false;
-        transform.position = respawnPoint.position;
-        rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(playerVars.respawnTime);
-        spriteRenderer.enabled = true;
+        while(transform.position != respawnPoint)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, respawnPoint, playerVars.respawnMoveTowardSpeed);
+            yield return null;
+        }
+        Respawn();
+    }
+
+    void Respawn()
+    {
+        animationScript.ChangeAnimationState("Respawn_Player");
+    }
+
+    public void AfterRespawnAnimation()
+    {
         movementScript.enabled = true;
+        movementScript.SetCanMove(true);
     }
-    public void SetRespawnPoint(Transform newRespawnPoint)
+
+    #endregion
+
+    #region Respawn Point
+
+    public void SetRespawnPoint(Vector3 newRespawnPoint)
     {
         if (newRespawnPoint == respawnPoint) return;
 
         respawnPoint = newRespawnPoint;
     }
-    */
+
+    #endregion
 }
