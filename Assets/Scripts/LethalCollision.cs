@@ -8,7 +8,7 @@ public class LethalCollision : MonoBehaviour
     {
         if (collision.TryGetComponent<PlayerHealth>(out PlayerHealth player))
         {
-            player.KillPlayer();
+            player.PlayerDeath();
         }
     }
 }

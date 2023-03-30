@@ -6,6 +6,13 @@ public class RespawnPoint : MonoBehaviour
 {
     private void Awake()
     {
-        Helpers.PlayerHealth.SetRespawnPoint(transform.position);
+        Helpers.PlayerHealth.SetRespawnPoint(transform);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Helpers.PlayerHealth.SetRespawnPoint(transform);
+        }
     }
 }
