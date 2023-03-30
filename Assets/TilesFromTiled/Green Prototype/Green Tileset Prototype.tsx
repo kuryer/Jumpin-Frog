@@ -26,6 +26,11 @@
    <object id="1" x="-0.00373672" y="0.009943" width="16.0135" height="15.9968"/>
   </objectgroup>
  </tile>
+ <tile id="5">
+  <objectgroup>
+   <object id="1" x="-0.00373672" y="0.009943" width="16.0135" height="15.9968"/>
+  </objectgroup>
+ </tile>
  <tile id="6">
   <objectgroup>
    <object id="1" x="-0.00373672" y="0.009943" width="16.0135" height="15.9968"/>

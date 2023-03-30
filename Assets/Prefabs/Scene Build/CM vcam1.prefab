@@ -65,11 +65,11 @@ MonoBehaviour:
   m_YDamping: 0
   m_ZDamping: 1
   m_TargetMovementOnly: 0
-  m_ScreenX: 0.4000005
-  m_ScreenY: 0.5116693
+  m_ScreenX: 0.40546933
+  m_ScreenY: 0.53250796
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.22656249
-  m_DeadZoneHeight: 0.2561113
+  m_DeadZoneHeight: 0.18666668
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 803678387609138840, guid: 272dccbc88c74a64eb6d07cbcfc4e86d, type: 3}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 11.25

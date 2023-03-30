@@ -4,16 +4,8 @@ using UnityEngine;
 
 public class RespawnPoint : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Awake()
     {
-        if (collision.CompareTag("Player"))
-        {
-            Helpers.PlayerHealth.SetRespawnPoint(transform);
-        }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Helpers.PlayerHealth.SetRespawnPoint(transform.position);
     }
 }

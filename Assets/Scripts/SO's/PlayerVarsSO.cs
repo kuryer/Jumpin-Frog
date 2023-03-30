@@ -63,5 +63,5 @@ public class PlayerVarsSO : ScriptableObject
     [Header("Line Renderer")]
     public float lineWidth;
     [Header("Death")]
-    public float respawnTime;
+    public float respawnMoveTowardSpeed;
 }
