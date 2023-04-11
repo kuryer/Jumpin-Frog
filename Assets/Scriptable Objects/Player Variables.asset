@@ -30,10 +30,10 @@ MonoBehaviour:
   wallSlideSpeed: 5
   wallGravity: 0.45
   wallJumpDirectionBalance: 0.67
-  wallJumpPowerModifier: 1.17
+  wallJumpPowerModifier: 1.5
   wallGrabJumpBuffer: 0.1
   wallGrabBuffer: 0.1
-  swingJumpForce: 102.5
+  swingJumpForce: 110
   swingJumpBalance: 0.35
   SwingJumpBuffer: 0
   swingBoostForce: 5.25
@@ -60,4 +60,4 @@ MonoBehaviour:
   throwDirectionXModifier: 0.9
   throwDirectionYModifier: 0.95
   lineWidth: 0.4
-  respawnMoveTowardSpeed: 0.3
+  respawnMoveTowardSpeed: 0.4

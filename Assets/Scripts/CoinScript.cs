@@ -5,6 +5,12 @@ using UnityEngine;
 public class CoinScript : MonoBehaviour
 {
     Animator animator;
+    bool isCollected = false;
+    enum AnimationState
+    {
+        Coin_Idle,
+        Coin_Collect
+    }
 
     private void Awake()
     {
@@ -13,7 +19,7 @@ public class CoinScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isCollected)
         {
             CollectCoin();
         }
@@ -21,8 +27,9 @@ public class CoinScript : MonoBehaviour
 
     void CollectCoin()
     {
-        //play animation
-        //add coin to coin count
+        animator.Play(AnimationState.Coin_Collect.ToString());
+        isCollected = true;
+        Helpers.DataManagerScript.AddCoin();
     }
 
     public void DeleteCoin()

@@ -6,9 +6,11 @@ public class PlayerHealth : MonoBehaviour
 {
     PlayerMovement movementScript;
     PlayerAnimations animationScript;
-    [SerializeField] Vector3 respawnPoint;
+    [SerializeField] GameObject respawnPointObject;
+    Vector3 respawnPointPosition;
     float respawnSpeed; // <- JO TU MAM CUŒ TAKIEGO NI WIM CZY TEGO UZYC CZY NIE, ZEBY RAZ USTAWIAC TE PREDKOSC CZY NI
     [SerializeField] PlayerVarsSO playerVars;
+
 
 
     void Start()
@@ -26,7 +28,6 @@ public class PlayerHealth : MonoBehaviour
         animationScript.ChangeAnimationState("Death_Player");
         movementScript.SetCanMove(false);
         movementScript.enabled = false;
-        Debug.Log("hello");
     }
 
     public void StartMovingTowardRoutine()
@@ -36,9 +37,9 @@ public class PlayerHealth : MonoBehaviour
 
     IEnumerator MoveTowardRespawn()
     {
-        while(transform.position != respawnPoint)
+        while(transform.position != respawnPointPosition)
         {
-            transform.position = Vector3.MoveTowards(transform.position, respawnPoint, playerVars.respawnMoveTowardSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, respawnPointPosition, playerVars.respawnMoveTowardSpeed);
             yield return null;
         }
         Respawn();
@@ -59,11 +60,26 @@ public class PlayerHealth : MonoBehaviour
 
     #region Respawn Point
 
-    public void SetRespawnPoint(Vector3 newRespawnPoint)
+    public void SetRespawnPoint(GameObject newRespawnPoint, bool isFirst)
     {
-        if (newRespawnPoint == respawnPoint) return;
+        Vector3 newRespawnPointPos = newRespawnPoint.transform.position;
+        if (newRespawnPointPos == respawnPointPosition) return;
 
-        respawnPoint = newRespawnPoint;
+        if (!isFirst)
+        {
+            ChangePreviousRespawnPoint();
+        }
+
+        respawnPointPosition = newRespawnPointPos;
+        respawnPointObject = newRespawnPoint;
+    }
+
+    void ChangePreviousRespawnPoint()
+    {
+        if(respawnPointObject != null)
+        {
+            respawnPointObject.GetComponent<RespawnPoint>().ClearPreviousBool();
+        }
     }
 
     #endregion

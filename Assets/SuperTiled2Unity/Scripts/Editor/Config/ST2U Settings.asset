@@ -17,7 +17,7 @@ MonoBehaviour:
   m_AnimationFramerate: 20
   m_DefaultMaterial: {fileID: 0}
   m_MaterialMatchings: []
-  m_ObjectTypesXml: {fileID: 0}
+  m_ObjectTypesXml: {fileID: 4900000, guid: 937e4f6903f494c48b78e14a2a9e703d, type: 3}
   m_ParseXmlError: 
   m_CollisionGeometryType: 1
   m_LayerColors:
@@ -53,5 +53,30 @@ MonoBehaviour:
   - {r: 1, g: 0.64705884, b: 0, a: 1}
   - {r: 0, g: 1, b: 1, a: 1}
   - {r: 0.7372549, g: 0.56078434, b: 0.56078434, a: 1}
-  m_CustomObjectTypes: []
-  m_PrefabReplacements: []
+  m_CustomObjectTypes:
+  - m_Name: Bubble
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  - m_Name: Coin
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  - m_Name: Door
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  - m_Name: Flag
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  - m_Name: Swing
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  m_PrefabReplacements:
+  - m_TypeName: Coin
+    m_Prefab: {fileID: 3377485361274972121, guid: bf9400f3c4ccab04aa71bd06a05554b4, type: 3}
+  - m_TypeName: Flag
+    m_Prefab: {fileID: 4472524462452571150, guid: 74cc5d0b395ffcf4dafe5b9facc1af23, type: 3}
+  - m_TypeName: Swing
+    m_Prefab: {fileID: 47595466687042728, guid: 8a692ac2fa3eab747a55cd7eb3fd8f73, type: 3}
+  - m_TypeName: Bubble
+    m_Prefab: {fileID: 43027589770213311, guid: 2b980ec8b94be36428afe98dd96ed40c, type: 3}
+  - m_TypeName: Door
+    m_Prefab: {fileID: 2904268743927636297, guid: a48dadbb6146e574dbb7e62e73bd45d1, type: 3}

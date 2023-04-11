@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4472524462452571148}
   - component: {fileID: 4472524462452571151}
   - component: {fileID: 4472524462452571149}
+  - component: {fileID: 4891761667567242202}
+  - component: {fileID: 2940057415805324382}
   m_Layer: 0
   m_Name: Respawn Point (Flag)
   m_TagString: Untagged
@@ -97,3 +99,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662b0d8ccb91784468cd2f0c77a23dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSet: 0
+--- !u!95 &4891761667567242202
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472524462452571150}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 965db103cbd904248a921b2d0284d7cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &2940057415805324382
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472524462452571150}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.16982849, y: -0.1843853}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0004376, y: 1.6312294}
+  m_EdgeRadius: 0

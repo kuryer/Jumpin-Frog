@@ -428,17 +428,14 @@ public class PlayerMovement : MonoBehaviour
 
         while(timeToPop > 0f)
         {
-            Debug.Log("Time to pop = " + timeToPop);
             rb.position = Vector2.MoveTowards(rb.position, bubblePosition, bubbleMagnetismStrength * Time.deltaTime);
             timeToPop -= Time.deltaTime;
             yield return null;
         }
-        Debug.Log("Throw -> Bubble");
         currentBubbleScript.ThrowPlayer();
     }
     public void ThrowPlayer()
     {
-        //make calculations and so on
         //throw to the desired direction
         SetCanMove(true);
         slingTimer = SlingGravityTimer();
@@ -455,39 +452,6 @@ public class PlayerMovement : MonoBehaviour
         direction.y *= playerVars.throwDirectionYModifier;
         return direction;
     }
-    /*
-    public void SetCanSlingTrue(Rigidbody2D slingRB, SlingPoint slingPoint)
-    {
-        sPoint = slingPoint;
-        slingPointRB = slingRB;
-        canSling = true;
-    }
-    public void SetCanSlingFalse()
-    {
-        canSling = false;
-    }
-    void Sling()
-    {
-        if(lastSwingPressed > 0f && !isGrounded)
-        {
-            StartCoroutine(SlingGravityTimer());
-            rb.velocity = Vector2.zero;
-            rb.AddForce(SlingDirection() * playerVars.slingPower, ForceMode2D.Impulse);
-            //Debug.Log(SlingDirection());
-            lastSwingPressed = 0f;
-            SetCanSlingFalse();
-            sPoint.HideArrow();
-            jump = WaitingJump;
-        }
-    }
-    Vector2 SlingDirection()
-    {
-        Vector2 direction = slingPointRB.position - rb.position;
-        direction = new Vector2(direction.x * playerVars.slingBalance, direction.y * (1f - playerVars.slingBalance));
-        Debug.Log(direction);
-        return direction.normalized;
-    }
-    */
     IEnumerator SlingGravityTimer()
     {
         SwitchGravity(gravityState.Sling);
@@ -924,12 +888,18 @@ public class PlayerMovement : MonoBehaviour
     {
         canMove = can;
         rb.velocity = Vector2.zero;
+        
         X = 0;
         if (can)
         {
             SwitchGravity(gravityState.Normal);
+            gameObject.tag = "Player";
         }
-        else SwitchGravity(gravityState.Space);
+        else
+        {
+            SwitchGravity(gravityState.Space);
+            gameObject.tag = "Dead";
+        }
     }
     void ChangeSpring()
     {

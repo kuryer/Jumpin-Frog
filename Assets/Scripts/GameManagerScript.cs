@@ -8,7 +8,6 @@ public class GameManagerScript : MonoBehaviour
 {
     private static GameManagerScript instance;
 
-    [SerializeField] CanvasScript canvasScript;
     [SerializeField] LevelTransitionAnimationScript TransitionScript;
     enum TransitionAnimationState
     {
@@ -16,14 +15,12 @@ public class GameManagerScript : MonoBehaviour
         OpenFromLoadingScreen,
         LoadingInactive
     }
-    bool isPaused = false;
-    bool canOpenPauseMenu;
     int currentLevel = 0;
     int desiredLevel;
-
+    int count;
+    public int CurrentLevel { get { return currentLevel; } }
     private void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -37,64 +34,21 @@ public class GameManagerScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && canOpenPauseMenu)
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            TogglePauseMenu();
+            SceneManager.LoadSceneAsync("UI Scene", LoadSceneMode.Additive);
         }
     }
 
-    #region PauseMenu
-    public void TogglePauseMenu()
-    {
-        //Sprawdzam czy ju¿ spauzowa³em czy jeszcze nie i manipuluje czasem w zale¿noœci od stanu Pause Menu
-        if (!isPaused)
-        {
-            SetPause();
-        }
-        else
-        {
-            SetResume();
-        }
-
-
-        //W³¹czam Pause Menu wizualnie w Canvasie
-        canvasScript.TogglePauseMenu(isPaused);
-    }
-    void SetPause()
-    {
-        Time.timeScale = 0;
-        isPaused = true;
-    }
-    void SetResume()
-    {
-        Time.timeScale = 1;
-        isPaused = false;
-        canvasScript.TogglePauseMenu(isPaused);
-    }
-    #endregion
-
-    //To jest pierwsza funkcja przez animacj¹. Przycisk -> GameManager
+    //To jest pierwsza funkcja przed animacj¹. Przycisk -> GameManager
     public void LoadNextLevel(int levelIndex)
     {
         SetDesiredLevel(levelIndex);
-        SetMenus();
         StartLevelTransition();
     }
     void SetDesiredLevel(int levelIndex)
     {
         desiredLevel = levelIndex;
-    }
-    void SetMenus()
-    {
-        canvasScript.ToggleMenus(desiredLevel);
-        canOpenPauseMenu = SetPauseMenuBool();
-        SetResume();
-    }
-    bool SetPauseMenuBool()
-    {
-        bool canOpenPauseMenu = true;
-        if (desiredLevel == 0) canOpenPauseMenu = false;
-        return canOpenPauseMenu;
     }
     
     //Ta metoda zaczyna animacje do zamkniecia przejscia

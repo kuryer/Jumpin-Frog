@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="Bubble" color="#a0a0a4"/>
+ <objecttype name="Coin" color="#a0a0a4"/>
+ <objecttype name="Door" color="#a0a0a4"/>
+ <objecttype name="Flag" color="#a0a0a4"/>
+ <objecttype name="Swing" color="#a0a0a4"/>
+</objecttypes>

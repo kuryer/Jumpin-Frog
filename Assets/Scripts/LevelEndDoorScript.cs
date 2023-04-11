@@ -21,8 +21,8 @@ public class LevelEndDoorScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Turn to another Level");
-                //przejscie do kolejnego poziomu
+                Debug.Log("Pls remember to look at this script bcs its not finished / saving aint done");
+                Helpers.GameManagerScript.LoadNextLevel(loadLevel);
                 //zapisz przejscie tego poziomu
             }
         }
