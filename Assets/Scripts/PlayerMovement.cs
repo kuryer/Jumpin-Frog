@@ -115,7 +115,8 @@ public class PlayerMovement : MonoBehaviour
         Jump_Player,
         Fall_Player,
         WallGrab_Player,
-        Swing_Player
+        Swing_Player,
+        InAirRoll_Player
     }
     SpriteRenderer spriteRenderer;
 
@@ -326,7 +327,6 @@ public class PlayerMovement : MonoBehaviour
             SwitchGravity(gravityState.Normal);
             rb.velocity = Vector2.zero;
 
-            playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
             isWallPauseJumping = true;
             isGrabbing = false;
             ZeroAllBuffers();
@@ -361,7 +361,7 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(rb.velocity.y);
             SpawnJumpCircle();
             Vector2 direction = new Vector2(SwingJumpDirectionX() * X * playerVars.swingJumpBalance, SwingJumpDirectionY() * (1f - playerVars.swingJumpBalance));
-            playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
+            //playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
             //float movePercent = MovePercentage();
             rb.velocity = Vector2.zero;
             rb.AddForce(direction * playerVars.swingJumpForce /** movePercent*/, ForceMode2D.Impulse);
@@ -389,7 +389,7 @@ public class PlayerMovement : MonoBehaviour
         if (JumpDown)
         {
             SwitchGravity(gravityState.Normal);
-            playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
+            //playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
             //Debug.Log("Swing Jump");
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * playerVars.afterSwingJumpPower, ForceMode2D.Impulse);
@@ -425,8 +425,8 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator MoveTowardsBubbleCenter()
     {
         float timeToPop = playerVars.throwTimer;
-
-        while(timeToPop > 0f)
+        playerAnims.ChangeAnimationState(AnimationState.Fall_Player.ToString());
+        while (timeToPop > 0f)
         {
             rb.position = Vector2.MoveTowards(rb.position, bubblePosition, bubbleMagnetismStrength * Time.deltaTime);
             timeToPop -= Time.deltaTime;
@@ -441,7 +441,8 @@ public class PlayerMovement : MonoBehaviour
         slingTimer = SlingGravityTimer();
         StartCoroutine(slingTimer);
         rb.AddForce(ThrowDirection() * playerVars.bubbleThrowForce, ForceMode2D.Impulse);
-        Debug.Log(ThrowDirection());
+        //Debug.Log(ThrowDirection());
+        playerAnims.ChangeAnimationState(AnimationState.InAirRoll_Player.ToString());
     }
     Vector2 ThrowDirection()
     {
@@ -529,6 +530,7 @@ public class PlayerMovement : MonoBehaviour
         canSwing = false;
         rb.rotation = 0f;
         swingBoosterCheck = false;
+        playerAnims.ChangeAnimationState(AnimationState.InAirRoll_Player.ToString());
         /*
         if(!swingJumped)
             StartCoroutine(SwingJumpBuffer());
@@ -746,7 +748,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void FallClamp()
     {
-        playerAnims.ChangeAnimationState(AnimationState.Fall_Player.ToString());
+        if(playerAnims.CurrentState != AnimationState.InAirRoll_Player.ToString())
+        {
+            playerAnims.ChangeAnimationState(AnimationState.Fall_Player.ToString());
+        }
         if (Mathf.Abs(rb.velocity.y) > playerVars.fallClampSpeed)
             rb.velocity = new Vector2(rb.velocity.x, -playerVars.fallClampSpeed);
     }

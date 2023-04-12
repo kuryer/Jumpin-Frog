@@ -6,6 +6,10 @@ public class PlayerAnimations : MonoBehaviour
 {
     Animator animator;
     private string currentState;
+    public string CurrentState
+    {
+        get { return currentState; }
+    }
 
     void Start()
     {
@@ -17,7 +21,7 @@ public class PlayerAnimations : MonoBehaviour
         if (currentState == newState) return;
 
         animator.Play(newState);
-        //Debug.Log(newState);
+        Debug.Log(newState);
         currentState = newState;
     }
 }

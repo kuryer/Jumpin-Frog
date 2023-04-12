@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Tutorial Level.tmx",
+    "activeFile": "Prototype Level 04.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -19,7 +19,7 @@
             "scaleInDock": 2
         },
         "Input Tile.tsx": {
-            "scaleInDock": 3
+            "scaleInDock": 4
         },
         "Prototype Level 01.tmx": {
             "expandedObjectLayers": [
@@ -28,7 +28,7 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2400,
+                "x": 2399.5,
                 "y": 399.5
             }
         },
@@ -39,67 +39,70 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2400,
-                "y": 399.75
+                "x": 2399.5,
+                "y": 399
             }
         },
         "Prototype Level 03.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 1.5,
+            "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2400,
-                "y": 399.66666666666663
+                "x": 1247,
+                "y": 392.5
             }
         },
         "Prototype Level 04.tmx": {
-            "scale": 0.304,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.125,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1453.9473684210527,
-                "y": 800.9868421052631
+                "x": 2752,
+                "y": 3944
             }
         },
         "Prototype Level 05.tmx": {
             "scale": 0.4053333333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1199.0131578947367,
-                "y": 482.3190789473685
+                "x": 1196.546052631579,
+                "y": 481.0855263157895
             }
         },
         "Prototype Level 06.tmx": {
             "scale": 0.304,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1598.6842105263158,
-                "y": 481.9078947368421
+                "x": 1595.3947368421054,
+                "y": 480.2631578947369
             }
         },
         "Prototype Level 07.tmx": {
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2400,
-                "y": 644
+                "x": 2392,
+                "y": 640
             }
         },
         "Prototype Level 08.tmx": {
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2400,
-                "y": 644
+                "x": 2392,
+                "y": 640
             }
         },
         "Prototype Level 09.tmx": {
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2800,
-                "y": 648
+                "x": 2784,
+                "y": 640
             }
         },
         "Prototype Level 10.tmx": {
@@ -109,8 +112,8 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2800,
-                "y": 639.6666666666666
+                "x": 2799.333333333333,
+                "y": 638.6666666666666
             }
         },
         "Prototype Spikes Tileset.tsx": {
@@ -123,8 +126,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 3513.5,
-                "y": 439.5
+                "x": 3512,
+                "y": 439
             }
         },
         "untitled.tmx": {
@@ -137,7 +140,7 @@
         }
     },
     "last.objectTypesPath": "D:/UnityHub/Jumpin Frog/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype/propertytypes.xml",
-    "map.height": 50,
+    "map.height": 300,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
@@ -157,6 +160,10 @@
     ],
     "project": "Prototype Project.tiled-project",
     "recentFiles": [
+        "Tutorial Level.tmx",
+        "Prototype Level 01.tmx",
+        "Prototype Level 02.tmx",
+        "Prototype Level 03.tmx",
         "Prototype Level 09.tmx",
         "Prototype Level 08.tmx",
         "Prototype Level 07.tmx",
@@ -164,10 +171,6 @@
         "Prototype Level 06.tmx",
         "Prototype Level 05.tmx",
         "Prototype Level 04.tmx",
-        "Prototype Level 03.tmx",
-        "Prototype Level 02.tmx",
-        "Prototype Level 01.tmx",
-        "Tutorial Level.tmx",
         "untitled.tmx"
     ]
 }

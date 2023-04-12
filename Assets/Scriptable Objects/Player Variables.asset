@@ -27,10 +27,10 @@ MonoBehaviour:
   jumpBuffer: 0.1
   jumpTightenerTime: 20
   jumpThightenerGravity: 34
-  wallSlideSpeed: 5
+  wallSlideSpeed: 8
   wallGravity: 0.45
-  wallJumpDirectionBalance: 0.67
-  wallJumpPowerModifier: 1.5
+  wallJumpDirectionBalance: 0.63
+  wallJumpPowerModifier: 1.8
   wallGrabJumpBuffer: 0.1
   wallGrabBuffer: 0.1
   swingJumpForce: 110
