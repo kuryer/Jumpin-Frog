@@ -28,7 +28,7 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2399.5,
+                "x": 2400,
                 "y": 399.5
             }
         },
@@ -39,7 +39,7 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2399.75,
+                "x": 2400,
                 "y": 399.75
             }
         },
@@ -50,7 +50,7 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2399.6666666666665,
+                "x": 2400,
                 "y": 399.66666666666663
             }
         },
@@ -58,16 +58,16 @@
             "scale": 0.304,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1250,
-                "y": 800.9868421052632
+                "x": 1453.9473684210527,
+                "y": 800.9868421052631
             }
         },
         "Prototype Level 05.tmx": {
             "scale": 0.4053333333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1199.0131578947369,
-                "y": 482.3190789473684
+                "x": 1199.0131578947367,
+                "y": 482.3190789473685
             }
         },
         "Prototype Level 06.tmx": {
@@ -75,7 +75,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 1598.6842105263158,
-                "y": 481.90789473684214
+                "y": 481.9078947368421
             }
         },
         "Prototype Level 07.tmx": {
@@ -123,8 +123,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 3147,
-                "y": 352
+                "x": 3513.5,
+                "y": 439.5
             }
         },
         "untitled.tmx": {
