@@ -326,7 +326,7 @@ public class PlayerMovement : MonoBehaviour
             //isWallJumping = true;
             SwitchGravity(gravityState.Normal);
             rb.velocity = Vector2.zero;
-
+            
             isWallPauseJumping = true;
             isGrabbing = false;
             ZeroAllBuffers();
@@ -340,6 +340,8 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(((Vector2.up * playerVars.wallJumpDirectionBalance) + (Vector2.right * (1f - playerVars.wallJumpDirectionBalance))) * playerVars.jumpPower * playerVars.wallJumpPowerModifier, ForceMode2D.Impulse);
             }
 
+
+            playerAnims.ChangeAnimationState(AnimationState.InAirRoll_Player.ToString());
             jump = WaitingJump;
             movement = InAirMovement;
         }

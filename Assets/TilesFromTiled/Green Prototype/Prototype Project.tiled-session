@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Prototype Level 04.tmx",
+    "activeFile": "Tutorial Level.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -28,8 +28,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2400,
-                "y": 399.5
+                "x": 2427,
+                "y": 370
             }
         },
         "Prototype Level 02.tmx": {
@@ -39,19 +39,19 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2400,
-                "y": 399.75
+                "x": 2399,
+                "y": 398.5
             }
         },
         "Prototype Level 03.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2400,
-                "y": 399.75
+                "x": 2114,
+                "y": 349
             }
         },
         "Prototype Level 04.tmx": {
@@ -61,48 +61,51 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 3513,
-                "y": 3808.9999999999995
+                "x": 4371.333333333333,
+                "y": 4140
             }
         },
         "Prototype Level 05.tmx": {
-            "scale": 0.2945,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.25,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1614.6010186757214,
-                "y": 3224.108658743634
+                "x": 2572,
+                "y": 4104
             }
         },
         "Prototype Level 06.tmx": {
-            "scale": 0.304,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1598.6842105263158,
-                "y": 481.9078947368421
+                "x": 784.8484848484849,
+                "y": 578.7878787878788
             }
         },
         "Prototype Level 07.tmx": {
-            "scale": 0.125,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2400,
-                "y": 644
+                "x": 1593,
+                "y": 583
             }
         },
         "Prototype Level 08.tmx": {
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2400,
-                "y": 644
+                "x": 2384,
+                "y": 632
             }
         },
         "Prototype Level 09.tmx": {
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2800,
-                "y": 648
+                "x": 2752,
+                "y": 608
             }
         },
         "Prototype Level 10.tmx": {
@@ -112,12 +115,17 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2800,
-                "y": 639.6666666666666
+                "x": 2798.6666666666665,
+                "y": 638
             }
         },
+        "Prototype Spikes Tileset but better.tsx": {
+            "scaleInDock": 5.5,
+            "scaleInEditor": 8
+        },
         "Prototype Spikes Tileset.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "Tutorial Level.tmx": {
             "expandedObjectLayers": [
@@ -126,8 +134,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2400,
-                "y": 399.5
+                "x": 2398,
+                "y": 398
             }
         },
         "untitled.tmx": {
@@ -139,6 +147,7 @@
             }
         }
     },
+    "last.imagePath": "D:/UnityHub/Jumpin Frog/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype",
     "last.objectTypesPath": "D:/UnityHub/Jumpin Frog/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype/propertytypes.xml",
     "map.height": 300,
     "map.lastUsedFormat": "tmx",
@@ -157,21 +166,26 @@
         "Prototype Level 07.tmx",
         "Prototype Level 08.tmx",
         "Prototype Level 09.tmx",
-        "Prototype Level 05.tmx"
+        "Prototype Spikes Tileset but better.tsx"
     ],
     "project": "Prototype Project.tiled-project",
     "recentFiles": [
-        "Tutorial Level.tmx",
-        "Prototype Level 01.tmx",
-        "Prototype Level 02.tmx",
-        "Prototype Level 03.tmx",
-        "Prototype Level 05.tmx",
+        "Prototype Spikes Tileset but better.tsx",
         "Prototype Level 09.tmx",
         "Prototype Level 08.tmx",
         "Prototype Level 07.tmx",
         "Prototype Level 10.tmx",
         "Prototype Level 06.tmx",
+        "Prototype Level 05.tmx",
         "Prototype Level 04.tmx",
-        "untitled.tmx"
-    ]
+        "Prototype Level 03.tmx",
+        "Prototype Level 02.tmx",
+        "Prototype Level 01.tmx",
+        "Tutorial Level.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
 }

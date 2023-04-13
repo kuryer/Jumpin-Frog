@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="300" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="119">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="300" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="120">
  <tileset firstgid="1" source="Input Tile.tsx"/>
  <tileset firstgid="5" source="Prototype Spikes Tileset.tsx"/>
  <tileset firstgid="9" source="Green Tileset Prototype.tsx"/>
@@ -347,6 +347,9 @@
    <point/>
   </object>
   <object id="118" name="Coin" type="Coin" x="2372" y="348">
+   <point/>
+  </object>
+  <object id="119" name="Coin" type="Coin" x="2632" y="616">
    <point/>
   </object>
  </objectgroup>
