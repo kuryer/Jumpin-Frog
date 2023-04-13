@@ -28,7 +28,7 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2399.5,
+                "x": 2400,
                 "y": 399.5
             }
         },
@@ -39,8 +39,8 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2399.5,
-                "y": 399
+                "x": 2400,
+                "y": 399.75
             }
         },
         "Prototype Level 03.tmx": {
@@ -50,59 +50,59 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1247,
-                "y": 392.5
+                "x": 2400,
+                "y": 399.75
             }
         },
         "Prototype Level 04.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.125,
+            "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2752,
-                "y": 3944
+                "x": 3513,
+                "y": 3808.9999999999995
             }
         },
         "Prototype Level 05.tmx": {
-            "scale": 0.4053333333333333,
-            "selectedLayer": 0,
+            "scale": 0.2945,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1196.546052631579,
-                "y": 481.0855263157895
+                "x": 1614.6010186757214,
+                "y": 3224.108658743634
             }
         },
         "Prototype Level 06.tmx": {
             "scale": 0.304,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1595.3947368421054,
-                "y": 480.2631578947369
+                "x": 1598.6842105263158,
+                "y": 481.9078947368421
             }
         },
         "Prototype Level 07.tmx": {
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2392,
-                "y": 640
+                "x": 2400,
+                "y": 644
             }
         },
         "Prototype Level 08.tmx": {
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2392,
-                "y": 640
+                "x": 2400,
+                "y": 644
             }
         },
         "Prototype Level 09.tmx": {
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2784,
-                "y": 640
+                "x": 2800,
+                "y": 648
             }
         },
         "Prototype Level 10.tmx": {
@@ -112,8 +112,8 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2799.333333333333,
-                "y": 638.6666666666666
+                "x": 2800,
+                "y": 639.6666666666666
             }
         },
         "Prototype Spikes Tileset.tsx": {
@@ -126,8 +126,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 3512,
-                "y": 439
+                "x": 2400,
+                "y": 399.5
             }
         },
         "untitled.tmx": {
@@ -156,7 +156,8 @@
         "Prototype Level 10.tmx",
         "Prototype Level 07.tmx",
         "Prototype Level 08.tmx",
-        "Prototype Level 09.tmx"
+        "Prototype Level 09.tmx",
+        "Prototype Level 05.tmx"
     ],
     "project": "Prototype Project.tiled-project",
     "recentFiles": [
@@ -164,12 +165,12 @@
         "Prototype Level 01.tmx",
         "Prototype Level 02.tmx",
         "Prototype Level 03.tmx",
+        "Prototype Level 05.tmx",
         "Prototype Level 09.tmx",
         "Prototype Level 08.tmx",
         "Prototype Level 07.tmx",
         "Prototype Level 10.tmx",
         "Prototype Level 06.tmx",
-        "Prototype Level 05.tmx",
         "Prototype Level 04.tmx",
         "untitled.tmx"
     ]
