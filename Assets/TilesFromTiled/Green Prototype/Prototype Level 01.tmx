@@ -70,7 +70,7 @@
   <object id="4" name="Coin" type="Coin" x="592" y="496">
    <point/>
   </object>
-  <object id="5" name="Swing" type="Swing" x="1408" y="316">
+  <object id="5" name="Swing" type="Swing" x="1408" y="308">
    <point/>
   </object>
   <object id="11" name="Flag" type="Flag" x="1636" y="368">
@@ -157,58 +157,58 @@
   <object id="54" name="Coin" type="Coin" x="1076" y="368">
    <point/>
   </object>
-  <object id="55" name="Coin" type="Coin" x="1360" y="392">
+  <object id="55" name="Coin" type="Coin" x="1360" y="384">
    <point/>
   </object>
-  <object id="56" name="Coin" type="Coin" x="1392" y="392">
+  <object id="56" name="Coin" type="Coin" x="1392" y="384">
    <point/>
   </object>
-  <object id="57" name="Coin" type="Coin" x="1360" y="424">
+  <object id="57" name="Coin" type="Coin" x="1360" y="416">
    <point/>
   </object>
-  <object id="58" name="Coin" type="Coin" x="1392" y="424">
+  <object id="58" name="Coin" type="Coin" x="1392" y="416">
    <point/>
   </object>
-  <object id="59" name="Coin" type="Coin" x="1360" y="360">
+  <object id="59" name="Coin" type="Coin" x="1360" y="352">
    <point/>
   </object>
-  <object id="60" name="Coin" type="Coin" x="1392" y="360">
+  <object id="60" name="Coin" type="Coin" x="1392" y="352">
    <point/>
   </object>
-  <object id="61" name="Coin" type="Coin" x="1424" y="392">
+  <object id="61" name="Coin" type="Coin" x="1424" y="384">
    <point/>
   </object>
-  <object id="62" name="Coin" type="Coin" x="1456" y="392">
+  <object id="62" name="Coin" type="Coin" x="1456" y="384">
    <point/>
   </object>
-  <object id="63" name="Coin" type="Coin" x="1424" y="424">
+  <object id="63" name="Coin" type="Coin" x="1424" y="416">
    <point/>
   </object>
-  <object id="64" name="Coin" type="Coin" x="1456" y="424">
+  <object id="64" name="Coin" type="Coin" x="1456" y="416">
    <point/>
   </object>
-  <object id="65" name="Coin" type="Coin" x="1424" y="360">
+  <object id="65" name="Coin" type="Coin" x="1424" y="352">
    <point/>
   </object>
-  <object id="66" name="Coin" type="Coin" x="1456" y="360">
+  <object id="66" name="Coin" type="Coin" x="1456" y="352">
    <point/>
   </object>
-  <object id="67" name="Coin" type="Coin" x="1328" y="392">
+  <object id="67" name="Coin" type="Coin" x="1328" y="384">
    <point/>
   </object>
-  <object id="68" name="Coin" type="Coin" x="1328" y="424">
+  <object id="68" name="Coin" type="Coin" x="1328" y="416">
    <point/>
   </object>
-  <object id="69" name="Coin" type="Coin" x="1328" y="360">
+  <object id="69" name="Coin" type="Coin" x="1328" y="352">
    <point/>
   </object>
-  <object id="70" name="Coin" type="Coin" x="1488" y="392">
+  <object id="70" name="Coin" type="Coin" x="1488" y="384">
    <point/>
   </object>
-  <object id="71" name="Coin" type="Coin" x="1488" y="424">
+  <object id="71" name="Coin" type="Coin" x="1488" y="416">
    <point/>
   </object>
-  <object id="72" name="Coin" type="Coin" x="1488" y="360">
+  <object id="72" name="Coin" type="Coin" x="1488" y="352">
    <point/>
   </object>
   <object id="73" name="Coin" type="Coin" x="2176" y="416">
@@ -307,46 +307,46 @@
   <object id="104" name="Coin" type="Coin" x="1896" y="256">
    <point/>
   </object>
-  <object id="105" name="Coin" type="Coin" x="2444" y="408">
+  <object id="105" name="Coin" type="Coin" x="2444" y="396">
    <point/>
   </object>
-  <object id="106" name="Coin" type="Coin" x="2420" y="388">
+  <object id="106" name="Coin" type="Coin" x="2420" y="376">
    <point/>
   </object>
-  <object id="107" name="Coin" type="Coin" x="2444" y="388">
+  <object id="107" name="Coin" type="Coin" x="2444" y="376">
    <point/>
   </object>
-  <object id="108" name="Coin" type="Coin" x="2420" y="408">
+  <object id="108" name="Coin" type="Coin" x="2420" y="396">
    <point/>
   </object>
-  <object id="109" name="Coin" type="Coin" x="2396" y="408">
+  <object id="109" name="Coin" type="Coin" x="2396" y="396">
    <point/>
   </object>
-  <object id="110" name="Coin" type="Coin" x="2396" y="388">
+  <object id="110" name="Coin" type="Coin" x="2396" y="376">
    <point/>
   </object>
-  <object id="111" name="Coin" type="Coin" x="2420" y="368">
+  <object id="111" name="Coin" type="Coin" x="2420" y="356">
    <point/>
   </object>
-  <object id="112" name="Coin" type="Coin" x="2444" y="368">
+  <object id="112" name="Coin" type="Coin" x="2444" y="356">
    <point/>
   </object>
-  <object id="113" name="Coin" type="Coin" x="2396" y="368">
+  <object id="113" name="Coin" type="Coin" x="2396" y="356">
    <point/>
   </object>
-  <object id="114" name="Coin" type="Coin" x="2420" y="348">
+  <object id="114" name="Coin" type="Coin" x="2420" y="336">
    <point/>
   </object>
-  <object id="115" name="Coin" type="Coin" x="2396" y="348">
+  <object id="115" name="Coin" type="Coin" x="2396" y="336">
    <point/>
   </object>
-  <object id="116" name="Coin" type="Coin" x="2372" y="388">
+  <object id="116" name="Coin" type="Coin" x="2372" y="376">
    <point/>
   </object>
-  <object id="117" name="Coin" type="Coin" x="2372" y="368">
+  <object id="117" name="Coin" type="Coin" x="2372" y="356">
    <point/>
   </object>
-  <object id="118" name="Coin" type="Coin" x="2372" y="348">
+  <object id="118" name="Coin" type="Coin" x="2372" y="336">
    <point/>
   </object>
   <object id="119" name="Coin" type="Coin" x="2632" y="616">

@@ -25,33 +25,33 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2427,
-                "y": 370
+                "x": 772.6666666666665,
+                "y": 450
             }
         },
         "Prototype Level 02.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2399,
-                "y": 398.5
+                "x": 2379,
+                "y": 395
             }
         },
         "Prototype Level 03.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 1,
+            "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2114,
-                "y": 349
+                "x": 3534.5,
+                "y": 288.5
             }
         },
         "Prototype Level 04.tmx": {
@@ -61,51 +61,51 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 4371.333333333333,
-                "y": 4140
+                "x": 1136,
+                "y": 3596.6666666666665
             }
         },
         "Prototype Level 05.tmx": {
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.25,
-            "selectedLayer": 2,
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 2572,
-                "y": 4104
+                "x": 1052,
+                "y": 4428
             }
         },
         "Prototype Level 06.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 784.8484848484849,
-                "y": 578.7878787878788
+                "x": 1600,
+                "y": 480.3030303030303
             }
         },
         "Prototype Level 07.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1593,
-                "y": 583
+                "x": 2400,
+                "y": 639.5
             }
         },
         "Prototype Level 08.tmx": {
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2384,
-                "y": 632
+                "x": 2400,
+                "y": 644
             }
         },
         "Prototype Level 09.tmx": {
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2752,
-                "y": 608
+                "x": 2800,
+                "y": 648
             }
         },
         "Prototype Level 10.tmx": {
@@ -115,8 +115,8 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2798.6666666666665,
-                "y": 638
+                "x": 2800,
+                "y": 639.6666666666666
             }
         },
         "Prototype Spikes Tileset but better.tsx": {
@@ -134,8 +134,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2398,
-                "y": 398
+                "x": 2397,
+                "y": 397
             }
         },
         "untitled.tmx": {

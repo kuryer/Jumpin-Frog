@@ -334,46 +334,46 @@
   <object id="157" name="Coin" type="Coin" x="1976" y="364">
    <point/>
   </object>
-  <object id="158" name="Coin" type="Coin" x="2096" y="400">
+  <object id="158" name="Coin" type="Coin" x="2084" y="388">
    <point/>
   </object>
-  <object id="159" name="Coin" type="Coin" x="2128" y="400">
+  <object id="159" name="Coin" type="Coin" x="2116" y="388">
    <point/>
   </object>
-  <object id="160" name="Coin" type="Coin" x="2096" y="432">
+  <object id="160" name="Coin" type="Coin" x="2084" y="420">
    <point/>
   </object>
-  <object id="161" name="Coin" type="Coin" x="2128" y="432">
+  <object id="161" name="Coin" type="Coin" x="2116" y="420">
    <point/>
   </object>
-  <object id="162" name="Coin" type="Coin" x="2096" y="368">
+  <object id="162" name="Coin" type="Coin" x="2084" y="356">
    <point/>
   </object>
-  <object id="163" name="Coin" type="Coin" x="2128" y="368">
+  <object id="163" name="Coin" type="Coin" x="2116" y="356">
    <point/>
   </object>
-  <object id="164" name="Coin" type="Coin" x="2160" y="400">
+  <object id="164" name="Coin" type="Coin" x="2148" y="388">
    <point/>
   </object>
-  <object id="165" name="Coin" type="Coin" x="2160" y="432">
+  <object id="165" name="Coin" type="Coin" x="2148" y="420">
    <point/>
   </object>
-  <object id="166" name="Coin" type="Coin" x="2160" y="368">
+  <object id="166" name="Coin" type="Coin" x="2148" y="356">
    <point/>
   </object>
-  <object id="167" name="Coin" type="Coin" x="2064" y="368">
+  <object id="167" name="Coin" type="Coin" x="2052" y="356">
    <point/>
   </object>
-  <object id="168" name="Coin" type="Coin" x="2064" y="400">
+  <object id="168" name="Coin" type="Coin" x="2052" y="388">
    <point/>
   </object>
-  <object id="169" name="Coin" type="Coin" x="2064" y="336">
+  <object id="169" name="Coin" type="Coin" x="2052" y="324">
    <point/>
   </object>
-  <object id="170" name="Coin" type="Coin" x="2096" y="336">
+  <object id="170" name="Coin" type="Coin" x="2084" y="324">
    <point/>
   </object>
-  <object id="171" name="Coin" type="Coin" x="2128" y="336">
+  <object id="171" name="Coin" type="Coin" x="2116" y="324">
    <point/>
   </object>
   <object id="173" name="Coin" type="Coin" x="2240" y="416">

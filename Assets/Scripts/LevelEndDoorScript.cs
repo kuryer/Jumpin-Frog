@@ -19,7 +19,7 @@ public class LevelEndDoorScript : MonoBehaviour
     {
         if (isPlayerInExit)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Fire3"))
             {
                 Debug.Log("Pls remember to look at this script bcs its not finished / saving aint done");
                 Helpers.GameManagerScript.LoadNextLevel(loadLevel);
