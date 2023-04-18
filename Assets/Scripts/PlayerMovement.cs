@@ -539,7 +539,8 @@ public class PlayerMovement : MonoBehaviour
         */
         //SwingBoost();
         movement = InAirMovement;
-        JumpThightenerQueue();
+        jump = WaitingJump;
+        //JumpThightenerQueue();
     }
     
     IEnumerator SwingJumpBuffer()
