@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     Vector3 respawnPointPosition;
     float respawnSpeed; // <- JO TU MAM CUŒ TAKIEGO NI WIM CZY TEGO UZYC CZY NIE, ZEBY RAZ USTAWIAC TE PREDKOSC CZY NI
     [SerializeField] PlayerVarsSO playerVars;
+    bool isDead = false;
 
 
 
@@ -20,14 +21,20 @@ public class PlayerHealth : MonoBehaviour
         respawnSpeed = playerVars.respawnMoveTowardSpeed;
     }
 
+
     #region Kill Player
 
     public void KillPlayer()
     {
-        movementScript.SetupVariablesAfterDeath();
-        animationScript.ChangeAnimationState("Death_Player");
-        movementScript.SetCanMove(false);
-        movementScript.enabled = false;
+        if (!isDead)
+        {
+            movementScript.SetupVariablesAfterDeath();
+            animationScript.ChangeAnimationState("Death_Player");
+            movementScript.SetCanMove(false);
+            movementScript.enabled = false;
+            Debug.Log("Player Died");
+            SetIsDead(true);
+        }
     }
 
     public void StartMovingTowardRoutine()
@@ -54,9 +61,16 @@ public class PlayerHealth : MonoBehaviour
     {
         movementScript.enabled = true;
         movementScript.SetCanMove(true);
+        SetIsDead(false);
+    }
+
+    void SetIsDead(bool state)
+    {
+        isDead = state;
     }
 
     #endregion
+
 
     #region Respawn Point
 

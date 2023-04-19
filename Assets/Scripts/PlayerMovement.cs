@@ -1059,6 +1059,22 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
 
+    #region Tongue Renderer
+
+
+    public Vector3 GetSwingPointPosition()
+    {
+        if (swingPointPosition != null)
+            return swingPointPosition;
+        else
+            return Vector3.zero;
+    }
+
+
+
+    #endregion
+
+
     #region Camera Blend
 
     public void StartBlend()
