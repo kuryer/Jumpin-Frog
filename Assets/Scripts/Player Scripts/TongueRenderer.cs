@@ -8,6 +8,8 @@ public class TongueRenderer : MonoBehaviour
     [SerializeField] Vector3 tongueOffset;
     Vector3 swingPointPosition;
 
+    delegate void RendererFunction();
+    RendererFunction rendererFunction;
 
     void Start()
     {
@@ -16,7 +18,7 @@ public class TongueRenderer : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = Quaternion.FromToRotation(ModifiedPlayerPosition(), swingPointPosition);
+        rendererFunction();
     }
 
 
@@ -37,11 +39,39 @@ public class TongueRenderer : MonoBehaviour
         return swingPointPosition + tongueOffset;
     }
 
+    void ChangeRendererState()
+    {
+        if (rendererFunction == DontRender)
+            StartRender();
+        else
+            StopRender();
+    }
     void StartRender()
     {
         //animacja??
         //ustawic skale Y w zale¿noœci od odleg³osci gracza od punktu
+        rendererFunction = Render;
     }
+
+    void Render()
+    {
+        transform.rotation = Quaternion.FromToRotation(ModifiedPlayerPosition(), swingPointPosition);
+    }
+
+    void DontRender()
+    {
+
+    }
+
+    void StopRender()
+    {
+        //animacja
+        rendererFunction = DontRender;
+    }
+
+
+
+
 
     #endregion
 }
