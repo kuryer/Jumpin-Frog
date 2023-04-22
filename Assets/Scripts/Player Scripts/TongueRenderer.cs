@@ -29,6 +29,12 @@ public class TongueRenderer : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = tongueSprite;
     }
 
+    void SetSwingPointPosition(Vector3 swingPointPos)
+    {
+        swingPointPosition = swingPointPos;
+    }
+
+
     #endregion
 
 
