@@ -6,6 +6,8 @@ public class TongueRenderer : MonoBehaviour
 {
     [SerializeField] Sprite tongueSprite;
     [SerializeField] Vector3 tongueOffset;
+    LineRenderer lineRenderer;
+    GameObject player;
     Vector3 swingPointPosition;
 
     delegate void RendererFunction();
@@ -13,10 +15,10 @@ public class TongueRenderer : MonoBehaviour
 
     void Start()
     {
-        SetSprite();
+        Setup();
     }
 
-    void Update()
+    private void Update()
     {
         rendererFunction();
     }
@@ -24,14 +26,17 @@ public class TongueRenderer : MonoBehaviour
 
     #region Setup
 
-    void SetSprite()
+    void Setup()
     {
         GetComponent<SpriteRenderer>().sprite = tongueSprite;
+        lineRenderer = GetComponent<LineRenderer>();
+        player = transform.parent.gameObject;
+        rendererFunction = DontRender;
     }
 
-    void SetSwingPointPosition(Vector3 swingPointPos)
+    public void SetSwingPointPosition(Vector3 swingPointPos)
     {
-        swingPointPosition = swingPointPos;
+        lineRenderer.SetPosition(1, swingPointPos);
     }
 
 
@@ -45,7 +50,15 @@ public class TongueRenderer : MonoBehaviour
         return swingPointPosition + tongueOffset;
     }
 
-    void ChangeRendererState()
+    void TurnSpriteRenderer()
+    {
+        if (lineRenderer.enabled == false)
+            lineRenderer.enabled = true;
+        else
+            lineRenderer.enabled = false;
+    }
+
+    public void ChangeRendererState()
     {
         if (rendererFunction == DontRender)
             StartRender();
@@ -57,11 +70,19 @@ public class TongueRenderer : MonoBehaviour
         //animacja??
         //ustawic skale Y w zale¿noœci od odleg³osci gracza od punktu
         rendererFunction = Render;
+        TurnSpriteRenderer();
     }
 
     void Render()
     {
-        transform.rotation = Quaternion.FromToRotation(ModifiedPlayerPosition(), swingPointPosition);
+        if(swingPointPosition != null)
+        {
+            /*
+            Quaternion rotation = Quaternion.FromToRotation(ModifiedPlayerPosition(), swingPointPosition);
+            transform.localRotation = rotation;
+            */
+            lineRenderer.SetPosition(0, transform.parent.position);
+        }
     }
 
     void DontRender()
@@ -72,6 +93,7 @@ public class TongueRenderer : MonoBehaviour
     void StopRender()
     {
         //animacja
+        TurnSpriteRenderer();
         rendererFunction = DontRender;
     }
 

@@ -120,9 +120,14 @@ public class PlayerMovement : MonoBehaviour
     }
     SpriteRenderer spriteRenderer;
 
+    [Header("TongueRenderer")]
+    [SerializeField] TongueRenderer tongueRenderer;
+
+    /*
     [Header("Camera Blend")]
     Vector2 savedVelocity;
     bool isBlending;
+    */
 
     #region Updates and Start
 
@@ -145,14 +150,14 @@ public class PlayerMovement : MonoBehaviour
         GatherBubbleInput();
         FallChecker();
 
-        if (isBlending) return;
+        //if (isBlending) return;
 
         jump();
 
 
         if (canSwing || isSwinging) Swing();
         //if (canSling) Sling();
-        if (isSwinging) LineRendering();
+        //if (isSwinging) LineRendering();
         if (canWallJump) WallJump();
         if(!isWallPauseJumping && !isSwinging) WallGrab();
 
@@ -169,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (isBlending) return;
+        //if (isBlending) return;
 
         CheckCollisions();
 
@@ -487,6 +492,7 @@ public class PlayerMovement : MonoBehaviour
     {
         canSwing = true;
         distJoint.connectedAnchor = pos;
+        tongueRenderer.SetSwingPointPosition(new Vector3(pos.x, pos.y, 0));
         swingScript = swingP;
         swingTransform = swingP.transform;
         swingPointPosition = pos;
@@ -512,7 +518,8 @@ public class PlayerMovement : MonoBehaviour
         //swingJumped = false;
         lastSwingPressed = 0f;
         distJoint.enabled = true;
-        lineRenderer.enabled = true;
+        //lineRenderer.enabled = true;
+        tongueRenderer.ChangeRendererState();
         SwitchGravity(gravityState.Swing);
         VelocityCut();
         playerAnims.ChangeAnimationState(AnimationState.Swing_Player.ToString());
@@ -525,7 +532,7 @@ public class PlayerMovement : MonoBehaviour
     void StopSwing()
     {
         distJoint.enabled = false;
-        lineRenderer.enabled = false;
+        //lineRenderer.enabled = false;
         SwitchGravity(gravityState.Normal);
         swingScript.StartTimer();
         isSwinging = false;
@@ -540,9 +547,10 @@ public class PlayerMovement : MonoBehaviour
         //SwingBoost();
         movement = InAirMovement;
         jump = WaitingJump;
+        tongueRenderer.ChangeRendererState();
         //JumpThightenerQueue();
     }
-    
+
     IEnumerator SwingJumpBuffer()
     {
         swingJumpBuffer = playerVars.SwingJumpBuffer;
@@ -1076,7 +1084,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     #region Camera Blend
-
+    /*
     public void StartBlend()
     {
         playerAnims.ChangeAnimationState(AnimationState.Idle_Player.ToString());
@@ -1089,6 +1097,7 @@ public class PlayerMovement : MonoBehaviour
         isBlending = false;
         rb.velocity = savedVelocity;
     }
+    */
 
     #endregion
 }
