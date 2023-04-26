@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public delegate void JumpDelegate();
     MovementDelegate movement;
     JumpDelegate jump;
+    PlayerControls playerControls;
     float lastGroundedTime;
     bool isGrabbing;
     bool jumped;
@@ -130,6 +131,21 @@ public class PlayerMovement : MonoBehaviour
     */
 
     #region Updates and Start
+
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
+
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
 
     void Start()
     {
@@ -858,6 +874,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void GatherInput()
     {
+        //JumpDown = playerControls.Movement.Jump.ReadValue<float>();
         JumpDown = Input.GetButtonDown("Jump");
         JumpHold = Input.GetButton("Jump");
         JumpUp = Input.GetButtonUp("Jump");
