@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float X;
     private bool JumpDown;
     private bool JumpHold;
-    private bool JumpUp;
+    //private bool JumpUp;
     bool canMove = false;
     private float lastJumpPressed;
     Vector3 groundRayoffset;
@@ -140,11 +141,23 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
+        SubscribeForPlayerInputEvents();
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
+        UnsubscribeFromPlayerInputEvents();
+    }
+
+    void SubscribeForPlayerInputEvents()
+    {
+        playerControls.Movement.Jump.started += SetJumpDownInput;
+    }
+
+    void UnsubscribeFromPlayerInputEvents()
+    {
+        playerControls.Movement.Jump.started -= SetJumpDownInput;
     }
 
     void Start()
@@ -173,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (canSwing || isSwinging) Swing();
         //if (canSling) Sling();
-        //if (isSwinging) LineRendering();
+        if (isSwinging) LineRendering();
         if (canWallJump) WallJump();
         if(!isWallPauseJumping && !isSwinging) WallGrab();
 
@@ -508,7 +521,7 @@ public class PlayerMovement : MonoBehaviour
     {
         canSwing = true;
         distJoint.connectedAnchor = pos;
-        tongueRenderer.SetSwingPointPosition(new Vector3(pos.x, pos.y, 0));
+        //tongueRenderer.SetSwingPointPosition(new Vector3(pos.x, pos.y, 0));
         swingScript = swingP;
         swingTransform = swingP.transform;
         swingPointPosition = pos;
@@ -534,8 +547,8 @@ public class PlayerMovement : MonoBehaviour
         //swingJumped = false;
         lastSwingPressed = 0f;
         distJoint.enabled = true;
-        //lineRenderer.enabled = true;
-        tongueRenderer.ChangeRendererState();
+        lineRenderer.enabled = true;
+        //tongueRenderer.ChangeRendererState();
         SwitchGravity(gravityState.Swing);
         VelocityCut();
         playerAnims.ChangeAnimationState(AnimationState.Swing_Player.ToString());
@@ -548,7 +561,7 @@ public class PlayerMovement : MonoBehaviour
     void StopSwing()
     {
         distJoint.enabled = false;
-        //lineRenderer.enabled = false;
+        lineRenderer.enabled = false;
         SwitchGravity(gravityState.Normal);
         swingScript.StartTimer();
         isSwinging = false;
@@ -563,7 +576,7 @@ public class PlayerMovement : MonoBehaviour
         //SwingBoost();
         movement = InAirMovement;
         jump = WaitingJump;
-        tongueRenderer.ChangeRendererState();
+        //tongueRenderer.ChangeRendererState();
         //JumpThightenerQueue();
     }
 
@@ -872,12 +885,33 @@ public class PlayerMovement : MonoBehaviour
 
     #region Gather Input
 
+
+    void SetJumpDownInput(InputAction.CallbackContext context)
+    {
+        JumpDown = true;
+    }
+
+    void SetJumpHoldInput(InputAction.CallbackContext context)
+    {
+        JumpHold = true;
+    }
+
+    void SetJumpUpInput(InputAction.CallbackContext context)
+    {
+        JumpDown = false;
+        JumpHold = false;
+        //JumpUp = true;
+    }
+
+
+
+
     private void GatherInput()
     {
         //JumpDown = playerControls.Movement.Jump.ReadValue<float>();
         JumpDown = Input.GetButtonDown("Jump");
         JumpHold = Input.GetButton("Jump");
-        JumpUp = Input.GetButtonUp("Jump");
+        //JumpUp = Input.GetButtonUp("Jump");
         SwingDown = Input.GetButtonDown("Swing");
         SwingUp = Input.GetButtonUp("Swing");
         X = XMovement();

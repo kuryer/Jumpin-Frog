@@ -20,7 +20,7 @@ public class TongueRenderer : MonoBehaviour
 
     private void Update()
     {
-        rendererFunction();
+        //rendererFunction();
     }
 
 
