@@ -21,7 +21,7 @@ public class PlayerAnimations : MonoBehaviour
         if (currentState == newState) return;
 
         animator.Play(newState);
-        Debug.Log(newState);
+        //Debug.Log(newState);
         currentState = newState;
     }
 }

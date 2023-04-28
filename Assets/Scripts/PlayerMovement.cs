@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     private float X;
-    private bool JumpDown;
-    private bool JumpHold;
+    //private bool JumpDown;
+    //private bool JumpHold;
     //private bool JumpUp;
     bool canMove = false;
     private float lastJumpPressed;
@@ -152,12 +152,24 @@ public class PlayerMovement : MonoBehaviour
 
     void SubscribeForPlayerInputEvents()
     {
-        playerControls.Movement.Jump.started += SetJumpDownInput;
+        playerControls.Movement.Jump.performed += SetJumpBuffer;
+        playerControls.Movement.Jump.canceled += CallJumpCut;
+
+
+        playerControls.Movement.Action.performed += SetSwingBuffer;
+        playerControls.Movement.Action.canceled += StopSwingingCall;
+
     }
 
     void UnsubscribeFromPlayerInputEvents()
     {
-        playerControls.Movement.Jump.started -= SetJumpDownInput;
+        playerControls.Movement.Jump.performed -= SetJumpBuffer;
+        playerControls.Movement.Jump.canceled -= CallJumpCut;
+
+
+        playerControls.Movement.Action.performed -= SetSwingBuffer;
+        playerControls.Movement.Action.canceled -= StopSwingingCall;
+
     }
 
     void Start()
@@ -322,7 +334,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!jumped)
         {
-            if(lastJumpPressed > 0 && isGrounded /* Jump Buffer */ || JumpDown && lastGroundedTime > 0 /* Coyote Time */)
+            if(lastJumpPressed > 0 && isGrounded /* Jump Buffer */ || lastJumpPressed > 0 && lastGroundedTime > 0 /* Coyote Time */)
             {
                 //Debug.Log("Basic Jump");
                 jumped = true;
@@ -334,11 +346,10 @@ public class PlayerMovement : MonoBehaviour
             }
             movement = InAirMovement;
         }
-        JumpCut();
     }
     void JumpCut()
     {
-        if (!isGrounded && rb.velocity.y > 0.1f && !JumpHold && !jumpCut)
+        if (!isGrounded && rb.velocity.y > 0.1f /* && !JumpHold */ && !jumpCut)
         {
             Debug.Log("Jump Cut Used");
             jumpCut = true;
@@ -420,6 +431,7 @@ public class PlayerMovement : MonoBehaviour
             return 2f;
         return rb.velocity.y;
     }
+    /*
     void AfterSwingJump()
     {
         if (JumpDown)
@@ -434,6 +446,7 @@ public class PlayerMovement : MonoBehaviour
             JumpThightenerQueue();
         }
     }
+    */
     void WaitingJump()
     {
         if(isGrounded && !isSwinging)
@@ -537,7 +550,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartSwing();
         }
-        if(isSwinging && SwingUp || isSwinging && transform.position.y >= swingTransform.position.y - playerVars.exitBarHeight && swingBoosterCheck)
+        if(/* isSwinging && SwingUp || */ isSwinging && transform.position.y >= swingTransform.position.y - playerVars.exitBarHeight && swingBoosterCheck)
         {
             StopSwing();
         }
@@ -545,6 +558,7 @@ public class PlayerMovement : MonoBehaviour
     void StartSwing()
     {
         //swingJumped = false;
+        ZeroAllBuffers();
         lastSwingPressed = 0f;
         distJoint.enabled = true;
         lineRenderer.enabled = true;
@@ -560,11 +574,11 @@ public class PlayerMovement : MonoBehaviour
     }
     void StopSwing()
     {
+        isSwinging = false;
         distJoint.enabled = false;
         lineRenderer.enabled = false;
         SwitchGravity(gravityState.Normal);
         swingScript.StartTimer();
-        isSwinging = false;
         canSwing = false;
         rb.rotation = 0f;
         swingBoosterCheck = false;
@@ -885,46 +899,53 @@ public class PlayerMovement : MonoBehaviour
 
     #region Gather Input
 
-
-    void SetJumpDownInput(InputAction.CallbackContext context)
+    void SetJumpBuffer(InputAction.CallbackContext context)
     {
-        JumpDown = true;
+        lastJumpPressed = playerVars.jumpBuffer;
     }
 
-    void SetJumpHoldInput(InputAction.CallbackContext context)
+    void CallJumpCut(InputAction.CallbackContext context)
     {
-        JumpHold = true;
+        if(jump == Jump)
+            JumpCut();
     }
 
-    void SetJumpUpInput(InputAction.CallbackContext context)
+    void SetSwingBuffer(InputAction.CallbackContext context)
     {
-        JumpDown = false;
-        JumpHold = false;
-        //JumpUp = true;
+        lastSwingPressed = playerVars.swingBuffer;
     }
 
+    void StopSwingingCall(InputAction.CallbackContext context)
+    {
+        if(isSwinging)
+            StopSwing();
+    }
 
-
+    
 
     private void GatherInput()
     {
-        //JumpDown = playerControls.Movement.Jump.ReadValue<float>();
-        JumpDown = Input.GetButtonDown("Jump");
-        JumpHold = Input.GetButton("Jump");
-        //JumpUp = Input.GetButtonUp("Jump");
-        SwingDown = Input.GetButtonDown("Swing");
-        SwingUp = Input.GetButtonUp("Swing");
         X = XMovement();
         GatherWallGrabBuffer();
-        if (JumpDown)
-            lastJumpPressed = playerVars.jumpBuffer;
+
+
+
+
+        //JumpDown = playerControls.Movement.Jump.ReadValue<float>();
+        //JumpDown = Input.GetButtonDown("Jump");
+        //JumpHold = Input.GetButton("Jump");
+        //JumpUp = Input.GetButtonUp("Jump");
+        //SwingDown = Input.GetButtonDown("Swing");
+        //SwingUp = Input.GetButtonUp("Swing");
+        /*
         if (SwingDown)
             lastSwingPressed = playerVars.swingBuffer;
+        */
         
     }
     float XMovement()
     {
-        float input = Input.GetAxisRaw("Horizontal");
+        float input = playerControls.Movement.Move.ReadValue<Vector2>().x;
         if (input == 0) return 0;
         else return Mathf.Sign(input);
     }
@@ -945,8 +966,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void GatherBubbleInput()
     {
-        float X = Input.GetAxisRaw("Horizontal");
-        float Y = Input.GetAxisRaw("Vertical");
+        float X = playerControls.Movement.Move.ReadValue<Vector2>().x;
+        float Y = playerControls.Movement.Move.ReadValue<Vector2>().y;
         if(X == 0 && Y == 0) return;
         bubbleX = X;
         bubbleY = Y;
@@ -1069,6 +1090,7 @@ public class PlayerMovement : MonoBehaviour
         rb.rotation = 0f;
         movement = BasicMovement;
         jump = Jump;
+        ZeroAllBuffers();
     }
 
     void ZeroAllBuffers()
