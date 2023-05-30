@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     PlayerMovement movementScript;
     PlayerAnimations animationScript;
     [SerializeField] GameObject respawnPointObject;
+    [SerializeField] int coinsTakenPerDeath;
     Vector3 respawnPointPosition;
     float respawnSpeed; // <- JO TU MAM CUŒ TAKIEGO NI WIM CZY TEGO UZYC CZY NIE, ZEBY RAZ USTAWIAC TE PREDKOSC CZY NI
     [SerializeField] PlayerVarsSO playerVars;
@@ -24,16 +25,29 @@ public class PlayerHealth : MonoBehaviour
 
     #region Kill Player
 
-    public void KillPlayer()
+    public void KillPlayer(int typeOfDmg)
     {
         if (!isDead)
         {
             movementScript.SetupVariablesAfterDeath();
-            animationScript.ChangeAnimationState("Death_Player");
+            PlayDeathAnimation(typeOfDmg);
             movementScript.SetCanMove(false);
             movementScript.enabled = false;
+            Helpers.DataManagerScript.SubtractCoins(coinsTakenPerDeath);
             Debug.Log("Player Died");
             SetIsDead(true);
+        }
+    }
+    void PlayDeathAnimation(int typeOfDmg)
+    {
+        switch (typeOfDmg)
+        {
+            case 0:
+                animationScript.ChangeAnimationState("Death_Player");
+                break;
+            case 1:
+                animationScript.ChangeAnimationState("FallDeath_Player");
+                break;
         }
     }
 

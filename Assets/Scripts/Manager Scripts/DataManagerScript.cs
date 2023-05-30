@@ -22,5 +22,13 @@ public class DataManagerScript : MonoBehaviour
         OnCoinAdded?.Invoke();
     }
 
+    public void SubtractCoins(int amount)
+    {
+        coinCount -= amount;
+        if(coinCount < 0)
+            coinCount = 0;
+        OnCoinAdded?.Invoke();
+        // jeszcze wywo³aæ animacje zabrania coinów
+    }
 
 }

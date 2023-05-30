@@ -9,9 +9,9 @@ public class TongueRenderer : MonoBehaviour
     LineRenderer lineRenderer;
     GameObject player;
     Vector3 swingPointPosition;
-
+    Vector3 finalSwingPoint;
     delegate void RendererFunction();
-    RendererFunction rendererFunction;
+    RendererFunction calculateFunction;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class TongueRenderer : MonoBehaviour
 
     private void Update()
     {
-        //rendererFunction();
+        calculateFunction();
     }
 
 
@@ -31,12 +31,12 @@ public class TongueRenderer : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = tongueSprite;
         lineRenderer = GetComponent<LineRenderer>();
         player = transform.parent.gameObject;
-        rendererFunction = DontRender;
+        calculateFunction = DontCalculatePoints;
     }
 
     public void SetSwingPointPosition(Vector3 swingPointPos)
     {
-        lineRenderer.SetPosition(1, swingPointPos);
+        swingPointPosition = swingPointPos;
     }
 
 
@@ -47,11 +47,14 @@ public class TongueRenderer : MonoBehaviour
 
     Vector3 ModifiedPlayerPosition()
     {
-        return swingPointPosition + tongueOffset;
+        return transform.parent.position - tongueOffset;
     }
 
-    void TurnSpriteRenderer()
+    public void TurnSpriteRenderer()
     {
+        //animacja tu musi byæ jeszcze
+
+
         if (lineRenderer.enabled == false)
             lineRenderer.enabled = true;
         else
@@ -60,46 +63,45 @@ public class TongueRenderer : MonoBehaviour
 
     public void ChangeRendererState()
     {
-        if (rendererFunction == DontRender)
-            StartRender();
+        if (calculateFunction == DontCalculatePoints)
+            StartCalculation();
         else
-            StopRender();
+            StopCalculation();
     }
-    void StartRender()
+    public void StartCalculation()
     {
         //animacja??
         //ustawic skale Y w zale¿noœci od odleg³osci gracza od punktu
-        rendererFunction = Render;
-        TurnSpriteRenderer();
+        finalSwingPoint = ModifiedPlayerPosition();
+        calculateFunction = CalculatePoints;
     }
 
-    void Render()
+    void CalculatePoints()
     {
         if(swingPointPosition != null)
         {
-            /*
-            Quaternion rotation = Quaternion.FromToRotation(ModifiedPlayerPosition(), swingPointPosition);
-            transform.localRotation = rotation;
-            */
-            lineRenderer.SetPosition(0, transform.parent.position);
+            lineRenderer.SetPosition(0, ModifiedPlayerPosition());
+            lineRenderer.SetPosition(1, swingPointPosition);
         }
     }
 
-    void DontRender()
+    void DontCalculatePoints()
     {
 
     }
 
-    void StopRender()
+    public void StopCalculation()
     {
         //animacja
-        TurnSpriteRenderer();
-        rendererFunction = DontRender;
+        ZeroPoints();
+        calculateFunction = DontCalculatePoints;
     }
 
-
-
-
+    void ZeroPoints()
+    {
+        lineRenderer.SetPosition(0, ModifiedPlayerPosition());
+        lineRenderer.SetPosition(1, ModifiedPlayerPosition());
+    }
 
     #endregion
 }

@@ -11,6 +11,9 @@ public class LevelTransitionAnimationScript : MonoBehaviour
     private void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
+    }
+    private void Start()
+    {
         Helpers.GameManagerScript.SetNewLevelTransition(gameObject.GetComponent<LevelTransitionAnimationScript>());
     }
     public void CloseAnimationFinished()

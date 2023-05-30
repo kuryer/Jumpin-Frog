@@ -32,14 +32,6 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            SceneManager.LoadSceneAsync("UI Scene", LoadSceneMode.Additive);
-        }
-    }
-
     //To jest pierwsza funkcja przed animacj¹. Przycisk -> GameManager
     public void LoadNextLevel(int levelIndex)
     {

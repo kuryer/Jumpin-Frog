@@ -110,6 +110,8 @@ public class PlayerMovement : MonoBehaviour
     PlayerAnimations playerAnims;
     [SerializeField] GameObject JumpCircle;
     [SerializeField] float jumpCircleposition;
+    public bool isFacingRight = true;
+
     enum AnimationState
     {
         Idle_Player,
@@ -125,11 +127,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("TongueRenderer")]
     [SerializeField] TongueRenderer tongueRenderer;
 
-    /*
+
     [Header("Camera Blend")]
-    Vector2 savedVelocity;
-    bool isBlending;
-    */
+    [SerializeField] CameraFollowScript cameraFollowScript;
 
     #region Updates and Start
 
@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         distJoint = GetComponent<SpringJoint2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer = tongueRenderer.GetComponent<LineRenderer>();
         playerAnims = GetComponent<PlayerAnimations>();
         lineRenderer.widthMultiplier = playerVars.lineWidth;
         groundRayoffset = new Vector3(rayOffset, 0f, 0f);
@@ -195,13 +195,14 @@ public class PlayerMovement : MonoBehaviour
 
         jump();
 
-
+        
         if (canSwing || isSwinging) Swing();
-        //if (canSling) Sling();
-        if (isSwinging) LineRendering();
         if (canWallJump) WallJump();
         if(!isWallPauseJumping && !isSwinging) WallGrab();
-
+        
+        //if (canSling) Sling();
+        //if (isSwinging) LineRendering();
+        
 
         Timer();
         ChangeSpring();
@@ -218,6 +219,7 @@ public class PlayerMovement : MonoBehaviour
         //if (isBlending) return;
 
         CheckCollisions();
+
 
         if (isSwinging) SwingRotation();
         /*if (canMove)*/ movement();
@@ -534,7 +536,8 @@ public class PlayerMovement : MonoBehaviour
     {
         canSwing = true;
         distJoint.connectedAnchor = pos;
-        //tongueRenderer.SetSwingPointPosition(new Vector3(pos.x, pos.y, 0));
+        tongueRenderer.SetSwingPointPosition(new Vector3(pos.x, pos.y, 0));
+        tongueRenderer.StartCalculation();
         swingScript = swingP;
         swingTransform = swingP.transform;
         swingPointPosition = pos;
@@ -561,8 +564,8 @@ public class PlayerMovement : MonoBehaviour
         ZeroAllBuffers();
         lastSwingPressed = 0f;
         distJoint.enabled = true;
-        lineRenderer.enabled = true;
-        //tongueRenderer.ChangeRendererState();
+        //lineRenderer.enabled = true;
+        tongueRenderer.TurnSpriteRenderer();
         SwitchGravity(gravityState.Swing);
         VelocityCut();
         playerAnims.ChangeAnimationState(AnimationState.Swing_Player.ToString());
@@ -570,13 +573,12 @@ public class PlayerMovement : MonoBehaviour
         swingScript.PlaySwingAnimation();
         movement = SwingingMovement;
         jump = SwingJump;
-        //jump = WaitingJump;
     }
     void StopSwing()
     {
         isSwinging = false;
         distJoint.enabled = false;
-        lineRenderer.enabled = false;
+        //lineRenderer.enabled = false;
         SwitchGravity(gravityState.Normal);
         swingScript.StartTimer();
         canSwing = false;
@@ -590,7 +592,8 @@ public class PlayerMovement : MonoBehaviour
         //SwingBoost();
         movement = InAirMovement;
         jump = WaitingJump;
-        //tongueRenderer.ChangeRendererState();
+        tongueRenderer.TurnSpriteRenderer();
+        tongueRenderer.StopCalculation();
         //JumpThightenerQueue();
     }
 
@@ -1110,13 +1113,17 @@ public class PlayerMovement : MonoBehaviour
         RunAnimation();
 
 
-        if (X < 0f)
+        if (X < 0f && isFacingRight)
         {
+            isFacingRight = false;
             spriteRenderer.flipX = true;
+            cameraFollowScript.CallTurn();
         }
-        else if (X > 0f)
+        else if (X > 0f && !isFacingRight)
         {
+            isFacingRight = true;
             spriteRenderer.flipX = false;
+            cameraFollowScript.CallTurn();
         }
     }
     void RunAnimation()

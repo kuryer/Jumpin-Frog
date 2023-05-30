@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5713fd9b5beb612498cb334a98eb0e3e
+guid: b8d2b48d3136cea43adf8418b4570929
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -105,127 +105,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: simple tilemap_0
+      name: Moving Spikes Tile
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
-        width: 8
-        height: 8
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        y: 16
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 264c662a27896f6479e8167599477b28
-      internalID: 2003250026
+      spriteID: b4b8dca37a201f046b096217b7fea9bd
+      internalID: -901433315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple tilemap_1
+      name: Moving Spikes Destination Point
       rect:
         serializedVersion: 2
-        x: 8
-        y: 8
-        width: 8
-        height: 8
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 472602c6eaa10d54e92b59e52c88be73
-      internalID: 317774190
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple tilemap_2
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 8
-        width: 8
-        height: 8
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: efb04cb0d39c13241949f616bcc6e208
-      internalID: 86459773
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple tilemap_3
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 48
         y: 0
-        width: 8
-        height: 8
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c259a809ede1f4d468753d13d07da2ba
-      internalID: 870313921
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple tilemap_4
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 0
-        width: 8
-        height: 8
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d781a3414d1dff54380dd96de7808aee
-      internalID: 540306396
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple tilemap_5
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 8
-        height: 8
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d21f1e20b39538b4f9ef43bd61e6dbdd
-      internalID: -1173750713
+      spriteID: bd62bc4d25ece4347981e9b75be0ae5d
+      internalID: 174192083
       vertices: []
       indices: 
       edges: []
@@ -241,12 +157,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      simple tilemap_0: 2003250026
-      simple tilemap_4: 540306396
-      simple tilemap_2: 86459773
-      simple tilemap_5: -1173750713
-      simple tilemap_3: 870313921
-      simple tilemap_1: 317774190
+      Moving Spikes Destination Point: 174192083
+      Moving Spikes Tile: -901433315
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
