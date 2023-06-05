@@ -5,11 +5,14 @@ using UnityEngine;
 public class MovingSpikes : MonoBehaviour
 {
     public GameObject destinationPointPrefab;
-    [SerializeField] float movingSpeed = 2f;
-    [SerializeField] SpikesDestinationPoint currentPoint;
+    public float movingSpeed = 2f;
+    [SerializeField] bool isPlatform;
+    SurfaceEffector2D effector;
+    SpikesDestinationPoint currentPoint;
     //SpikesDestinationPoint nextPoint;
     int currentIndex = 0;
     bool isGoingBack = false;
+    public Vector3 moveTowardsPosition;
     public enum LoopModes
     {
         Around,
@@ -23,6 +26,7 @@ public class MovingSpikes : MonoBehaviour
     void Awake()
     {
         GetFirstPoint();
+        if (isPlatform) effector = GetComponent<SurfaceEffector2D>();
     }
     void GetFirstPoint()
     {
@@ -53,13 +57,15 @@ public class MovingSpikes : MonoBehaviour
                 currentIndex = 0;
                 currentPoint = points[currentIndex];
                 currentIndex++;
+                effector.speed *= -1;
             }
             else
             {
                 currentPoint = points[currentIndex];
                 currentIndex++;
+                effector.speed *= -1;
             }
-                
+
         }
         if(loopMode == LoopModes.BackToBack)
         {
@@ -92,21 +98,21 @@ public class MovingSpikes : MonoBehaviour
                 }
             }
         }
-        Debug.Log("current Index = " + currentIndex);
     }
 
     void MoveTowardsCurrentPoint()
     {
         if(transform.position != currentPoint.transform.position)
         {
+            //rb.MovePosition(currentPoint.GetPosition() * Time.deltaTime);
             float speed = movingSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, currentPoint.transform.position, speed);
-
+            moveTowardsPosition = Vector3.MoveTowards(transform.position, currentPoint.transform.position, speed);
+            moveTowardsPosition -= transform.position;
+            transform.position += moveTowardsPosition;
             return;
         }
         else
         {
-            Debug.Log("hello");
             GetNextPoint();
         }
     }

@@ -39,6 +39,12 @@ public class PlayerMovement : MonoBehaviour
     MovementDelegate movement;
     JumpDelegate jump;
     PlayerControls playerControls;
+    Transform platformTransform;
+    MovingSpikes platformScript;
+    Vector2 platformPosition;
+    Vector2 platformPosDelta;
+    Rigidbody2D platformRB;
+    [SerializeField] float platfromMovementFix;
     float lastGroundedTime;
     bool isGrabbing;
     bool jumped;
@@ -72,11 +78,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 innerRaycastOffset;
     private bool canCornerCorrect;
 
-    [Header("Sling")]
+    [Header("Bubble")]
     [SerializeField] float bubbleMagnetismStrength;
-    bool canSling;
-    Rigidbody2D slingPointRB;
-    SlingPoint sPoint;
+    //bool canSling;
+    //Rigidbody2D slingPointRB;
+    //SlingPoint sPoint;
     Vector2 bubblePosition;
     BubbleScript currentBubbleScript;
     float bubbleX;
@@ -226,17 +232,19 @@ public class PlayerMovement : MonoBehaviour
         if (canCornerCorrect) CornerCorrect(rb.velocity.y);
         if (rb.velocity.y < 0f && !isGrounded && !isGrabbing && !isSwinging && GravityState != gravityState.Sling) FallClamp();
     }
+
     #endregion
 
 
     #region Movements
     private void BasicMovement()
     {
+        //AddPlatformVelocity();
 
         //calcualte the direction we want to move in and our desired velocity
         float maxSpeed = X * playerVars.moveSpeed;
         //calculate difference between current velocity and desired velocity
-        float speedDif = maxSpeed - rb.velocity.x;
+        float speedDif = maxSpeed - rb.velocity.x - platformPosDelta.x;
         //change acceleration rate depending on situation
         float accelRate = (Mathf.Abs(maxSpeed) > 0.01f) ? playerVars.acceleration : playerVars.decceleration;
         //applies acceleration to speed difference, the raises to a set power so acceleration increases with higher speeds
@@ -245,9 +253,14 @@ public class PlayerMovement : MonoBehaviour
         float movement = (Mathf.Abs(speedDif) * accelRate) * Mathf.Sign(speedDif);
         //anti-clipping calculations
         //movement *= (Mathf.Abs(rb.velocity.x) < .001f && X == 0) ? 0f : 1f;
-
+        if(Mathf.Abs(movement) < 5f)
+        {
+            movement = 0f;
+        }
         rb.AddForce(movement * Vector2.right);
 
+        //Debug.Log("rb velocity: " + rb.velocity + ", speedDif: " + speedDif  + ", Vector2.right: " + Vector2.right);
+        //Debug.Log(rb.mass);
         
         if (Mathf.Abs(rb.velocity.x) < 0f && Mathf.Abs(rb.velocity.x) != 0f)
         {
@@ -280,7 +293,7 @@ public class PlayerMovement : MonoBehaviour
         float maxSpeed = X * playerVars.swingMoveSpeed;
 
         //float speedDif = maxSpeed - (rb.velocity.magnitude * X);
-        float speedDif = maxSpeed - rb.velocity.x;
+        float speedDif = maxSpeed - (rb.velocity.x + platformPosDelta.x);
         
         speedDif = Mathf.Sign(speedDif) == Mathf.Sign(maxSpeed) ? speedDif : 0f;
 
@@ -326,12 +339,79 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
 
+    #region Platform Velocity
+
+    public void SetPlatformTransform(MovingSpikes script, bool isEnter)
+    {
+        if (isEnter)
+        {
+            platformScript = script;
+            platformRB = script.GetComponent<Rigidbody2D>();
+        }
+        else
+        {
+            platformScript = null;
+            platformRB = null;
+            platformPosition = Vector3.zero;
+        }
+    }
+
+    void AddPlatformVelocity()
+    {
+        /*
+        if(platformTransform == null)
+        {
+            platformPosDelta = Vector3.zero;
+            return;
+        }
+        if(platformPosition == Vector3.zero)
+        {
+            platformPosition = platformTransform.position;
+        }
+        else
+        {
+            platformPosDelta = platformTransform.position - platformPosition;
+            //gameObject.transform.position -= platformPosDelta;
+            //rb.MovePosition(transform.position + platformPosDelta);
+            platformPosition = platformTransform.position;
+            Debug.Log(platformPosDelta);
+        }
+        */
+        if(platformScript != null)
+        {
+            if(platformPosition == Vector2.zero)
+            {
+                platformPosition = platformRB.position;
+                return;
+            }
+            platformPosDelta = platformRB.position - platformPosition;
+            rb.position += platformPosDelta;
+            platformPosition = platformRB.position;
+
+            /*
+            platformPosDelta = platformScript.moveTowardsPosition;
+            //transform.position += platformPosDelta;
+            Vector2 velocityAdd = new Vector2(platformPosDelta.x, platformPosDelta.y);
+            rb.velocity += velocityAdd * 5;
+            Debug.Log(platformPosDelta);
+            */
+        }
+        else
+        {
+            platformPosDelta = Vector2.zero;
+            platformPosition = Vector2.zero;
+        }
+    }
+
+    #endregion
+
+
     #region Jumps
 
     //===================
     //Normal Jump Section
     //===================
-    
+
     private void Jump()
     {
         if (!jumped)

@@ -11,11 +11,11 @@ public class PauseMenuScript : MonoBehaviour
     private void Awake()
     {
         //read saved data and apply to the settings    
+        SetupFlippingOnLevel();
     }
 
     void Start()
     {
-        SetupFlippingOnLevel();
     }
 
     // Update is called once per frame

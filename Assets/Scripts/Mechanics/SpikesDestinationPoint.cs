@@ -27,4 +27,10 @@ public class SpikesDestinationPoint : MonoBehaviour
             lineRenderer.SetPosition(1, nextPoint.transform.position);
         }
     }
+
+    public Vector2 GetPosition()
+    {
+        Vector2 pos =  new Vector2 (transform.position.x, transform.position.y);
+        return pos;
+    }
 }
