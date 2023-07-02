@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     JumpDelegate jump;
     PlayerControls playerControls;
     Transform platformTransform;
-    MovingSpikes platformScript;
+    [SerializeField] MovingPlatform platformScript;
     Vector2 platformPosition;
     Vector2 platformPosDelta;
     Rigidbody2D platformRB;
@@ -80,9 +80,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Bubble")]
     [SerializeField] float bubbleMagnetismStrength;
-    //bool canSling;
-    //Rigidbody2D slingPointRB;
-    //SlingPoint sPoint;
     Vector2 bubblePosition;
     BubbleScript currentBubbleScript;
     float bubbleX;
@@ -222,12 +219,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //if (isBlending) return;
-
         CheckCollisions();
 
 
         if (isSwinging) SwingRotation();
+        //AddPlatformVelocity();
         /*if (canMove)*/ movement();
         if (canCornerCorrect) CornerCorrect(rb.velocity.y);
         if (rb.velocity.y < 0f && !isGrounded && !isGrabbing && !isSwinging && GravityState != gravityState.Sling) FallClamp();
@@ -244,31 +240,35 @@ public class PlayerMovement : MonoBehaviour
         //calcualte the direction we want to move in and our desired velocity
         float maxSpeed = X * playerVars.moveSpeed;
         //calculate difference between current velocity and desired velocity
-        float speedDif = maxSpeed - rb.velocity.x - platformPosDelta.x;
+        float speedDif = maxSpeed - rb.velocity.x;
+
+        if(platformScript != null)
+        {
+            //rb.velocity += platformScript.rb.velocity;
+            //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
+            speedDif += platformScript.rb.velocity.x;
+        }
+
         //change acceleration rate depending on situation
         float accelRate = (Mathf.Abs(maxSpeed) > 0.01f) ? playerVars.acceleration : playerVars.decceleration;
+        
+
+
         //applies acceleration to speed difference, the raises to a set power so acceleration increases with higher speeds
         //finally multiplies by sign to reapply direction
         //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.velPower) * Mathf.Sign(speedDif);
         float movement = (Mathf.Abs(speedDif) * accelRate) * Mathf.Sign(speedDif);
         //anti-clipping calculations
         //movement *= (Mathf.Abs(rb.velocity.x) < .001f && X == 0) ? 0f : 1f;
-        if(Mathf.Abs(movement) < 5f)
+        /*
+        if(Mathf.Abs(movement) < 10f)
         {
             movement = 0f;
         }
+        */
         rb.AddForce(movement * Vector2.right);
-
-        //Debug.Log("rb velocity: " + rb.velocity + ", speedDif: " + speedDif  + ", Vector2.right: " + Vector2.right);
-        //Debug.Log(rb.mass);
-        
-        if (Mathf.Abs(rb.velocity.x) < 0f && Mathf.Abs(rb.velocity.x) != 0f)
-        {
-            Debug.Log("siema to ten system eo");
-            //Debug.Log(movement.ToString());
-            rb.velocity.Set(0f, rb.velocity.y);
-        }
-        
+        //if(platformScript != null)
+        //    Debug.Log("rb velocity: " + rb.velocity + ", speedDif: " + speedDif + ", movement: " + movement);
     }
     void InAirMovement()
     {
@@ -341,7 +341,7 @@ public class PlayerMovement : MonoBehaviour
 
     #region Platform Velocity
 
-    public void SetPlatformTransform(MovingSpikes script, bool isEnter)
+    public void SetPlatformTransform(MovingPlatform script, bool isEnter)
     {
         if (isEnter)
         {
@@ -353,53 +353,6 @@ public class PlayerMovement : MonoBehaviour
             platformScript = null;
             platformRB = null;
             platformPosition = Vector3.zero;
-        }
-    }
-
-    void AddPlatformVelocity()
-    {
-        /*
-        if(platformTransform == null)
-        {
-            platformPosDelta = Vector3.zero;
-            return;
-        }
-        if(platformPosition == Vector3.zero)
-        {
-            platformPosition = platformTransform.position;
-        }
-        else
-        {
-            platformPosDelta = platformTransform.position - platformPosition;
-            //gameObject.transform.position -= platformPosDelta;
-            //rb.MovePosition(transform.position + platformPosDelta);
-            platformPosition = platformTransform.position;
-            Debug.Log(platformPosDelta);
-        }
-        */
-        if(platformScript != null)
-        {
-            if(platformPosition == Vector2.zero)
-            {
-                platformPosition = platformRB.position;
-                return;
-            }
-            platformPosDelta = platformRB.position - platformPosition;
-            rb.position += platformPosDelta;
-            platformPosition = platformRB.position;
-
-            /*
-            platformPosDelta = platformScript.moveTowardsPosition;
-            //transform.position += platformPosDelta;
-            Vector2 velocityAdd = new Vector2(platformPosDelta.x, platformPosDelta.y);
-            rb.velocity += velocityAdd * 5;
-            Debug.Log(platformPosDelta);
-            */
-        }
-        else
-        {
-            platformPosDelta = Vector2.zero;
-            platformPosition = Vector2.zero;
         }
     }
 
@@ -433,7 +386,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded && rb.velocity.y > 0.1f /* && !JumpHold */ && !jumpCut)
         {
-            Debug.Log("Jump Cut Used");
             jumpCut = true;
             rb.AddForce(Vector2.down * rb.velocity.y * playerVars.jumpCutMultiplier, ForceMode2D.Impulse);
             SwitchGravity(gravityState.Falling);
@@ -513,22 +465,6 @@ public class PlayerMovement : MonoBehaviour
             return 2f;
         return rb.velocity.y;
     }
-    /*
-    void AfterSwingJump()
-    {
-        if (JumpDown)
-        {
-            SwitchGravity(gravityState.Normal);
-            //playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
-            //Debug.Log("Swing Jump");
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            rb.AddForce(Vector2.up * playerVars.afterSwingJumpPower, ForceMode2D.Impulse);
-            ZeroAllBuffers();
-            jump = Jump;
-            JumpThightenerQueue();
-        }
-    }
-    */
     void WaitingJump()
     {
         if(isGrounded && !isSwinging)
@@ -597,7 +533,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void SlowDownBubbleDash()
     {
-        Debug.Log("Slow Down");
         rb.velocity /= 1.5f;
     }
 
@@ -665,27 +600,11 @@ public class PlayerMovement : MonoBehaviour
         rb.rotation = 0f;
         swingBoosterCheck = false;
         playerAnims.ChangeAnimationState(AnimationState.InAirRoll_Player.ToString());
-        /*
-        if(!swingJumped)
-            StartCoroutine(SwingJumpBuffer());
-        */
-        //SwingBoost();
         movement = InAirMovement;
         jump = WaitingJump;
         tongueRenderer.TurnSpriteRenderer();
         tongueRenderer.StopCalculation();
         //JumpThightenerQueue();
-    }
-
-    IEnumerator SwingJumpBuffer()
-    {
-        swingJumpBuffer = playerVars.SwingJumpBuffer;
-        while(swingJumpBuffer > 0f)
-        {
-            swingJumpBuffer -= Time.deltaTime;
-            yield return null;
-        }
-        SwingBoost();
     }
     void VelocityCut()
     {
@@ -694,44 +613,6 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("After Velocity Cut: " + rb.velocity);
     }
 
-    void SwingBoost()
-    {
-        /*
-        Vector2 transRight = new Vector2(playerVars.swingJumpBalance * rb.velocity.x, (1f - playerVars.swingJumpBalance) * rb.velocity.y);
-        Vector2 direction = transRight * rb.velocity.magnitude;
-        direction *= Mathf.Sign(XSwing);
-        Debug.Log(Mathf.Sign(XSwing));
-        rb.velocity = Vector2.zero;   ZASTANÓW SIE CO JEST LEPSZE (1.8 Z TYM VECTOR.ZERO 4 BEZ TEGO (SWING JUMP FORCE))
-        */
-
-        Debug.Log("SwingBoost");
-        //Vector2 direction = new Vector2(playerVars.swingJumpBalance * rb.velocity.x, (1f - playerVars.swingJumpBalance) * rb.velocity.y);
-        Vector2 direction = new Vector2(10f * X * playerVars.swingBoostBalance, 10f * (1f - playerVars.swingBoostBalance));
-        playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
-        float movePercent = MovePercentage();
-        //rb.velocity = Vector2.zero;
-        rb.AddForce(direction * playerVars.swingBoostForce * movePercent, ForceMode2D.Impulse);
-        jump = WaitingJump;
-        //Debug.Log("magnitude: " + rb.velocity.magnitude.ToString() + /*", Transform.right " + transRight.ToString() + */", direction: " + direction.ToString());
-    }
-    float MovePercentage()
-    {
-        //Debug.Log(rb.velocity.magnitude / playerVars.swingMoveSpeed);
-
-        if ((rb.velocity.magnitude / playerVars.swingMoveSpeed) > playerVars.swingSpeedPercentage)
-        {
-            return Mathf.Abs(playerVars.swingMoveSpeed / playerVars.swingMoveSpeed);
-        }
-        else
-        {
-            return Mathf.Abs(rb.velocity.magnitude / playerVars.swingMoveSpeed);
-        }
-    }
-    void LineRendering()
-    {
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, swingPointPosition);
-    }
     #endregion
 
 
@@ -851,7 +732,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             case gravityState.Sling:
                 {
-                    rb.gravityScale = playerVars.slingGravity;
+                    rb.gravityScale = playerVars.bubbleGravity;
                     GravityState = gravityState.Sling;
                     //gravityStateText.text = "Gravity State: Sling";
                     break;
@@ -1242,22 +1123,4 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
-
-    #region Camera Blend
-    /*
-    public void StartBlend()
-    {
-        playerAnims.ChangeAnimationState(AnimationState.Idle_Player.ToString());
-        savedVelocity = rb.velocity;
-        isBlending = true;
-        rb.velocity = Vector2.zero;
-    }
-    public void EndBlend()
-    {
-        isBlending = false;
-        rb.velocity = savedVelocity;
-    }
-    */
-
-    #endregion
 }

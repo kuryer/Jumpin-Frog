@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b704ad51234904a8c9f01be0a0fd78, type: 3}
+  m_Name: Player Variables New
+  m_EditorClassIdentifier: 
+  moveSpeed: 9.5
+  acceleration: 50
+  decceleration: 100
+  velPower: 1
+  generalGravity: 1.8
+  inAirAccelerationBasic: 18.5
+  inAirDeccelerationBasic: 1
+  fallClampSpeed: 15.2
+  jumpPower: 125
+  jumpCutMultiplier: 1.2
+  fallGravity: 2.5
+  coyoteTime: 0.08
+  jumpBuffer: 0.13
+  jumpTightenerTime: 20
+  jumpThightenerGravity: 34
+  wallSlideSpeed: 3
+  wallGravity: 0.15
+  wallJumpDirectionBalance: 0.65
+  wallJumpPowerModifier: 1.3
+  wallGrabJumpBuffer: 0.1
+  wallGrabBuffer: 0.1
+  swingJumpForce: 89
+  swingJumpBalance: 0.41
+  springFrequency: 2.2
+  springDamping: 0.45
+  swingVelocityCut: 1
+  swingMoveSpeed: 21
+  accelerationSwing: 16
+  conccelerationSwing: 0.7
+  deccelerationSwing: 0
+  swingMovementPower: 1
+  swingGravity: 0.1
+  swingBuffer: 0.3
+  afterSwingJumpPower: 10
+  swingSpeedPercentage: 0.9
+  exitBarHeight: 1
+  bubbleGravity: 0
+  slingGravityChangeTime: 0.145
+  throwTimer: 0.65
+  bubbleThrowForce: 130
+  throwDirectionXModifier: 0.9
+  throwDirectionYModifier: 0.95
+  lineWidth: 0.75
+  respawnMoveTowardSpeed: 0.4

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Prototype Level 01.tmx",
+    "activeFile": "Level 02.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -21,15 +21,26 @@
         "Input Tile.tsx": {
             "scaleInDock": 4
         },
+        "Level 02.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 3,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 2483.333333333333,
+                "y": 4764.666666666666
+            }
+        },
         "Prototype Level 01.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 2,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 437.75,
-                "y": 412.5
+                "x": 2396,
+                "y": 397.33333333333337
             }
         },
         "Prototype Level 02.tmx": {
@@ -39,19 +50,19 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2399.5,
-                "y": 399.5
+                "x": 2397,
+                "y": 398
             }
         },
         "Prototype Level 03.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2399.75,
-                "y": 399.75
+                "x": 2397,
+                "y": 398
             }
         },
         "Prototype Level 04.tmx": {
@@ -61,51 +72,51 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2375.333333333333,
-                "y": 2399.6666666666665
+                "x": 2372.6666666666665,
+                "y": 2398
             }
         },
         "Prototype Level 05.tmx": {
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.5,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2400,
-                "y": 2399
+                "x": 1088,
+                "y": 4454
             }
         },
         "Prototype Level 06.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1600,
-                "y": 480.3030303030303
+                "x": 1587.8787878787878,
+                "y": 472.72727272727275
             }
         },
         "Prototype Level 07.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2400,
-                "y": 639.5
+                "x": 2395,
+                "y": 634
             }
         },
         "Prototype Level 08.tmx": {
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2400,
-                "y": 644
+                "x": 2360,
+                "y": 608
             }
         },
         "Prototype Level 09.tmx": {
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2800,
-                "y": 648
+                "x": 2736,
+                "y": 592
             }
         },
         "Prototype Level 10.tmx": {
@@ -115,8 +126,19 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2800,
-                "y": 639.6666666666666
+                "x": 3116.6666666666665,
+                "y": 796
+            }
+        },
+        "Prototype Level Testing.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2399.5,
+                "y": 2427.25
             }
         },
         "Prototype Spikes Tileset but better.tsx": {
@@ -125,17 +147,17 @@
         },
         "Prototype Spikes Tileset.tsx": {
             "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInEditor": 8
         },
         "Tutorial Level.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 1,
+            "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 2399.5,
-                "y": 399.5
+                "x": 2394,
+                "y": 396
             }
         },
         "untitled.tmx": {
@@ -149,39 +171,29 @@
     },
     "last.imagePath": "D:/UnityHub/Jumpin Frog/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype",
     "last.objectTypesPath": "D:/UnityHub/Jumpin Frog/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype/propertytypes.xml",
-    "map.height": 300,
+    "map.height": 500,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 300,
+    "map.width": 500,
     "openFiles": [
-        "Tutorial Level.tmx",
-        "Prototype Level 01.tmx",
-        "Prototype Level 02.tmx",
-        "Prototype Level 03.tmx",
-        "Prototype Level 04.tmx",
-        "Prototype Level 05.tmx",
-        "Prototype Level 06.tmx",
-        "Prototype Level 10.tmx",
-        "Prototype Level 07.tmx",
-        "Prototype Level 08.tmx",
-        "Prototype Level 09.tmx",
-        "Prototype Spikes Tileset but better.tsx"
+        "Prototype Level Testing.tmx",
+        "Level 02.tmx"
     ],
     "project": "Prototype Project.tiled-project",
     "recentFiles": [
-        "Tutorial Level.tmx",
+        "Prototype Level Testing.tmx",
+        "Level 02.tmx",
+        "Prototype Level 07.tmx",
         "Prototype Spikes Tileset but better.tsx",
         "Prototype Level 09.tmx",
         "Prototype Level 08.tmx",
-        "Prototype Level 07.tmx",
         "Prototype Level 10.tmx",
         "Prototype Level 06.tmx",
         "Prototype Level 05.tmx",
         "Prototype Level 04.tmx",
         "Prototype Level 03.tmx",
-        "Prototype Level 02.tmx",
-        "Prototype Level 01.tmx"
+        "Prototype Level 02.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

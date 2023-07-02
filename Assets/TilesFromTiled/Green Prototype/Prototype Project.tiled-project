@@ -11,10 +11,48 @@
         {
             "color": "#ffa0a0a4",
             "drawFill": true,
+            "id": 5,
+            "members": [
+            ],
+            "name": "Bubble",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
             "id": 1,
             "members": [
             ],
             "name": "Coin",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 9,
+            "members": [
+            ],
+            "name": "Crushing Block",
             "type": "class",
             "useAs": [
                 "property",
@@ -68,10 +106,10 @@
         {
             "color": "#ffa0a0a4",
             "drawFill": true,
-            "id": 4,
+            "id": 8,
             "members": [
             ],
-            "name": "Swing",
+            "name": "Leaves Spawner",
             "type": "class",
             "useAs": [
                 "property",
@@ -87,10 +125,48 @@
         {
             "color": "#ffa0a0a4",
             "drawFill": true,
-            "id": 5,
+            "id": 7,
             "members": [
             ],
-            "name": "Bubble",
+            "name": "Moving Spikes",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 6,
+            "members": [
+            ],
+            "name": "Platform",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 4,
+            "members": [
+            ],
+            "name": "Swing",
             "type": "class",
             "useAs": [
                 "property",

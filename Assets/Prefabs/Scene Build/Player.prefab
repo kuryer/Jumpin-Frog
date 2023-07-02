@@ -126,7 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2671e2cfd017340bd1828374b63ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerVars: {fileID: 11400000, guid: 72e004cd34ebc9640a27b53750003b6b, type: 2}
+  playerVars: {fileID: 11400000, guid: c2d85ec264ce35d4f9d6be8d65ee0263, type: 2}
+  platformScript: {fileID: 0}
+  platfromMovementFix: 0
   groundRayLength: 0.76
   groundLayer:
     serializedVersion: 2
@@ -148,7 +150,9 @@ MonoBehaviour:
   playerRotationFix: 90
   JumpCircle: {fileID: 3593269304060940393, guid: da915433f8fb5244580b618870838abf, type: 3}
   jumpCircleposition: 0
+  isFacingRight: 1
   tongueRenderer: {fileID: 8685133206484574028}
+  cameraFollowScript: {fileID: 0}
 --- !u!114 &803678387609138845
 MonoBehaviour:
   m_ObjectHideFlags: 0

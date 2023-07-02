@@ -5,7 +5,7 @@ using UnityEngine;
 public class FallingLeavesSpawner : MonoBehaviour
 {
     [Header("Spawn Variables")]
-    [Range(0f, 15f)]
+    [Range(2f, 15f)]
     [SerializeField] float SpawnAreaDistance;
     [Range(0f, 30f)]
     [SerializeField] float gizmosRayLength;
@@ -89,7 +89,6 @@ public class FallingLeavesSpawner : MonoBehaviour
         if (hit.collider != null && hit.collider.CompareTag("Leaf"))
         {
             Destroy(hit.collider.gameObject);
-            Debug.Log("yo");
         }
     }
 

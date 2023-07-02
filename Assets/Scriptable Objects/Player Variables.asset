@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 14
   acceleration: 20
-  decceleration: 60
+  decceleration: 100
   velPower: 1
   generalGravity: 1.8
   inAirAccelerationBasic: 12

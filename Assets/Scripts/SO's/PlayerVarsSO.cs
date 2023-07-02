@@ -33,10 +33,6 @@ public class PlayerVarsSO : ScriptableObject
     [Header("Swing Jump")]
     public float swingJumpForce;
     public float swingJumpBalance;
-    public float SwingJumpBuffer;
-    [Header("Swing Boost")]
-    public float swingBoostForce;
-    public float swingBoostBalance;
     [Header("Swinging")]
     public float springFrequency;
     public float springDamping;
@@ -51,10 +47,8 @@ public class PlayerVarsSO : ScriptableObject
     public float afterSwingJumpPower;
     public float swingSpeedPercentage;
     public float exitBarHeight;
-    [Header("Sling")]
-    public float slingPower;
-    public float slingBalance;
-    public float slingGravity;
+    [Header("Bubble")]
+    public float bubbleGravity;
     public float slingGravityChangeTime;
     public float throwTimer;
     public float bubbleThrowForce;

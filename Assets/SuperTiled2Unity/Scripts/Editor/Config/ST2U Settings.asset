@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff72ddc2da234e244a8e96eb44e4c03d, type: 3}
   m_Name: ST2U Settings
   m_EditorClassIdentifier: 
-  m_PixelsPerUnit: 100
+  m_PixelsPerUnit: 16
   m_EdgesPerEllipse: 32
   m_AnimationFramerate: 20
   m_DefaultMaterial: {fileID: 0}
@@ -60,13 +60,25 @@ MonoBehaviour:
   - m_Name: Coin
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
+  - m_Name: Crushing Block
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
   - m_Name: Door
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
   - m_Name: Flag
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
+  - m_Name: Leaves Spawner
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  - m_Name: Moving Spikes
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
   - m_Name: Swing
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  - m_Name: Platform
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
   m_PrefabReplacements:
@@ -80,3 +92,11 @@ MonoBehaviour:
     m_Prefab: {fileID: 43027589770213311, guid: 2b980ec8b94be36428afe98dd96ed40c, type: 3}
   - m_TypeName: Door
     m_Prefab: {fileID: 2904268743927636297, guid: a48dadbb6146e574dbb7e62e73bd45d1, type: 3}
+  - m_TypeName: Platform
+    m_Prefab: {fileID: 7786775275155084893, guid: 524f681cef5e229499249425a0de9a96, type: 3}
+  - m_TypeName: Moving Spikes
+    m_Prefab: {fileID: 5079347840184732452, guid: da3b0db05c328a64895b82e50ce6ab7c, type: 3}
+  - m_TypeName: Leaves Spawner
+    m_Prefab: {fileID: 4218083650576290022, guid: 178729b29a25e9741b8ab18dced4ef52, type: 3}
+  - m_TypeName: Crushing Block
+    m_Prefab: {fileID: 1507682437318100034, guid: 7dc2b0b6633ee4b4eaebbec1aa479522, type: 3}

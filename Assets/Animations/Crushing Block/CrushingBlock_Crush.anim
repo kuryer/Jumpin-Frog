@@ -29,17 +29,17 @@ AnimationClip:
       value: {fileID: 21300000, guid: 07c17aa3e5842584f863af04702339e0, type: 3}
     - time: 0.4
       value: {fileID: 21300000, guid: e6c6ea4f1eee3a04b8635ceb63e6647b, type: 3}
-    - time: 0.8333333
+    - time: 0.5833333
       value: {fileID: 21300000, guid: b8ceb4c8c4e597042a04805310ae0cea, type: 3}
-    - time: 0.93333334
+    - time: 0.68333334
       value: {fileID: 21300000, guid: 0cc4cc7941e6f1f42984e495682f6625, type: 3}
-    - time: 1.0333333
+    - time: 0.78333336
       value: {fileID: 21300000, guid: 75cd2ce92199d124c8087549d35e66ec, type: 3}
-    - time: 1.1333333
+    - time: 0.8833333
       value: {fileID: 21300000, guid: 2d7d4af8178788f45bf7a7da48ebdb16, type: 3}
-    - time: 1.2333333
+    - time: 0.98333335
       value: {fileID: 21300000, guid: 7457a80904e659942a46953a44b434d3, type: 3}
-    - time: 1.3333334
+    - time: 1.0833334
       value: {fileID: 21300000, guid: 7457a80904e659942a46953a44b434d3, type: 3}
     attribute: m_Sprite
     path: 
@@ -76,7 +76,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.35
+    m_StopTime: 1.1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -96,14 +96,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.93333334
+  - time: 0.68333334
     functionName: TurnOffCollider
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2833333
+  - time: 1.0333333
     functionName: CrushingAnimationEnd
     data: 
     objectReferenceParameter: {fileID: 0}

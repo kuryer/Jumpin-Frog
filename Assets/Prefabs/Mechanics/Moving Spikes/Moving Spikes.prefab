@@ -113,8 +113,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destinationPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
-  movingSpeed: 5
-  currentPoint: {fileID: 0}
+  movingSpeed: 6
+  rb: {fileID: 0}
+  isPlatform: 0
+  rayLength: 0
+  destinationPointLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  moveTowardsPosition: {x: 0, y: 0, z: 0}
   loopMode: 0
   points: []
 --- !u!60 &5079347839175430552
@@ -174,7 +180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5079347840184732452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.708221, y: 4.536119, z: 15.911146}
+  m_LocalPosition: {x: 0, y: 0, z: 15.911146}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
