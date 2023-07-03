@@ -2825,6 +2825,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1165825806736078432, guid: a11ab4d7b1d6adf4cb5d5a0579dc199d, type: 3}
+      propertyPath: loadLevel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1296184962658874601, guid: a11ab4d7b1d6adf4cb5d5a0579dc199d, type: 3}
       propertyPath: m_Name
       value: Prototype Level Testing
