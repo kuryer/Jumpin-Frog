@@ -153,27 +153,6 @@ public class PlayerMovement : MonoBehaviour
         UnsubscribeFromPlayerInputEvents();
     }
 
-    void SubscribeForPlayerInputEvents()
-    {
-        playerControls.Movement.Jump.performed += SetJumpBuffer;
-        playerControls.Movement.Jump.canceled += CallJumpCut;
-
-
-        playerControls.Movement.Action.performed += SetSwingBuffer;
-        playerControls.Movement.Action.canceled += StopSwingingCall;
-
-    }
-
-    void UnsubscribeFromPlayerInputEvents()
-    {
-        playerControls.Movement.Jump.performed -= SetJumpBuffer;
-        playerControls.Movement.Jump.canceled -= CallJumpCut;
-
-
-        playerControls.Movement.Action.performed -= SetSwingBuffer;
-        playerControls.Movement.Action.canceled -= StopSwingingCall;
-
-    }
 
     void Start()
     {
@@ -231,6 +210,32 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+
+    #region Events
+
+    void SubscribeForPlayerInputEvents()
+    {
+        playerControls.Movement.Jump.performed += SetJumpBuffer;
+        playerControls.Movement.Jump.canceled += CallJumpCut;
+
+
+        playerControls.Movement.Action.performed += SetSwingBuffer;
+        playerControls.Movement.Action.canceled += StopSwingingCall;
+
+    }
+
+    void UnsubscribeFromPlayerInputEvents()
+    {
+        playerControls.Movement.Jump.performed -= SetJumpBuffer;
+        playerControls.Movement.Jump.canceled -= CallJumpCut;
+
+
+        playerControls.Movement.Action.performed -= SetSwingBuffer;
+        playerControls.Movement.Action.canceled -= StopSwingingCall;
+
+    }
+
+    #endregion
 
     #region Movements
     private void BasicMovement()
@@ -953,6 +958,25 @@ public class PlayerMovement : MonoBehaviour
             gameObject.tag = "Dead";
         }
     }
+    void SetCanMoveTrue()
+    {
+        canMove = true;
+        rb.velocity = Vector2.zero;
+        X = 0;
+        SwitchGravity(gravityState.Normal);
+        gameObject.tag = "Player";
+    }
+    void SetCanMoveFalse()
+    {
+        canMove = false;
+        rb.velocity = Vector2.zero;
+        X = 0;
+        SwitchGravity(gravityState.Space);
+        gameObject.tag = "Dead";
+
+
+    }
+
     void ChangeSpring()
     {
         if (distJoint.frequency != playerVars.springFrequency)

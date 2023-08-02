@@ -9,7 +9,7 @@ public class DataManagerScript : MonoBehaviour
     //WA¯NE NIE ZAPOMNIJ O TYM PLIKU XDDD
     private int coinCount = 0;
     public UnityAction OnCoinAdded;
-
+    
     public int CoinCount
     {
         get { return coinCount; }

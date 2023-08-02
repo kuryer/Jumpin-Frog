@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     float respawnSpeed; // <- JO TU MAM CUŒ TAKIEGO NI WIM CZY TEGO UZYC CZY NIE, ZEBY RAZ USTAWIAC TE PREDKOSC CZY NI
     [SerializeField] PlayerVarsSO playerVars;
     bool isDead = false;
-
+    public UnityEvent OnPlayerDeath;
 
 
     void Start()
@@ -29,10 +30,11 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isDead)
         {
+            OnPlayerDeath?.Invoke();
             movementScript.SetupVariablesAfterDeath();
-            PlayDeathAnimation(typeOfDmg);
             movementScript.SetCanMove(false);
             movementScript.enabled = false;
+            PlayDeathAnimation(typeOfDmg);
             Helpers.DataManagerScript.SubtractCoins(coinsTakenPerDeath);
             Debug.Log("Player Died");
             SetIsDead(true);

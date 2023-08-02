@@ -15,9 +15,9 @@ public class MovingPlatform : MonoBehaviour
     public GameObject destinationPointPrefab;
     public float movingSpeed = 170f;
     [HideInInspector] public Rigidbody2D rb;
-    [SerializeField] bool worksOnDetection;
-    public delegate void MovementType();
-    MovementType movement;
+    [SerializeField] bool worksOnDetection; // znaczy ¿e dzia³a tylko jak sie na nim stoi
+    //public delegate void MovementType();
+    //MovementType movement;
     [SerializeField] float radiusLength;
     [SerializeField] LayerMask destinationPointLayer;
     [SerializeField] SpikesDestinationPoint firstPoint;
@@ -79,8 +79,7 @@ public class MovingPlatform : MonoBehaviour
 
     void BasicPlatformMovement()
     {
-        float speed = movingSpeed * Time.deltaTime;
-        rb.velocity = moveTowardsPosition.normalized * speed;
+        rb.velocity = moveTowardsPosition.normalized * movingSpeed;
     }
     void GetNextPoint()
     {
@@ -207,6 +206,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
     #endregion
+
 
     #region Raycast Detection
 

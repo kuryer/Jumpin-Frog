@@ -4,16 +4,25 @@ using UnityEngine;
 
 public static class Helpers
 {
+    private static GameObject player;
     private static PlayerMovement playerMovement;
     private static PlayerHealth playerHealth;
     private static GameManagerScript gameManager;
     private static DataManagerScript dataManager;
 
+    public static GameObject Player
+    {
+        get
+        {
+            if (player == null) player = GameObject.FindGameObjectWithTag("Player");
+            return player;
+        }
+    }
     public static PlayerMovement PlayerMovement
     {
         get
         {
-            if (playerMovement == null) playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+            if (playerMovement == null) playerMovement = Player.GetComponent<PlayerMovement>();
             return playerMovement;
         }
     }
@@ -21,7 +30,7 @@ public static class Helpers
     {
         get
         {
-            if (playerHealth == null) playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+            if (playerHealth == null) playerHealth = Player.GetComponent<PlayerHealth>();
             return playerHealth;
         }
     }
