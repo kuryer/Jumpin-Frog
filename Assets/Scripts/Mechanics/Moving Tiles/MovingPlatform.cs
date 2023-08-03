@@ -6,7 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     [Header("Platform Detection")]
     MovingPlatform script;
-    bool isCalled;
+    bool isStandingOnPlatform;
     [SerializeField] Vector3 rayPosition;
     [SerializeField] float rayLength;
     [SerializeField] LayerMask player;
@@ -97,7 +97,7 @@ public class MovingPlatform : MonoBehaviour
         }
         else
         {
-            if (isCalled)
+            if (isStandingOnPlatform)
             {
                 OnDetectionForwardPoint();
             }
@@ -214,20 +214,20 @@ public class MovingPlatform : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + rayPosition, Vector3.right, rayLength, player);
 
-        if (!isCalled && hit.collider != null)
+        if (!isStandingOnPlatform && hit.collider != null)
         {
             Helpers.PlayerMovement.SetPlatformTransform(script, true);
-            isCalled = true;
+            isStandingOnPlatform = true;
             if (worksOnDetection)
             {
                 GetNextPoint();
                 SetMoveTowardsPos();
             }
         }
-        else if (isCalled && hit.collider == null)
+        else if (isStandingOnPlatform && hit.collider == null)
         {
             Helpers.PlayerMovement.SetPlatformTransform(script, false);
-            isCalled = false;
+            isStandingOnPlatform = false;
         }
     }
 

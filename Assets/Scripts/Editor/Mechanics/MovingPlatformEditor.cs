@@ -48,7 +48,7 @@ public class MovingPlatformEditor : Editor
         points.onAddCallback = (points) =>
         {
             SpikesDestinationPoint point = Instantiate(thisScript.destinationPointPrefab, thisScript.transform.parent).GetComponent<SpikesDestinationPoint>();
-
+            //Lets manipulate the points' names so they'll be easier to work with 
             pointsList.arraySize++;
             pointsList.GetArrayElementAtIndex(pointsList.arraySize - 1).objectReferenceValue = point;
         };
@@ -58,8 +58,10 @@ public class MovingPlatformEditor : Editor
     {
         points.onRemoveCallback = (points) =>
         {
-            DestroyImmediate(thisScript.points[points.index].gameObject, true);
+            GameObject toDelete = thisScript.points[points.index].gameObject;
+
             pointsList.DeleteArrayElementAtIndex(points.index);
+            DestroyImmediate(toDelete, true);
         };
     }
 
