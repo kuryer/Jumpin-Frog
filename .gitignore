@@ -48,13 +48,15 @@ ExportedObj/
 *.pdb.meta
 *.mdb.meta
 
+#Unity's Local Changes
+*.dwls
+
 # Unity3D generated file on crash reports
 sysinfo.txt
 
 # Builds
 *.apk
 *.unitypackage
-
 
 # Crashlytics generated file
 crashlytics-build.properties
