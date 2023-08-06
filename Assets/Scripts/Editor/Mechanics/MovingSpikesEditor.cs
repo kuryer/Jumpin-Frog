@@ -47,7 +47,7 @@ public class MovingSpikesEditor : Editor
     {
         points.onAddCallback = (points) =>
         {
-            SpikesDestinationPoint point = Instantiate(thisScript.destinationPointPrefab, thisScript.transform.parent).GetComponent<SpikesDestinationPoint>();
+            DestinationPoint point = Instantiate(thisScript.destinationPointPrefab, thisScript.transform.parent).GetComponent<DestinationPoint>();
 
             pointsList.arraySize++;
             pointsList.GetArrayElementAtIndex(pointsList.arraySize - 1).objectReferenceValue = point;

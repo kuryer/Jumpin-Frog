@@ -1,78 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditorInternal;
 
 
 [CustomEditor(typeof(MovingPlatform))]
 public class MovingPlatformEditor : Editor
 {
-    ReorderableList points;
-    SerializedProperty pointsList;
-    MovingPlatform thisScript;
+    //MovingPlatform thsScript;
 
     private void OnEnable()
     {
-        thisScript = (MovingPlatform)target;
-        pointsList = serializedObject.FindProperty("points");
-        points = new ReorderableList(serializedObject, pointsList, true, true, true, true);
-
-
-
-        DrawListsHeader();
-        DrawListsElements();
-        OnAddPoint();
-        OnRemovePoint();
-
-    }
-    void DrawListsHeader()
-    {
-        points.drawHeaderCallback = (Rect rect) => {
-            EditorGUI.LabelField(rect, "Destination Points");
-        };
-    }
-
-    void DrawListsElements()
-    {
-        points.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
-        {
-            var element = points.serializedProperty.GetArrayElementAtIndex(index);
-            rect.y += 2;
-            EditorGUI.PropertyField(new Rect(rect.x, rect.y, 270, EditorGUIUtility.singleLineHeight),
-                element, GUIContent.none);
-        };
-    }
-    void OnAddPoint()
-    {
-        points.onAddCallback = (points) =>
-        {
-            SpikesDestinationPoint point = Instantiate(thisScript.destinationPointPrefab, thisScript.transform.parent).GetComponent<SpikesDestinationPoint>();
-            //Lets manipulate the points' names so they'll be easier to work with 
-            pointsList.arraySize++;
-            pointsList.GetArrayElementAtIndex(pointsList.arraySize - 1).objectReferenceValue = point;
-        };
-    }
-
-    void OnRemovePoint()
-    {
-        points.onRemoveCallback = (points) =>
-        {
-            GameObject toDelete = thisScript.points[points.index].gameObject;
-
-            pointsList.DeleteArrayElementAtIndex(points.index);
-            DestroyImmediate(toDelete, true);
-        };
+        //thsScript = (MovingPlatform)target;
     }
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
-
+        //serializedObject.Update();
+        /*
+        if(GUILayout.Button("Add Point"))
+        {
+            thsScript.AddPoint();
+        }
+        if(GUILayout.Button("Delete Last Point"))
+        {
+            thsScript.DeleteLastPoint();
+        }
+        */
         base.DrawDefaultInspector();
+        
+        //serializedObject.ApplyModifiedProperties();
+    }
+}
+[CustomEditor(typeof(MovingTile))]
+public class MovingTileEditor : MovingPlatformEditor
+{
+    MovingTile thisScript;
+    private void OnEnable()
+    {
+        thisScript = (MovingTile)target;
+    }
 
-        points.DoLayoutList();
+    public override void OnInspectorGUI()
+    {
+        EditorGUILayout.LabelField("--------------------------------");
+        base.OnInspectorGUI();
 
-        serializedObject.ApplyModifiedProperties();
+        if (GUILayout.Button("Add Point"))
+        {
+            thisScript.AddPoint();
+        }
+        if (GUILayout.Button("Delete Last Point"))
+        {
+            thisScript.DeleteLastPoint();
+        }
     }
 }

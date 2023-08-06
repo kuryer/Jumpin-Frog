@@ -180,6 +180,9 @@ MonoBehaviour:
   respawnPointObject: {fileID: 0}
   coinsTakenPerDeath: 10
   playerVars: {fileID: 11400000, guid: 72e004cd34ebc9640a27b53750003b6b, type: 2}
+  OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!60 &803678387609138843
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SpikesDestinationPoint : MonoBehaviour
+public class DestinationPoint : MonoBehaviour
 {
-    LineRenderer lineRenderer;
 }

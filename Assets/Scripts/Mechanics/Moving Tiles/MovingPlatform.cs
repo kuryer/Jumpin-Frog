@@ -1,210 +1,206 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : MovingTile
 {
     [Header("Platform Detection")]
-    MovingPlatform script;
     bool isStandingOnPlatform;
     [SerializeField] Vector3 rayPosition;
-    [SerializeField] float rayLength;
+    [SerializeField] float onDetectionRayLength;
+    [SerializeField] float interiorRayLength;
     [SerializeField] LayerMask player;
 
     [Header("Platform Movement")]
-    public GameObject destinationPointPrefab;
-    public float movingSpeed = 170f;
+    [Range(1f, 4f)]
+    public float movingSpeed;
     [HideInInspector] public Rigidbody2D rb;
     [SerializeField] bool worksOnDetection; // znaczy ¿e dzia³a tylko jak sie na nim stoi
-    //public delegate void MovementType();
-    //MovementType movement;
-    [SerializeField] float radiusLength;
     [SerializeField] LayerMask destinationPointLayer;
-    [SerializeField] SpikesDestinationPoint firstPoint;
-    [SerializeField] SpikesDestinationPoint lastPoint;
-    SpikesDestinationPoint currentPoint;
-    int currentIndex = 0;
-    bool isGoingBack = false;
+    bool Back2Back_isMovingBackwards;
+    int currentPointNumber;
+    int lastPointNumber;
+    DestinationPoint currentPoint;
     [HideInInspector] public Vector3 moveTowardsPosition;
-    public enum LoopModes
+    delegate void MovementType();
+    MovementType SetNextPoint;
+
+    enum LoopModes
     {
         Around,
         BackToBack
     }
-    [SerializeField] public LoopModes loopMode = LoopModes.Around;
-    [HideInInspector] public List<SpikesDestinationPoint> points;
+    [SerializeField] LoopModes loopMode = LoopModes.Around;
+
+    [Header("Editor")]
+    public GameObject destinationPointPrefab;
+
 
     #region Setup
 
+
     private void Awake()
     {
-        script = GetComponent<MovingPlatform>();
         rb = GetComponent<Rigidbody2D>();
-        GetFirstPoint();
-        if (worksOnDetection) StopMoving();
-        else SetMoveTowardsPos();
+        Setup();
     }
-    void GetFirstPoint()
+
+    private void OnEnable()
     {
-        if (points.Count <= 1)
-        {
-            Debug.Log("Not enough Desitnation points to build a route.");
-            return;
-        }
+        SubscribeOnPlayerDeath();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeOnPlayerDeath();
+    }
+
+    void SubscribeOnPlayerDeath()
+    {
+        Helpers.PlayerHealth.OnPlayerDeath.AddListener(OnDetection_SetNextPoint);
+    }
+
+    void UnsubscribeOnPlayerDeath()
+    {
+        Helpers.PlayerHealth.OnPlayerDeath.RemoveListener(OnDetection_SetNextPoint);
+
+    }
+
+    private void Setup()
+    {
+        lastPointNumber = destinationPoints.Count - 1;
         if (!worksOnDetection)
         {
-            currentIndex++;
-            currentPoint = points[currentIndex];
+            switch (loopMode)
+            {
+                case LoopModes.Around:
+                    SetNextPoint = Around_SetNextPoint;
+                    break;
+                case LoopModes.BackToBack:
+                    SetNextPoint = Back2Back_SetNextPoint;
+                    break;
+            }
+            SetNextPoint();
+            return;
         }
+        SetNextPoint = OnDetection_SetNextPoint;
     }
-    void SetMoveTowardsPos()
-    {
-        moveTowardsPosition = currentPoint.transform.position - transform.position;
-    }
+
+
     #endregion
 
 
     #region Update
+
     private void FixedUpdate()
     {
         CastRay();
-        CastCircle();
-        BasicPlatformMovement();
+        CastInteriorRay();
     }
+
+    #endregion
+
+
+    #region LoopMode_Around
+
+    private void Around_SetNextPoint()
+    {
+        currentPoint = destinationPoints[Around_GetNextPointNumber()];
+        SetMoveTowardsPos();
+    }
+
+    private int Around_GetNextPointNumber()
+    {
+        currentPointNumber++;
+        if (currentPointNumber <= lastPointNumber)
+            return currentPointNumber;
+        currentPointNumber = 0;
+        return currentPointNumber;
+    }
+
+    #endregion
+
+
+    #region LoopMode_Back2Back
+
+
+    private void Back2Back_SetDirection()
+    {
+        if (currentPointNumber == lastPointNumber)
+            Back2Back_isMovingBackwards = true;
+        if(currentPointNumber == 0)
+            Back2Back_isMovingBackwards = false;
+    }
+
+    private int Back2Back_GetNextPointNumber()
+    {
+        if (!Back2Back_isMovingBackwards)
+            return ++currentPointNumber;
+        return --currentPointNumber;
+    }
+
+    private void Back2Back_SetNextPoint()
+    {
+        Back2Back_SetDirection();
+        currentPoint = destinationPoints[Back2Back_GetNextPointNumber()];
+        SetMoveTowardsPos();
+    }
+
+
+    #endregion
+
+
+    #region OnDetection
+
+
+    void OnDetection_SetNextPoint_Forward()
+    {
+        if(currentPointNumber == lastPointNumber)
+        {
+            StopMoving();
+            return;
+        }
+        currentPointNumber++;
+        currentPoint = destinationPoints[currentPointNumber];
+        SetMoveTowardsPos();
+    }
+
+    void OnDetection_SetNextPoint_Backwards()
+    {
+        if (currentPointNumber == 0)
+        {
+            StopMoving();
+            return;
+        }
+        currentPointNumber--;
+        currentPoint = destinationPoints[currentPointNumber];
+        SetMoveTowardsPos();
+    }
+
+    void OnDetection_SetNextPoint()
+    {
+        if (isStandingOnPlatform)
+            OnDetection_SetNextPoint_Forward();
+        else OnDetection_SetNextPoint_Backwards();
+    }
+
 
     #endregion
 
 
     #region Movement
 
-    void BasicPlatformMovement()
-    {
-        rb.velocity = moveTowardsPosition.normalized * movingSpeed;
-    }
-    void GetNextPoint()
-    {
-        if (!worksOnDetection)
-        {
-            if (loopMode == LoopModes.Around)
-            {
-                BasicAroundPoint();
-            }
-            if (loopMode == LoopModes.BackToBack)
-            {
-                BasicBackToBackPoint();
-            }
-            SetMoveTowardsPos();
-        }
-        else
-        {
-            if (isStandingOnPlatform)
-            {
-                OnDetectionForwardPoint();
-            }
-            else
-            {
-                OnDetectionBackwardsPoint();
-            }
-        }
-    }
-
-    void BasicAroundPoint()
-    {
-        if (points.Count == currentIndex)
-        {
-            currentIndex = 0;
-            currentPoint = points[currentIndex];
-            currentIndex++;
-        }
-        else
-        {
-            currentPoint = points[currentIndex];
-            currentIndex++;
-        }
-    }
-
-    void BasicBackToBackPoint()
-    {
-        if (!isGoingBack)
-        {
-            if (points.Count == currentIndex)
-            {
-                currentIndex--;
-                currentPoint = points[currentIndex];
-                isGoingBack = true;
-            }
-            else
-            {
-                currentPoint = points[currentIndex];
-                currentIndex++;
-            }
-        }
-        else
-        {
-            if (currentIndex == 0)
-            {
-                currentIndex++;
-                currentPoint = points[currentIndex];
-                isGoingBack = false;
-            }
-            else
-            {
-                currentIndex--;
-                currentPoint = points[currentIndex];
-            }
-        }
-    }
-
-    void OnDetectionForwardPoint()
-    {
-        if (currentPoint == lastPoint)
-        {
-            StopMoving();
-        }
-        else
-        {
-            currentIndex = points.IndexOf(currentPoint);
-            ChangeIndex(1);
-            currentPoint = points[currentIndex];
-            SetMoveTowardsPos();
-        }
-    }
-
-    void OnDetectionBackwardsPoint()
-    {
-        if(currentPoint == firstPoint)
-        {
-            StopMoving();
-        }
-        else
-        {
-            currentIndex = points.IndexOf(currentPoint);
-            ChangeIndex(-1);
-            currentPoint = points[currentIndex];
-            SetMoveTowardsPos();
-        }
-    }
-
     void StopMoving()
     {
-        moveTowardsPosition = Vector3.zero;
+        rb.velocity = Vector2.zero;
     }
-
-    void ChangeIndex(int amount)
+    void SetMoveTowardsPos()
     {
-        currentIndex += amount;
-
-        while(currentIndex >= points.Count)
-        {
-            int realIndex = currentIndex - points.Count;
-            currentIndex = realIndex;
-        }
-        while(currentIndex < 0)
-        {
-            int realIndex = currentIndex;
-            currentIndex = points.Count + realIndex;
-        }
+        moveTowardsPosition = currentPoint.transform.position - transform.position;
+        rb.velocity = moveTowardsPosition.normalized * movingSpeed;
     }
+
     #endregion
 
 
@@ -212,34 +208,32 @@ public class MovingPlatform : MonoBehaviour
 
     void CastRay()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayPosition, Vector3.right, rayLength, player);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayPosition, Vector3.right, onDetectionRayLength, player);
 
         if (!isStandingOnPlatform && hit.collider != null)
         {
-            Helpers.PlayerMovement.SetPlatformTransform(script, true);
+            Helpers.PlayerMovement.SetPlatformTransform(rb, true);
             isStandingOnPlatform = true;
             if (worksOnDetection)
             {
-                GetNextPoint();
-                SetMoveTowardsPos();
+                SetNextPoint();
             }
         }
         else if (isStandingOnPlatform && hit.collider == null)
         {
-            Helpers.PlayerMovement.SetPlatformTransform(script, false);
+            Helpers.PlayerMovement.SetPlatformTransform(rb, false);
             isStandingOnPlatform = false;
         }
     }
 
-    void CastCircle()
+    void CastInteriorRay()
     {
-        Vector2 position = new Vector2(transform.position.x - (radiusLength / 2), transform.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(position, transform.right, radiusLength, destinationPointLayer);
+        Vector2 position = new Vector2(transform.position.x - (interiorRayLength / 2), transform.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(position, transform.right, interiorRayLength, destinationPointLayer);
 
-        //RaycastHit2D hit = Physics2D.CircleCast(transform.position, radiusLength, Vector2.right);
-        if (hit.collider != null && hit.collider.GetComponent<SpikesDestinationPoint>() == currentPoint)
+        if (hit.collider != null && hit.collider.GetComponent<DestinationPoint>() == currentPoint)
         {
-            GetNextPoint();
+            SetNextPoint();
         }
     }
 
@@ -249,10 +243,10 @@ public class MovingPlatform : MonoBehaviour
     #region Gizmos
 
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        Vector3 addLength = new Vector3(rayLength, 0f, 0f);
-        Vector3 addRadius = new Vector3(radiusLength / 2, 0f, 0f);
+        Vector3 addLength = new Vector3(onDetectionRayLength, 0f, 0f);
+        Vector3 addRadius = new Vector3(interiorRayLength / 2, 0f, 0f);
         Gizmos.DrawLine(transform.position + rayPosition, transform.position + rayPosition + addLength);
         Gizmos.DrawLine(transform.position - addRadius, transform.position + addRadius);
     }
@@ -261,15 +255,32 @@ public class MovingPlatform : MonoBehaviour
 
 
     #region Editor Things
-
-    public void DeletePoint(int index)
+    /*
+    public void AddPoint()
     {
-        if (points[index] != null)
+        DestinationPoint point = Instantiate(destinationPointPrefab, transform.parent).GetComponent<DestinationPoint>();
+        destinationPoints.Add(point);
+    }
+
+    public void DeleteLastPoint()
+    {
+        GameObject toDelete = destinationPoints[destinationPoints.Count - 1].gameObject;
+        Debug.Log(toDelete.name);
+        if (toDelete != null)
         {
-            SpikesDestinationPoint point = points[index];
-            DestroyImmediate(point.gameObject, true);
+            destinationPoints.Remove(toDelete.GetComponent<DestinationPoint>());
+            DestroyImmediate(toDelete, true );
         }
     }
 
+    public void DeletePoint(int index)
+    {
+        if (destinationPoints[index] != null)
+        {
+            DestinationPoint point = destinationPoints[index];
+            DestroyImmediate(point.gameObject, true);
+        }
+    }
+    */
     #endregion
 }

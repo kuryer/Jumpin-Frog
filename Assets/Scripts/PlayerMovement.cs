@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     Vector3 groundRayoffset;
     Vector3 wallRayoffset;
 
-
     //[SerializeField] TextMeshProUGUI gravityStateText;
     [Header("Gravity")]
     gravityState GravityState;
@@ -40,10 +39,9 @@ public class PlayerMovement : MonoBehaviour
     JumpDelegate jump;
     PlayerControls playerControls;
     Transform platformTransform;
-    [SerializeField] MovingPlatform platformScript;
+    [SerializeField] Rigidbody2D platformRB;
     Vector2 platformPosition;
     Vector2 platformPosDelta;
-    Rigidbody2D platformRB;
     [SerializeField] float platfromMovementFix;
     float lastGroundedTime;
     bool isGrabbing;
@@ -202,7 +200,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         if (isSwinging) SwingRotation();
-        //AddPlatformVelocity();
         /*if (canMove)*/ movement();
         if (canCornerCorrect) CornerCorrect(rb.velocity.y);
         if (rb.velocity.y < 0f && !isGrounded && !isGrabbing && !isSwinging && GravityState != gravityState.Sling) FallClamp();
@@ -240,18 +237,17 @@ public class PlayerMovement : MonoBehaviour
     #region Movements
     private void BasicMovement()
     {
-        //AddPlatformVelocity();
 
         //calcualte the direction we want to move in and our desired velocity
         float maxSpeed = X * playerVars.moveSpeed;
         //calculate difference between current velocity and desired velocity
         float speedDif = maxSpeed - rb.velocity.x;
 
-        if(platformScript != null)
+        if(platformRB != null)
         {
             //rb.velocity += platformScript.rb.velocity;
             //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
-            speedDif += platformScript.rb.velocity.x;
+            speedDif += platformRB.velocity.x;
         }
 
         //change acceleration rate depending on situation
@@ -346,16 +342,14 @@ public class PlayerMovement : MonoBehaviour
 
     #region Platform Velocity
 
-    public void SetPlatformTransform(MovingPlatform script, bool isEnter)
+    public void SetPlatformTransform(Rigidbody2D platformRigidbody, bool isEnter)
     {
         if (isEnter)
         {
-            platformScript = script;
-            platformRB = script.GetComponent<Rigidbody2D>();
+            platformRB = platformRigidbody;
         }
         else
         {
-            platformScript = null;
             platformRB = null;
             platformPosition = Vector3.zero;
         }

@@ -8,7 +8,7 @@ public class MovingSpikes : MonoBehaviour
     public float movingSpeed = 2f;
     [SerializeField] float rayLength;
     [SerializeField] LayerMask destinationPointLayer;
-    SpikesDestinationPoint currentPoint;
+    DestinationPoint currentPoint;
     int currentIndex = 0;
     bool isGoingBack = false;
     public enum LoopModes
@@ -17,7 +17,7 @@ public class MovingSpikes : MonoBehaviour
         BackToBack
     }
     [SerializeField] public LoopModes loopMode = LoopModes.Around;
-    [HideInInspector] public List<SpikesDestinationPoint> points;
+    [HideInInspector] public List<DestinationPoint> points;
 
     #region Setup
 
@@ -141,7 +141,7 @@ public class MovingSpikes : MonoBehaviour
     {
         if(points[index] != null)
         {
-            SpikesDestinationPoint point = points[index];
+            DestinationPoint point = points[index];
             DestroyImmediate(point.gameObject, true);
         }
     }
