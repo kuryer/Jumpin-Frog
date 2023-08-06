@@ -3,19 +3,19 @@ using UnityEditor;
 
 
 [CustomEditor(typeof(MovingPlatform))]
-public class MovingPlatformEditor : Editor
+public class MovingPlatformEditor : MovingTileEditor
 {
-    //MovingPlatform thsScript;
+    MovingPlatform thsScript;
 
     private void OnEnable()
     {
-        //thsScript = (MovingPlatform)target;
+        thsScript = (MovingPlatform)target;
     }
 
     public override void OnInspectorGUI()
     {
         //serializedObject.Update();
-        /*
+        
         if(GUILayout.Button("Add Point"))
         {
             thsScript.AddPoint();
@@ -24,33 +24,9 @@ public class MovingPlatformEditor : Editor
         {
             thsScript.DeleteLastPoint();
         }
-        */
+          
         base.DrawDefaultInspector();
         
         //serializedObject.ApplyModifiedProperties();
-    }
-}
-[CustomEditor(typeof(MovingTile))]
-public class MovingTileEditor : MovingPlatformEditor
-{
-    MovingTile thisScript;
-    private void OnEnable()
-    {
-        thisScript = (MovingTile)target;
-    }
-
-    public override void OnInspectorGUI()
-    {
-        EditorGUILayout.LabelField("--------------------------------");
-        base.OnInspectorGUI();
-
-        if (GUILayout.Button("Add Point"))
-        {
-            thisScript.AddPoint();
-        }
-        if (GUILayout.Button("Delete Last Point"))
-        {
-            thisScript.DeleteLastPoint();
-        }
     }
 }

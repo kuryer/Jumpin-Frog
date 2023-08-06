@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSpikes : MonoBehaviour
+public class MovingSpikes : MovingTile
 {
     public GameObject destinationPointPrefab;
     public float movingSpeed = 2f;
@@ -37,6 +37,7 @@ public class MovingSpikes : MonoBehaviour
     }
 
     #endregion
+
 
     #region Movement
 
@@ -130,20 +131,6 @@ public class MovingSpikes : MonoBehaviour
     {
         Vector3 rayAdd = new Vector3(rayLength / 2, 0f, 0f);
         Gizmos.DrawLine(transform.position - rayAdd, transform.position + rayAdd);
-    }
-
-    #endregion
-
-
-    #region Editor Things
-
-    public void DeletePoint(int index)
-    {
-        if(points[index] != null)
-        {
-            DestinationPoint point = points[index];
-            DestroyImmediate(point.gameObject, true);
-        }
     }
 
     #endregion
