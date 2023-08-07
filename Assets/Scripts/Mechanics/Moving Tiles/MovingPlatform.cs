@@ -6,42 +6,35 @@ using UnityEngine;
 public class MovingPlatform : MovingTile
 {
     [Header("Platform Detection")]
+
     bool isStandingOnPlatform;
+    [SerializeField] LayerMask destinationPointLayer;
+    [SerializeField] LayerMask player;
     [SerializeField] Vector3 rayPosition;
     [SerializeField] float onDetectionRayLength;
     [SerializeField] float interiorRayLength;
-    [SerializeField] LayerMask player;
 
     [Header("Platform Movement")]
-    [Range(1f, 4f)]
-    public float movingSpeed;
-    [HideInInspector] public Rigidbody2D rb;
+
     [SerializeField] bool worksOnDetection; // znaczy ¿e dzia³a tylko jak sie na nim stoi
-    [SerializeField] LayerMask destinationPointLayer;
-    bool Back2Back_isMovingBackwards;
-    int currentPointNumber;
-    int lastPointNumber;
-    DestinationPoint currentPoint;
+    [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Vector3 moveTowardsPosition;
-    delegate void MovementType();
+    [SerializeField] LoopModes loopMode = LoopModes.Around;
+    [Range(1f, 4f)] [SerializeField]
+    float movingSpeed;
+    int lastPointNumber;
+    int currentPointNumber;
+    bool Back2Back_isMovingBackwards;
+    DestinationPoint currentPoint;
     MovementType SetNextPoint;
 
-    enum LoopModes
-    {
-        Around,
-        BackToBack
-    }
-    [SerializeField] LoopModes loopMode = LoopModes.Around;
-
-    [Header("Editor")]
-    public GameObject destinationPointPrefab;
 
 
     #region Setup
 
-
     private void Awake()
     {
+        //destinationPointLayer = LayerMask.NameToLayer("Destination Point");
         rb = GetComponent<Rigidbody2D>();
         Setup();
     }
@@ -86,7 +79,6 @@ public class MovingPlatform : MovingTile
         }
         SetNextPoint = OnDetection_SetNextPoint;
     }
-
 
     #endregion
 
@@ -251,36 +243,5 @@ public class MovingPlatform : MovingTile
         Gizmos.DrawLine(transform.position - addRadius, transform.position + addRadius);
     }
 
-    #endregion
-
-
-    #region Editor Things
-    /*
-    public void AddPoint()
-    {
-        DestinationPoint point = Instantiate(destinationPointPrefab, transform.parent).GetComponent<DestinationPoint>();
-        destinationPoints.Add(point);
-    }
-
-    public void DeleteLastPoint()
-    {
-        GameObject toDelete = destinationPoints[destinationPoints.Count - 1].gameObject;
-        Debug.Log(toDelete.name);
-        if (toDelete != null)
-        {
-            destinationPoints.Remove(toDelete.GetComponent<DestinationPoint>());
-            DestroyImmediate(toDelete, true );
-        }
-    }
-
-    public void DeletePoint(int index)
-    {
-        if (destinationPoints[index] != null)
-        {
-            DestinationPoint point = destinationPoints[index];
-            DestroyImmediate(point.gameObject, true);
-        }
-    }
-    */
     #endregion
 }
