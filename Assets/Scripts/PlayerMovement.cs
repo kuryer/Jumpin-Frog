@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     Transform platformTransform;
     [SerializeField] Rigidbody2D platformRB;
     Vector2 platformPosition;
-    Vector2 platformPosDelta;
+    Vector2 platformPosDelta = Vector2.zero;
     [SerializeField] float platfromMovementFix;
     float lastGroundedTime;
     bool isGrabbing;

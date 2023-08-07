@@ -11,12 +11,7 @@ public class MovingSpikes : MovingTile
     DestinationPoint currentPoint;
     int currentIndex = 0;
     bool isGoingBack = false;
-    public enum LoopModes
-    {
-        Around,
-        BackToBack
-    }
-    [SerializeField] public LoopModes loopMode = LoopModes.Around;
+    [SerializeField] LoopModes loopMode = LoopModes.Around;
     [HideInInspector] public List<DestinationPoint> points;
 
     #region Setup
