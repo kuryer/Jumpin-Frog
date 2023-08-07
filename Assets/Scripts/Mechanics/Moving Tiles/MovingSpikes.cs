@@ -1,103 +1,103 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSpikes : MonoBehaviour
+public class MovingSpikes : MovingTile
 {
-    public GameObject destinationPointPrefab;
     public float movingSpeed = 2f;
-    [SerializeField] float rayLength;
-    [SerializeField] LayerMask destinationPointLayer;
     DestinationPoint currentPoint;
-    int currentIndex = 0;
-    bool isGoingBack = false;
-    public enum LoopModes
-    {
-        Around,
-        BackToBack
-    }
-    [SerializeField] public LoopModes loopMode = LoopModes.Around;
-    [HideInInspector] public List<DestinationPoint> points;
+    MovementType SetNextPoint;
+    bool Back2Back_isMovingBackwards;
+    int currentPointNumber;
+    int lastPointNumber;
+
+    [SerializeField] LoopModes loopMode = LoopModes.Around;
+
+
 
     #region Setup
 
     void Awake()
     {
-        GetFirstPoint();
+        Setup();
     }
-    void GetFirstPoint()
+
+    private void Setup()
     {
-        if(points.Count <= 1)
+        lastPointNumber = destinationPoints.Count - 1;
+        switch (loopMode)
         {
-            Debug.Log("Not enough Desitnation points to build a route.");
-            return;
+            case LoopModes.Around:
+                SetNextPoint = Around_SetNextPoint;
+                break;
+            case LoopModes.BackToBack:
+                SetNextPoint = Back2Back_SetNextPoint;
+                break;
         }
-        currentPoint = points[currentIndex];
-        currentIndex++;
+        SetNextPoint();
     }
 
     #endregion
 
-    #region Movement
 
+    #region Update
     void Update()
     {
         MoveTowardsCurrentPoint();
     }
+    #endregion
 
-    void GetNextPoint()
+
+    #region LoopMode_Around
+
+    private void Around_SetNextPoint()
     {
-        if(loopMode == LoopModes.Around)
-        {
-            if(points.Count == currentIndex)
-            {
-                currentIndex = 0;
-                currentPoint = points[currentIndex];
-                currentIndex++;
-            }
-            else
-            {
-                currentPoint = points[currentIndex];
-                currentIndex++;
-            }
-
-        }
-        if(loopMode == LoopModes.BackToBack)
-        {
-            if (!isGoingBack)
-            {
-                if (points.Count == currentIndex)
-                {
-                    currentIndex--;
-                    currentPoint = points[currentIndex];
-                    isGoingBack = true;
-                }
-                else
-                {
-                    currentPoint = points[currentIndex];
-                    currentIndex++;
-                }
-            }
-            else
-            {
-                if (currentIndex == 0)
-                {
-                    currentIndex++;
-                    currentPoint = points[currentIndex];
-                    isGoingBack = false;
-                }
-                else
-                {
-                    currentIndex--;
-                    currentPoint = points[currentIndex];
-                }
-            }
-        }
+        currentPoint = destinationPoints[Around_GetNextPointNumber()];
     }
+
+    private int Around_GetNextPointNumber()
+    {
+        currentPointNumber++;
+        if (currentPointNumber <= lastPointNumber)
+            return currentPointNumber;
+        currentPointNumber = 0;
+        return currentPointNumber;
+    }
+
+    #endregion
+
+
+    #region LoopMode_Back2Back
+
+
+    private void Back2Back_SetDirection()
+    {
+        if (currentPointNumber == lastPointNumber)
+            Back2Back_isMovingBackwards = true;
+        if (currentPointNumber == 0)
+            Back2Back_isMovingBackwards = false;
+    }
+
+    private int Back2Back_GetNextPointNumber()
+    {
+        if (!Back2Back_isMovingBackwards)
+            return ++currentPointNumber;
+        return --currentPointNumber;
+    }
+
+    private void Back2Back_SetNextPoint()
+    {
+        Back2Back_SetDirection();
+        currentPoint = destinationPoints[Back2Back_GetNextPointNumber()];
+    }
+
+
+    #endregion
+
+
+    #region Movement
 
     void MoveTowardsCurrentPoint()
     {
-        if(points.Count > 1)
+        if(destinationPoints.Count > 1)
         {
             SpikesMovement();
         }
@@ -116,33 +116,7 @@ public class MovingSpikes : MonoBehaviour
         }
         else
         {
-            GetNextPoint();
-        }
-    }
-
-
-    #endregion
-
-
-    #region Gizmos
-
-    private void OnDrawGizmos()
-    {
-        Vector3 rayAdd = new Vector3(rayLength / 2, 0f, 0f);
-        Gizmos.DrawLine(transform.position - rayAdd, transform.position + rayAdd);
-    }
-
-    #endregion
-
-
-    #region Editor Things
-
-    public void DeletePoint(int index)
-    {
-        if(points[index] != null)
-        {
-            DestinationPoint point = points[index];
-            DestroyImmediate(point.gameObject, true);
+            SetNextPoint();
         }
     }
 

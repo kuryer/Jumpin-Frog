@@ -112,17 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21d3d3b71f02d641ba7661dcd3d5250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
+  destPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
+  destinationPoints: []
   movingSpeed: 6
-  rb: {fileID: 0}
-  isPlatform: 0
-  rayLength: 0
-  destinationPointLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  moveTowardsPosition: {x: 0, y: 0, z: 0}
   loopMode: 0
-  points: []
 --- !u!60 &5079347839175430552
 PolygonCollider2D:
   m_ObjectHideFlags: 0

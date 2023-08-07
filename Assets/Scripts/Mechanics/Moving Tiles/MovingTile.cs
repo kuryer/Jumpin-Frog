@@ -7,6 +7,13 @@ public class MovingTile : MonoBehaviour
     [Header("Destination Points")][SerializeField]
     GameObject destPointPrefab;
     [SerializeField] protected List<DestinationPoint> destinationPoints;
+    protected delegate void MovementType();
+    protected enum LoopModes
+    {
+        Around,
+        BackToBack
+    }
+
     public void AddPoint()
     {
         DestinationPoint point = Instantiate(destPointPrefab, transform.parent).GetComponent<DestinationPoint>();
@@ -23,14 +30,4 @@ public class MovingTile : MonoBehaviour
             DestroyImmediate(toDelete, true);
         }
     }
-
-    public void DeletePoint(int index)
-    {
-        if (destinationPoints[index] != null)
-        {
-            DestinationPoint point = destinationPoints[index];
-            DestroyImmediate(point.gameObject, true);
-        }
-    }
-
 }
