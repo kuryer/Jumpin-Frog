@@ -24,6 +24,9 @@ public class DestinationPointsLineRenderer : MonoBehaviour
 
     void Setup()
     {
+        if (points.Count < 2)
+            return;
+
         if(loopMode == MovingTile.LoopModes.Around)
         {
             Around_RenderLines();
@@ -64,6 +67,9 @@ public class DestinationPointsLineRenderer : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if(points.Count < 2)
+            return;
+
         if(loopMode == MovingTile.LoopModes.Around)
         {
             Around_GizmosBuild();
