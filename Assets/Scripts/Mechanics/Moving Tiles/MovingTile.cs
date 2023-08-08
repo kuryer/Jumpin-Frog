@@ -6,13 +6,14 @@ public class MovingTile : MonoBehaviour
 {
     [Header("Destination Points")][SerializeField]
     GameObject destPointPrefab;
-    [SerializeField] protected List<DestinationPoint> destinationPoints;
+    public List<DestinationPoint> destinationPoints;
     protected delegate void MovementType();
-    protected enum LoopModes
+    public enum LoopModes
     {
         Around,
         BackToBack
     }
+    public LoopModes loopMode = LoopModes.Around;
 
     public void AddPoint()
     {

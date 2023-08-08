@@ -19,7 +19,6 @@ public class MovingPlatform : MovingTile
     [SerializeField] bool worksOnDetection; // znaczy ¿e dzia³a tylko jak sie na nim stoi
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Vector3 moveTowardsPosition;
-    [SerializeField] LoopModes loopMode = LoopModes.Around;
     [Range(1f, 4f)] [SerializeField]
     float movingSpeed;
     int lastPointNumber;
