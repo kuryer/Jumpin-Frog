@@ -5,23 +5,25 @@ using UnityEditor;
 [CustomEditor(typeof(MovingPlatform))]
 public class MovingPlatformEditor : MovingTileEditor
 {
-    MovingTile inheritingScript;
+    MovingPlatform thisScript;
 
     private void OnEnable()
     {
-        inheritingScript = (MovingTile)target;
+        thisScript = (MovingPlatform)target;
     }
 
     public override void OnInspectorGUI()
     {
         base.DrawDefaultInspector();
+        
         if(GUILayout.Button("Add Point"))
         {
-            inheritingScript.AddPoint();
+            AddPoint(thisScript.destinationPointPrefab);
         }
         if(GUILayout.Button("Delete Last Point"))
         {
-            inheritingScript.DeleteLastPoint();
+            DeleteLastPoint(thisScript.destinationPointPrefab);
         }
+        
     }
 }

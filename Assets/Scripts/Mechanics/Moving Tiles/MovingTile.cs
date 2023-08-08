@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MovingTile : MonoBehaviour
 {
-    [Header("Destination Points")][SerializeField]
-    GameObject destPointPrefab;
-    public List<DestinationPoint> destinationPoints;
+    [Header("Destination Points")]
+    [SerializeField] public List<DestinationPoint> destinationPoints;
+    public GameObject destPointPrefab;
     protected delegate void MovementType();
     public enum LoopModes
     {

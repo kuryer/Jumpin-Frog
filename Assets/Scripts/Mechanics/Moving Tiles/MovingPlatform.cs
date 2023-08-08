@@ -26,7 +26,7 @@ public class MovingPlatform : MovingTile
     bool Back2Back_isMovingBackwards;
     DestinationPoint currentPoint;
     MovementType SetNextPoint;
-
+    public GameObject destinationPointPrefab;
 
 
     #region Setup

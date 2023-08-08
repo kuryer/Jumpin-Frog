@@ -99,22 +99,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984f615bd52215f49ac407da1f77a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
   destinationPoints: []
-  rayPosition: {x: -1.72, y: 0.6, z: 0}
-  onDetectionRayLength: 3.46
-  interiorRayLength: 0.01
-  player:
-    serializedVersion: 2
-    m_Bits: 256
-  movingSpeed: 2
-  rb: {fileID: 0}
-  worksOnDetection: 0
+  destPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
+  loopMode: 0
   destinationPointLayer:
     serializedVersion: 2
     m_Bits: 2147483648
+  player:
+    serializedVersion: 2
+    m_Bits: 256
+  rayPosition: {x: -1.72, y: 0.6, z: 0}
+  onDetectionRayLength: 3.46
+  interiorRayLength: 0.01
+  worksOnDetection: 0
+  rb: {fileID: 0}
   moveTowardsPosition: {x: 0, y: 0, z: 0}
-  loopMode: 0
+  movingSpeed: 2
+  destinationPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
 --- !u!61 &7786775273934170583
 BoxCollider2D:
   m_ObjectHideFlags: 0

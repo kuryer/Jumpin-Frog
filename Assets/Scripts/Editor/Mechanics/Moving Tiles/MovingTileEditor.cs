@@ -2,30 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+using Unity.VisualScripting;
 
 [CustomEditor(typeof(MovingTile))]
 public class MovingTileEditor : Editor
 {
-    //MovingTile thisScript;
+    MovingTile thsScript;
+    SerializedProperty destinationPointsProperty;
+    SerializedProperty destinationPointPrefab;
+
     private void OnEnable()
     {
-        //thisScript = (MovingTile)target;
+        thsScript = (MovingTile)target;
+        destinationPointsProperty = serializedObject.FindProperty("destinationPoints");
+        destinationPointPrefab = serializedObject.FindProperty("destPointPrefab");
     }
 
     public override void OnInspectorGUI()
     {
-        EditorGUILayout.LabelField("--------------------------------");
+        serializedObject.Update();
         base.OnInspectorGUI();
-        /*
-        if (GUILayout.Button("Add Point"))
-        {
-            thisScript.AddPoint();
-        }
-        if (GUILayout.Button("Delete Last Point"))
-        {
-            thisScript.DeleteLastPoint();
-        }
-        */
+        serializedObject.ApplyModifiedProperties();
     }
+
+    protected void AddPoint(GameObject prefab)
+    {
+        DestinationPoint addedPoint = Instantiate(prefab, thsScript.transform.parent).GetComponent<DestinationPoint>();
+
+        destinationPointsProperty.arraySize++;
+        destinationPointsProperty.GetArrayElementAtIndex(destinationPointsProperty.arraySize - 1).objectReferenceValue = addedPoint;
+    }
+
+    protected void DeleteLastPoint(GameObject prefab)
+    {
+        Debug.Log(prefab);
+        Debug.Log(thsScript.transform.parent);
+    }
+
+
 }
