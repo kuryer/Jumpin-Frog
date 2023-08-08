@@ -10,10 +10,16 @@ public class DestinationPointsLineRenderer : MonoBehaviour
     MovingTile.LoopModes loopMode;
     private void Awake()
     {
+        GetVariables();
+
+        Setup();
+    }
+
+    void GetVariables()
+    {
         points = GetComponent<MovingTile>().destinationPoints;
         lineRenderer = GetComponent<LineRenderer>();
         loopMode = GetComponent<MovingTile>().loopMode;
-        Setup();
     }
 
     void Setup()
