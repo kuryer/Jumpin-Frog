@@ -16,7 +16,7 @@ public class DestinationPointsLineRenderer : MonoBehaviour
 
     void GetVariables()
     {
-        points = GetComponent<MovingTile>().destinationPoints;
+        //points = GetComponent<MovingTile>().destinationPoints;
         lineRenderer = GetComponent<LineRenderer>();
         loopMode = GetComponent<MovingTile>().loopMode;
     }
