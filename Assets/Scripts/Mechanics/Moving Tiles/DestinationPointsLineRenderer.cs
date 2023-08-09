@@ -1,4 +1,3 @@
-using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +16,7 @@ public class DestinationPointsLineRenderer : MonoBehaviour
 
     void GetVariables()
     {
-        //points = GetComponent<MovingTile>().destinationPoints;
+        points = GetComponent<MovingTile>().destinationPoints;
         lineRenderer = GetComponent<LineRenderer>();
         loopMode = GetComponent<MovingTile>().loopMode;
     }
@@ -35,6 +34,8 @@ public class DestinationPointsLineRenderer : MonoBehaviour
         Back2Back_RenderLines();
     }
 
+
+    #region Line Renderer
 
     void Around_RenderLines()
     {
@@ -62,6 +63,9 @@ public class DestinationPointsLineRenderer : MonoBehaviour
 
         throw new ArgumentException("Array index reached negative number");
     }
+
+    #endregion
+
 
     #region Gizmos
 
@@ -93,6 +97,6 @@ public class DestinationPointsLineRenderer : MonoBehaviour
             Gizmos.DrawLine(GetPointPos(i), GetPointPos(i + 1)); ;
         }
     }
-    #endregion
 
+    #endregion
 }

@@ -116,7 +116,6 @@ public class MovingPlatform : MovingTile
 
     #region LoopMode_Back2Back
 
-
     private void Back2Back_SetDirection()
     {
         if (currentPointNumber == lastPointNumber)
@@ -223,7 +222,7 @@ public class MovingPlatform : MovingTile
         Vector2 position = new Vector2(transform.position.x - (interiorRayLength / 2), transform.position.y);
         RaycastHit2D hit = Physics2D.Raycast(position, transform.right, interiorRayLength, destinationPointLayer);
 
-        if (hit.collider != null && hit.collider.GetComponent<DestinationPoint>() == currentPoint)
+        if (hit.collider != null && hit.collider.gameObject == currentPoint)
         {
             SetNextPoint();
         }
