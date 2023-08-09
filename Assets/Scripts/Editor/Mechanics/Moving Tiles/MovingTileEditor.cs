@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Unity.VisualScripting;
+using System;
 
 [CustomEditor(typeof(MovingTile))]
 public class MovingTileEditor : Editor
@@ -11,9 +11,9 @@ public class MovingTileEditor : Editor
     SerializedProperty destinationPointsProperty;
     SerializedProperty destinationPointPrefab;
 
-    private void OnEnable()
+    public virtual void OnEnable()
     {
-        thsScript = (MovingTile)target;
+        thsScript = (MovingTile)target ?? throw new NullReferenceException();
         destinationPointsProperty = serializedObject.FindProperty("destinationPoints");
         destinationPointPrefab = serializedObject.FindProperty("destPointPrefab");
     }
@@ -25,18 +25,20 @@ public class MovingTileEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 
-    protected void AddPoint(GameObject prefab)
+    protected void AddPoint(GameObject prefab, Transform parentTransform, SerializedProperty points)
     {
-        DestinationPoint addedPoint = Instantiate(prefab, thsScript.transform.parent).GetComponent<DestinationPoint>();
+        GameObject addedPoint = Instantiate(prefab, parentTransform);
 
-        destinationPointsProperty.arraySize++;
-        destinationPointsProperty.GetArrayElementAtIndex(destinationPointsProperty.arraySize - 1).objectReferenceValue = addedPoint;
+        points.arraySize++;
+        points.GetArrayElementAtIndex(points.arraySize - 1).objectReferenceValue = addedPoint;
+       
     }
 
-    protected void DeleteLastPoint(GameObject prefab)
+    protected void DeleteLastPoint(GameObject prefab, Transform parentTransform, SerializedProperty points)
     {
-        Debug.Log(prefab);
-        Debug.Log(thsScript.transform.parent);
+        var toDelete = points.GetArrayElementAtIndex(points.arraySize - 1).objectReferenceValue;
+        points.DeleteArrayElementAtIndex(points.arraySize - 1);
+        DestroyImmediate(toDelete, true);
     }
 
 

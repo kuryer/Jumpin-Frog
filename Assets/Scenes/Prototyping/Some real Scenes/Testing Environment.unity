@@ -1510,6 +1510,10 @@ PrefabInstance:
       propertyPath: destinationPoints.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: -6751537374280890639, guid: 78aee5443c57596499ed4b01acef5cf4, type: 3}
+      propertyPath: destinationPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: -6044418698523352758, guid: 78aee5443c57596499ed4b01acef5cf4, type: 3}
       propertyPath: movingSpeed
       value: 2

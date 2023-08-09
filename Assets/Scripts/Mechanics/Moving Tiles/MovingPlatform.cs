@@ -24,9 +24,10 @@ public class MovingPlatform : MovingTile
     int lastPointNumber;
     int currentPointNumber;
     bool Back2Back_isMovingBackwards;
-    DestinationPoint currentPoint;
+    GameObject currentPoint;
     MovementType SetNextPoint;
     public GameObject destinationPointPrefab;
+    public List<GameObject> destinationPoints;
 
 
     #region Setup

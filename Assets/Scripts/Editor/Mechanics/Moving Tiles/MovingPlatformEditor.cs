@@ -6,24 +6,28 @@ using UnityEditor;
 public class MovingPlatformEditor : MovingTileEditor
 {
     MovingPlatform thisScript;
+    SerializedProperty destinationPoints;
 
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
+        destinationPoints = serializedObject.FindProperty("destinationPoints");
         thisScript = (MovingPlatform)target;
     }
 
     public override void OnInspectorGUI()
     {
+        serializedObject.Update();
         base.DrawDefaultInspector();
         
         if(GUILayout.Button("Add Point"))
         {
-            AddPoint(thisScript.destinationPointPrefab);
+            AddPoint(thisScript.destinationPointPrefab, thisScript.transform.parent, destinationPoints);
         }
         if(GUILayout.Button("Delete Last Point"))
         {
-            DeleteLastPoint(thisScript.destinationPointPrefab);
+            DeleteLastPoint(thisScript.destinationPointPrefab, thisScript.transform.parent, destinationPoints);
         }
-        
+        serializedObject.ApplyModifiedProperties();
     }
 }
