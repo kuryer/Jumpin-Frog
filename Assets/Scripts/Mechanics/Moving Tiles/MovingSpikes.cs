@@ -5,7 +5,6 @@ public class MovingSpikes : MovingTile
 {
     public float movingSpeed = 2f;
     [SerializeField] float rayLength;
-    //[SerializeField] LayerMask destinationPointLayer;
     GameObject currentPoint;
     [HideInInspector] List<GameObject> destinationPoints;
     MovementType SetNextPoint;

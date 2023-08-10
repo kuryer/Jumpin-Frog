@@ -8,7 +8,6 @@ public class MovingPlatform : MovingTile
     [Header("Platform Detection")]
 
     bool isStandingOnPlatform;
-    //[SerializeField] LayerMask destinationPointLayer;
     [SerializeField] LayerMask player;
     [SerializeField] Vector3 rayPosition;
     [SerializeField] float onDetectionRayLength;
@@ -26,7 +25,6 @@ public class MovingPlatform : MovingTile
     bool Back2Back_isMovingBackwards;
     GameObject currentPoint;
     MovementType SetNextPoint;
-    public GameObject destinationPointPrefab;
     [HideInInspector] List<GameObject> destinationPoints;
 
 
