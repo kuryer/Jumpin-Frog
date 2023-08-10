@@ -8,7 +8,7 @@ public class MovingPlatform : MovingTile
     [Header("Platform Detection")]
 
     bool isStandingOnPlatform;
-    [SerializeField] LayerMask destinationPointLayer;
+    //[SerializeField] LayerMask destinationPointLayer;
     [SerializeField] LayerMask player;
     [SerializeField] Vector3 rayPosition;
     [SerializeField] float onDetectionRayLength;
@@ -27,14 +27,14 @@ public class MovingPlatform : MovingTile
     GameObject currentPoint;
     MovementType SetNextPoint;
     public GameObject destinationPointPrefab;
-    public List<GameObject> destinationPoints;
+    [HideInInspector] List<GameObject> destinationPoints;
 
 
     #region Setup
 
     private void Awake()
     {
-        //destinationPointLayer = LayerMask.NameToLayer("Destination Point");
+        destinationPoints = GetComponent<DestinationPointsData>().destinationPoints;
         rb = GetComponent<Rigidbody2D>();
         Setup();
     }

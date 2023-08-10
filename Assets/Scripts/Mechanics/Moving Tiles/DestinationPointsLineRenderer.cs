@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestinationPointsLineRenderer : MonoBehaviour
 {
-    List<DestinationPoint> points;
+    List<GameObject> points;
     LineRenderer lineRenderer;
     MovingTile.LoopModes loopMode;
     private void Awake()
@@ -16,7 +16,7 @@ public class DestinationPointsLineRenderer : MonoBehaviour
 
     void GetVariables()
     {
-        //points = GetComponent<MovingTile>().destinationPoints;
+        points = GetComponent<DestinationPointsData>().destinationPoints;
         lineRenderer = GetComponent<LineRenderer>();
         loopMode = GetComponent<MovingTile>().loopMode;
     }

@@ -5,10 +5,9 @@ public class MovingSpikes : MovingTile
 {
     public float movingSpeed = 2f;
     [SerializeField] float rayLength;
-    [SerializeField] LayerMask destinationPointLayer;
+    //[SerializeField] LayerMask destinationPointLayer;
     GameObject currentPoint;
-    public List<GameObject> destinationPoints;
-    public GameObject destinationPointPrefab;
+    [HideInInspector] List<GameObject> destinationPoints;
     MovementType SetNextPoint;
 
     int lastPointNumber;
@@ -20,6 +19,7 @@ public class MovingSpikes : MovingTile
 
     private void Awake()
     {
+        destinationPoints = GetComponent<DestinationPointsData>().destinationPoints;
         Setup();
     }
     private void Setup()

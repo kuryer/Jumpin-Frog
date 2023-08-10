@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7786775273934170586}
   - component: {fileID: 7786775273934170584}
   - component: {fileID: 7786775273934170580}
+  - component: {fileID: 3016845966342129865}
   - component: {fileID: 7786775273934170583}
   - component: {fileID: 7786775273934170581}
   m_Layer: 3
@@ -99,8 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984f615bd52215f49ac407da1f77a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationPoints: []
-  destPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
   loopMode: 0
   destinationPointLayer:
     serializedVersion: 2
@@ -115,6 +114,21 @@ MonoBehaviour:
   rb: {fileID: 0}
   moveTowardsPosition: {x: 0, y: 0, z: 0}
   movingSpeed: 2
+  destinationPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
+  destinationPoints: []
+--- !u!114 &3016845966342129865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786775273934170589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85fdfcf3edb99d43bac9725293e48db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationPoints: []
   destinationPointPrefab: {fileID: 8407533581198677606, guid: 7b4a98d93f4f75e42a7d6cffebdac1f4, type: 3}
 --- !u!61 &7786775273934170583
 BoxCollider2D:

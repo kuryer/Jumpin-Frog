@@ -17,9 +17,9 @@ public class MovingSpikesEditor : MovingTileEditor
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
         base.DrawDefaultInspector();
-
+        /*
+        serializedObject.Update();
         if (GUILayout.Button("Add Point"))
         {
             AddPoint(thisScript.destinationPointPrefab, thisScript.transform.parent, destinationPoints);
@@ -29,5 +29,6 @@ public class MovingSpikesEditor : MovingTileEditor
             DeleteLastPoint(thisScript.destinationPointPrefab, thisScript.transform.parent, destinationPoints);
         }
         serializedObject.ApplyModifiedProperties();
+        */
     }
 }
