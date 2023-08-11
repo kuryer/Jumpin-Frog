@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestinationPointsLineRenderer : MonoBehaviour
 {
     List<GameObject> points;
+    List<GameObject> gizmosPoints;
     LineRenderer lineRenderer;
     MovingTile.LoopModes loopMode;
     private void Awake()
@@ -16,7 +17,7 @@ public class DestinationPointsLineRenderer : MonoBehaviour
 
     void GetVariables()
     {
-        points = GetComponent<DestinationPointsData>().destinationPoints;
+        points = GetComponent<MovingTile>().destinationPoints;
         lineRenderer = GetComponent<LineRenderer>();
         loopMode = GetComponent<MovingTile>().loopMode;
     }
@@ -71,7 +72,9 @@ public class DestinationPointsLineRenderer : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if(points.Count < 2)
+        //points = GetComponent<DestinationPointsData>().destinationPoints;
+
+        if(gizmosPoints.Count < 2)
             return;
 
         if(loopMode == MovingTile.LoopModes.Around)

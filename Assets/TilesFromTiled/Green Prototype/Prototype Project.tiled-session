@@ -31,8 +31,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2344.6666666666665,
-                "y": 4746.666666666666
+                "x": 4000,
+                "y": 3999.333333333333
             }
         },
         "Prototype Level 01.tmx": {
@@ -148,8 +148,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 261.25,
-                "y": 204.5
+                "x": 800,
+                "y": 799.75
             }
         },
         "Prototype Spikes Tileset but better.tsx": {
@@ -162,10 +162,10 @@
         },
         "Testing Environment Level.tmx": {
             "scale": 3,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1694.5,
-                "y": 7695.666666666666
+                "x": 1693.8333333333333,
+                "y": 7695
             }
         },
         "Tutorial Level.tmx": {

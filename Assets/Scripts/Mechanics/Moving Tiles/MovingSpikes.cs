@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSpikes : MovingTile
+public class MovingSpikes : MonoBehaviour
 {
     public float movingSpeed = 2f;
     [SerializeField] float rayLength;
     GameObject currentPoint;
     [HideInInspector] List<GameObject> destinationPoints;
-    MovementType SetNextPoint;
+    MovingTile.MovementType SetNextPoint;
+    MovingTile.LoopModes loopMode;
 
     int lastPointNumber;
     int currentPointIndex;
@@ -18,18 +19,25 @@ public class MovingSpikes : MovingTile
 
     private void Awake()
     {
-        destinationPoints = GetComponent<DestinationPointsData>().destinationPoints;
+        GetVariables();
         Setup();
     }
+    private void GetVariables()
+    {
+        var dataScript = GetComponent<MovingTile>();
+        destinationPoints = dataScript.destinationPoints;
+        loopMode = dataScript.loopMode;
+    }
+
     private void Setup()
     {
         lastPointNumber = destinationPoints.Count - 1;
         switch (loopMode)
         {
-            case LoopModes.Around:
+            case MovingTile.LoopModes.Around:
                 SetNextPoint = Around_SetNextPoint;
                 break;
-            case LoopModes.BackToBack:
+            case MovingTile.LoopModes.BackToBack:
                 SetNextPoint = Back2Back_SetNextPoint;
                 break;
         }

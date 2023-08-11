@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(DestinationPointsData))]
-public class DestinationPointsDataEditor : Editor
+[CustomEditor(typeof(MovingTile))]
+public class MovingTileData : Editor
 {
-    
-    DestinationPointsData thisScript;
+
+    MovingTile thisScript;
     SerializedProperty destinationPoints;
 
     private void OnEnable()
     {
-        thisScript = (DestinationPointsData)target;
+        thisScript = (MovingTile)target;
         destinationPoints = serializedObject.FindProperty("destinationPoints");
     }
 

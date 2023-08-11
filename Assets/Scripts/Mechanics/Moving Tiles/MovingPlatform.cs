@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.Timeline.AnimationPlayableAsset;
 
-public class MovingPlatform : MovingTile
+public class MovingPlatform : MonoBehaviour
 {
     [Header("Platform Detection")]
 
@@ -24,17 +25,26 @@ public class MovingPlatform : MovingTile
     int currentPointNumber;
     bool Back2Back_isMovingBackwards;
     GameObject currentPoint;
-    MovementType SetNextPoint;
+    MovingTile.MovementType SetNextPoint;
     [HideInInspector] List<GameObject> destinationPoints;
+    LayerMask destinationPointLayer;
+    MovingTile.LoopModes loopMode;
 
 
     #region Setup
 
     private void Awake()
     {
-        destinationPoints = GetComponent<DestinationPointsData>().destinationPoints;
-        rb = GetComponent<Rigidbody2D>();
+        GetVariables();
         Setup();
+    }
+    private void GetVariables()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        var dataScript = GetComponent<MovingTile>();
+        destinationPoints = dataScript.destinationPoints;
+        destinationPointLayer = dataScript.destinationPointLayer;
+        loopMode = dataScript.loopMode;
     }
 
     private void OnEnable()
@@ -65,10 +75,10 @@ public class MovingPlatform : MovingTile
         {
             switch (loopMode)
             {
-                case LoopModes.Around:
+                case MovingTile.LoopModes.Around:
                     SetNextPoint = Around_SetNextPoint;
                     break;
-                case LoopModes.BackToBack:
+                case MovingTile.LoopModes.BackToBack:
                     SetNextPoint = Back2Back_SetNextPoint;
                     break;
             }
