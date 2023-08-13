@@ -184,6 +184,20 @@ public class MovingPlatform : MonoBehaviour
             OnDetection_SetNextPoint_Forward();
         else OnDetection_SetNextPoint_Backwards();
     }
+    /*
+    //TO DO:
+        - getIndex, który nie moze zwrocic indexu poza tablic¹ <-- to bez sensu. Jakos wczesniej to sie powinno zablokowac
+        - 
+
+    int OnDetection_GetNextIndex(int direction)
+    {
+        if(direction > 0)
+        {
+
+        }
+    }
+    */
+
 
 
     #endregion
