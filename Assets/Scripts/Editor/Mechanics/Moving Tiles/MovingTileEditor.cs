@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(MovingTile))]
-public class MovingTileData : Editor
+public class MovingTileEditor : Editor
 {
 
     MovingTile thisScript;

@@ -59,13 +59,14 @@ public class MovingPlatform : MonoBehaviour
 
     void SubscribeOnPlayerDeath()
     {
-        Helpers.PlayerHealth.OnPlayerDeath.AddListener(OnDetection_SetNextPoint);
+        if(worksOnDetection)
+            Helpers.PlayerHealth.OnPlayerDeath.AddListener(OnDetection_SetNextPoint);
     }
 
     void UnsubscribeOnPlayerDeath()
     {
-        Helpers.PlayerHealth.OnPlayerDeath.RemoveListener(OnDetection_SetNextPoint);
-
+        if(worksOnDetection)
+            Helpers.PlayerHealth.OnPlayerDeath.RemoveListener(OnDetection_SetNextPoint);
     }
 
     private void Setup()

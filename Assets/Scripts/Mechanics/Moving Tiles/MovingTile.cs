@@ -30,6 +30,8 @@ public class MovingTile : MonoBehaviour
         if (destinationPoints.Count < 2)
             return;
 
+        lineRenderer = GetComponent<LineRenderer>();
+
         if (loopMode == MovingTile.LoopModes.Around)
         {
             Around_RenderLines();
@@ -43,6 +45,7 @@ public class MovingTile : MonoBehaviour
 
     void Around_RenderLines()
     {
+        lineRenderer.positionCount = destinationPoints.Count + 1;
         for (int i = 0; i <= destinationPoints.Count; i++)
         {
             lineRenderer.SetPosition(i, GetPointPos(i));
@@ -51,6 +54,7 @@ public class MovingTile : MonoBehaviour
 
     void Back2Back_RenderLines()
     {
+        lineRenderer.positionCount = destinationPoints.Count;
         for (int i = 0; i < destinationPoints.Count; i++)
         {
             lineRenderer.SetPosition(i, GetPointPos(i));

@@ -508,13 +508,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="1" name="Platform_1" type="Platform" x="1648" y="7712">
-   <point/>
-  </object>
-  <object id="2" name="Platform_3" type="Platform" x="1728" y="7712">
-   <point/>
-  </object>
-  <object id="3" name="Platform_2" type="Platform" x="1584" y="7712">
+  <object id="3" name="Platform_2" type="Platform" x="1600" y="7712">
    <point/>
   </object>
  </objectgroup>

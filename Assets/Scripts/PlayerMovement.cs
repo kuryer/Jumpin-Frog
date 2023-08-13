@@ -141,14 +141,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        playerControls.Enable();
         SubscribeForPlayerInputEvents();
+        playerControls.Enable();
     }
 
     private void OnDisable()
     {
-        playerControls.Disable();
         UnsubscribeFromPlayerInputEvents();
+        playerControls.Disable();
     }
 
 
@@ -198,6 +198,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckCollisions();
 
+        //TestMovement();
 
         if (isSwinging) SwingRotation();
         /*if (canMove)*/ movement();
@@ -234,14 +235,25 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+
     #region Movements
+
+    void TestMovement()
+    {
+        if (platformRB == null)
+            return;
+
+        rb.velocity = platformRB.velocity;
+    }
+
+
     private void BasicMovement()
     {
-
         //calcualte the direction we want to move in and our desired velocity
         float maxSpeed = X * playerVars.moveSpeed;
         //calculate difference between current velocity and desired velocity
         float speedDif = maxSpeed - rb.velocity.x;
+
 
         if(platformRB != null)
         {
@@ -249,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
             //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
             speedDif += platformRB.velocity.x;
         }
-
+        
         //change acceleration rate depending on situation
         float accelRate = (Mathf.Abs(maxSpeed) > 0.01f) ? playerVars.acceleration : playerVars.decceleration;
         
@@ -267,6 +279,7 @@ public class PlayerMovement : MonoBehaviour
             movement = 0f;
         }
         */
+        
         rb.AddForce(movement * Vector2.right);
         //if(platformScript != null)
         //    Debug.Log("rb velocity: " + rb.velocity + ", speedDif: " + speedDif + ", movement: " + movement);

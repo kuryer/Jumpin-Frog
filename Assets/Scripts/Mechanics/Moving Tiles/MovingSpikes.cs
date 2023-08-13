@@ -4,7 +4,6 @@ using UnityEngine;
 public class MovingSpikes : MonoBehaviour
 {
     public float movingSpeed = 2f;
-    [SerializeField] float rayLength;
     GameObject currentPoint;
     [HideInInspector] List<GameObject> destinationPoints;
     MovingTile.MovementType SetNextPoint;
