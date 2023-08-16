@@ -1018,6 +1018,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8163870829018432988, guid: 78aee5443c57596499ed4b01acef5cf4, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8163870829018432988, guid: 78aee5443c57596499ed4b01acef5cf4, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8163870829018432988, guid: 78aee5443c57596499ed4b01acef5cf4, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -6751537374280890639, guid: 78aee5443c57596499ed4b01acef5cf4, type: 3}
       propertyPath: movingSpeed
       value: 2

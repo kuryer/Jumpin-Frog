@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckCollisions();
 
-        //TestMovement();
+        TestMovement();
 
         if (isSwinging) SwingRotation();
         /*if (canMove)*/ movement();

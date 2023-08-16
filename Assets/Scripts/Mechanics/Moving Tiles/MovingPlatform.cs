@@ -98,6 +98,7 @@ public class MovingPlatform : MonoBehaviour
     {
         CastRay();
         CastInteriorRay();
+        Debug.Log("platform's velocity: " + rb.velocity);
     }
 
     #endregion
