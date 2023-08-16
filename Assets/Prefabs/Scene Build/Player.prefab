@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 803678387609138844}
   - component: {fileID: 803678387609138845}
   - component: {fileID: 803678387609138842}
-  - component: {fileID: 803678387609138843}
+  - component: {fileID: 5643272741942045075}
   - component: {fileID: 803678387609138846}
   - component: {fileID: 803678387609138817}
   - component: {fileID: 803678387609138816}
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerVars: {fileID: 11400000, guid: c2d85ec264ce35d4f9d6be8d65ee0263, type: 2}
-  platformScript: {fileID: 0}
+  platformRB: {fileID: 0}
   platfromMovementFix: 0
   groundRayLength: 0.76
   groundLayer:
@@ -180,8 +180,11 @@ MonoBehaviour:
   respawnPointObject: {fileID: 0}
   coinsTakenPerDeath: 10
   playerVars: {fileID: 11400000, guid: 72e004cd34ebc9640a27b53750003b6b, type: 2}
---- !u!60 &803678387609138843
-PolygonCollider2D:
+  OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!61 &5643272741942045075
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -193,7 +196,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.034088135, y: -0.49647522}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -203,18 +206,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.35936737, y: 0.0034885406}
-      - {x: -0.42513657, y: -0.13224506}
-      - {x: -0.42518234, y: -0.50346756}
-      - {x: -0.4260617, y: -0.95001304}
-      - {x: -0.25495136, y: -0.994739}
-      - {x: 0.20468962, y: -0.99441487}
-      - {x: 0.35575867, y: -0.95876384}
-      - {x: 0.3547058, y: -0.4991007}
-      - {x: 0.3545494, y: -0.2469902}
-      - {x: 0.241539, y: 0.0041446686}
+  serializedVersion: 2
+  m_Size: {x: 0.77557373, y: 0.9939575}
+  m_EdgeRadius: 0
 --- !u!231 &803678387609138846
 SpringJoint2D:
   m_ObjectHideFlags: 0

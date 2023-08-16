@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 8a8726bd46997a5459ce06891fa0bf98
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototyping/Prototype Level Testing.unity
     guid: 007726b0f61004b45b2437447ad6230a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototyping/Some real Scenes/Level 02.unity
     guid: 702941f7df6d53e4ebede29da233cb19
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test 1.unity
     guid: 14d8b765ba0708b409035814c347f5ef
   - enabled: 1
@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Additive/GM Scene.unity
     guid: 5e2e10a10e66f604bbc7291c699bad6b
+  - enabled: 1
+    path: Assets/Scenes/Prototyping/Some real Scenes/Testing Environment.unity
+    guid: 7b8c241cc39ee554b89ca558a9d07160
   m_configObjects: {}

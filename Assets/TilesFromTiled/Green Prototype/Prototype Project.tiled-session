@@ -9,14 +9,17 @@
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "Blue Tileset Prototype.tsx": {
+        ":/automap-tiles.tsx": {
             "scaleInDock": 1
+        },
+        "Blue Tileset Prototype.tsx": {
+            "scaleInDock": 3
         },
         "Door Tileset Prototype.tsx": {
             "scaleInDock": 1
         },
         "Green Tileset Prototype.tsx": {
-            "scaleInDock": 2
+            "scaleInDock": 4
         },
         "Input Tile.tsx": {
             "scaleInDock": 4
@@ -25,11 +28,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.75,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 3358.6666666666665,
-                "y": 4648
+                "x": 2773,
+                "y": 6683.333333333333
             }
         },
         "Prototype Level 01.tmx": {
@@ -141,6 +144,14 @@
                 "y": 2427.25
             }
         },
+        "Prototype Ruleset.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 800,
+                "y": 799.75
+            }
+        },
         "Prototype Spikes Tileset but better.tsx": {
             "scaleInDock": 5.5,
             "scaleInEditor": 8
@@ -148,6 +159,14 @@
         "Prototype Spikes Tileset.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 8
+        },
+        "Testing Environment Level.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2255,
+                "y": 7534
+            }
         },
         "Tutorial Level.tmx": {
             "expandedObjectLayers": [
@@ -178,11 +197,15 @@
     "map.width": 500,
     "openFiles": [
         "Prototype Level Testing.tmx",
-        "Level 02.tmx"
+        "Level 02.tmx",
+        "Testing Environment Level.tmx",
+        "Prototype Ruleset.tmx"
     ],
     "project": "Prototype Project.tiled-project",
     "recentFiles": [
         "Prototype Level Testing.tmx",
+        "Prototype Ruleset.tmx",
+        "Testing Environment Level.tmx",
         "Level 02.tmx",
         "Prototype Level 07.tmx",
         "Prototype Spikes Tileset but better.tsx",
@@ -191,9 +214,7 @@
         "Prototype Level 10.tmx",
         "Prototype Level 06.tmx",
         "Prototype Level 05.tmx",
-        "Prototype Level 04.tmx",
-        "Prototype Level 03.tmx",
-        "Prototype Level 02.tmx"
+        "Prototype Level 04.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

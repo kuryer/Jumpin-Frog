@@ -22,7 +22,7 @@ public static class Helpers
     {
         get
         {
-            if (playerMovement == null) playerMovement = Player.GetComponent<PlayerMovement>();
+            if (playerMovement == null) playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
             return playerMovement;
         }
     }
@@ -30,7 +30,7 @@ public static class Helpers
     {
         get
         {
-            if (playerHealth == null) playerHealth = Player.GetComponent<PlayerHealth>();
+            if (playerHealth == null) playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
             return playerHealth;
         }
     }

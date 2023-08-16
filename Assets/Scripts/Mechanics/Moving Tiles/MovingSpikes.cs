@@ -1,42 +1,95 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingSpikes : MonoBehaviour
 {
-    public GameObject destinationPointPrefab;
     public float movingSpeed = 2f;
-    [SerializeField] float rayLength;
-    [SerializeField] LayerMask destinationPointLayer;
-    SpikesDestinationPoint currentPoint;
-    int currentIndex = 0;
-    bool isGoingBack = false;
-    public enum LoopModes
-    {
-        Around,
-        BackToBack
-    }
-    [SerializeField] public LoopModes loopMode = LoopModes.Around;
-    [HideInInspector] public List<SpikesDestinationPoint> points;
+    GameObject currentPoint;
+    [HideInInspector] List<GameObject> destinationPoints;
+    MovingTile.MovementType SetNextPoint;
+    MovingTile.LoopModes loopMode;
+
+    int lastPointNumber;
+    int currentPointIndex;
+    private bool Back2Back_isMovingBackwards;
+
 
     #region Setup
 
-    void Awake()
+    private void Awake()
     {
-        GetFirstPoint();
+        GetVariables();
+        Setup();
     }
-    void GetFirstPoint()
+    private void GetVariables()
     {
-        if(points.Count <= 1)
+        var dataScript = GetComponent<MovingTile>();
+        destinationPoints = dataScript.destinationPoints;
+        loopMode = dataScript.loopMode;
+    }
+
+    private void Setup()
+    {
+        lastPointNumber = destinationPoints.Count - 1;
+        switch (loopMode)
         {
-            Debug.Log("Not enough Desitnation points to build a route.");
-            return;
+            case MovingTile.LoopModes.Around:
+                SetNextPoint = Around_SetNextPoint;
+                break;
+            case MovingTile.LoopModes.BackToBack:
+                SetNextPoint = Back2Back_SetNextPoint;
+                break;
         }
-        currentPoint = points[currentIndex];
-        currentIndex++;
+        SetNextPoint();
     }
 
     #endregion
+
+
+    #region LoopMode_Around
+
+    private void Around_SetNextPoint()
+    {
+        currentPoint = destinationPoints[Around_GetNextPointNumber()];
+    }
+
+    private int Around_GetNextPointNumber()
+    {
+        currentPointIndex++;
+        if (currentPointIndex <= lastPointNumber)
+            return currentPointIndex;
+        currentPointIndex = 0;
+        return currentPointIndex;
+    }
+
+    #endregion
+
+
+    #region LoopMode_Back2Back
+
+    private void Back2Back_SetDirection()
+    {
+        if (currentPointIndex == lastPointNumber)
+            Back2Back_isMovingBackwards = true;
+        if (currentPointIndex == 0)
+            Back2Back_isMovingBackwards = false;
+    }
+
+    private int Back2Back_GetNextPointNumber()
+    {
+        if (!Back2Back_isMovingBackwards)
+            return ++currentPointIndex;
+        return --currentPointIndex;
+    }
+
+    private void Back2Back_SetNextPoint()
+    {
+        Back2Back_SetDirection();
+        currentPoint = destinationPoints[Back2Back_GetNextPointNumber()];
+    }
+
+    #endregion
+
 
     #region Movement
 
@@ -45,59 +98,10 @@ public class MovingSpikes : MonoBehaviour
         MoveTowardsCurrentPoint();
     }
 
-    void GetNextPoint()
-    {
-        if(loopMode == LoopModes.Around)
-        {
-            if(points.Count == currentIndex)
-            {
-                currentIndex = 0;
-                currentPoint = points[currentIndex];
-                currentIndex++;
-            }
-            else
-            {
-                currentPoint = points[currentIndex];
-                currentIndex++;
-            }
-
-        }
-        if(loopMode == LoopModes.BackToBack)
-        {
-            if (!isGoingBack)
-            {
-                if (points.Count == currentIndex)
-                {
-                    currentIndex--;
-                    currentPoint = points[currentIndex];
-                    isGoingBack = true;
-                }
-                else
-                {
-                    currentPoint = points[currentIndex];
-                    currentIndex++;
-                }
-            }
-            else
-            {
-                if (currentIndex == 0)
-                {
-                    currentIndex++;
-                    currentPoint = points[currentIndex];
-                    isGoingBack = false;
-                }
-                else
-                {
-                    currentIndex--;
-                    currentPoint = points[currentIndex];
-                }
-            }
-        }
-    }
 
     void MoveTowardsCurrentPoint()
     {
-        if(points.Count > 1)
+        if(destinationPoints.Count > 1)
         {
             SpikesMovement();
         }
@@ -116,35 +120,10 @@ public class MovingSpikes : MonoBehaviour
         }
         else
         {
-            GetNextPoint();
+            SetNextPoint();
         }
     }
 
-
-    #endregion
-
-
-    #region Gizmos
-
-    private void OnDrawGizmos()
-    {
-        Vector3 rayAdd = new Vector3(rayLength / 2, 0f, 0f);
-        Gizmos.DrawLine(transform.position - rayAdd, transform.position + rayAdd);
-    }
-
-    #endregion
-
-
-    #region Editor Things
-
-    public void DeletePoint(int index)
-    {
-        if(points[index] != null)
-        {
-            SpikesDestinationPoint point = points[index];
-            DestroyImmediate(point.gameObject, true);
-        }
-    }
 
     #endregion
 }
