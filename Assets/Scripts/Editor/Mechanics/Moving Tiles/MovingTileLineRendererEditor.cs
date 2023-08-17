@@ -7,15 +7,12 @@ using UnityEditor;
 [CustomEditor(typeof(MovingTileLineRenderer), true)]
 public class MovingTileLineRendererEditor : Editor
 {
-
     MovingTileLineRenderer thisScript;
-    SerializedProperty destinationPoints;
 
     private void OnEnable()
     {
         thisScript = (MovingTileLineRenderer)target;
     }
-
 
     public override void OnInspectorGUI()
     {
@@ -23,12 +20,7 @@ public class MovingTileLineRendererEditor : Editor
 
         if (GUILayout.Button("Reload Line Renderer"))
         {
-            ReloadLineRenderer();
+            thisScript.ReloadLineRenderer();
         }
-    }
-
-    void ReloadLineRenderer()
-    {
-
     }
 }

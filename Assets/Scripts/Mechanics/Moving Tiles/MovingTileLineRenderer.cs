@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[ExecuteInEditMode]
 public class MovingTileLineRenderer : MonoBehaviour
 {
 
@@ -10,16 +10,12 @@ public class MovingTileLineRenderer : MonoBehaviour
     LineRenderer lineRenderer;
     List<GameObject> destinationPoints;
 
-    void Update()
+    
+    public void ReloadLineRenderer()
     {
         if (movingTile == null) movingTile = GetComponent<MovingTile>();
         if (lineRenderer == null) lineRenderer = GetComponent<LineRenderer>();
         if (destinationPoints == null) destinationPoints = movingTile.destinationPoints;
-
-        //Debug.Log(movingTile.destinationPoints.Count);
-        //if (destinationPoints.Count < 2)
-        //    return;
-
 
         if (movingTile.loopMode == MovingTile.LoopModes.Around)
         {
@@ -27,7 +23,6 @@ public class MovingTileLineRenderer : MonoBehaviour
             return;
         }
         Back2Back_RenderLines();
-
     }
     void Around_RenderLines()
     {
