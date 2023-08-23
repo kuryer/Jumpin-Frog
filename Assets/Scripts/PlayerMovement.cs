@@ -252,15 +252,17 @@ public class PlayerMovement : MonoBehaviour
         //calcualte the direction we want to move in and our desired velocity
         float maxSpeed = X * playerVars.moveSpeed;
         //calculate difference between current velocity and desired velocity
+        float baseVelocity = rb.velocity.x;
+        if(platformRB != null)
+        {
+            //rb.velocity += new Vector2(platformRB.velocity.x, 0f);
+            baseVelocity = platformRB.velocity.x;
+            //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
+            //speedDif += platformRB.velocity.x;
+        }
         float speedDif = maxSpeed - rb.velocity.x;
 
 
-        if(platformRB != null)
-        {
-            //rb.velocity += platformScript.rb.velocity;
-            //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
-            speedDif += platformRB.velocity.x;
-        }
         
         //change acceleration rate depending on situation
         float accelRate = (Mathf.Abs(maxSpeed) > 0.01f) ? playerVars.acceleration : playerVars.decceleration;
