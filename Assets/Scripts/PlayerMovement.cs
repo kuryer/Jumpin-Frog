@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckCollisions();
 
-        TestMovement();
+        //TestMovement();
 
         if (isSwinging) SwingRotation();
         /*if (canMove)*/ movement();
@@ -256,11 +256,12 @@ public class PlayerMovement : MonoBehaviour
         if(platformRB != null)
         {
             //rb.velocity += new Vector2(platformRB.velocity.x, 0f);
-            baseVelocity = platformRB.velocity.x;
+            //rb.velocity += platformRB.velocity;
+            Debug.Log(baseVelocity);
             //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
             //speedDif += platformRB.velocity.x;
         }
-        float speedDif = maxSpeed - rb.velocity.x;
+        float speedDif = maxSpeed - baseVelocity;
 
 
         
@@ -281,7 +282,7 @@ public class PlayerMovement : MonoBehaviour
             movement = 0f;
         }
         */
-        
+        if (platformRB != null) rb.AddForce(platformRB.velocity);
         rb.AddForce(movement * Vector2.right);
         //if(platformScript != null)
         //    Debug.Log("rb velocity: " + rb.velocity + ", speedDif: " + speedDif + ", movement: " + movement);
