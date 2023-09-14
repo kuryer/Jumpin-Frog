@@ -11,6 +11,8 @@ public class PlayerVarsSO : ScriptableObject
     public float decceleration;
     public float velPower;
     public float generalGravity;
+    [Header("Platform Movement")]
+    public float naturalizerModifier;
     [Header("In Air Movement")]
     public float inAirAccelerationBasic;
     public float inAirDeccelerationBasic;

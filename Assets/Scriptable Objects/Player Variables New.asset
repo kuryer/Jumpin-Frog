@@ -17,6 +17,7 @@ MonoBehaviour:
   decceleration: 100
   velPower: 1
   generalGravity: 1.8
+  naturalizerModifier: 1
   inAirAccelerationBasic: 18.5
   inAirDeccelerationBasic: 1
   fallClampSpeed: 15.2

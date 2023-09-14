@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckCollisions();
 
-        TestMovement();
+        //TestMovement();
 
         if (isSwinging) SwingRotation();
         /*if (canMove)*/ movement();
@@ -237,30 +237,31 @@ public class PlayerMovement : MonoBehaviour
 
 
     #region Movements
-
-    void TestMovement()
-    {
-        if (platformRB == null)
-            return;
-
-        rb.velocity = platformRB.velocity;
-    }
-
-
     private void BasicMovement()
     {
         //calcualte the direction we want to move in and our desired velocity
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb.velocity = Vector2.right * 20f;
+        }
+
         float maxSpeed = X * playerVars.moveSpeed;
         //calculate difference between current velocity and desired velocity
-        float speedDif = maxSpeed - rb.velocity.x;
-
-
+        float baseVelocity = rb.velocity.x;
         if(platformRB != null)
         {
-            //rb.velocity += platformScript.rb.velocity;
+            float platfromNormalizedVelocityX = platformRB.velocity.x * playerVars.naturalizerModifier;
+            baseVelocity -= platfromNormalizedVelocityX;
+            //rb.velocity += new Vector2(platformRB.velocity.x, 0f);
+            //baseVelocity -= platformRB.velocity.x;
+            Debug.Log(baseVelocity);
             //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
-            speedDif += platformRB.velocity.x;
+            //speedDif += platformRB.velocity.x;
         }
+        float speedDif = maxSpeed - baseVelocity;
+
+
         
         //change acceleration rate depending on situation
         float accelRate = (Mathf.Abs(maxSpeed) > 0.01f) ? playerVars.acceleration : playerVars.decceleration;
@@ -279,7 +280,7 @@ public class PlayerMovement : MonoBehaviour
             movement = 0f;
         }
         */
-        
+        if (platformRB != null) rb.AddForce(platformRB.velocity);
         rb.AddForce(movement * Vector2.right);
         //if(platformScript != null)
         //    Debug.Log("rb velocity: " + rb.velocity + ", speedDif: " + speedDif + ", movement: " + movement);

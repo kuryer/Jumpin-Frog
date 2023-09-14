@@ -17,6 +17,7 @@ MonoBehaviour:
   decceleration: 100
   velPower: 1
   generalGravity: 1.8
+  naturalizerModifier: 0.97
   inAirAccelerationBasic: 12
   inAirDeccelerationBasic: 1
   fallClampSpeed: 16
@@ -35,9 +36,6 @@ MonoBehaviour:
   wallGrabBuffer: 0.1
   swingJumpForce: 110
   swingJumpBalance: 0.35
-  SwingJumpBuffer: 0
-  swingBoostForce: 5.25
-  swingBoostBalance: 0.43
   springFrequency: 2.2
   springDamping: 0.45
   swingVelocityCut: 1
@@ -51,9 +49,7 @@ MonoBehaviour:
   afterSwingJumpPower: 10
   swingSpeedPercentage: 0.9
   exitBarHeight: 1
-  slingPower: 175
-  slingBalance: 0.35
-  slingGravity: 0
+  bubbleGravity: 0
   slingGravityChangeTime: 0.145
   throwTimer: 0.65
   bubbleThrowForce: 170
