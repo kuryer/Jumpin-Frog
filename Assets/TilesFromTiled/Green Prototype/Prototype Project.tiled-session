@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Level 02.tmx",
+    "activeFile": "Testing Environment Level.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -28,11 +28,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2773,
-                "y": 6683.333333333333
+                "x": 2614,
+                "y": 6705.333333333333
             }
         },
         "Prototype Level 01.tmx": {
@@ -161,11 +161,11 @@
             "scaleInEditor": 8
         },
         "Testing Environment Level.tmx": {
-            "scale": 0.5,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2255,
-                "y": 7534
+                "x": 1445.6666666666665,
+                "y": 7690
             }
         },
         "Tutorial Level.tmx": {
@@ -204,9 +204,9 @@
     "project": "Prototype Project.tiled-project",
     "recentFiles": [
         "Prototype Level Testing.tmx",
+        "Level 02.tmx",
         "Prototype Ruleset.tmx",
         "Testing Environment Level.tmx",
-        "Level 02.tmx",
         "Prototype Level 07.tmx",
         "Prototype Spikes Tileset but better.tsx",
         "Prototype Level 09.tmx",

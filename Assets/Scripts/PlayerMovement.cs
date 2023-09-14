@@ -237,26 +237,24 @@ public class PlayerMovement : MonoBehaviour
 
 
     #region Movements
-
-    void TestMovement()
-    {
-        if (platformRB == null)
-            return;
-
-        rb.velocity = platformRB.velocity;
-    }
-
-
     private void BasicMovement()
     {
         //calcualte the direction we want to move in and our desired velocity
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb.velocity = Vector2.right * 20f;
+        }
+
         float maxSpeed = X * playerVars.moveSpeed;
         //calculate difference between current velocity and desired velocity
         float baseVelocity = rb.velocity.x;
         if(platformRB != null)
         {
+            float platfromNormalizedVelocityX = platformRB.velocity.x * playerVars.naturalizerModifier;
+            baseVelocity -= platfromNormalizedVelocityX;
             //rb.velocity += new Vector2(platformRB.velocity.x, 0f);
-            //rb.velocity += platformRB.velocity;
+            //baseVelocity -= platformRB.velocity.x;
             Debug.Log(baseVelocity);
             //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
             //speedDif += platformRB.velocity.x;
