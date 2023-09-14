@@ -32,7 +32,7 @@ public class MovingTile : MonoBehaviour
 
         lineRenderer = GetComponent<LineRenderer>();
 
-        if (loopMode == MovingTile.LoopModes.Around)
+        if (loopMode == LoopModes.Around)
         {
             Around_RenderLines();
             return;
