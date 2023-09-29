@@ -171,8 +171,6 @@ public class PlayerMovement : MonoBehaviour
         GatherBubbleInput();
         FallChecker();
 
-        //if (isBlending) return;
-
         jump();
 
         
@@ -188,20 +186,15 @@ public class PlayerMovement : MonoBehaviour
         ChangeSpring();
 
         DetectSideOfAnimation();
-
-        if (Input.GetKey(KeyCode.R))
-        {
-            Debug.Log("movement funcion: " + movement.Method.Name.ToString());
-        }
     }
     private void FixedUpdate()
     {
         CheckCollisions();
 
-        //TestMovement();
 
         if (isSwinging) SwingRotation();
-        /*if (canMove)*/ movement();
+        if (platformRB != null) PlatformMovement();
+        movement();
         if (canCornerCorrect) CornerCorrect(rb.velocity.y);
         if (rb.velocity.y < 0f && !isGrounded && !isGrabbing && !isSwinging && GravityState != gravityState.Sling) FallClamp();
     }
@@ -237,53 +230,36 @@ public class PlayerMovement : MonoBehaviour
 
 
     #region Movements
+    void PlatformMovement()
+    {
+        rb.AddForce(platformRB.velocity);
+    }
     private void BasicMovement()
     {
         //calcualte the direction we want to move in and our desired velocity
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.velocity = Vector2.right * 20f;
-        }
-
         float maxSpeed = X * playerVars.moveSpeed;
+
         //calculate difference between current velocity and desired velocity
         float baseVelocity = rb.velocity.x;
+
         if(platformRB != null)
         {
             float platfromNormalizedVelocityX = platformRB.velocity.x * playerVars.naturalizerModifier;
             baseVelocity -= platfromNormalizedVelocityX;
-            //rb.velocity += new Vector2(platformRB.velocity.x, 0f);
-            //baseVelocity -= platformRB.velocity.x;
-            Debug.Log(baseVelocity);
-            //rb.velocity += new Vector2(0, platformScript.rb.velocity.y);
-            //speedDif += platformRB.velocity.x;
         }
+
         float speedDif = maxSpeed - baseVelocity;
-
-
         
         //change acceleration rate depending on situation
         float accelRate = (Mathf.Abs(maxSpeed) > 0.01f) ? playerVars.acceleration : playerVars.decceleration;
-        
-
 
         //applies acceleration to speed difference, the raises to a set power so acceleration increases with higher speeds
         //finally multiplies by sign to reapply direction
         //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.velPower) * Mathf.Sign(speedDif);
         float movement = (Mathf.Abs(speedDif) * accelRate) * Mathf.Sign(speedDif);
+        
         //anti-clipping calculations
-        //movement *= (Mathf.Abs(rb.velocity.x) < .001f && X == 0) ? 0f : 1f;
-        /*
-        if(Mathf.Abs(movement) < 10f)
-        {
-            movement = 0f;
-        }
-        */
-        if (platformRB != null) rb.AddForce(platformRB.velocity);
         rb.AddForce(movement * Vector2.right);
-        //if(platformScript != null)
-        //    Debug.Log("rb velocity: " + rb.velocity + ", speedDif: " + speedDif + ", movement: " + movement);
     }
     void InAirMovement()
     {
@@ -1124,12 +1100,10 @@ public class PlayerMovement : MonoBehaviour
         if (X != 0f && isGrounded && !jumped)
         {
             playerAnims.ChangeAnimationState(AnimationState.Run_Player.ToString());
-            //Debug.Log("yo 2");
         }
         else if (X == 0f && isGrounded && !jumped)
         {
             playerAnims.ChangeAnimationState(AnimationState.Idle_Player.ToString());
-            //Debug.Log("yo 3");
         }
     }
     void SpawnJumpCircle()
