@@ -31,8 +31,8 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 2614,
-                "y": 6705.333333333333
+                "x": 4000,
+                "y": 3999.333333333333
             }
         },
         "Prototype Level 01.tmx": {
@@ -140,8 +140,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2399.5,
-                "y": 2427.25
+                "x": 2301.5,
+                "y": 2295.25
             }
         },
         "Prototype Ruleset.tmx": {
@@ -161,11 +161,11 @@
             "scaleInEditor": 8
         },
         "Testing Environment Level.tmx": {
-            "scale": 1.5,
+            "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1445.6666666666665,
-                "y": 7690
+                "x": 1428,
+                "y": 7723
             }
         },
         "Tutorial Level.tmx": {
@@ -202,6 +202,7 @@
         "Prototype Ruleset.tmx"
     ],
     "project": "Prototype Project.tiled-project",
+    "property.type": "int",
     "recentFiles": [
         "Prototype Level Testing.tmx",
         "Level 02.tmx",
