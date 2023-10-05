@@ -15,17 +15,20 @@ public class CrushingBlock : MonoBehaviour
     Collider2D boxCollider;
     Animator animator;
 
-    [SerializeField]float timeToRespawn;
-    [SerializeField]Vector3 rayPosition;
-    [SerializeField]float rayDistance;
+    [SerializeField] float timeToRespawn;
+    [SerializeField] Vector3 rayPosition;
+    [SerializeField] float rayDistance;
     [SerializeField] LayerMask playerLayer;
 
     void Start()
     {
         state = States.Idle;
         boxCollider = GetComponent<Collider2D>();
+        CrushingPlatform platform = transform.parent.GetComponent<CrushingPlatform>();
+        platform.OnCrush += Crush;
         animator = GetComponent<Animator>();
     }
+
     private void FixedUpdate()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + rayPosition, Vector3.right, rayDistance, playerLayer);
@@ -36,8 +39,9 @@ public class CrushingBlock : MonoBehaviour
     }
     void Crush()
     {
-        ChangeAnimation("CrushingBlock_Crush");
-        state = States.Crush;
+        Debug.Log("test");
+        //ChangeAnimation("CrushingBlock_Crush");
+        //state = States.Crush;
     }
 
     public void TurnOffCollider()
