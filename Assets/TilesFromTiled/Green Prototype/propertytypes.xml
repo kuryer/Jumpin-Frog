@@ -3,10 +3,13 @@
  <objecttype name="Bubble" color="#a0a0a4"/>
  <objecttype name="Coin" color="#a0a0a4"/>
  <objecttype name="Crushing Block" color="#a0a0a4"/>
+ <objecttype name="CrushingPlatform1" color="#a0a0a4"/>
+ <objecttype name="CrushingPlatform2" color="#a0a0a4"/>
+ <objecttype name="CrushingPlatform3" color="#a0a0a4"/>
  <objecttype name="Door" color="#a0a0a4"/>
  <objecttype name="Flag" color="#a0a0a4"/>
  <objecttype name="Leaves Spawner" color="#a0a0a4"/>
  <objecttype name="Moving Spikes" color="#a0a0a4"/>
- <objecttype name="Swing" color="#a0a0a4"/>
  <objecttype name="Platform" color="#a0a0a4"/>
+ <objecttype name="Swing" color="#a0a0a4"/>
 </objecttypes>

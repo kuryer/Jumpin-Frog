@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Testing Environment Level.tmx",
+    "activeFile": "Level 02.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -28,11 +28,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.75,
-            "selectedLayer": 2,
+            "scale": 0.25,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 4000,
-                "y": 3999.333333333333
+                "x": 5110,
+                "y": 7728
             }
         },
         "Prototype Level 01.tmx": {
@@ -161,11 +161,14 @@
             "scaleInEditor": 8
         },
         "Testing Environment Level.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1556.3333333333333,
-                "y": 7638.666666666666
+                "x": 1421.6666666666665,
+                "y": 7671.333333333333
             }
         },
         "Tutorial Level.tmx": {
@@ -189,7 +192,7 @@
         }
     },
     "last.imagePath": "D:/UnityHub/Jumpin Frog/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype",
-    "last.objectTypesPath": "D:/UnityHub/Jumpin Frog/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype/propertytypes.xml",
+    "last.objectTypesPath": "C:/Unity/Projects/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype/propertytypes.xml",
     "map.height": 500,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
@@ -205,9 +208,9 @@
     "property.type": "int",
     "recentFiles": [
         "Prototype Level Testing.tmx",
-        "Level 02.tmx",
         "Prototype Ruleset.tmx",
         "Testing Environment Level.tmx",
+        "Level 02.tmx",
         "Prototype Level 07.tmx",
         "Prototype Spikes Tileset but better.tsx",
         "Prototype Level 09.tmx",

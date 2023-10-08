@@ -63,6 +63,15 @@ MonoBehaviour:
   - m_Name: Crushing Block
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
+  - m_Name: CrushingPlatform1
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  - m_Name: CrushingPlatform2
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
+  - m_Name: CrushingPlatform3
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties: []
   - m_Name: Door
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
@@ -75,10 +84,10 @@ MonoBehaviour:
   - m_Name: Moving Spikes
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
-  - m_Name: Swing
+  - m_Name: Platform
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
-  - m_Name: Platform
+  - m_Name: Swing
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties: []
   m_PrefabReplacements:
@@ -100,3 +109,9 @@ MonoBehaviour:
     m_Prefab: {fileID: 4218083650576290022, guid: 178729b29a25e9741b8ab18dced4ef52, type: 3}
   - m_TypeName: Crushing Block
     m_Prefab: {fileID: 1507682437318100034, guid: 7dc2b0b6633ee4b4eaebbec1aa479522, type: 3}
+  - m_TypeName: CrushingPlatform1
+    m_Prefab: {fileID: 9023546442173508673, guid: e58a21ae449756c4a8b71c405c763dd2, type: 3}
+  - m_TypeName: CrushingPlatform2
+    m_Prefab: {fileID: 5676984894800309570, guid: 270347e3370a63342a82c16836f0c0c6, type: 3}
+  - m_TypeName: CrushingPlatform3
+    m_Prefab: {fileID: 7208185642829823730, guid: 37b54cba68cbdea46a9a148221a4b081, type: 3}

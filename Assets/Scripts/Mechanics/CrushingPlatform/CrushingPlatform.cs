@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.VersionControl.Asset;
 
 public class CrushingPlatform : MonoBehaviour
 {
-    [SerializeField] List<CrushingBlock> blocks = new List<CrushingBlock>();
     enum States
     {
         Idle,
@@ -17,6 +13,7 @@ public class CrushingPlatform : MonoBehaviour
     public delegate void OnCrushMethod();
     public OnCrushMethod OnCrush;
 
+    [SerializeField] float timeToRespawn;
     [SerializeField] float rayDistance;
     [SerializeField] Vector3 rayPosition;
     [SerializeField] LayerMask playerLayer;
@@ -25,12 +22,10 @@ public class CrushingPlatform : MonoBehaviour
     {
         foreach(Transform child in transform)
         {
-            blocks.Add(child.GetComponent<CrushingBlock>());
+            var script = child.GetComponent<CrushingBlock>();
+            script.SetTimeToRespawn(timeToRespawn);
+            OnCrush += script.Crush;
         }
-    }
-    private void Update()
-    {
-            OnCrush();
     }
     private void FixedUpdate()
     {
@@ -39,5 +34,12 @@ public class CrushingPlatform : MonoBehaviour
         {
             OnCrush();
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = state == States.Idle ? Color.green : Color.red;
+        Vector3 rayDistanceV3 = new Vector3(rayDistance, 0, 0);
+        Gizmos.DrawLine(transform.position + rayPosition, transform.position + rayPosition + rayDistanceV3);
     }
 }
