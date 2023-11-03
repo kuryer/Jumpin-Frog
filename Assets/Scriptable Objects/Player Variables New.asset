@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b704ad51234904a8c9f01be0a0fd78, type: 3}
   m_Name: Player Variables New
   m_EditorClassIdentifier: 
-  moveSpeed: 9.5
+  moveSpeed: 11
   acceleration: 50
   decceleration: 100
   velPower: 1
@@ -51,8 +51,8 @@ MonoBehaviour:
   exitBarHeight: 1
   bubbleGravity: 0
   slingGravityChangeTime: 0.145
-  throwTimer: 0.65
-  bubbleThrowForce: 130
+  throwTimer: 1.25
+  bubbleThrowForce: 145
   throwDirectionXModifier: 0.9
   throwDirectionYModifier: 0.95
   lineWidth: 0.75
