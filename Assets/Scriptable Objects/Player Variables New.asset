@@ -52,7 +52,7 @@ MonoBehaviour:
   bubbleGravity: 0
   slingGravityChangeTime: 0.145
   throwTimer: 1.25
-  bubbleThrowForce: 145
+  bubbleThrowForce: 175
   throwDirectionXModifier: 0.9
   throwDirectionYModifier: 0.95
   lineWidth: 0.75
