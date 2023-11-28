@@ -511,10 +511,10 @@
   <object id="3" name="Platform_2" type="Platform" x="1600" y="7712">
    <point/>
   </object>
-  <object id="4" name="Swing_1" type="Swing" x="1408" y="7616">
+  <object id="4" name="Swing_1" type="Swing" x="1356" y="7624">
    <point/>
   </object>
-  <object id="7" name="CrushingPlatform3_1" type="CrushingPlatform3" x="1328" y="7712">
+  <object id="7" name="CrushingPlatform3_1" type="CrushingPlatform3" x="1136" y="7712">
    <point/>
   </object>
  </objectgroup>

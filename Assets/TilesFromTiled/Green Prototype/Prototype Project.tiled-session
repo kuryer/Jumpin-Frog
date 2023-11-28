@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "AlphaLevelNaJam.tmx",
+    "activeFile": "Testing Environment Level.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -19,8 +19,8 @@
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 8517.666666666666,
-                "y": 1170
+                "x": 5200,
+                "y": 3599.6666666666665
             }
         },
         "Blue Tileset Prototype.tsx": {
@@ -42,8 +42,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 3907,
-                "y": 4751
+                "x": 4000,
+                "y": 3999.5
             }
         },
         "Prototype Level 01.tmx": {
@@ -64,8 +64,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2435,
-                "y": 378
+                "x": 2400,
+                "y": 399.5
             }
         },
         "Prototype Level 03.tmx": {
@@ -151,16 +151,16 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2391,
-                "y": 2390
+                "x": 2422,
+                "y": 2447
             }
         },
         "Prototype Ruleset.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 327,
-                "y": 453
+                "x": 800,
+                "y": 799.5
             }
         },
         "Prototype Spikes Tileset but better.tsx": {
@@ -178,8 +178,8 @@
             "scale": 0.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 3999,
-                "y": 4000
+                "x": 4000,
+                "y": 3999
             }
         },
         "SkelaLevel02.tmx": {
@@ -189,27 +189,27 @@
             "scale": 0.25,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1952,
-                "y": 3586
+                "x": 2800,
+                "y": 3998
             }
         },
         "SkelaTest.tmx": {
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 3848,
-                "y": 3740
+                "x": 2800,
+                "y": 3998
             }
         },
         "Testing Environment Level.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.75,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2250.6666666666665,
-                "y": 7317.333333333333
+                "x": 4000,
+                "y": 3999.6666666666665
             }
         },
         "Tutorial Level.tmx": {
@@ -219,8 +219,8 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1012,
-                "y": 572
+                "x": 2400,
+                "y": 399.5
             }
         },
         "untitled.tmx": {
@@ -256,14 +256,14 @@
     "recentFiles": [
         "Prototype Level Testing.tmx",
         "Level 02.tmx",
-        "Testing Environment Level.tmx",
-        "Prototype Ruleset.tmx",
-        "Prototype Level 02.tmx",
-        "Tutorial Level.tmx",
-        "SkelaLevel.tmx",
-        "SkelaTest.tmx",
         "SkelaLevel02.tmx",
         "AlphaLevelNaJam.tmx",
+        "SkelaTest.tmx",
+        "SkelaLevel.tmx",
+        "Tutorial Level.tmx",
+        "Prototype Level 02.tmx",
+        "Prototype Ruleset.tmx",
+        "Testing Environment Level.tmx",
         "Prototype Level 10.tmx",
         "Prototype Level 07.tmx"
     ],
