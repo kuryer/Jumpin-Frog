@@ -25,7 +25,8 @@ public class PlayerMovement : MonoBehaviour
         JumpTightener,
         Falling,
         WallGrab,
-        Swing,
+        Swinging,
+        InactiveSwing,
         Sling,
         Space
     }
@@ -40,8 +41,6 @@ public class PlayerMovement : MonoBehaviour
     PlayerControls playerControls;
     Transform platformTransform;
     [SerializeField] Rigidbody2D platformRB;
-    Vector2 platformPosition;
-    Vector2 platformPosDelta = Vector2.zero;
     [SerializeField] float platfromMovementFix;
     float lastGroundedTime;
     bool isGrabbing;
@@ -257,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
         //finally multiplies by sign to reapply direction
         //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.velPower) * Mathf.Sign(speedDif);
         float movement = (Mathf.Abs(speedDif) * accelRate) * Mathf.Sign(speedDif);
-        
+
         //anti-clipping calculations
         rb.AddForce(movement * Vector2.right);
     }
@@ -280,20 +279,29 @@ public class PlayerMovement : MonoBehaviour
     }
     void SwingingMovement()
     {
+        SetSwingGracity();
         
         float maxSpeed = X * playerVars.swingMoveSpeed;
-
-        //float speedDif = maxSpeed - (rb.velocity.magnitude * X);
-        float speedDif = maxSpeed - (rb.velocity.x + platformPosDelta.x);
+        float realSpeed = rb.velocity.magnitude * Mathf.Sign(rb.velocity.x);
+        //Debug.Log(rb.velocity.magnitude * Mathf.Sign(rb.velocity.x));
+        float speedDif = maxSpeed - realSpeed;
         
         speedDif = Mathf.Sign(speedDif) == Mathf.Sign(maxSpeed) ? speedDif : 0f;
 
-        float accelRate = SwingAccelRate();
+        float accelRate = Mathf.Sign(realSpeed) == Mathf.Sign(maxSpeed) ? playerVars.accelerationSwing : playerVars.deccelerationSwing;
 
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.swingMovementPower) * Mathf.Sign(speedDif);
 
         rb.AddForce(movement * transform.right);
-        
+        Debug.Log("speedDif: " + speedDif + " , movement: " + movement);
+    }
+
+    void SetSwingGracity()
+    {
+        if (X == 0)
+            SwitchGravity(gravityState.InactiveSwing);
+        else
+            SwitchGravity(gravityState.Swinging);
     }
     float SwingAccelRate()
     {
@@ -341,7 +349,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             platformRB = null;
-            platformPosition = Vector3.zero;
         }
     }
 
@@ -414,6 +421,16 @@ public class PlayerMovement : MonoBehaviour
             movement = InAirMovement;
         }
     }
+
+    public void OnJumpPad(float jumpForce)
+    {
+        jumped = true;
+        playerAnims.ChangeAnimationState(AnimationState.Jump_Player.ToString());
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        ZeroAllBuffers();
+    }
+
 
     //========================
     //After Swing Jump Section
@@ -570,7 +587,7 @@ public class PlayerMovement : MonoBehaviour
         distJoint.enabled = true;
         //lineRenderer.enabled = true;
         tongueRenderer.TurnSpriteRenderer();
-        SwitchGravity(gravityState.Swing);
+        SwitchGravity(gravityState.Swinging);
         VelocityCut();
         playerAnims.ChangeAnimationState(AnimationState.Swing_Player.ToString());
         isSwinging = true;
@@ -712,11 +729,17 @@ public class PlayerMovement : MonoBehaviour
                     //gravityStateText.text = "Gravity State: Wall Grab";
                     break;
                 }
-            case gravityState.Swing:
+            case gravityState.Swinging:
                 {
-                    rb.gravityScale = playerVars.swingGravity;
-                    GravityState = gravityState.Swing;
+                    rb.gravityScale = playerVars.swingingGravity;
+                    GravityState = gravityState.Swinging;
                     //gravityStateText.text = "Gravity State: Swing";
+                    break;
+                }
+            case gravityState.InactiveSwing:
+                {
+                    rb.gravityScale = playerVars.inactiveGravity;
+                    GravityState = gravityState.InactiveSwing;
                     break;
                 }
             case gravityState.Sling:

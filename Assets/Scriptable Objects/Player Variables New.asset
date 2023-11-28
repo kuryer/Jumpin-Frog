@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b704ad51234904a8c9f01be0a0fd78, type: 3}
   m_Name: Player Variables New
   m_EditorClassIdentifier: 
-  moveSpeed: 9.5
+  moveSpeed: 10
   acceleration: 50
-  decceleration: 100
+  decceleration: 50
+  stoppingBuffor: 0
   velPower: 1
   generalGravity: 1.8
   naturalizerModifier: 1
@@ -37,22 +38,23 @@ MonoBehaviour:
   swingJumpForce: 89
   swingJumpBalance: 0.41
   springFrequency: 2.2
-  springDamping: 0.45
+  springDamping: 0.47
   swingVelocityCut: 1
-  swingMoveSpeed: 21
-  accelerationSwing: 16
+  swingMoveSpeed: 50
+  accelerationSwing: 5
   conccelerationSwing: 0.7
-  deccelerationSwing: 0
+  deccelerationSwing: 3.7
   swingMovementPower: 1
-  swingGravity: 0.1
+  inactiveGravity: 1.8
+  swingingGravity: 0
   swingBuffer: 0.3
   afterSwingJumpPower: 10
   swingSpeedPercentage: 0.9
   exitBarHeight: 1
   bubbleGravity: 0
   slingGravityChangeTime: 0.145
-  throwTimer: 0.65
-  bubbleThrowForce: 130
+  throwTimer: 1.25
+  bubbleThrowForce: 175
   throwDirectionXModifier: 0.9
   throwDirectionYModifier: 0.95
   lineWidth: 0.75

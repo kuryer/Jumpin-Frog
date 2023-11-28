@@ -12,6 +12,17 @@
         ":/automap-tiles.tsx": {
             "scaleInDock": 1
         },
+        "AlphaLevelNaJam.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 5200,
+                "y": 3599.6666666666665
+            }
+        },
         "Blue Tileset Prototype.tsx": {
             "scaleInDock": 3
         },
@@ -28,11 +39,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.5,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 4000,
-                "y": 3999.6666666666665
+                "y": 3999.5
             }
         },
         "Prototype Level 01.tmx": {
@@ -50,11 +61,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 2400,
-                "y": 401
+                "y": 399.5
             }
         },
         "Prototype Level 03.tmx": {
@@ -137,19 +148,19 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 2,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2392,
-                "y": 2391.75
+                "x": 2422,
+                "y": 2447
             }
         },
         "Prototype Ruleset.tmx": {
-            "scale": 1.5,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 800,
-                "y": 799.6666666666666
+                "y": 799.5
             }
         },
         "Prototype Spikes Tileset but better.tsx": {
@@ -160,26 +171,56 @@
             "scaleInDock": 1,
             "scaleInEditor": 8
         },
+        "SkelaLevel.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 4000,
+                "y": 3999
+            }
+        },
+        "SkelaLevel02.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.25,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 2800,
+                "y": 3998
+            }
+        },
+        "SkelaTest.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2800,
+                "y": 3998
+            }
+        },
         "Testing Environment Level.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1584.5,
-                "y": 7493
+                "x": 1358.3333333333333,
+                "y": 7783.333333333333
             }
         },
         "Tutorial Level.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 2394,
-                "y": 396
+                "x": 2400,
+                "y": 399.5
             }
         },
         "untitled.tmx": {
@@ -193,33 +234,38 @@
     },
     "last.imagePath": "D:/UnityHub/Jumpin Frog/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype",
     "last.objectTypesPath": "C:/Unity/Projects/Jumpin-Frog/Assets/TilesFromTiled/Green Prototype/propertytypes.xml",
-    "map.height": 500,
+    "map.height": 450,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 500,
+    "map.width": 650,
     "openFiles": [
         "Prototype Level Testing.tmx",
         "Level 02.tmx",
         "Testing Environment Level.tmx",
         "Prototype Ruleset.tmx",
-        "Prototype Level 02.tmx"
+        "Prototype Level 02.tmx",
+        "Tutorial Level.tmx",
+        "SkelaLevel.tmx",
+        "SkelaTest.tmx",
+        "AlphaLevelNaJam.tmx",
+        "SkelaLevel02.tmx"
     ],
     "project": "Prototype Project.tiled-project",
     "property.type": "int",
     "recentFiles": [
         "Prototype Level Testing.tmx",
         "Level 02.tmx",
+        "SkelaLevel02.tmx",
+        "AlphaLevelNaJam.tmx",
+        "SkelaTest.tmx",
+        "SkelaLevel.tmx",
+        "Tutorial Level.tmx",
         "Prototype Level 02.tmx",
         "Prototype Ruleset.tmx",
         "Testing Environment Level.tmx",
         "Prototype Level 10.tmx",
-        "Prototype Level 07.tmx",
-        "Prototype Spikes Tileset but better.tsx",
-        "Prototype Level 09.tmx",
-        "Prototype Level 08.tmx",
-        "Prototype Level 06.tmx",
-        "Prototype Level 05.tmx"
+        "Prototype Level 07.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

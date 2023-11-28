@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swingPointAnim: {fileID: 4788629207199466010}
   cooldown: 2
+  circleCollider: {fileID: 7396877461248344585}
 --- !u!58 &7396877461248344585
 CircleCollider2D:
   m_ObjectHideFlags: 0
