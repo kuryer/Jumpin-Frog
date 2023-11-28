@@ -9,6 +9,7 @@ public class PlayerVarsSO : ScriptableObject
     public float moveSpeed;
     public float acceleration;
     public float decceleration;
+    public float stoppingBuffor;
     public float velPower;
     public float generalGravity;
     [Header("Platform Movement")]
@@ -44,7 +45,8 @@ public class PlayerVarsSO : ScriptableObject
     public float conccelerationSwing;
     public float deccelerationSwing;
     public float swingMovementPower;
-    public float swingGravity;
+    public float inactiveGravity;
+    public float swingingGravity = 0f;
     public float swingBuffer;
     public float afterSwingJumpPower;
     public float swingSpeedPercentage;

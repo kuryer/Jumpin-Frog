@@ -7,6 +7,7 @@ public class SwingPoint : MonoBehaviour
     SwingPoint thisScript;
     [SerializeField] Animator swingPointAnim;
     [SerializeField] float cooldown;
+    [SerializeField] CircleCollider2D circleCollider;
     bool isSwinging;
     bool canSwing;
     private void Start()
@@ -74,7 +75,7 @@ public class SwingPoint : MonoBehaviour
     #region Gizmos
     private void OnDrawGizmos()
     {
-        
+        Gizmos.DrawSphere(transform.position, circleCollider.radius);
     }
 
     #endregion
