@@ -75,7 +75,7 @@ public class SwingPoint : MonoBehaviour
     #region Gizmos
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(transform.position, circleCollider.radius);
+        Gizmos.DrawWireSphere(transform.position, circleCollider.radius * transform.localScale.x);
     }
 
     #endregion

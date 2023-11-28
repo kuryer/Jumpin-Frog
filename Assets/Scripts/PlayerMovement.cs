@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     bool isWallPauseJumping;
     float wallGrabBufferL;
     float wallGrabBufferR;
+    float lastSwingingTime;
     bool jumpCut;
 
     [Header("Ground Collisions")]
@@ -172,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
 
         jump();
 
-        
+        Debug.Log(lastSwingingTime);
         if (canSwing || isSwinging) Swing();
         if (canWallJump) WallJump();
         if(!isWallPauseJumping && !isSwinging) WallGrab();
@@ -293,7 +294,7 @@ public class PlayerMovement : MonoBehaviour
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.swingMovementPower) * Mathf.Sign(speedDif);
 
         rb.AddForce(movement * transform.right);
-        Debug.Log("speedDif: " + speedDif + " , movement: " + movement);
+        //Debug.Log("speedDif: " + speedDif + " , movement: " + movement);
     }
 
     void SetSwingGracity()
@@ -437,7 +438,9 @@ public class PlayerMovement : MonoBehaviour
     //========================
     void SwingJump()
     {
-        if(lastJumpPressed > 0f)
+        if(lastSwingingTime <= 0f)
+            jump = WaitingJump;
+        if(lastJumpPressed > 0f || lastJumpPressed > 0f && lastSwingingTime > 0f)
         {
             //CZY JA POTRZEBUJE TERAZ TEGO BALANSU ALBO PROCENTA Z PREDKOSCI JAK MAM JUZ POGRUPOWANY X I Y NA ODDZIELNE PARTIE I DZIA£AJ¥ ONE ODDZIELNIE???
             //MOZNABY POPRÓBOWAÆ BEZ TEGO BALANSU ITD.
@@ -587,6 +590,7 @@ public class PlayerMovement : MonoBehaviour
         distJoint.enabled = true;
         //lineRenderer.enabled = true;
         tongueRenderer.TurnSpriteRenderer();
+        lastSwingingTime = playerVars.swingCoyoteTime;
         SwitchGravity(gravityState.Swinging);
         VelocityCut();
         playerAnims.ChangeAnimationState(AnimationState.Swing_Player.ToString());
@@ -607,7 +611,7 @@ public class PlayerMovement : MonoBehaviour
         swingBoosterCheck = false;
         playerAnims.ChangeAnimationState(AnimationState.InAirRoll_Player.ToString());
         movement = InAirMovement;
-        jump = WaitingJump;
+        //jump = WaitingJump;
         tongueRenderer.TurnSpriteRenderer();
         tongueRenderer.StopCalculation();
         //JumpThightenerQueue();
@@ -1001,6 +1005,7 @@ public class PlayerMovement : MonoBehaviour
         TouchGroundScript();
 
         CoyoteTimeTimer();
+        SwingCoyoteTimeTimer();
 
         AntiDoubleJumpMechanism();
         AntiDoubleGrabMechanism();
@@ -1052,6 +1057,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded)
             lastGroundedTime -= Time.deltaTime;
+    }
+    void SwingCoyoteTimeTimer()
+    {
+        if(lastSwingingTime > 0f && !isSwinging)
+            lastSwingingTime -= Time.deltaTime;
     }
     void WallGrabBufferTimer()
     {

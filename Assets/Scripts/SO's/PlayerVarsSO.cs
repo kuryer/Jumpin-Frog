@@ -36,6 +36,7 @@ public class PlayerVarsSO : ScriptableObject
     [Header("Swing Jump")]
     public float swingJumpForce;
     public float swingJumpBalance;
+    public float swingCoyoteTime;
     [Header("Swinging")]
     public float springFrequency;
     public float springDamping;
