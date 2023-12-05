@@ -132,10 +132,15 @@ MonoBehaviour:
   groundRayLength: 0.76
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 520
+  slopeLayer:
+    serializedVersion: 2
+    m_Bits: 512
   rayOffset: 0.19
+  slopeRayoffset: 0.15
   groundRayPosition: {x: -0.03, y: -0.44, z: 0}
   isGrounded: 0
+  isOnSlope: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
