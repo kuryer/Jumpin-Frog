@@ -1717,34 +1717,6 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 233258822}
-    - target: {fileID: 97895273891166563, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
-      propertyPath: m_BiasY
-      value: -0.018
-      objectReference: {fileID: 0}
-    - target: {fileID: 97895273891166563, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
-      propertyPath: m_ScreenX
-      value: 0.5041666
-      objectReference: {fileID: 0}
-    - target: {fileID: 97895273891166563, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
-      propertyPath: m_ScreenY
-      value: 0.6361074
-      objectReference: {fileID: 0}
-    - target: {fileID: 97895273891166563, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
-      propertyPath: m_YDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 97895273891166563, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
-      propertyPath: m_DeadZoneHeight
-      value: 0.6211124
-      objectReference: {fileID: 0}
-    - target: {fileID: 97895273891166563, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
-      propertyPath: m_SoftZoneHeight
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 97895273891166563, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
-      propertyPath: m_TrackedObjectOffset.y
-      value: 0.83
-      objectReference: {fileID: 0}
     - target: {fileID: 97895274217609860, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
       propertyPath: m_RootOrder
       value: 5

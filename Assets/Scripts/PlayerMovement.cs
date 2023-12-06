@@ -251,9 +251,13 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
+        float reachSpeed = isOnSlope ? playerVars.slopeSpeed : playerVars.moveSpeed;
 
         //calcualte the direction we want to move in and our desired velocity
-        float maxSpeed = X * playerVars.moveSpeed;
+        float maxSpeed = X * reachSpeed;
+
+        if (Input.GetKey(KeyCode.R))
+            Debug.Log(reachSpeed);
 
         //calculate difference between current velocity and desired velocity
         float baseVelocity = rb.velocity.x;
