@@ -206,10 +206,10 @@
                 2
             ],
             "scale": 1.5,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1358.3333333333333,
-                "y": 7783.333333333333
+                "x": 1415.6666666666665,
+                "y": 7662.666666666666
             }
         },
         "Tutorial Level.tmx": {
