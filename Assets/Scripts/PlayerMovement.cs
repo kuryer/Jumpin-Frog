@@ -8,16 +8,12 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     private float X;
-    //private bool JumpDown;
-    //private bool JumpHold;
-    //private bool JumpUp;
-    bool canMove = false;
+    [SerializeField]bool canMove = false;
     private float lastJumpPressed;
     Vector3 groundRayoffset;
     Vector3 slopeRayOffset;
     Vector3 wallRayoffset;
 
-    //[SerializeField] TextMeshProUGUI gravityStateText;
     [Header("Gravity")]
     gravityState GravityState;
     enum gravityState
@@ -57,12 +53,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float groundRayLength;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask slopeLayer;
+    [SerializeField] LayerMask leftShortSlopeLayer;
+    [SerializeField] LayerMask leftLongSlopeLayer;
+    [SerializeField] LayerMask rightShortSlopeLayer;
+    [SerializeField] LayerMask rightLongSlopeLayer;
     [SerializeField] float rayOffset;
     [SerializeField] float slopeRayoffset;
     [SerializeField] Vector3 groundRayPosition;
     [SerializeField] bool isGrounded;
     [SerializeField] bool isOnSlope;
 
+    bool isOnRightSmallSlope;
+    bool isOnLeftSmallSlope;
+    bool isOnRightLongSlope;
+    bool isOnLeftLongSlope;
 
     [Header("Wall Collisions")]
     [SerializeField] LayerMask wallLayer;
@@ -241,23 +245,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void BasicMovement()
     {
-
-        if(isOnSlope && X == 0)
-        {
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.velocity = Vector2.zero;
-        }
-        else if(rb.bodyType == RigidbodyType2D.Kinematic)
-        {
-            rb.bodyType = RigidbodyType2D.Dynamic;
-        }
-        float reachSpeed = isOnSlope ? playerVars.slopeSpeed : playerVars.moveSpeed;
+        SlopeFix();
+        float reachSpeed = SlopeMultiplier();
 
         //calcualte the direction we want to move in and our desired velocity
-        float maxSpeed = X * reachSpeed;
+        float maxSpeed = X * playerVars.moveSpeed * reachSpeed;
 
         if (Input.GetKey(KeyCode.R))
-            Debug.Log(reachSpeed);
+            Debug.Log(X);
 
         //calculate difference between current velocity and desired velocity
         float baseVelocity = rb.velocity.x;
@@ -280,6 +275,50 @@ public class PlayerMovement : MonoBehaviour
 
         //anti-clipping calculations
         rb.AddForce(movement * Vector2.right);
+    }
+    void SlopeFix()
+    {
+        if (isOnSlope && X == 0)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = Vector2.zero;
+        }
+        else if (rb.bodyType == RigidbodyType2D.Kinematic)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
+    }
+    float SlopeMultiplier()
+    {
+        if (isOnLeftLongSlope)
+        {
+            if (X >= 0)
+                return playerVars.goingUpLong;
+            else 
+                return playerVars.goingDownLong;
+        }
+        if(isOnRightLongSlope)
+        {
+            if (X >= 0)
+                return playerVars.goingDownLong;
+            else
+                return playerVars.goingUpLong;
+        }
+        if (isOnLeftSmallSlope)
+        {
+            if (X >= 0)
+                return playerVars.goingUpShort;
+            else 
+                return playerVars.goingDownShort;
+        }
+        if (isOnRightSmallSlope)
+        {
+            if(X >= 0)
+                return playerVars.goingDownShort;
+            else
+                return playerVars.goingUpShort;
+        }
+        return 1f;
     }
     void InAirMovement()
     {
@@ -827,6 +866,33 @@ public class PlayerMovement : MonoBehaviour
             Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, slopeLayer) ||
             Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, slopeLayer) ||
             Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, slopeLayer);
+
+        //Slope Collision
+
+        isOnLeftLongSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, leftLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, leftLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, leftLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, leftLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, leftLongSlopeLayer);
+
+        isOnRightLongSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, rightLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, rightLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, rightLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, rightLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, rightLongSlopeLayer);
+
+        isOnLeftSmallSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, leftShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, leftShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, leftShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, leftShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, leftShortSlopeLayer);
+
+        isOnRightSmallSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, rightShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, rightShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, rightShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, rightShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, rightShortSlopeLayer);
+
 
         //Corner Collisions
         canCornerCorrect = Physics2D.Raycast(transform.position + edgeRaycastOffset, Vector2.up, topRaycastLength, groundLayer) &&

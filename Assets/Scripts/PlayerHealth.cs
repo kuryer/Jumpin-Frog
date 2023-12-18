@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class PlayerHealth : MonoBehaviour
 {
     PlayerMovement movementScript;
@@ -60,11 +61,9 @@ public class PlayerHealth : MonoBehaviour
 
     IEnumerator MoveTowardRespawn()
     {
-        while(transform.position != respawnPointPosition)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, respawnPointPosition, playerVars.respawnMoveTowardSpeed);
-            yield return null;
-        }
+        yield return new WaitForSeconds(.6f);
+        Vector3 respawnPosition = new Vector3(respawnPointPosition.x, respawnPointPosition.y, 0f);
+        transform.position = respawnPosition;
         Respawn();
     }
 
