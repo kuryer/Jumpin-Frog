@@ -8,15 +8,12 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     private float X;
-    //private bool JumpDown;
-    //private bool JumpHold;
-    //private bool JumpUp;
-    bool canMove = false;
+    [SerializeField]bool canMove = false;
     private float lastJumpPressed;
     Vector3 groundRayoffset;
+    Vector3 slopeRayOffset;
     Vector3 wallRayoffset;
 
-    //[SerializeField] TextMeshProUGUI gravityStateText;
     [Header("Gravity")]
     gravityState GravityState;
     enum gravityState
@@ -49,15 +46,27 @@ public class PlayerMovement : MonoBehaviour
     bool isWallPauseJumping;
     float wallGrabBufferL;
     float wallGrabBufferR;
+    float lastSwingingTime;
     bool jumpCut;
 
     [Header("Ground Collisions")]
     [SerializeField] float groundRayLength;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask slopeLayer;
+    [SerializeField] LayerMask leftShortSlopeLayer;
+    [SerializeField] LayerMask leftLongSlopeLayer;
+    [SerializeField] LayerMask rightShortSlopeLayer;
+    [SerializeField] LayerMask rightLongSlopeLayer;
     [SerializeField] float rayOffset;
+    [SerializeField] float slopeRayoffset;
     [SerializeField] Vector3 groundRayPosition;
     [SerializeField] bool isGrounded;
+    [SerializeField] bool isOnSlope;
 
+    bool isOnRightSmallSlope;
+    bool isOnLeftSmallSlope;
+    bool isOnRightLongSlope;
+    bool isOnLeftLongSlope;
 
     [Header("Wall Collisions")]
     [SerializeField] LayerMask wallLayer;
@@ -163,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
         lineRenderer.widthMultiplier = playerVars.lineWidth;
         groundRayoffset = new Vector3(rayOffset, 0f, 0f);
         wallRayoffset = new Vector3(0f, wallRayOffset, 0f);
+        slopeRayOffset = new Vector3(slopeRayoffset, 0f, 0f);
     }
     void Update()
     {
@@ -172,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
         jump();
 
-        
+        //Debug.Log(lastSwingingTime);
         if (canSwing || isSwinging) Swing();
         if (canWallJump) WallJump();
         if(!isWallPauseJumping && !isSwinging) WallGrab();
@@ -235,8 +245,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void BasicMovement()
     {
+        SlopeFix();
+        float reachSpeed = SlopeMultiplier();
+
         //calcualte the direction we want to move in and our desired velocity
-        float maxSpeed = X * playerVars.moveSpeed;
+        float maxSpeed = X * playerVars.moveSpeed * reachSpeed;
+
+        if (Input.GetKey(KeyCode.R))
+            Debug.Log(X);
 
         //calculate difference between current velocity and desired velocity
         float baseVelocity = rb.velocity.x;
@@ -260,6 +276,50 @@ public class PlayerMovement : MonoBehaviour
         //anti-clipping calculations
         rb.AddForce(movement * Vector2.right);
     }
+    void SlopeFix()
+    {
+        if (isOnSlope && X == 0)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = Vector2.zero;
+        }
+        else if (rb.bodyType == RigidbodyType2D.Kinematic)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
+    }
+    float SlopeMultiplier()
+    {
+        if (isOnLeftLongSlope)
+        {
+            if (X >= 0)
+                return playerVars.goingUpLong;
+            else 
+                return playerVars.goingDownLong;
+        }
+        if(isOnRightLongSlope)
+        {
+            if (X >= 0)
+                return playerVars.goingDownLong;
+            else
+                return playerVars.goingUpLong;
+        }
+        if (isOnLeftSmallSlope)
+        {
+            if (X >= 0)
+                return playerVars.goingUpShort;
+            else 
+                return playerVars.goingDownShort;
+        }
+        if (isOnRightSmallSlope)
+        {
+            if(X >= 0)
+                return playerVars.goingDownShort;
+            else
+                return playerVars.goingUpShort;
+        }
+        return 1f;
+    }
     void InAirMovement()
     {
         //calcualte the direction we want to move in and our desired velocity
@@ -279,11 +339,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void SwingingMovement()
     {
-        SetSwingGracity();
+        SetSwingGravity();
         
         float maxSpeed = X * playerVars.swingMoveSpeed;
         float realSpeed = rb.velocity.magnitude * Mathf.Sign(rb.velocity.x);
-        //Debug.Log(rb.velocity.magnitude * Mathf.Sign(rb.velocity.x));
         float speedDif = maxSpeed - realSpeed;
         
         speedDif = Mathf.Sign(speedDif) == Mathf.Sign(maxSpeed) ? speedDif : 0f;
@@ -293,10 +352,9 @@ public class PlayerMovement : MonoBehaviour
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.swingMovementPower) * Mathf.Sign(speedDif);
 
         rb.AddForce(movement * transform.right);
-        Debug.Log("speedDif: " + speedDif + " , movement: " + movement);
     }
 
-    void SetSwingGracity()
+    void SetSwingGravity()
     {
         if (X == 0)
             SwitchGravity(gravityState.InactiveSwing);
@@ -437,7 +495,9 @@ public class PlayerMovement : MonoBehaviour
     //========================
     void SwingJump()
     {
-        if(lastJumpPressed > 0f)
+        if(lastSwingingTime <= 0f)
+            jump = WaitingJump;
+        if(lastJumpPressed > 0f || lastJumpPressed > 0f && lastSwingingTime > 0f)
         {
             //CZY JA POTRZEBUJE TERAZ TEGO BALANSU ALBO PROCENTA Z PREDKOSCI JAK MAM JUZ POGRUPOWANY X I Y NA ODDZIELNE PARTIE I DZIA£AJ¥ ONE ODDZIELNIE???
             //MOZNABY POPRÓBOWAÆ BEZ TEGO BALANSU ITD.
@@ -524,6 +584,7 @@ public class PlayerMovement : MonoBehaviour
         direction = new Vector2(bubbleX, bubbleY).normalized;
         direction.x *= playerVars.throwDirectionXModifier;
         direction.y *= playerVars.throwDirectionYModifier;
+        Debug.Log(direction);
         return direction;
     }
     IEnumerator SlingGravityTimer()
@@ -587,6 +648,7 @@ public class PlayerMovement : MonoBehaviour
         distJoint.enabled = true;
         //lineRenderer.enabled = true;
         tongueRenderer.TurnSpriteRenderer();
+        lastSwingingTime = playerVars.swingCoyoteTime;
         SwitchGravity(gravityState.Swinging);
         VelocityCut();
         playerAnims.ChangeAnimationState(AnimationState.Swing_Player.ToString());
@@ -607,7 +669,7 @@ public class PlayerMovement : MonoBehaviour
         swingBoosterCheck = false;
         playerAnims.ChangeAnimationState(AnimationState.InAirRoll_Player.ToString());
         movement = InAirMovement;
-        jump = WaitingJump;
+        //jump = WaitingJump;
         tongueRenderer.TurnSpriteRenderer();
         tongueRenderer.StopCalculation();
         //JumpThightenerQueue();
@@ -799,6 +861,39 @@ public class PlayerMovement : MonoBehaviour
             Physics2D.Raycast((transform.position + groundRayPosition) + (2 * groundRayoffset), Vector3.down, groundRayLength, groundLayer) ||
             Physics2D.Raycast((transform.position + groundRayPosition) + groundRayoffset, Vector3.down, groundRayLength, groundLayer);
 
+        isOnSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, slopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, slopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, slopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, slopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, slopeLayer);
+
+        //Slope Collision
+
+        isOnLeftLongSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, leftLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, leftLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, leftLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, leftLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, leftLongSlopeLayer);
+
+        isOnRightLongSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, rightLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, rightLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, rightLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, rightLongSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, rightLongSlopeLayer);
+
+        isOnLeftSmallSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, leftShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, leftShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, leftShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, leftShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, leftShortSlopeLayer);
+
+        isOnRightSmallSlope = Physics2D.Raycast((transform.position + groundRayPosition), Vector3.down, groundRayLength, rightShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down, groundRayLength, rightShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down, groundRayLength, rightShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down, groundRayLength, rightShortSlopeLayer) ||
+            Physics2D.Raycast((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down, groundRayLength, rightShortSlopeLayer);
+
+
         //Corner Collisions
         canCornerCorrect = Physics2D.Raycast(transform.position + edgeRaycastOffset, Vector2.up, topRaycastLength, groundLayer) &&
                            !Physics2D.Raycast(transform.position + innerRaycastOffset, Vector2.up, topRaycastLength, groundLayer) ||
@@ -841,6 +936,7 @@ public class PlayerMovement : MonoBehaviour
     {
         groundRayoffset = new Vector3(rayOffset, 0f, 0f);
         wallRayoffset = new Vector3(0f, wallRayOffset, 0f);
+        slopeRayOffset = new Vector3(slopeRayoffset, 0f, 0f);
         Vector3 basePosition = new Vector3(transform.position.x, transform.position.y + wallRayPosition, transform.position.z);
         Gizmos.color = Color.green;
         //Ground Rays
@@ -849,6 +945,13 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawRay((transform.position + groundRayPosition) - (2 * groundRayoffset), Vector3.down * groundRayLength);
         Gizmos.DrawRay((transform.position + groundRayPosition) + (2 * groundRayoffset), Vector3.down * groundRayLength);
         Gizmos.DrawRay((transform.position + groundRayPosition) + groundRayoffset, Vector3.down * groundRayLength);
+
+        //Slope Rays
+        Gizmos.DrawRay((transform.position + groundRayPosition), Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition) - slopeRayOffset, Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition) - (2 * slopeRayOffset), Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition) + (2 * slopeRayOffset), Vector3.down * groundRayLength);
+        Gizmos.DrawRay((transform.position + groundRayPosition) + slopeRayOffset, Vector3.down * groundRayLength);
 
         //Wall Rays
         Gizmos.DrawRay(new Vector3(transform.position.x, transform.position.y + wallRayPosition, transform.position.z) + wallRayoffset, Vector3.right * wallRayLength);
@@ -1001,6 +1104,7 @@ public class PlayerMovement : MonoBehaviour
         TouchGroundScript();
 
         CoyoteTimeTimer();
+        SwingCoyoteTimeTimer();
 
         AntiDoubleJumpMechanism();
         AntiDoubleGrabMechanism();
@@ -1052,6 +1156,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded)
             lastGroundedTime -= Time.deltaTime;
+    }
+    void SwingCoyoteTimeTimer()
+    {
+        if(lastSwingingTime > 0f && !isSwinging)
+            lastSwingingTime -= Time.deltaTime;
     }
     void WallGrabBufferTimer()
     {

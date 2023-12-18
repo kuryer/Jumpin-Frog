@@ -32,6 +32,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803678387609138838}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 770.39, y: 229.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -39,7 +40,6 @@ Transform:
   m_Children:
   - {fileID: 3357048992298676104}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &803678387609138841
 SpriteRenderer:
@@ -110,6 +110,12 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 2419a0ced13671641942af835df0774b, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
@@ -126,16 +132,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2671e2cfd017340bd1828374b63ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 0
   playerVars: {fileID: 11400000, guid: c2d85ec264ce35d4f9d6be8d65ee0263, type: 2}
   platformRB: {fileID: 0}
   platfromMovementFix: 0
   groundRayLength: 0.76
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 30728
+  slopeLayer:
+    serializedVersion: 2
+    m_Bits: 30720
+  leftShortSlopeLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  leftLongSlopeLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  rightShortSlopeLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  rightLongSlopeLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   rayOffset: 0.19
+  slopeRayoffset: 0.15
   groundRayPosition: {x: -0.03, y: -0.44, z: 0}
   isGrounded: 0
+  isOnSlope: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -193,6 +217,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -222,6 +265,7 @@ SpringJoint2D:
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
+  m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
@@ -252,6 +296,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!120 &803678387609138816
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -339,16 +384,20 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0
 --- !u!1 &8286745104095933583
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,13 +424,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8286745104095933583}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.1338997, w: 0.9909949}
   m_LocalPosition: {x: -1.46, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 803678387609138840}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15.39}
 --- !u!114 &8685133206484574028
 MonoBehaviour:
@@ -451,6 +500,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!120 &818957045
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -538,13 +588,17 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0

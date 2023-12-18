@@ -17,12 +17,12 @@ TagManager:
   - Wall
   - Spikes
   - Player
-  - 
+  - Slope
   - Leaf
-  - 
-  - 
-  - 
-  - 
+  - Left Long Slope
+  - Right Long Slope
+  - Small Right Slope
+  - Small Left Slope
   - 
   - 
   - 

@@ -30,6 +30,7 @@ public class GameManagerScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Application.targetFrameRate = 60;
     }
 
     //To jest pierwsza funkcja przed animacj¹. Przycisk -> GameManager
@@ -57,8 +58,29 @@ public class GameManagerScript : MonoBehaviour
         currentLevel = desiredLevel;
     }
 
+    private void Update()
+    {
+        ChangeFramerate();
+    }
+
+    void ChangeFramerate()
+    {
+        if(Input.GetKeyDown(KeyCode.F1))
+            Application.targetFrameRate = 60;
+        if(Input.GetKeyDown(KeyCode.F2))
+            Application.targetFrameRate = 144;
+        if (Input.GetKeyDown(KeyCode.F3))
+            Application.targetFrameRate = 240;
+    }
+
     public void SetNewLevelTransition(LevelTransitionAnimationScript transitionScript)
     {
         TransitionScript = transitionScript;
+    }
+
+    public void Quit()
+    {
+        Debug.Log("Jakiœ quit tej?");
+        Application.Quit();
     }
 }

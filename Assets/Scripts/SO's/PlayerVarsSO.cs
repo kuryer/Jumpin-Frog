@@ -12,6 +12,12 @@ public class PlayerVarsSO : ScriptableObject
     public float stoppingBuffor;
     public float velPower;
     public float generalGravity;
+    public float slopeSpeed;
+    [Header("Slope Multipliers")]
+    public float goingDownShort;
+    public float goingUpShort;
+    public float goingDownLong;
+    public float goingUpLong;
     [Header("Platform Movement")]
     public float naturalizerModifier;
     [Header("In Air Movement")]
@@ -36,6 +42,7 @@ public class PlayerVarsSO : ScriptableObject
     [Header("Swing Jump")]
     public float swingJumpForce;
     public float swingJumpBalance;
+    public float swingCoyoteTime;
     [Header("Swinging")]
     public float springFrequency;
     public float springDamping;

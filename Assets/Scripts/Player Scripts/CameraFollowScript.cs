@@ -17,7 +17,7 @@ public class CameraFollowScript : MonoBehaviour
         isFacingRight = player.isFacingRight;
     }
 
-    void Update()
+    void LateUpdate()
     {
         transform.position = playerTransform.position;
     }
