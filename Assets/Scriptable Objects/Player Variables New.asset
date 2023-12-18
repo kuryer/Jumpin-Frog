@@ -19,6 +19,10 @@ MonoBehaviour:
   velPower: 1
   generalGravity: 1.8
   slopeSpeed: 14
+  goingDownShort: 0.2
+  goingUpShort: 1.75
+  goingDownLong: 0.55
+  goingUpLong: 1.5
   naturalizerModifier: 1
   inAirAccelerationBasic: 18.5
   inAirDeccelerationBasic: 1

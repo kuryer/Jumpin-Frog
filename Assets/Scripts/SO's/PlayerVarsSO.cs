@@ -13,6 +13,11 @@ public class PlayerVarsSO : ScriptableObject
     public float velPower;
     public float generalGravity;
     public float slopeSpeed;
+    [Header("Slope Multipliers")]
+    public float goingDownShort;
+    public float goingUpShort;
+    public float goingDownLong;
+    public float goingUpLong;
     [Header("Platform Movement")]
     public float naturalizerModifier;
     [Header("In Air Movement")]
