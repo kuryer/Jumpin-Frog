@@ -211,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
 
-    #region Events
+    #region Input Events
 
     void SubscribeForPlayerInputEvents()
     {
