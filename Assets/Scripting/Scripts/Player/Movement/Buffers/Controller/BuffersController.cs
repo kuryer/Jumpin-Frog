@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuffersController : MonoBehaviour
@@ -8,7 +6,8 @@ public class BuffersController : MonoBehaviour
     [SerializeField] Buffer CoyoteTime;
 
 
-    Coroutine BufferReference;
+    Coroutine JumpBufferCoroutine;
+    Coroutine CoyoteTimeCoroutine;
 
     void Start()
     {
@@ -28,11 +27,25 @@ public class BuffersController : MonoBehaviour
         if (!JumpBuffer.ActivityInfo.SecondValue)
             return;
 
-        if (BufferReference is null)
-            BufferReference = StartCoroutine(JumpBuffer.StartTimerRoutine());
+        if (JumpBufferCoroutine is null)
+            JumpBufferCoroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
         else
             JumpBuffer.RenewTimer();
     }
 
+    #endregion
+
+    #region CoyoteTime
+
+    public void SetCoyoteTime()
+    {
+        if(!CoyoteTime.ActivityInfo.SecondValue)
+            return;
+
+        if (CoyoteTimeCoroutine is null)
+            CoyoteTimeCoroutine = StartCoroutine(CoyoteTime.StartTimerRoutine());
+        else
+            CoyoteTime.RenewTimer();
+    }
     #endregion
 }
