@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="Scriptable Objects/Player/Buffer")]
@@ -8,18 +9,13 @@ public class Buffer : ScriptableObject
     public float MaxTime;
     public float ElapsedTime;
     public MovementStateVariable ActiveState;
-    public MovementState ValidState;
-
-    public void StartTimer()
-    {
-        ActivityInfo.FirstValue= true;
-        ElapsedTime = MaxTime;
-    }
+    public List<MovementState> ValidStates;
 
     #region Courutine
 
     public IEnumerator StartTimerRoutine()
     {
+        ElapsedTime = MaxTime;
         ActivityInfo.FirstValue = true;
         while (ElapsedTime > 0f)
         {
@@ -35,19 +31,9 @@ public class Buffer : ScriptableObject
     }
 
     #endregion
-    public void ElapseTime()
-    {
-        if(ElapsedTime > 0f)
-        {
-            ElapsedTime -= Time.deltaTime;
-            return;
-        }else
-            ActivityInfo.FirstValue = false;
-    }
-
     public void OnStateChangeCheck()
     {
-        if (ActiveState.Value == ValidState)
+        if (ValidStates.Contains(ActiveState.Value))
             ActivityInfo.SecondValue = true;
         else
         {
