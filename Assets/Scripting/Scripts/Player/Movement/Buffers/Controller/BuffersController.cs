@@ -12,21 +12,27 @@ public class BuffersController : MonoBehaviour
 
     void Start()
     {
-        
+        OnStateChanged();
     }
+
+    public void OnStateChanged() // <- Call od State machiny
+    {
+        JumpBuffer.OnStateChangeCheck();
+        CoyoteTime.OnStateChangeCheck();
+    }
+
+    #region Jump Buffer
 
     public void SetJumpBuffer()
     {
         if (!JumpBuffer.ActivityInfo.SecondValue)
             return;
+
         if (BufferReference is null)
             BufferReference = StartCoroutine(JumpBuffer.StartTimerRoutine());
         else
             JumpBuffer.RenewTimer();
     }
 
-    void Update()
-    {
-        
-    }
+    #endregion
 }

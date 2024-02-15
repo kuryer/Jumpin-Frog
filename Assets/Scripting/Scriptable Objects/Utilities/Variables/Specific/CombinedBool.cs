@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Scriptable Objects/Variables/Specific/Combined Bool")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Utilities/Variables/Specific/Combined Bool")]
 public class CombinedBool : ScriptableObject
 {
     public bool FirstValue;
