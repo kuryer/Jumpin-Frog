@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundDetection : MonoBehaviour
@@ -11,26 +9,18 @@ public class GroundDetection : MonoBehaviour
     [SerializeField] LayerMask GroundLayer;
 
     [Header("Event Values")]
-    bool isGrounded;
-    bool isEventCalled;
-
-
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    public BoolVariable isGrounded;
+    public GameEvent OnGroundEvent;
+    public GameEvent InAirEvent;
 
     private void FixedUpdate()
     {
-        if(isGrounded != IsGrounded())
+        if(isGrounded.Value != IsGrounded())
         {
-            //call event;
+            if(isGrounded.Value == true)
+                InAirCall();
+            else
+                OnGroundCall();
         }
     }
 
@@ -41,5 +31,27 @@ public class GroundDetection : MonoBehaviour
         Physics2D.Raycast((transform.position + RayPosition) - RayOffset, Vector3.down, RayDistance, GroundLayer) ||
         Physics2D.Raycast((transform.position + RayPosition) + (2 * RayOffset), Vector3.down, RayDistance, GroundLayer) ||
         Physics2D.Raycast((transform.position + RayPosition) + RayOffset, Vector3.down, RayDistance, GroundLayer);
+    }
+
+    void OnGroundCall()
+    {
+        isGrounded.Value = true;
+        OnGroundEvent.Raise();
+    }
+
+    void InAirCall()
+    {
+        isGrounded.Value = false;
+        //Call State Machine changeState
+        InAirEvent.Raise();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawRay(transform.position + RayPosition, Vector3.down * RayDistance);
+        Gizmos.DrawRay(transform.position + RayPosition - (2 * RayOffset), Vector3.down * RayDistance);
+        Gizmos.DrawRay(transform.position + RayPosition + (2 * RayOffset), Vector3.down * RayDistance);
+        Gizmos.DrawRay(transform.position + RayPosition - RayOffset, Vector3.down * RayDistance);
+        Gizmos.DrawRay(transform.position + RayPosition + RayOffset, Vector3.down * RayDistance);
     }
 }
