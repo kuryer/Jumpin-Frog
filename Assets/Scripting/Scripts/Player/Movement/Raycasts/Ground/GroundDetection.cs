@@ -9,12 +9,19 @@ public class GroundDetection : MonoBehaviour
     [SerializeField] LayerMask GroundLayer;
 
     [Header("Event Values")]
-    public BoolVariable isGrounded;
-    public GameEvent OnGroundEvent;
-    public GameEvent InAirEvent;
+    [SerializeField] BoolVariable isGrounded;
+    [SerializeField] GameEvent OnGroundEvent;
+    [SerializeField] GameEvent InAirEvent;
+
+    [SerializeField] MovementState GroundState;
+    [SerializeField] MovementState InAirState;
+    [SerializeField] MovementStateVariable ActualState;
 
     private void FixedUpdate()
     {
+        if (!(ActualState.Value == GroundState || ActualState.Value == InAirState))
+            return;
+
         if(isGrounded.Value != IsGrounded())
         {
             if(isGrounded.Value == true)
@@ -36,6 +43,7 @@ public class GroundDetection : MonoBehaviour
     void OnGroundCall()
     {
         isGrounded.Value = true;
+        //call State Machine
         OnGroundEvent.Raise();
     }
 
