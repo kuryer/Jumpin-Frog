@@ -4,10 +4,10 @@ public class BuffersController : MonoBehaviour
 {
     [SerializeField] Buffer JumpBuffer;
     [SerializeField] Buffer CoyoteTime;
-
-
-    Coroutine JumpBufferCoroutine;
-    Coroutine CoyoteTimeCoroutine;
+    [SerializeField] Buffer WallJumpBuffer;
+    [SerializeField] Buffer SwingCatchBuffer;
+    [SerializeField] Buffer BubbleBuffer;
+    [SerializeField] Buffer SwingJumpCoyoteTime;
 
     void Start()
     {
@@ -18,6 +18,10 @@ public class BuffersController : MonoBehaviour
     {
         JumpBuffer.OnStateChangeCheck();
         CoyoteTime.OnStateChangeCheck();
+        WallJumpBuffer.OnStateChangeCheck();
+        SwingCatchBuffer.OnStateChangeCheck();
+        BubbleBuffer.OnStateChangeCheck();
+        SwingJumpCoyoteTime.OnStateChangeCheck();
     }
 
     #region Jump Buffer
@@ -27,10 +31,16 @@ public class BuffersController : MonoBehaviour
         if (!JumpBuffer.ActivityInfo.SecondValue)
             return;
 
-        if (JumpBufferCoroutine is null)
-            JumpBufferCoroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+        if (!JumpBuffer.ActivityInfo.FirstValue)
+            JumpBuffer.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
         else
             JumpBuffer.RenewTimer();
+    }
+
+    public void ResetJumpBuffer()
+    {
+        StopCoroutine(JumpBuffer.Coroutine);
+        JumpBuffer.ResetTimer();
     }
 
     #endregion
@@ -42,10 +52,100 @@ public class BuffersController : MonoBehaviour
         if(!CoyoteTime.ActivityInfo.SecondValue)
             return;
 
-        if (CoyoteTimeCoroutine is null)
-            CoyoteTimeCoroutine = StartCoroutine(CoyoteTime.StartTimerRoutine());
+        if (!CoyoteTime.ActivityInfo.FirstValue)
+            CoyoteTime.Coroutine = StartCoroutine(CoyoteTime.StartTimerRoutine());
         else
             CoyoteTime.RenewTimer();
     }
+
+    public void ResetCoyoteTime()
+    {
+        StopCoroutine(CoyoteTime.Coroutine);
+        CoyoteTime.ResetTimer();
+    }
+
+    #endregion
+
+    #region Wall Jump Buffer
+
+    public void SetWallJumpBuffer()
+    {
+        if (!WallJumpBuffer.ActivityInfo.SecondValue)
+            return;
+
+        if (!WallJumpBuffer.ActivityInfo.FirstValue)
+            WallJumpBuffer.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+        else
+            WallJumpBuffer.RenewTimer();
+    }
+
+    public void ResetWallJumpBuffer()
+    {
+        StopCoroutine(WallJumpBuffer.Coroutine);
+        WallJumpBuffer.ResetTimer();
+    }
+    #endregion
+
+    #region Swing Catch Buffer
+
+    public void SetSwingCatchBuffer()
+    {
+        if (!SwingCatchBuffer.ActivityInfo.SecondValue)
+            return;
+
+        if (!SwingCatchBuffer.ActivityInfo.FirstValue)
+            SwingCatchBuffer.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+        else
+            SwingCatchBuffer.RenewTimer();
+    }
+
+    public void ResetSwingCatchBuffer()
+    {
+        StopCoroutine(SwingCatchBuffer.Coroutine);
+        SwingCatchBuffer.ResetTimer();
+    }
+
+    #endregion
+
+    #region Bubble Buffer
+
+    public void SetBubbleBuffer()
+    {
+        if (!BubbleBuffer.ActivityInfo.SecondValue)
+            return;
+
+        if (!BubbleBuffer.ActivityInfo.FirstValue)
+            BubbleBuffer.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+        else
+            BubbleBuffer.RenewTimer();
+    }
+
+    public void ResetBubbleBuffer()
+    {
+        StopCoroutine(BubbleBuffer.Coroutine);
+        BubbleBuffer.ResetTimer();
+    }
+
+    #endregion
+
+    #region Swing Jump Coyote Time
+
+    public void SetSwingJumpCoyoteTime()
+    {
+        if (!SwingJumpCoyoteTime.ActivityInfo.SecondValue)
+            return;
+
+        if (!SwingJumpCoyoteTime.ActivityInfo.FirstValue)
+            SwingJumpCoyoteTime.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+        else
+            SwingJumpCoyoteTime.RenewTimer();
+    }
+
+    public void ResetSwingJumpCoyoteTime()
+    {
+        StopCoroutine(SwingJumpCoyoteTime.Coroutine);
+        SwingJumpCoyoteTime.ResetTimer();
+    }
+
     #endregion
 }
