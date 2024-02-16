@@ -10,6 +10,7 @@ public class Buffer : ScriptableObject
     public float ElapsedTime;
     public MovementStateVariable ActiveState;
     public List<MovementState> ValidStates;
+    public Coroutine Coroutine;
 
     #region Courutine
 
