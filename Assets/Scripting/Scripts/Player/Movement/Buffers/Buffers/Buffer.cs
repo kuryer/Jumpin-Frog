@@ -15,22 +15,27 @@ public class Buffer : ScriptableObject
 
     public IEnumerator StartTimerRoutine()
     {
-        ElapsedTime = MaxTime;
         ActivityInfo.FirstValue = true;
         while (ElapsedTime > 0f)
         {
             ElapsedTime -= Time.deltaTime;
             yield return null;
         }
-        ActivityInfo.FirstValue = false;
+        ResetTimer();
     }
 
     public void RenewTimer()
     {
         ElapsedTime = MaxTime;
     }
+    public void ResetTimer()
+    {
+        ElapsedTime = MaxTime;
+        ActivityInfo.FirstValue = false;
+    }
 
     #endregion
+
     public void OnStateChangeCheck()
     {
         if (ValidStates.Contains(ActiveState.Value))
@@ -38,13 +43,7 @@ public class Buffer : ScriptableObject
         else
         {
             ActivityInfo.SecondValue = false;
-            ZeroTimer();
+            ResetTimer();
         }
-    }
-
-    public void ZeroTimer()
-    {
-        ElapsedTime = 0f;
-        ActivityInfo.FirstValue = false;
     }
 }
