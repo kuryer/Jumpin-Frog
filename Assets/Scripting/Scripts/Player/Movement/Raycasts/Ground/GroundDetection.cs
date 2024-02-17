@@ -19,11 +19,12 @@ public class GroundDetection : MonoBehaviour
 
     [Header("Anti-Double Jump")]
     [SerializeField] BoolVariable PlayerJumped;
+    private delegate void GroundCheckDelegate();
+    GroundCheckDelegate groundCheckDelegate;
 
 
     private void FixedUpdate()
     {
-        //zrobi³bym delegate z tego
 
         if (!(ActualState.Value == GroundState || ActualState.Value == InAirState))
             return;
@@ -72,5 +73,22 @@ public class GroundDetection : MonoBehaviour
     public void PlayerJumpedCall()
     {
         PlayerJumped.Value = true;
+        groundCheckDelegate = PlayerJumpCheck;
+    }
+
+    void PlayerJumpCheck()
+    {
+        if (GroundCheck() == false)
+        {
+            ChangedInAirCall();
+        }
+    }
+
+    void ChangedInAirCall()
+    {
+        PlayerJumped.Value = false;
+        isGrounded.Value = false;
+        //groundCheckDelegate = defaultMethod
+        //Call EVENT????
     }
 }
