@@ -17,12 +17,18 @@ public class GroundDetection : MonoBehaviour
     [SerializeField] MovementState InAirState;
     [SerializeField] MovementStateVariable ActualState;
 
+    [Header("Anti-Double Jump")]
+    [SerializeField] BoolVariable PlayerJumped;
+
+
     private void FixedUpdate()
     {
+        //zrobi³bym delegate z tego
+
         if (!(ActualState.Value == GroundState || ActualState.Value == InAirState))
             return;
 
-        if(isGrounded.Value != IsGrounded())
+        if(isGrounded.Value != GroundCheck())
         {
             if(isGrounded.Value == true)
                 InAirCall();
@@ -31,7 +37,7 @@ public class GroundDetection : MonoBehaviour
         }
     }
 
-    bool IsGrounded()
+    bool GroundCheck()
     {
         return Physics2D.Raycast((transform.position + RayPosition), Vector3.down, RayDistance, GroundLayer) ||
         Physics2D.Raycast((transform.position + RayPosition) - (2 * RayOffset), Vector3.down, RayDistance, GroundLayer) ||
@@ -61,5 +67,10 @@ public class GroundDetection : MonoBehaviour
         Gizmos.DrawRay(transform.position + RayPosition + (2 * RayOffset), Vector3.down * RayDistance);
         Gizmos.DrawRay(transform.position + RayPosition - RayOffset, Vector3.down * RayDistance);
         Gizmos.DrawRay(transform.position + RayPosition + RayOffset, Vector3.down * RayDistance);
+    }
+
+    public void PlayerJumpedCall()
+    {
+        PlayerJumped.Value = true;
     }
 }
