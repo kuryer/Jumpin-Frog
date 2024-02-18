@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class BasicJumpController : MonoBehaviour
@@ -22,12 +23,13 @@ public class BasicJumpController : MonoBehaviour
     void BasicJumpCheck()
     {
         if (JumpBuffer.ActivityInfo.Value() && isGrounded.Value) 
-            BasicJump();
+            BasicJump(playerVariables.jumpPower);
     }
 
-    public void BasicJump()
+    public void BasicJump(float jumpForce)
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         BuffersController.ResetJumpBuffer();
         //Change state to in air
         GroundDetection.PlayerJumpedCall(); // Anti-double Jump
