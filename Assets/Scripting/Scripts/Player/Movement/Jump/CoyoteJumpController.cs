@@ -1,18 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CoyoteJumpController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Player")]
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] PlayerVarsSO playerVariables;
 
-    // Update is called once per frame
+    [Header("Jump")]
+    [SerializeField] Buffer JumpBuffer;
+    [SerializeField] Buffer CoyoteTime;
+    [SerializeField] BuffersController BuffersController;
     void Update()
     {
-        
+        CoyoteJumpCheck();
+    }
+
+    void CoyoteJumpCheck()
+    {
+        if (JumpBuffer.ActivityInfo.Value() && CoyoteTime.ActivityInfo.Value())
+            CoyoteJump();
+    }
+
+    void CoyoteJump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
+        rb.AddForce(Vector2.up * playerVariables.jumpPower, ForceMode2D.Impulse);
+        ResetBuffers();
+    }
+
+    void ResetBuffers()
+    {
+        BuffersController.ResetJumpBuffer();
+        BuffersController.ResetCoyoteTime();
     }
 }

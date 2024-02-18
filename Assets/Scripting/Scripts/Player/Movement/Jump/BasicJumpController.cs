@@ -28,11 +28,8 @@ public class BasicJumpController : MonoBehaviour
     public void BasicJump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
-        rb.AddForce(Vector2.up * playerVariables.jumpPower, ForceMode2D.Impulse);
-        //Reset buffers
         BuffersController.ResetJumpBuffer();
         //Change state to in air
-        //anti-double jump mechanic
-        GroundDetection.PlayerJumpedCall();
+        GroundDetection.PlayerJumpedCall(); // Anti-double Jump
     }
 }
