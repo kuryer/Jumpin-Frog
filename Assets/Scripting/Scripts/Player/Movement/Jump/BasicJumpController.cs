@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicJumpController : MonoBehaviour
@@ -14,13 +12,10 @@ public class BasicJumpController : MonoBehaviour
     [SerializeField] BuffersController BuffersController;
 
     [Header("Anti-Double Jump")]
-    [SerializeField] BoolVariable PlayerJumped;
     [SerializeField] GroundDetection GroundDetection;
 
     void Update()
     {
-        if (PlayerJumped.Value)
-            return;
         BasicJumpCheck();
     }
 
@@ -32,11 +27,12 @@ public class BasicJumpController : MonoBehaviour
 
     public void BasicJump()
     {
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * playerVariables.jumpPower, ForceMode2D.Impulse);
-        //anti-double jump mechanic
-        GroundDetection.PlayerJumpedCall();
         //Reset buffers
         BuffersController.ResetJumpBuffer();
         //Change state to in air
+        //anti-double jump mechanic
+        GroundDetection.PlayerJumpedCall();
     }
 }
