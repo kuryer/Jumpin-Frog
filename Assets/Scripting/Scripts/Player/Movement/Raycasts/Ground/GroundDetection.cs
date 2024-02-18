@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GroundDetection : MonoBehaviour
@@ -18,24 +19,20 @@ public class GroundDetection : MonoBehaviour
     [SerializeField] MovementStateVariable ActualState;
 
     [Header("Anti-Double Jump")]
-    [SerializeField] BoolVariable PlayerJumped;
+    [SerializeField] BasicJumpController JumpController;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] float antiBugTime;
     private delegate void GroundCheckDelegate();
     GroundCheckDelegate groundCheckDelegate;
-
+    //Moge jeszcze zrobic tak ze bede wylaczal skrypt basic jumpa
+    private void Awake()
+    {
+        groundCheckDelegate = DefaultCheck;
+    }
 
     private void FixedUpdate()
     {
-
-        if (!(ActualState.Value == GroundState || ActualState.Value == InAirState))
-            return;
-
-        if(isGrounded.Value != GroundCheck())
-        {
-            if(isGrounded.Value == true)
-                InAirCall();
-            else
-                OnGroundCall();
-        }
+        groundCheckDelegate();
     }
 
     bool GroundCheck()
@@ -72,23 +69,47 @@ public class GroundDetection : MonoBehaviour
 
     public void PlayerJumpedCall()
     {
-        PlayerJumped.Value = true;
+        SetBasicJumpController(false);
         groundCheckDelegate = PlayerJumpCheck;
+    }
+
+    void DefaultCheck()
+    {
+        if (!(ActualState.Value == GroundState || ActualState.Value == InAirState))
+            return;
+
+        if (isGrounded.Value != GroundCheck())
+        {
+            if (isGrounded.Value == true)
+                InAirCall();
+            else
+                OnGroundCall();
+        }
     }
 
     void PlayerJumpCheck()
     {
         if (GroundCheck() == false)
-        {
             ChangedInAirCall();
-        }
+        else if(rb.velocity.y <= 0)
+            BackToDefaultGrounded();
     }
-
+    void BackToDefaultGrounded()
+    {
+        OnGroundCall();
+        SetBasicJumpController(true);
+        groundCheckDelegate = DefaultCheck;
+    }
     void ChangedInAirCall()
     {
-        PlayerJumped.Value = false;
         isGrounded.Value = false;
-        //groundCheckDelegate = defaultMethod
+        groundCheckDelegate = DefaultCheck;
+        SetBasicJumpController(true);
         //Call EVENT????
+    }
+
+    void SetBasicJumpController(bool enabled)
+    {
+        JumpController.enabled = enabled;
     }
 }
