@@ -47,6 +47,7 @@ public class BuffersController : MonoBehaviour
 
     #region CoyoteTime
 
+    //Called by GroundDetection.InAirCall Event
     public void SetCoyoteTime()
     {
         if(!CoyoteTime.ActivityInfo.SecondValue)
