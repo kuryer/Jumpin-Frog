@@ -10,4 +10,9 @@ public class CombinedBool : ScriptableObject
     {
         return FirstValue && SecondValue;
     }
+
+    public bool Or()
+    {
+        return FirstValue || SecondValue;
+    }
 }
