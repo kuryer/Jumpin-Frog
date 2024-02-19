@@ -9,7 +9,7 @@ public class FallDetection : MonoBehaviour
 
     void Update()
     {
-        if (!(ActualState.Value is InAirMovementState) || isFalling)
+        if (!(ActualState.Value is InAirMovementState) || isFalling /* || gravityState = sling*/)
             return;
 
         FallCheck();

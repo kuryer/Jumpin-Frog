@@ -1,18 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BubbleThrowController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Player")]
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] PlayerVarsSO playerVariables;
+
+    public void BubbleThrow(Vector2 direction)
     {
-        
+        rb.AddForce(direction * playerVariables.bubbleThrowForce, ForceMode2D.Impulse);
+        StartCoroutine(SlingGravityTimer());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SlingGravityTimer()
     {
-        
+        //switch gravity sling(bubble)
+        yield return new WaitForSeconds(playerVariables.slingGravityChangeTime);
+        //if(gravityState = Sling && actualState is inAir)
+            //change to default gravity
     }
 }
