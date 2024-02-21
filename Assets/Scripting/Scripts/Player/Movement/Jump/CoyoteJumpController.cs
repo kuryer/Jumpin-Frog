@@ -10,6 +10,7 @@ public class CoyoteJumpController : MonoBehaviour
     [SerializeField] Buffer JumpBuffer;
     [SerializeField] Buffer CoyoteTime;
     [SerializeField] BuffersController BuffersController;
+    [SerializeField] JumpCutController JumpCutController;
     void Update()
     {
         CoyoteJumpCheck();

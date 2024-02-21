@@ -5,6 +5,11 @@ public class JumpPadJump : MonoBehaviour
     [Header("Player")]
     [SerializeField] Rigidbody2D rb;
     [SerializeField] MovementStateVariable ActualState;
+
+    [Header("State Management")]
+    [SerializeField] MovementStateMachine StateMachine;
+    [SerializeField] MovementState InAirMovementState;
+
     [Header("Anti-Double Jump")]
     [SerializeField] GroundDetection GroundDetection;
     public void Jump(float jumpForce)
@@ -17,7 +22,7 @@ public class JumpPadJump : MonoBehaviour
 
     void TransitionToInAir()
     {
-        //Change state to inAir
+        StateMachine.ChangeState(InAirMovementState);
         GroundDetection.PlayerJumpedCall();
     } 
 }

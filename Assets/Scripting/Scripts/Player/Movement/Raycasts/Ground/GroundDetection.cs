@@ -14,8 +14,10 @@ public class GroundDetection : MonoBehaviour
     [SerializeField] GameEvent OnGroundEvent;
     [SerializeField] GameEvent InAirEvent;
 
-    [SerializeField] MovementState GroundState;
-    [SerializeField] MovementState InAirState;
+    [Header("State Management")]
+    [SerializeField] MovementStateMachine StateMachine;
+    [SerializeField] MovementState GroundMovementState;
+    [SerializeField] MovementState InAirMovementState;
     [SerializeField] MovementStateVariable ActualState;
 
     [Header("Anti-Double Jump")]
@@ -25,6 +27,7 @@ public class GroundDetection : MonoBehaviour
     private delegate void GroundCheckDelegate();
     GroundCheckDelegate groundCheckDelegate;
     //Moge jeszcze zrobic tak ze bede wylaczal skrypt basic jumpa
+
     private void Awake()
     {
         groundCheckDelegate = DefaultCheck;
@@ -47,14 +50,14 @@ public class GroundDetection : MonoBehaviour
     void OnGroundCall()
     {
         isGrounded.Value = true;
-        //call State Machine
+        StateMachine.ChangeState(GroundMovementState);
         OnGroundEvent.Raise();
     }
 
     void InAirCall()
     {
         isGrounded.Value = false;
-        //Call State Machine changeState
+        StateMachine.ChangeState(InAirMovementState);
         InAirEvent.Raise();
     }
 
@@ -71,11 +74,12 @@ public class GroundDetection : MonoBehaviour
     {
         SetBasicJumpController(false);
         groundCheckDelegate = PlayerJumpCheck;
+        InAirEvent.Raise();
     }
 
     void DefaultCheck()
     {
-        if (!(ActualState.Value == GroundState || ActualState.Value == InAirState))
+        if (!(ActualState.Value is GroundMovementState || ActualState.Value is InAirMovementState))
             return;
 
         if (isGrounded.Value != GroundCheck())
@@ -105,7 +109,6 @@ public class GroundDetection : MonoBehaviour
         isGrounded.Value = false;
         groundCheckDelegate = DefaultCheck;
         SetBasicJumpController(true);
-        //Call EVENT????
     }
 
     void SetBasicJumpController(bool enabled)
