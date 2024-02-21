@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlopeDetection : MonoBehaviour
+public class OldSlopeDetection : MonoBehaviour
 {
     [SerializeField] float rayDistance;
     [SerializeField] Vector3 rayOffset;
