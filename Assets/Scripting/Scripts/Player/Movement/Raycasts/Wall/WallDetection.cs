@@ -9,12 +9,10 @@ public class WallDetection : MonoBehaviour
     [SerializeField] LayerMask WallLayer;
     
     [Header("Detection Values")]
-    [SerializeField] CombinedBool DetectedWalls;
+    [SerializeField] DirectionBool DetectedWalls;
     private delegate void WallDetectionDelegate();
     WallDetectionDelegate leftWallDetection;
     WallDetectionDelegate rightWallDetection;
-
-    //First = Left || Second = Right
 
     #region Updates
     private void Awake()
@@ -54,11 +52,11 @@ public class WallDetection : MonoBehaviour
 
     void DefaultLeftWallCheck()
     {
-        DetectedWalls.FirstValue = LeftWallCheck();
+        DetectedWalls.Left = LeftWallCheck();
     }
     void DefaultRightWallCheck()
     {
-        DetectedWalls.SecondValue = RightWallCheck();
+        DetectedWalls.Right = RightWallCheck();
     }
 
     #endregion
@@ -69,6 +67,7 @@ public class WallDetection : MonoBehaviour
 
     public void LeftWallJumped()
     {
+        DetectedWalls.Left = false;
         leftWallDetection = LeftWallJumpedCheck;
     }
     void LeftWallJumpedCheck()
@@ -88,6 +87,7 @@ public class WallDetection : MonoBehaviour
     #region Right
     public void RightWallJumped()
     {
+        DetectedWalls.Right = false;
         rightWallDetection = RightWallJumpedCheck;
     }
     void RightWallJumpedCheck()
