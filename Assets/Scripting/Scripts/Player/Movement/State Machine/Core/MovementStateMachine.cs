@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementStateMachine : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] MovementStateVariable ActualState;
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        ActualState.Value.OnUpdate();
+    }
+
+    void FixedUpdate()
+    {
+        ActualState.Value.OnFixedUpdate();
+    }
+
+    public void ChangeState(MovementState movementState)
+    {
+        if (ActualState.Value == movementState)
+            return;
+        ActualState.Value.OnExit();
+        ActualState.Value = movementState;
+        ActualState.Value.OnEnter();
     }
 }

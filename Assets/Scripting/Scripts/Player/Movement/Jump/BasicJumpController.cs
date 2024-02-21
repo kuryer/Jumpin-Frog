@@ -11,6 +11,10 @@ public class BasicJumpController : MonoBehaviour
     [SerializeField] BoolVariable isGrounded;
     [SerializeField] BuffersController BuffersController;
 
+    [Header("State Management")]
+    [SerializeField] MovementStateMachine StateMachine;
+    [SerializeField] MovementState InAirMovementState;
+
     [Header("Anti-Double Jump")]
     [SerializeField] GroundDetection GroundDetection;
 
@@ -30,7 +34,7 @@ public class BasicJumpController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         BuffersController.ResetJumpBuffer();
-        //Change state to in air
+        StateMachine.ChangeState(InAirMovementState);
         GroundDetection.PlayerJumpedCall(); // Anti-double Jump
     }
 }
