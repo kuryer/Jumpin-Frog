@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b704ad51234904a8c9f01be0a0fd78, type: 3}
   m_Name: Test Player Vars
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  acceleration: 1
-  decceleration: 1
+  moveSpeed: 7
+  acceleration: 0.25
+  decceleration: 0.1
   stoppingBuffor: 1
   velPower: 1
   generalGravity: 1

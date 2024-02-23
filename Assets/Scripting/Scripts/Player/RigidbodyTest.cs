@@ -1,14 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RigidbodyTest : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] PlayerVarsSO playerVariables;
+    [SerializeField] TestVariables testVariables;
+    [SerializeField] BoolVariable isOnSlopeVariable;
     PlayerControls playerControls;
+    Rigidbody2D platformRB;
     float X;
+    float velocity;
+    bool StandOnSlope;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -31,22 +34,14 @@ public class RigidbodyTest : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movement();
+        RBMovement();
     }
 
     void Update()
     {
         X = GatherInput();
         if (Input.GetKeyDown(KeyCode.R))
-            ChangeBody();
-    }
-
-    void ChangeBody()
-    {
-        if (rb.bodyType == RigidbodyType2D.Kinematic)
-            rb.bodyType = RigidbodyType2D.Dynamic;
-        else
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = X * 5f * Vector2.right;
     }
 
     float GatherInput()
@@ -56,26 +51,56 @@ public class RigidbodyTest : MonoBehaviour
         else return Mathf.Sign(input);
     }
 
-    void Movement()
+    void RBMovement()
     {
-        //calcualte the direction we want to move in and our desired velocity
-        float maxSpeed = X * playerVariables.moveSpeed;
+        if (X == 0)
+            SlowDownVelocity();
+        else
+            SetVelocityAcc();
 
-        //calculate difference between current velocity and desired velocity
-        float baseVelocity = rb.velocity.x;
+        float velocityX = platformRB is null ? velocity : velocity + platformRB.velocity.x;
+        rb.velocity = new Vector2(velocityX, rb.velocity.y);
+    }
 
+    void SlowDownVelocity()
+    {
+        if (StandOnSlope)
+            return;
 
-        float speedDif = maxSpeed - baseVelocity;
+        if(!StandOnSlope && isOnSlopeVariable.Value)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = Vector2.zero;
+            StandOnSlope = true;
+            return;
+        }
 
-        //change acceleration rate depending on situation
-        float accelRate = (Mathf.Abs(maxSpeed) > 0.01f) ? playerVariables.acceleration : playerVariables.decceleration;
+        if (velocity == 0)
+            return;
 
-        //applies acceleration to speed difference, the raises to a set power so acceleration increases with higher speeds
-        //finally multiplies by sign to reapply direction
-        //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.velPower) * Mathf.Sign(speedDif);
-        float movement = (Mathf.Abs(speedDif) * accelRate) * Mathf.Sign(speedDif);
+        if (Mathf.Abs(velocity + (testVariables.decc * -Mathf.Sign(velocity) * Time.fixedDeltaTime)) > 0)
+            velocity += (testVariables.decc * -Mathf.Sign(velocity) * Time.fixedDeltaTime);
+        else velocity = 0;
+    }
 
-        //anti-clipping calculations
-        rb.velocity = new Vector2(rb.velocity.x + movement, rb.velocity.y);
+    void SetVelocityAcc()
+    {
+        if (velocity == testVariables.maxSpeed * X)
+            return;
+
+        if (StandOnSlope)
+            BackToDynamic();
+
+        float multiplier = Mathf.Sign(velocity) == X ? testVariables.acc : testVariables.decc;
+
+        if (Mathf.Abs(velocity + (multiplier * X * Time.fixedDeltaTime)) < testVariables.maxSpeed)
+            velocity += (multiplier * X * Time.fixedDeltaTime);
+        else velocity = testVariables.maxSpeed * X;
+    }
+
+    void BackToDynamic()
+    {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        StandOnSlope = false;
     }
 }

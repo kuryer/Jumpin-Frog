@@ -21,6 +21,7 @@ public class SlopeDetection : MonoBehaviour
 
     [Header("Output")]
     [SerializeField] MovementStateVariable ActualState;
+    [SerializeField] BoolVariable isOnSlopeVariable;
     [SerializeField] PlayerVarsSO playerVariables;
     [SerializeField] IntVariable X;
     [SerializeField] FloatVariable SlopeModifier;
@@ -30,27 +31,29 @@ public class SlopeDetection : MonoBehaviour
     {
         if (ActualState.Value is not GroundMovementState)
             return;
-        Raycast();
+        isOnSlopeVariable.Value = Raycast();
         SlopeModifier.Value = ChooseModifier();
     }
 
-    void Raycast()
+    bool Raycast()
     {
-        isLeftLong = Physics2D.Raycast(transform.position + RayPosition, Vector3.down, RayDistance, LeftLongLayer) ||
+        bool isLeftLong = Physics2D.Raycast(transform.position + RayPosition, Vector3.down, RayDistance, LeftLongLayer) ||
             Physics2D.Raycast(transform.position + RayPosition + RayOffset, Vector3.down, RayDistance, LeftLongLayer) ||
             Physics2D.Raycast(transform.position + RayPosition - RayOffset, Vector3.down, RayDistance, LeftLongLayer);
         
-        isRightLong = Physics2D.Raycast(transform.position + RayPosition, Vector3.down, RayDistance, RightLongLayer) ||
+        bool isRightLong = Physics2D.Raycast(transform.position + RayPosition, Vector3.down, RayDistance, RightLongLayer) ||
             Physics2D.Raycast(transform.position + RayPosition + RayOffset, Vector3.down, RayDistance, RightLongLayer) ||
             Physics2D.Raycast(transform.position + RayPosition - RayOffset, Vector3.down, RayDistance, RightLongLayer);
 
-        isLeftShort = Physics2D.Raycast(transform.position + RayPosition, Vector3.down, RayDistance, LeftShortLayer) ||
+        bool isLeftShort = Physics2D.Raycast(transform.position + RayPosition, Vector3.down, RayDistance, LeftShortLayer) ||
             Physics2D.Raycast(transform.position + RayPosition + RayOffset, Vector3.down, RayDistance, LeftShortLayer) ||
             Physics2D.Raycast(transform.position + RayPosition - RayOffset, Vector3.down, RayDistance, LeftShortLayer);
 
-        isRightShort = Physics2D.Raycast(transform.position + RayPosition, Vector3.down, RayDistance, RightShortLayer) ||
+        bool isRightShort = Physics2D.Raycast(transform.position + RayPosition, Vector3.down, RayDistance, RightShortLayer) ||
             Physics2D.Raycast(transform.position + RayPosition + RayOffset, Vector3.down, RayDistance, RightShortLayer) ||
             Physics2D.Raycast(transform.position + RayPosition - RayOffset, Vector3.down, RayDistance, RightShortLayer);
+
+        return isLeftLong || isRightLong || isLeftShort || isRightShort;
     }
 
     float ChooseModifier()
