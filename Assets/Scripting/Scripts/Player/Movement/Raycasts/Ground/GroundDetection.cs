@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class GroundDetection : MonoBehaviour
@@ -23,7 +22,6 @@ public class GroundDetection : MonoBehaviour
     [Header("Anti-Double Jump")]
     [SerializeField] BasicJumpController JumpController;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] float antiBugTime;
     private delegate void GroundCheckDelegate();
     GroundCheckDelegate groundCheckDelegate;
     //Moge jeszcze zrobic tak ze bede wylaczal skrypt basic jumpa
@@ -56,9 +54,16 @@ public class GroundDetection : MonoBehaviour
 
     void InAirCall()
     {
+        BodyTypeCheck();
         isGrounded.Value = false;
         StateMachine.ChangeState(InAirMovementState);
         InAirEvent.Raise();
+    }
+
+    void BodyTypeCheck()
+    {
+        if (rb.bodyType == RigidbodyType2D.Kinematic)
+            rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     private void OnDrawGizmosSelected()

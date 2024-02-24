@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerReferenceCollector : MonoBehaviour
@@ -10,14 +8,21 @@ public class PlayerReferenceCollector : MonoBehaviour
     [Header("References")]
     [SerializeField] Rigidbody2D Rigidbody2D;
 
-    private void Awake()
+    private void OnEnable()
     {
-        SetReferences();
+        SetReferences(true);
     }
 
-    void SetReferences()
+    void SetReferences(bool isActive)
     {
-        Rigidbody2DValue.SetItem(Rigidbody2D);
+        if (isActive)
+            Rigidbody2DValue.SetItem(Rigidbody2D);
+        else
+            Rigidbody2DValue.NullItem();
+    }
 
+    private void OnDisable()
+    {
+        SetReferences(false);    
     }
 }
