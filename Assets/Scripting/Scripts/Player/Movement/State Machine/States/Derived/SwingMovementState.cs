@@ -5,23 +5,40 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Scriptable Objects/Player/Movement States/Swing Movement")]
 public class SwingMovementState : MovementState
 {
+    [Header("Player")]
     [SerializeField] Rigidbody2DRuntimeValue rb;
     [SerializeField] FloatVariable X;
     [SerializeField] PlayerMovementVariables playerVariables;
+    Transform transform;
+    
     [Header("Gravity")]
     GravityController gravityController;
     [SerializeField] GravityState ActiveSwingState;
     [SerializeField] GravityState InactiveSwingState;
-    Transform transform;
+
+    [Header("Swing")]
+    [SerializeField] SwingVariable ActualSwing;
+    Rigidbody2D SwingRB;
+    Transform SwingTransform;
+    Vector2 SwingPosition;
+
 
     public override void OnEnter()
     {
         transform ??= rb.Item.transform;
         gravityController ??= rb.Item.GetComponent<GravityController>();
+        GetSwingData();
+    }
+
+    void GetSwingData()
+    {
+        SwingRB = ActualSwing.Value.GetComponent<Rigidbody2D>();
+        SwingTransform = ActualSwing.Value.transform;
+        SwingPosition = SwingTransform.position;
     }
 
     public override void OnUpdate()
-    {
+    { 
     }
 
     public override void OnFixedUpdate()
@@ -33,6 +50,7 @@ public class SwingMovementState : MovementState
     {
     }
 
+    #region Swing Movement
     void SwingingMovement()
     {
         SetSwingGravity();
@@ -58,4 +76,5 @@ public class SwingMovementState : MovementState
             gravityController.ChangeGravity(ActiveSwingState);
 
     }
+    #endregion
 }

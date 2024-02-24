@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwingAction : MonoBehaviour
+public class SwingCatchAction : MonoBehaviour
 {
     [Header("Swing Check")]
     [SerializeField] Buffer SwingCatchBuffer;
