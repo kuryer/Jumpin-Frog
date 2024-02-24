@@ -14,6 +14,7 @@ public class JumpPadJump : MonoBehaviour
     [SerializeField] GroundDetection GroundDetection;
     public void Jump(float jumpForce)
     {
+        BodyTypeCheck();
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         if (ActualState.Value is GroundMovementState)
@@ -25,4 +26,10 @@ public class JumpPadJump : MonoBehaviour
         StateMachine.ChangeState(InAirMovementState);
         GroundDetection.PlayerJumpedCall();
     } 
+
+    void BodyTypeCheck()
+    {
+        if (rb.bodyType == RigidbodyType2D.Kinematic)
+            rb.bodyType = RigidbodyType2D.Dynamic;
+    }
 }

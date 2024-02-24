@@ -5,22 +5,57 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Scriptable Objects/Player/Movement States/Swing Movement")]
 public class SwingMovementState : MovementState
 {
-    public override void OnFixedUpdate()
+    [SerializeField] Rigidbody2DRuntimeValue rb;
+    [SerializeField] FloatVariable X;
+    [SerializeField] PlayerMovementVariables playerVariables;
+    [Header("Gravity")]
+    GravityController gravityController;
+    [SerializeField] GravityState ActiveSwingState;
+    [SerializeField] GravityState InactiveSwingState;
+    Transform transform;
+
+    public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+        transform ??= rb.Item.transform;
+        gravityController ??= rb.Item.GetComponent<GravityController>();
     }
 
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
     }
-    public override void OnEnter()
+
+    public override void OnFixedUpdate()
     {
-        throw new System.NotImplementedException();
+        SwingingMovement();
     }
 
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
+    }
+
+    void SwingingMovement()
+    {
+        SetSwingGravity();
+
+        float maxSpeed = X.Value * playerVariables.swingMaxSpeed;
+        float realSpeed = rb.Item.velocity.magnitude * Mathf.Sign(rb.Item.velocity.x);
+        float speedDif = maxSpeed - realSpeed;
+
+        speedDif = Mathf.Sign(speedDif) == Mathf.Sign(maxSpeed) ? speedDif : 0f;
+
+        float accelRate = Mathf.Sign(realSpeed) == Mathf.Sign(maxSpeed) ? playerVariables.swingAcc : playerVariables.swingDecc;
+
+        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVariables.swingPower) * Mathf.Sign(speedDif);
+
+        rb.Item.AddForce(movement * transform.right);
+    }
+
+    void SetSwingGravity()
+    {
+        if (X.Value == 0)
+            gravityController.ChangeGravity(InactiveSwingState);
+        else
+            gravityController.ChangeGravity(ActiveSwingState);
+
     }
 }

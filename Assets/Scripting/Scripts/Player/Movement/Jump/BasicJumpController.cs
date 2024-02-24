@@ -31,10 +31,17 @@ public class BasicJumpController : MonoBehaviour
 
     public void BasicJump(float jumpForce)
     {
+        BodyTypeCheck();
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         BuffersController.ResetJumpBuffer();
         StateMachine.ChangeState(InAirMovementState);
         GroundDetection.PlayerJumpedCall(); // Anti-double Jump
+    }
+
+    void BodyTypeCheck()
+    {
+        if (rb.bodyType == RigidbodyType2D.Kinematic)
+            rb.bodyType = RigidbodyType2D.Dynamic;
     }
 }
