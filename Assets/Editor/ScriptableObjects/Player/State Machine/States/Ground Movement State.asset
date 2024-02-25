@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a640035669ffd47b5a7751f7895254, type: 3}
   m_Name: Ground Movement State
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  playerVariables: {fileID: 0}
+  isOnSlopeVariable: {fileID: 0}

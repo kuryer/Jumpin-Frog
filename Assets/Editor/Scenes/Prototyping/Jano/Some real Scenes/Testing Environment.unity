@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 47679069}
   - component: {fileID: 47679068}
   - component: {fileID: 47679067}
+  - component: {fileID: 47679070}
   m_Layer: 0
   m_Name: Detection
   m_TagString: Untagged
@@ -303,6 +304,38 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   DetectedWalls: {fileID: 11400000, guid: 6f3b58e29241db441aa78742c31d17b9, type: 2}
+--- !u!114 &47679070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47679065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8a7a89c94dc84dbb606451870c860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RayPosition: {x: 0, y: 0, z: 0}
+  RayOffset: {x: 0.41, y: 0, z: 0}
+  RayDistance: 0.34
+  LeftShortLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  RightShortLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  LeftLongLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  RightLongLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
+  isOnSlopeVariable: {fileID: 11400000, guid: 8894445d99ef3ca4ea0357afbe13f9f5, type: 2}
+  playerVariables: {fileID: 0}
+  X: {fileID: 0}
+  SlopeModifier: {fileID: 0}
 --- !u!1 &104287256
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +929,7 @@ MonoBehaviour:
   rb: {fileID: 271881253}
   playerVariables: {fileID: 11400000, guid: fef30dc9179708a4a8fac7b9f1673b25, type: 2}
   testVariables: {fileID: 11400000, guid: 5530dc37755d10f47a291ce32677f493, type: 2}
-  isOnSlopeVariable: {fileID: 0}
+  isOnSlopeVariable: {fileID: 11400000, guid: 8894445d99ef3ca4ea0357afbe13f9f5, type: 2}
 --- !u!212 &271881255
 SpriteRenderer:
   m_ObjectHideFlags: 0
