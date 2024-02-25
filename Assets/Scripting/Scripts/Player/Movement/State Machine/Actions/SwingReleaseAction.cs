@@ -36,7 +36,7 @@ public class SwingReleaseAction : MonoBehaviour
         TongueRenderer.TurnSpriteRenderer();
         TongueRenderer.StopCalculation();//tongue renderer
         StateMachine.ChangeState(InAirState);//change state
-        //Call swingpoint cooldown
+        ActualSwing.Value.OnPlayerRelease();
     }
 
     #region Setup
