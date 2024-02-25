@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d3c40605b8c0e469d0bec2d80b291a, type: 3}
+  m_Name: Swing Movement State
+  m_EditorClassIdentifier: 
+  rb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
+  X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  ActiveSwingState: {fileID: 11400000, guid: 3a5d104e49bc7fb4e9a41c162e836522, type: 2}
+  InactiveSwingState: {fileID: 11400000, guid: 0048ac4467e408c499d9ad7be2f6418b, type: 2}
+  ActualSwing: {fileID: 11400000, guid: acd955f511423ee45a1c0ba9ed4965ae, type: 2}

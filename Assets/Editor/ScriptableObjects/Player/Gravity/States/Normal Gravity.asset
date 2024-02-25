@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a640035669ffd47b5a7751f7895254, type: 3}
-  m_Name: Ground Movement State
+  m_Script: {fileID: 11500000, guid: 52b553852c883614bbcc542c7fbaffd2, type: 3}
+  m_Name: Normal Gravity
   m_EditorClassIdentifier: 
+  Gravity: 1.8

@@ -23,7 +23,7 @@ public class SlopeDetection : MonoBehaviour
     [SerializeField] MovementStateVariable ActualState;
     [SerializeField] BoolVariable isOnSlopeVariable;
     [SerializeField] PlayerVarsSO playerVariables;
-    [SerializeField] IntVariable X;
+    [SerializeField] FloatVariable X;
     [SerializeField] FloatVariable SlopeModifier;
 
     // Update is called once per frame
@@ -87,5 +87,12 @@ public class SlopeDetection : MonoBehaviour
                 return playerVariables.goingUpShort;
         }
         return 1f;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position + RayPosition, Vector3.down * RayDistance);
+        Gizmos.DrawRay(transform.position + RayPosition - RayOffset, Vector3.down * RayDistance);
+        Gizmos.DrawRay(transform.position + RayPosition + RayOffset, Vector3.down * RayDistance);
     }
 }

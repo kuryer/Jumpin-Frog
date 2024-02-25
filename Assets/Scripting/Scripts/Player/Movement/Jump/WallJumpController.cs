@@ -9,8 +9,12 @@ public class WallJumpController : MonoBehaviour
     [Header("Jump Variables")]
     [SerializeField] Buffer WallJumpBuffer;
     [SerializeField] BuffersController BuffersController;
-    [SerializeField] CombinedBool WallDetectionBool;
+    [SerializeField] DirectionBool WallDetectionBool;
     [SerializeField] MovementStateVariable ActualState;
+
+    [Header("State Management")]
+    [SerializeField] MovementStateMachine StateMachine;
+    [SerializeField] MovementState InAirMovementState;
 
     [Header("Anti-Double Jump")]
     [SerializeField] WallDetection WallDetection;
@@ -22,18 +26,18 @@ public class WallJumpController : MonoBehaviour
 
     void WallJumpCheck()
     {
-        if (WallJumpBuffer.ActivityInfo.Value() && WallDetectionBool.Or())
+        if (WallJumpBuffer.ActivityInfo.Value() && WallDetectionBool.LeftOrRight())
             WallJump();
     }
 
     void WallJump()
     {
         if (ActualState.Value is OnWallMovement)
-            ;//call change state machine to in air;
+            StateMachine.ChangeState(InAirMovementState);
 
-        if(WallDetectionBool.FirstValue)
+        if(WallDetectionBool.Left)
             LeftJump();
-        else if(WallDetectionBool.SecondValue)
+        else if(WallDetectionBool.Right)
             RightJump();
 
         BuffersController.ResetWallJumpBuffer();

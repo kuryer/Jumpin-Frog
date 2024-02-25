@@ -3,12 +3,13 @@ using UnityEngine;
 public class GravityController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] GravityState ActualState;
+    [SerializeField] GravityStateVariable ActualState;
 
     public void ChangeGravity(GravityState gravityState)
     {
-        if (ActualState == gravityState)
+        if (ActualState.Value == gravityState)
             return;
         rb.gravityScale = gravityState.Gravity;
+        ActualState.Value = gravityState;
     }
 }

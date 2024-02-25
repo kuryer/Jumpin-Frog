@@ -79,7 +79,7 @@ public class GroundDetection : MonoBehaviour
     {
         SetBasicJumpController(false);
         groundCheckDelegate = PlayerJumpCheck;
-        InAirEvent.Raise();
+        //InAirEvent.Raise();
     }
 
     void DefaultCheck()

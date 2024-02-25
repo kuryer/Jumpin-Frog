@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7351cb72106d71848aef873e49882a1e, type: 3}
-  m_Name: In Air Movement State
+  m_Script: {fileID: 11500000, guid: 52b553852c883614bbcc542c7fbaffd2, type: 3}
+  m_Name: Inactive Swing Gravity
   m_EditorClassIdentifier: 
+  Gravity: 1.8
