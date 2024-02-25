@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7351cb72106d71848aef873e49882a1e, type: 3}
   m_Name: In Air Movement State
   m_EditorClassIdentifier: 
+  rb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
+  X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}

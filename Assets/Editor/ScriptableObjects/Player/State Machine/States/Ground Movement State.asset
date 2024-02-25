@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a640035669ffd47b5a7751f7895254, type: 3}
   m_Name: Ground Movement State
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
-  playerVariables: {fileID: 0}
-  isOnSlopeVariable: {fileID: 0}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  isOnSlopeVariable: {fileID: 11400000, guid: 8894445d99ef3ca4ea0357afbe13f9f5, type: 2}

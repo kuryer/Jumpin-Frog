@@ -26,7 +26,7 @@ public class DisablerEvent : ScriptableObject
                 script.enabled = enabled;
             }
 
-        }catch(NullReferenceException ex)
+        }catch(NullReferenceException)
         {
             Debug.LogError("Scripts weren't assigned to the disabler event at " + this.name);
         }

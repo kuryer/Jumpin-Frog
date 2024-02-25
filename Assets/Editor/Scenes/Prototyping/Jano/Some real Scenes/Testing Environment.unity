@@ -316,9 +316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da8a7a89c94dc84dbb606451870c860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RayPosition: {x: 0, y: 0, z: 0}
-  RayOffset: {x: 0.41, y: 0, z: 0}
-  RayDistance: 0.34
+  RayPosition: {x: 0, y: -0.7, z: 0}
+  RayOffset: {x: -0.44, y: 0, z: 0}
+  RayDistance: 0.38
   LeftShortLayer:
     serializedVersion: 2
     m_Bits: 16384
@@ -333,9 +333,9 @@ MonoBehaviour:
     m_Bits: 4096
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   isOnSlopeVariable: {fileID: 11400000, guid: 8894445d99ef3ca4ea0357afbe13f9f5, type: 2}
-  playerVariables: {fileID: 0}
-  X: {fileID: 0}
-  SlopeModifier: {fileID: 0}
+  playerVariables: {fileID: 11400000, guid: c2d85ec264ce35d4f9d6be8d65ee0263, type: 2}
+  X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  SlopeModifier: {fileID: 11400000, guid: 1c1dd13740697964a8399f2046eb6682, type: 2}
 --- !u!1 &104287256
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +880,7 @@ GameObject:
   - component: {fileID: 271881253}
   - component: {fileID: 271881257}
   - component: {fileID: 271881258}
+  - component: {fileID: 271881259}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -1059,6 +1060,20 @@ SpringJoint2D:
   m_Distance: 2.4
   m_DampingRatio: 0.2
   m_Frequency: 1.7
+--- !u!114 &271881259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271881252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87467784e07b1c449af1726528c852c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rigidbody2DValue: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
+  Rigidbody2D: {fileID: 271881253}
 --- !u!1001 &356866235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1462,11 +1477,59 @@ MonoBehaviour:
     m_ActionId: 115a8b63-7adb-4508-baf8-84c2e21f6c47
     m_ActionName: Movement/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1867182824}
+        m_TargetAssemblyTypeName: BuffersController, Assembly-CSharp
+        m_MethodName: SetJumpBuffer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1867182824}
+        m_TargetAssemblyTypeName: BuffersController, Assembly-CSharp
+        m_MethodName: SetBubbleBuffer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1867182824}
+        m_TargetAssemblyTypeName: BuffersController, Assembly-CSharp
+        m_MethodName: SetWallJumpBuffer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b41a1551-02e3-40aa-af2c-c4570eda33c3
     m_ActionName: Movement/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1867182824}
+        m_TargetAssemblyTypeName: BuffersController, Assembly-CSharp
+        m_MethodName: SetSwingCatchBuffer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b1c4f12c-6fad-469f-994d-588a532c7db3
     m_ActionName: Movement/Action[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
@@ -4924,6 +4987,7 @@ GameObject:
   - component: {fileID: 1867182827}
   - component: {fileID: 1867182826}
   - component: {fileID: 1867182830}
+  - component: {fileID: 1867182832}
   m_Layer: 0
   m_Name: Jump Controllers
   m_TagString: Untagged
@@ -5072,6 +5136,34 @@ MonoBehaviour:
   StateMachine: {fileID: 1831899921}
   InAirMovementState: {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
   GroundDetection: {fileID: 47679068}
+--- !u!114 &1867182832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867182822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cd74228b52d04d8b6bb376f90cb0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 65209257687e4c744accbc06e6f90a1d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1867182824}
+        m_TargetAssemblyTypeName: BuffersController, Assembly-CSharp
+        m_MethodName: SetCoyoteTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1884381303 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4347832263415511775, guid: 78aee5443c57596499ed4b01acef5cf4, type: 3}
