@@ -23,4 +23,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Editor/Scenes/Prototyping/Jano/Some real Scenes/Testing Environment.unity
     guid: 7b8c241cc39ee554b89ca558a9d07160
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 58521a0e8f035ac4ab5d8c8d981ffd46, type: 2}

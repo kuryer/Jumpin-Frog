@@ -9,10 +9,7 @@ public class SwingJumpController : MonoBehaviour
     [Header("Jump")]
     [SerializeField] Buffer SwingJumpBuffer;
     [SerializeField] BuffersController BuffersController;
-
-    [Header("State Management")]
-    [SerializeField] MovementStateMachine StateMachine;
-    [SerializeField] MovementState InAirState;
+    [SerializeField] SwingReleaseAction SwingRelease;
 
     private void Update()
     {
@@ -27,7 +24,7 @@ public class SwingJumpController : MonoBehaviour
 
     void SwingJump()
     {
-        StateMachine.ChangeState(InAirState);
+        SwingRelease.SwingRelease();
         //spawn Jump particles
         // earlier there was X here as an input X instead of abs(rb.vel.x)
         Vector2 direction = new Vector2(SwingJumpDirectionX() * Mathf.Abs(rb.velocity.x) * playerVariables.swingJumpBalance,

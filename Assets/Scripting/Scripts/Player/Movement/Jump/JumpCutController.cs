@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpCutController : MonoBehaviour
@@ -19,8 +17,8 @@ public class JumpCutController : MonoBehaviour
     {
         if(rb.velocity.y > 0.1f)
         {
+            Debug.Log("Jump Cut Performed");
             rb.AddForce(Vector2.down * rb.velocity.y * playerVariables.jumpCutMultiplier, ForceMode2D.Impulse);
-            //change to falling gravity or leave it for fall checker???
             this.enabled = false;
         }
     }
