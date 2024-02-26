@@ -12,7 +12,7 @@ public class SwingMovementState : MovementState
     Transform transform;
     
     [Header("Gravity")]
-    GravityController gravityController;
+    [SerializeField] GravityControllerRuntimeValue gravityController;
     [SerializeField] GravityState ActiveSwingState;
     [SerializeField] GravityState InactiveSwingState;
 
@@ -22,11 +22,11 @@ public class SwingMovementState : MovementState
     Transform SwingTransform;
     Vector2 SwingPosition;
 
-
+    [Header("Rotation")]
+    [SerializeField] float PlayerRotationFix;
     public override void OnEnter()
     {
         transform ??= rb.Item.transform;
-        gravityController ??= rb.Item.GetComponent<GravityController>();
         GetSwingData();
     }
 
@@ -43,11 +43,21 @@ public class SwingMovementState : MovementState
 
     public override void OnFixedUpdate()
     {
+        SwingRotation();
         SwingingMovement();
     }
 
     public override void OnExit()
     {
+    }
+
+
+    void SwingRotation()
+    {
+        Vector2 lookDir = SwingRB.position - rb.Item.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        angle -= PlayerRotationFix;
+        rb.Item.rotation = angle;
     }
 
     #region Swing Movement
@@ -71,9 +81,9 @@ public class SwingMovementState : MovementState
     void SetSwingGravity()
     {
         if (X.Value == 0)
-            gravityController.ChangeGravity(InactiveSwingState);
+            gravityController.Item.ChangeGravity(InactiveSwingState);
         else
-            gravityController.ChangeGravity(ActiveSwingState);
+            gravityController.Item.ChangeGravity(ActiveSwingState);
 
     }
     #endregion

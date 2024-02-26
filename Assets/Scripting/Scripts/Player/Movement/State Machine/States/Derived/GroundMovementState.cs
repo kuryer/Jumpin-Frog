@@ -9,11 +9,16 @@ public class GroundMovementState : MovementState
     [SerializeField] PlayerMovementVariables playerVariables;
     [SerializeField] BoolVariable isOnSlopeVariable;
     Rigidbody2D platformRB;
-    float velocity;
+    [SerializeField] float velocity;
     bool StandOnSlope;
+    
+    [Header("Disabler")]
+    [SerializeField] DisablerEvent GroundMovementDisablerEvent;
+    
     public override void OnEnter()
     {
         velocity = rb.Item.velocity.x;
+        GroundMovementDisablerEvent.SetScripts(true);
     }
     public override void OnUpdate()
     {
@@ -24,6 +29,7 @@ public class GroundMovementState : MovementState
     }
     public override void OnExit()
     {
+        GroundMovementDisablerEvent.SetScripts(false);
     }
 
     #region Core Movement
@@ -33,8 +39,9 @@ public class GroundMovementState : MovementState
             SlowDownVelocity();
         else
             SetVelocityAcc();
-        float velocityX = platformRB is null ? velocity : velocity + platformRB.velocity.x;
-        rb.Item.velocity = new Vector2(velocityX, rb.Item.velocity.y);
+        //float velocityX = platformRB is null ? velocity : velocity + platformRB.velocity.x;
+        //to jest do poprawy bo mam unassignedReferenceException rzucany wiêc musze ten assignment ograæ jakoœ fajnie
+        rb.Item.velocity = new Vector2(velocity, rb.Item.velocity.y);
     }
 
     void SlowDownVelocity()

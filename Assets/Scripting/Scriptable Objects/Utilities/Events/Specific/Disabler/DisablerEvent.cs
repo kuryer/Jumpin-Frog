@@ -5,27 +5,31 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Scriptable Objects/Utilities/Events/Specific/Disabler Event")]
 public class DisablerEvent : ScriptableObject
 {
-    List<MonoBehaviour> Scripts;
+    List<MonoBehaviour> EnableScripts;
+    List<MonoBehaviour> DisableScripts;
 
-    public void AssignScripts(List<MonoBehaviour> scripts)
+    public void AssignScripts(List<MonoBehaviour> enable, List<MonoBehaviour> disable)
     {
-        Scripts = scripts;
+        EnableScripts = enable;
+        DisableScripts = disable;
     }
 
     public void NullScripts()
     {
-        Scripts = null;
+        EnableScripts = null;
+        DisableScripts = null;
     }
 
     public void SetScripts(bool enabled)
     {
         try
         {
-            foreach (var script in Scripts)
-            {
-                script.enabled = enabled;
-            }
-
+            if(enabled)
+                foreach (var script in EnableScripts)
+                    script.enabled = true;
+            else
+                foreach(var script in DisableScripts)
+                    script.enabled = false;
         }catch(NullReferenceException)
         {
             Debug.LogError("Scripts weren't assigned to the disabler event at " + this.name);

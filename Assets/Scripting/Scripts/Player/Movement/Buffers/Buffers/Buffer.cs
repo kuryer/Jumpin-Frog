@@ -9,6 +9,7 @@ public class Buffer : ScriptableObject
     public float MaxTime;
     public float ElapsedTime;
     public MovementStateVariable ActiveState;
+    [SerializeField] bool EveryStateValid;
     public List<MovementState> ValidStates;
     public Coroutine Coroutine;
 
@@ -39,7 +40,7 @@ public class Buffer : ScriptableObject
 
     public void OnStateChangeCheck()
     {
-        if (ValidStates.Contains(ActiveState.Value))
+        if (EveryStateValid || ValidStates.Contains(ActiveState.Value))
             ActivityInfo.SecondValue = true;
         else
         {

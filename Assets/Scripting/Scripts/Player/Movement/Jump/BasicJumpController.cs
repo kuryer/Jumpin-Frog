@@ -10,6 +10,7 @@ public class BasicJumpController : MonoBehaviour
     [SerializeField] Buffer JumpBuffer;
     [SerializeField] BoolVariable isGrounded;
     [SerializeField] BuffersController BuffersController;
+    [SerializeField] JumpCutController JumpCutController;
 
     [Header("State Management")]
     [SerializeField] MovementStateMachine StateMachine;
@@ -37,6 +38,7 @@ public class BasicJumpController : MonoBehaviour
         BuffersController.ResetJumpBuffer();
         StateMachine.ChangeState(InAirMovementState);
         GroundDetection.PlayerJumpedCall(); // Anti-double Jump
+        JumpCutController.enabled = true;
     }
 
     void BodyTypeCheck()

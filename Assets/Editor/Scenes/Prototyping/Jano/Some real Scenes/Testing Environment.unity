@@ -922,7 +922,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271881252}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2dba0a58e5bafd4299e37b71a0feadc, type: 3}
   m_Name: 
@@ -992,7 +992,7 @@ Transform:
   m_GameObject: {fileID: 271881252}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 745.32, y: -5.97, z: 0}
+  m_LocalPosition: {x: 745.291, y: -5.967, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1002,6 +1002,7 @@ Transform:
   - {fileID: 506447565}
   - {fileID: 47679066}
   - {fileID: 1361965045}
+  - {fileID: 932563268}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &271881257
@@ -1514,6 +1515,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1867182827}
+        m_TargetAssemblyTypeName: JumpCutController, Assembly-CSharp
+        m_MethodName: JumpCut
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b41a1551-02e3-40aa-af2c-c4570eda33c3
     m_ActionName: Movement/Jump[/Keyboard/space]
   - m_PersistentCalls:
@@ -1984,6 +1997,61 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0d91f182c614c4bb354904764292ec, type: 3}
+--- !u!1 &932563267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 932563268}
+  - component: {fileID: 932563269}
+  m_Layer: 0
+  m_Name: Disabler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &932563268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932563267}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 271881256}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &932563269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932563267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e093d9b5b57f6e14c9d822b83f7199dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundMovementDisablerEvent: {fileID: 11400000, guid: b1821e1ec56b2ea4391135862064a99a, type: 2}
+  GroundEnableScripts:
+  - {fileID: 1867182829}
+  GroundDisableScripts:
+  - {fileID: 1867182829}
+  InAirMovementDisablerEvent: {fileID: 11400000, guid: 7bf7350c2cea80442867871ff0bcc11d, type: 2}
+  InAirEnableScripts:
+  - {fileID: 1867182828}
+  InAirDisableScripts:
+  - {fileID: 1867182827}
+  - {fileID: 1867182828}
 --- !u!1 &958094032
 GameObject:
   m_ObjectHideFlags: 0
@@ -3475,7 +3543,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361965044}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f8c786f45bd342439d9c8cfcf8a578d, type: 3}
   m_Name: 
@@ -3495,7 +3563,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361965044}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92f6caf8be99b3f4196d4ce44c4f2373, type: 3}
   m_Name: 
@@ -3726,7 +3794,7 @@ Transform:
   m_GameObject: {fileID: 1482419868}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 747.68665, y: -3.21735, z: -10}
+  m_LocalPosition: {x: 747.6578, y: -3.21735, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3820,6 +3888,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1501313882}
   - component: {fileID: 1501313883}
+  - component: {fileID: 1501313885}
+  - component: {fileID: 1501313884}
   m_Layer: 0
   m_Name: Gravity Controller
   m_TagString: Untagged
@@ -3856,6 +3926,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 271881253}
   ActualState: {fileID: 11400000, guid: 2e1a92015785b824f91a572ce80f5580, type: 2}
+  RuntimeValue: {fileID: 11400000, guid: f7714cdb46c0b55409c1a500a98099a2, type: 2}
+--- !u!114 &1501313884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501313881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cd74228b52d04d8b6bb376f90cb0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ae9d2d9be0477044aa161ad78a158550, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1501313883}
+        m_TargetAssemblyTypeName: GravityController, Assembly-CSharp
+        m_MethodName: ChangeGravity
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 42f26feb401a9f34c829d04659674513, type: 2}
+          m_ObjectArgumentAssemblyTypeName: GravityState, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1501313885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501313881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cd74228b52d04d8b6bb376f90cb0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 8077c973f9fdc224c801e1fb8a4b5e1c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1501313883}
+        m_TargetAssemblyTypeName: GravityController, Assembly-CSharp
+        m_MethodName: ChangeGravity
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
+          m_ObjectArgumentAssemblyTypeName: GravityState, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1509515601
 GameObject:
   m_ObjectHideFlags: 0
@@ -4480,11 +4607,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 97895274217609860, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 747.6867
+      value: 747.6577
       objectReference: {fileID: 0}
     - target: {fileID: 97895274217609860, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.1399994
+      value: -5.137
       objectReference: {fileID: 0}
     - target: {fileID: 97895274217609860, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4971,6 +5098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
+  InitState: {fileID: 11400000, guid: a4b5b8ce9d97dca4f9ff9a30806d70fc, type: 2}
 --- !u!1 &1867182822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5071,7 +5199,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867182822}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3b5ffb3585486d429de28828335700b, type: 3}
   m_Name: 
@@ -5099,6 +5227,7 @@ MonoBehaviour:
   JumpBuffer: {fileID: 11400000, guid: 18d151b5ab13d2549a0e36d04160ee12, type: 2}
   isGrounded: {fileID: 11400000, guid: 0e9e328acd0c8e4439dd1113587d53a8, type: 2}
   BuffersController: {fileID: 1867182824}
+  JumpCutController: {fileID: 1867182827}
   StateMachine: {fileID: 1831899921}
   InAirMovementState: {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
   GroundDetection: {fileID: 47679068}
@@ -5116,8 +5245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 271881253}
   playerVariables: {fileID: 11400000, guid: c2d85ec264ce35d4f9d6be8d65ee0263, type: 2}
-  SwingJumpBuffer: {fileID: 0}
-  BuffersController: {fileID: 1867182824}
   SwingRelease: {fileID: 1361965049}
 --- !u!114 &1867182831
 MonoBehaviour:

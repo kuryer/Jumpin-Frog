@@ -3,10 +3,10 @@ using UnityEngine;
 public class MovementStateMachine : MonoBehaviour
 {
     [SerializeField] MovementStateVariable ActualState;
-    
+    [SerializeField] MovementState InitState;
     void Start()
     {
-        
+        ActualState.Value = InitState;
     }
 
     void Update()

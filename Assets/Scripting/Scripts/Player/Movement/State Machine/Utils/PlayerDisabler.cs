@@ -1,16 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDisabler : MonoBehaviour
 {
     [Header("Ground Movement")]
-    [SerializeField] DisablerEvent GroundMovementStateEvent;
-    [SerializeField] List<MonoBehaviour> GroundScripts;
+    [SerializeField] DisablerEvent GroundMovementDisablerEvent;
+    [SerializeField] List<MonoBehaviour> GroundEnableScripts;
+    [SerializeField] List<MonoBehaviour> GroundDisableScripts;
 
     [Header("In Air Movement")]
-    [SerializeField] DisablerEvent InAirMovementStateEvent;
-    [SerializeField] List<MonoBehaviour> InAirScripts;
+    [SerializeField] DisablerEvent InAirMovementDisablerEvent;
+    [SerializeField] List<MonoBehaviour> InAirEnableScripts;
+    [SerializeField] List<MonoBehaviour> InAirDisableScripts;
 
 
     #region Assignment
@@ -33,16 +34,16 @@ public class PlayerDisabler : MonoBehaviour
     void AssignGroundMovement(bool enabled)
     {
         if(enabled)
-            GroundMovementStateEvent.AssignScripts(GroundScripts);
+            GroundMovementDisablerEvent.AssignScripts(GroundEnableScripts, GroundDisableScripts);
         else
-            GroundMovementStateEvent.NullScripts();
+            GroundMovementDisablerEvent.NullScripts();
     }
 
     void AssignInAirMovement(bool enabled)
     {
         if (enabled)
-            InAirMovementStateEvent.AssignScripts(InAirScripts);
+            InAirMovementDisablerEvent.AssignScripts(InAirEnableScripts, InAirDisableScripts);
         else
-            InAirMovementStateEvent.NullScripts();
+            InAirMovementDisablerEvent.NullScripts();
     }
 }

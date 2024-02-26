@@ -15,6 +15,8 @@ MonoBehaviour:
   rb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  gravityController: {fileID: 11400000, guid: f7714cdb46c0b55409c1a500a98099a2, type: 2}
   ActiveSwingState: {fileID: 11400000, guid: 3a5d104e49bc7fb4e9a41c162e836522, type: 2}
   InactiveSwingState: {fileID: 11400000, guid: 0048ac4467e408c499d9ad7be2f6418b, type: 2}
   ActualSwing: {fileID: 11400000, guid: acd955f511423ee45a1c0ba9ed4965ae, type: 2}
+  PlayerRotationFix: 0

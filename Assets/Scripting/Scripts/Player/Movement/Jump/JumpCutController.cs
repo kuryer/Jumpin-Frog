@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class JumpCutController : MonoBehaviour
 {
@@ -6,15 +7,15 @@ public class JumpCutController : MonoBehaviour
     [SerializeField] BoolVariable isGrounded;
     [SerializeField] PlayerVarsSO playerVariables;
 
-
     private void Awake()
     {
         this.enabled = false;
     }
 
-    //wywo³ane je¿eli gracz podniesie jump button
-    public void JumpCut()
+    public void JumpCut(InputAction.CallbackContext context)
     {
+        if (!context.canceled || !enabled)
+            return;
         if(rb.velocity.y > 0.1f)
         {
             Debug.Log("Jump Cut Performed");
@@ -27,5 +28,6 @@ public class JumpCutController : MonoBehaviour
       2. Czy nie potrzebuje jakiegoœ mechanizmu, który samodzielnie zadba o wy³¹czenie jump cuta po chwili
      ale chyba lepszym pomys³em bêdzie dodanie do zmian state'u modularnych metod, które bêd¹ siê 
      wywo³ywaæ w onEnter i onExit (to brzmi jak spoko pomys³ ale trzeba to przeanalizowaæ)*/
-
+    /*1.1 no zadzia³a xd, tak¿e ten no !enabled ig
+      2.1 potrzebuje i tak juz go napisa³em B), trzeba tylko dopisaæ do InAir.OnExit() -> JumpCutController.enabled = false*/
 }
