@@ -7,22 +7,9 @@ public class SwingJumpController : MonoBehaviour
     [SerializeField] PlayerVarsSO playerVariables;
 
     [Header("Jump")]
-    [SerializeField] Buffer SwingJumpBuffer;
-    [SerializeField] BuffersController BuffersController;
     [SerializeField] SwingReleaseAction SwingRelease;
 
-    private void Update()
-    {
-        SwingJumpCheck();
-    }
-
-    public void SwingJumpCheck()
-    {
-        if (SwingJumpBuffer.ActivityInfo.Value())
-            SwingJump();
-    }
-
-    void SwingJump()
+    public void SwingJump()
     {
         SwingRelease.SwingRelease();
         //spawn Jump particles
@@ -30,7 +17,6 @@ public class SwingJumpController : MonoBehaviour
         Vector2 direction = new Vector2(SwingJumpDirectionX() * Mathf.Abs(rb.velocity.x) * playerVariables.swingJumpBalance,
             SwingJumpDirectionY() * (1f - playerVariables.swingJumpBalance));
         rb.AddForce(direction * playerVariables.swingJumpForce /** movePercent*/, ForceMode2D.Impulse);
-        BuffersController.ResetSwingJumpCoyoteTime();
     }
 
     float SwingJumpDirectionX()

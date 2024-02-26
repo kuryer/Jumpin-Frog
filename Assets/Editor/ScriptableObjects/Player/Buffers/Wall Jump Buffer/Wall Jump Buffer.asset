@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Wall Jump Buffer
   m_EditorClassIdentifier: 
   ActivityInfo: {fileID: 11400000, guid: 9bbe11fc8a7193144a3ff74bee6aa24b, type: 2}
-  MaxTime: 0
+  MaxTime: 0.05
   ElapsedTime: 0
+  EveryStateValid: 1
   ActiveState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   ValidStates: []

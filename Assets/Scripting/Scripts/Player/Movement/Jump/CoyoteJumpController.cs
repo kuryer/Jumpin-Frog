@@ -27,6 +27,7 @@ public class CoyoteJumpController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * playerVariables.jumpPower, ForceMode2D.Impulse);
         ResetBuffers();
+        JumpCutController.enabled = true;
     }
 
     void ResetBuffers()

@@ -3,11 +3,18 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Scriptable Objects/Player/Movement States/In Air Movement")]
 public class InAirMovementState : MovementState
 {
+    [Header("Movement")]
     [SerializeField] Rigidbody2DRuntimeValue rb;
     [SerializeField] FloatVariable X;
     [SerializeField] PlayerMovementVariables playerVariables;
+    
+    [Header("Disabler")]
+    [SerializeField] DisablerEvent InAirMovementDisablerEvent;
 
-
+    public override void OnEnter()
+    {
+        InAirMovementDisablerEvent.SetScripts(true);
+    }
     public override void OnUpdate()
     {
     }
@@ -15,13 +22,9 @@ public class InAirMovementState : MovementState
     {
         InAirMovement();
     }
-
-    public override void OnEnter()
-    {
-    }
-
     public override void OnExit()
     {
+        InAirMovementDisablerEvent.SetScripts(false);
     }
 
     void InAirMovement()

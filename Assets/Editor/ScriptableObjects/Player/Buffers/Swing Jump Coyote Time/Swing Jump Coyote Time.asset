@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Swing Jump Coyote Time
   m_EditorClassIdentifier: 
   ActivityInfo: {fileID: 11400000, guid: 80483a6151a4e55478f9c526dfadc5a5, type: 2}
-  MaxTime: 0
+  MaxTime: 0.1
   ElapsedTime: 0
+  EveryStateValid: 0
   ActiveState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
-  ValidStates: []
+  ValidStates:
+  - {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
