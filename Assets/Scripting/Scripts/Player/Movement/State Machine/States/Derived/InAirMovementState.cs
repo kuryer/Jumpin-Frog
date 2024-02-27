@@ -11,6 +11,9 @@ public class InAirMovementState : MovementState
     [Header("Disabler")]
     [SerializeField] DisablerEvent InAirMovementDisablerEvent;
 
+    [Header("Fall Clamp")]
+    [SerializeField] BoolVariable IsFalling;
+
     public override void OnEnter()
     {
         InAirMovementDisablerEvent.SetScripts(true);
@@ -21,6 +24,7 @@ public class InAirMovementState : MovementState
     public override void OnFixedUpdate()
     {
         InAirMovement();
+        if(IsFalling.Value) FallClamp();
     }
     public override void OnExit()
     {
@@ -43,5 +47,12 @@ public class InAirMovementState : MovementState
 
         movement *= limiter;
         rb.Item.AddForce(movement * Vector2.right);
+    }
+
+
+    void FallClamp()
+    {
+        if (Mathf.Abs(rb.Item.velocity.y) > playerVariables.FallClampSpeed)
+            rb.Item.velocity = new Vector2(rb.Item.velocity.x, -playerVariables.FallClampSpeed);
     }
 }

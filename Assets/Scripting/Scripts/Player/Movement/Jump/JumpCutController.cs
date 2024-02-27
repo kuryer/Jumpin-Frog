@@ -5,7 +5,7 @@ public class JumpCutController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] BoolVariable isGrounded;
-    [SerializeField] PlayerVarsSO playerVariables;
+    [SerializeField] PlayerMovementVariables playerVariables;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class JumpCutController : MonoBehaviour
         if(rb.velocity.y > 0.1f)
         {
             Debug.Log("Jump Cut Performed");
-            rb.AddForce(Vector2.down * rb.velocity.y * playerVariables.jumpCutMultiplier, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.down * rb.velocity.y * playerVariables.JumpCutMultiplier, ForceMode2D.Impulse);
             this.enabled = false;
         }
     }

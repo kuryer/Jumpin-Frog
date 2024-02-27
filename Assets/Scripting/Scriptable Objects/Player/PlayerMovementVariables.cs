@@ -17,10 +17,16 @@ public class PlayerMovementVariables : ScriptableObject
     public float InAirDecc;
     public float inAirPower;
 
+    public float FallClampSpeed;
     [Header("Swing Movement")]
     public float swingMaxSpeed;
     public float swingAcc;
     public float swingDecc;
     public float swingPower;
+
+    [Header("Basic Jump")]
+    public float JumpForce;
+    [Tooltip("Y Velocity multiplied by this variable is the force that's applied to the body on jump cut")]
+    public float JumpCutMultiplier;
 
 }
