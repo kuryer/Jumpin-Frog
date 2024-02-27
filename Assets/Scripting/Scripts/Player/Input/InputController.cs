@@ -25,4 +25,14 @@ public class InputController : MonoBehaviour
     {
         
     }
+
+    public void InputTest(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            Debug.Log("started");
+        if (context.performed)
+            Debug.Log("performed");
+        if (context.canceled)
+            Debug.Log("canceled");
+    }
 }

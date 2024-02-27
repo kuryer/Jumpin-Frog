@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d00fc259769a5408d2679ebe2b9557, type: 3}
   m_Name: Movement Variables
   m_EditorClassIdentifier: 
-  maxSpeed: 7
-  slowDownTreshold: 0.03
-  acceleration: 3
-  decceleration: 3
-  InAirMaxSpeed: 10
-  InAirAcc: 18.5
-  InAirDecc: 1
+  maxSpeed: 8
+  slowDownTreshold: 0.1
+  acceleration: 3.5
+  decceleration: 3.5
+  InAirMaxSpeed: 12
+  InAirAcc: 19
+  InAirDecc: 1.5
   inAirPower: 1
+  FallClampSpeed: 15
   swingMaxSpeed: 50
   swingAcc: 5
   swingDecc: 3.7
   swingPower: 1
+  JumpForce: 125
+  JumpCutMultiplier: 1.3

@@ -4,7 +4,7 @@ public class BasicJumpController : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] PlayerVarsSO playerVariables;
+    [SerializeField] PlayerMovementVariables playerVariables;
 
     [Header("Jump")]
     [SerializeField] Buffer JumpBuffer;
@@ -27,7 +27,7 @@ public class BasicJumpController : MonoBehaviour
     void BasicJumpCheck()
     {
         if (JumpBuffer.ActivityInfo.Value() && isGrounded.Value) 
-            BasicJump(playerVariables.jumpPower);
+            BasicJump(playerVariables.JumpForce);
     }
 
     public void BasicJump(float jumpForce)

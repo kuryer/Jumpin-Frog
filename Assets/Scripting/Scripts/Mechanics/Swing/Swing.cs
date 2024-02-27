@@ -4,6 +4,7 @@ public class Swing : MonoBehaviour
 {
     [SerializeField] SwingVariable ActualSwing;
     [SerializeField] MovementStateVariable ActualState;
+    [SerializeField] CircleCollider2D SwingCollider;
     bool onCooldown;
     Transform player;
     //tutaj jeszcze mo¿emy dodawaæ cooldowny albo (design idea) stworzyæ oddzielny swing z cooldownem i jeden bez
@@ -54,4 +55,13 @@ public class Swing : MonoBehaviour
         onCooldown = true;
         SetSwing(false);
     }
+
+    #region Gizmos
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, SwingCollider.radius * transform.localScale.x);
+    }
+
+    #endregion
 }

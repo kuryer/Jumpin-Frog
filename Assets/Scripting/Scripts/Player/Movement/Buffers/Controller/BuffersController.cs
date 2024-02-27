@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BuffersController : MonoBehaviour
 {
@@ -26,9 +27,9 @@ public class BuffersController : MonoBehaviour
 
     #region Jump Buffer
 
-    public void SetJumpBuffer()
+    public void SetJumpBuffer(InputAction.CallbackContext context)
     {
-        if (!JumpBuffer.ActivityInfo.SecondValue)
+        if (!JumpBuffer.ActivityInfo.SecondValue || !context.started)
             return;
 
         if (!JumpBuffer.ActivityInfo.FirstValue)
@@ -69,9 +70,9 @@ public class BuffersController : MonoBehaviour
 
     #region Wall Jump Buffer
 
-    public void SetWallJumpBuffer()
+    public void SetWallJumpBuffer(InputAction.CallbackContext context)
     {
-        if (!WallJumpBuffer.ActivityInfo.SecondValue)
+        if (!WallJumpBuffer.ActivityInfo.SecondValue || !context.started)
             return;
 
         if (!WallJumpBuffer.ActivityInfo.FirstValue)
@@ -89,9 +90,9 @@ public class BuffersController : MonoBehaviour
 
     #region Swing Catch Buffer
 
-    public void SetSwingCatchBuffer()
+    public void SetSwingCatchBuffer(InputAction.CallbackContext context)
     {
-        if (!SwingCatchBuffer.ActivityInfo.SecondValue)
+        if (!SwingCatchBuffer.ActivityInfo.SecondValue || !context.started)
             return;
 
         if (!SwingCatchBuffer.ActivityInfo.FirstValue)
@@ -110,9 +111,9 @@ public class BuffersController : MonoBehaviour
 
     #region Bubble Buffer
 
-    public void SetBubbleBuffer()
+    public void SetBubbleBuffer(InputAction.CallbackContext context)
     {
-        if (!BubbleBuffer.ActivityInfo.SecondValue)
+        if (!BubbleBuffer.ActivityInfo.SecondValue || !context.started)
             return;
 
         if (!BubbleBuffer.ActivityInfo.FirstValue)

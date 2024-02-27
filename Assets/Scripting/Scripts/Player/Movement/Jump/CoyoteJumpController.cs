@@ -4,7 +4,7 @@ public class CoyoteJumpController : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] PlayerVarsSO playerVariables;
+    [SerializeField] PlayerMovementVariables playerVariables;
 
     [Header("Jump")]
     [SerializeField] Buffer JumpBuffer;
@@ -25,7 +25,7 @@ public class CoyoteJumpController : MonoBehaviour
     void CoyoteJump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
-        rb.AddForce(Vector2.up * playerVariables.jumpPower, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * playerVariables.JumpForce, ForceMode2D.Impulse);
         ResetBuffers();
         JumpCutController.enabled = true;
     }
