@@ -39,6 +39,8 @@ public class GroundMovementState : MovementState
             SlowDownVelocity();
         else
             SetVelocityAcc();
+        if (StandOnSlope)
+            return;
         //float velocityX = platformRB is null ? velocity : velocity + platformRB.velocity.x;
         //to jest do poprawy bo mam unassignedReferenceException rzucany wiêc musze ten assignment ograæ jakoœ fajnie
         rb.Item.velocity = new Vector2(velocity, rb.Item.velocity.y);
@@ -49,20 +51,37 @@ public class GroundMovementState : MovementState
         if (StandOnSlope)
             return;
 
-        if (!StandOnSlope && isOnSlopeVariable.Value)
-        {
-            rb.Item.bodyType = RigidbodyType2D.Kinematic;
-            rb.Item.velocity = Vector2.zero;
-            StandOnSlope = true;
-            return;
-        }
+        //if (!StandOnSlope && isOnSlopeVariable.Value)
+        //{
+        //    rb.Item.bodyType = RigidbodyType2D.Kinematic;
+        //    rb.Item.velocity = Vector2.zero;
+        //    velocity = 0;
+        //    StandOnSlope = true;
+        //    return;
+        //}
 
         if (velocity == 0)
-            return;
+            if (isOnSlopeVariable.Value)
+            {
+                rb.Item.bodyType = RigidbodyType2D.Kinematic;
+                rb.Item.velocity = Vector2.zero;
+                velocity = 0;
+                StandOnSlope = true;
+                return;
+            }
+            else
+                return;
 
-        if (Mathf.Abs(velocity + (playerVariables.decc * -Mathf.Sign(velocity) * Time.fixedDeltaTime)) > 0)
+        if (Mathf.Abs(velocity) > playerVariables.slowDownTreshold)
+        {
             velocity += (playerVariables.decc * -Mathf.Sign(velocity) * Time.fixedDeltaTime);
-        else velocity = 0;
+            Debug.Log("slow down part");
+        }
+        else
+        {
+            velocity = 0;
+            Debug.Log("zero part");
+        }
     }
 
     void SetVelocityAcc()
