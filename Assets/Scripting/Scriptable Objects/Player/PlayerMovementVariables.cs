@@ -5,6 +5,7 @@ public class PlayerMovementVariables : ScriptableObject
 {
     [Header("Ground Movement")]
     public float maxSpeed;
+    public float slowDownTreshold;
     [SerializeField] float acceleration;
     [SerializeField] float decceleration;
     [HideInInspector] public float acc { get { return maxSpeed * acceleration; } }

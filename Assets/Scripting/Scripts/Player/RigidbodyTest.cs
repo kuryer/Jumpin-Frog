@@ -57,7 +57,8 @@ public class RigidbodyTest : MonoBehaviour
             SlowDownVelocity();
         else
             SetVelocityAcc();
-
+        if (StandOnSlope)
+            return;
         float velocityX = platformRB is null ? velocity : velocity + platformRB.velocity.x;
         rb.velocity = new Vector2(velocityX, rb.velocity.y);
     }

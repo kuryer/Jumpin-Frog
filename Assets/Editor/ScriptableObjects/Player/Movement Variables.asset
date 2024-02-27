@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Movement Variables
   m_EditorClassIdentifier: 
   maxSpeed: 7
+  slowDownTreshold: 0.03
   acceleration: 3
   decceleration: 3
   InAirMaxSpeed: 10
