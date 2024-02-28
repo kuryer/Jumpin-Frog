@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Swing Catch Buffer
   m_EditorClassIdentifier: 
   ActivityInfo: {fileID: 11400000, guid: 31ab078c93abe2346afbddb92b883a24, type: 2}
-  MaxTime: 0.1
-  ElapsedTime: 0
+  MaxTime: 2
+  ElapsedTime: 2
   ActiveState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   EveryStateValid: 0
   ValidStates:

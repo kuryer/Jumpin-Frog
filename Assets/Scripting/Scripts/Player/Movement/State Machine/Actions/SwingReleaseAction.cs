@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SwingReleaseAction : MonoBehaviour
 {
@@ -25,6 +26,12 @@ public class SwingReleaseAction : MonoBehaviour
     void SwingReleaseCheck()
     {
         if (transform.position.y > SwingPosition.y)
+            SwingRelease();
+    }
+
+    public void InputSwingRelease(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
             SwingRelease();
     }
 

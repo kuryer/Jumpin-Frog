@@ -24,10 +24,14 @@ public class SwingMovementState : MovementState
 
     [Header("Rotation")]
     [SerializeField] float PlayerRotationFix;
+
+    [Header("Disabler")]
+    [SerializeField] DisablerEvent SwingMovementDisablerEvent;
     public override void OnEnter()
     {
-        transform ??= rb.Item.transform;
+        transform = rb.Item.transform;
         GetSwingData();
+        SwingMovementDisablerEvent.SetScripts(true);
     }
 
     void GetSwingData()
@@ -49,6 +53,7 @@ public class SwingMovementState : MovementState
 
     public override void OnExit()
     {
+        SwingMovementDisablerEvent.SetScripts(false);
     }
 
 
@@ -76,6 +81,7 @@ public class SwingMovementState : MovementState
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVariables.swingPower) * Mathf.Sign(speedDif);
 
         rb.Item.AddForce(movement * transform.right);
+        //Debug.Log(movement * transform.right);
     }
 
     void SetSwingGravity()

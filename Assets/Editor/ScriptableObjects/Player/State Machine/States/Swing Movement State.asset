@@ -19,4 +19,5 @@ MonoBehaviour:
   ActiveSwingState: {fileID: 11400000, guid: 3a5d104e49bc7fb4e9a41c162e836522, type: 2}
   InactiveSwingState: {fileID: 11400000, guid: 0048ac4467e408c499d9ad7be2f6418b, type: 2}
   ActualSwing: {fileID: 11400000, guid: acd955f511423ee45a1c0ba9ed4965ae, type: 2}
-  PlayerRotationFix: 0
+  PlayerRotationFix: 90
+  SwingMovementDisablerEvent: {fileID: 11400000, guid: 6ea40096b543b074496bc163d820c317, type: 2}
