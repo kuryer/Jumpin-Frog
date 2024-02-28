@@ -32,7 +32,7 @@ public class SwingCatchAction : MonoBehaviour
     {
         Vector3 swingPos = ActualSwing.Value.transform.position;
         BuffersController.ResetSwingCatchBuffer();
-        TongueJoint.anchor = swingPos;
+        TongueJoint.connectedAnchor = swingPos;
         TongueJoint.enabled = true;
         TongueRenderer.SetSwingPointPosition(new Vector3(swingPos.x, swingPos.y, 0f));
         TongueRenderer.StartCalculation();
@@ -40,6 +40,5 @@ public class SwingCatchAction : MonoBehaviour
 
         GravityController.ChangeGravity(SwingGravity);
         StateMachine.ChangeState(SwingState);
-        //disable this script
     }
 }

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivityInfo: {fileID: 11400000, guid: af47b2c647fef074d931e14fb8340788, type: 2}
   MaxTime: 0.13
-  ElapsedTime: 0
-  EveryStateValid: 1
+  ElapsedTime: 0.13
   ActiveState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
-  ValidStates: []
+  EveryStateValid: 0
+  ValidStates:
+  - {fileID: 11400000, guid: a4b5b8ce9d97dca4f9ff9a30806d70fc, type: 2}
+  - {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}

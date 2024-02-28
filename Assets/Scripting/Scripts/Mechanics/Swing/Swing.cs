@@ -5,14 +5,17 @@ public class Swing : MonoBehaviour
     [SerializeField] SwingVariable ActualSwing;
     [SerializeField] MovementStateVariable ActualState;
     [SerializeField] CircleCollider2D SwingCollider;
-    bool onCooldown;
-    Transform player;
+    [SerializeField] bool onCooldown;
+    [SerializeField] Transform player;
     //tutaj jeszcze mo¿emy dodawaæ cooldowny albo (design idea) stworzyæ oddzielny swing z cooldownem i jeden bez
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && ActualState.Value is InAirMovementState)
+        {
+            Debug.Log(collision.gameObject.name);
             player = collision.transform;
+        }
     }
 
     private void Update()
@@ -22,7 +25,7 @@ public class Swing : MonoBehaviour
 
         if (player.position.y < transform.position.y)
             SetSwing(true);
-        else if (ActualSwing.Value == null && ActualState.Value is InAirMovementState)
+        else if (ActualSwing.Value != null && ActualState.Value is InAirMovementState)
             SetSwing(false);
     }
 

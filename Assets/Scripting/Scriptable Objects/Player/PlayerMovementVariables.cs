@@ -29,4 +29,8 @@ public class PlayerMovementVariables : ScriptableObject
     [Tooltip("Y Velocity multiplied by this variable is the force that's applied to the body on jump cut")]
     public float JumpCutMultiplier;
 
+    [Header("Swing Jump")]
+    public float SwingJumpForce;
+    public float SwingJumpBalance;
+
 }

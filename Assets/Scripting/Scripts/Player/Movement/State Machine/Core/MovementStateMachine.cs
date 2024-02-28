@@ -4,6 +4,7 @@ public class MovementStateMachine : MonoBehaviour
 {
     [SerializeField] MovementStateVariable ActualState;
     [SerializeField] MovementState InitState;
+    [SerializeField] BuffersController BuffersController;
     void Start()
     {
         ActualState.Value = InitState;
@@ -26,5 +27,6 @@ public class MovementStateMachine : MonoBehaviour
         ActualState.Value.OnExit();
         ActualState.Value = movementState;
         ActualState.Value.OnEnter();
+        BuffersController.OnStateChanged();
     }
 }

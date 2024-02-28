@@ -13,6 +13,10 @@ public class PlayerDisabler : MonoBehaviour
     [SerializeField] List<MonoBehaviour> InAirEnableScripts;
     [SerializeField] List<MonoBehaviour> InAirDisableScripts;
 
+    [Header("Swing Movement")]
+    [SerializeField] DisablerEvent SwingMovementDisablerEvent;
+    [SerializeField] List<MonoBehaviour> SwingEnableScripts;
+    [SerializeField] List<MonoBehaviour> SwingDisableScripts;
 
     #region Assignment
 
@@ -20,12 +24,14 @@ public class PlayerDisabler : MonoBehaviour
     {
         AssignGroundMovement(true);
         AssignInAirMovement(true);
+        AssignSwingMovement(true);
     }
 
     private void OnDisable()
     {
         AssignGroundMovement(false);
         AssignInAirMovement(false);
+        AssignSwingMovement(false);
     }
 
     #endregion
@@ -45,5 +51,13 @@ public class PlayerDisabler : MonoBehaviour
             InAirMovementDisablerEvent.AssignScripts(InAirEnableScripts, InAirDisableScripts);
         else
             InAirMovementDisablerEvent.NullScripts();
+    }
+
+    void AssignSwingMovement(bool enabled)
+    {
+        if (enabled)
+            SwingMovementDisablerEvent.AssignScripts(SwingEnableScripts, SwingDisableScripts);
+        else
+            SwingMovementDisablerEvent.NullScripts();
     }
 }

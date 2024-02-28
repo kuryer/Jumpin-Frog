@@ -23,7 +23,9 @@ MonoBehaviour:
   FallClampSpeed: 15
   swingMaxSpeed: 50
   swingAcc: 5
-  swingDecc: 3.7
+  swingDecc: 0.7
   swingPower: 1
   JumpForce: 125
   JumpCutMultiplier: 1.3
+  SwingJumpForce: 89
+  SwingJumpBalance: 0.5

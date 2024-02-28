@@ -76,7 +76,7 @@ public class BuffersController : MonoBehaviour
             return;
 
         if (!WallJumpBuffer.ActivityInfo.FirstValue)
-            WallJumpBuffer.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+            WallJumpBuffer.Coroutine = StartCoroutine(WallJumpBuffer.StartTimerRoutine());
         else
             WallJumpBuffer.RenewTimer();
     }
@@ -95,10 +95,20 @@ public class BuffersController : MonoBehaviour
         if (!SwingCatchBuffer.ActivityInfo.SecondValue || !context.started)
             return;
 
+        Debug.Log("halo");
+
         if (!SwingCatchBuffer.ActivityInfo.FirstValue)
-            SwingCatchBuffer.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+        {
+            Debug.Log("1");
+
+            SwingCatchBuffer.Coroutine = StartCoroutine(SwingCatchBuffer.StartTimerRoutine());
+        }
         else
+        {
+            Debug.Log("2");
+
             SwingCatchBuffer.RenewTimer();
+        }
     }
 
     public void ResetSwingCatchBuffer()
@@ -117,7 +127,7 @@ public class BuffersController : MonoBehaviour
             return;
 
         if (!BubbleBuffer.ActivityInfo.FirstValue)
-            BubbleBuffer.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+            BubbleBuffer.Coroutine = StartCoroutine(BubbleBuffer.StartTimerRoutine());
         else
             BubbleBuffer.RenewTimer();
     }
@@ -138,7 +148,7 @@ public class BuffersController : MonoBehaviour
             return;
 
         if (!SwingJumpCoyoteTime.ActivityInfo.FirstValue)
-            SwingJumpCoyoteTime.Coroutine = StartCoroutine(JumpBuffer.StartTimerRoutine());
+            SwingJumpCoyoteTime.Coroutine = StartCoroutine(SwingJumpCoyoteTime.StartTimerRoutine());
         else
             SwingJumpCoyoteTime.RenewTimer();
     }
