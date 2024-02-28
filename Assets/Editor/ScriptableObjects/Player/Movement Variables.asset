@@ -20,12 +20,12 @@ MonoBehaviour:
   InAirAcc: 19
   InAirDecc: 1.5
   inAirPower: 1
-  FallClampSpeed: 15
+  FallClampSpeed: 15.2
   swingMaxSpeed: 50
   swingAcc: 5
   swingDecc: 0.7
   swingPower: 1
   JumpForce: 125
   JumpCutMultiplier: 1.3
-  SwingJumpForce: 89
+  SwingJumpForce: 80
   SwingJumpBalance: 0.5

@@ -24,7 +24,9 @@ public class SwingCatchAction : MonoBehaviour
 
     void SwingCatchCheck()
     {
-        if (SwingCatchBuffer.ActivityInfo.Value() && ActualSwing.Value != null)
+        if (ActualSwing.Value is null)
+            return;
+        if (SwingCatchBuffer.ActivityInfo.Value() && transform.position.y < ActualSwing.Value.transform.position.y)
             SwingCatch();
     }
     

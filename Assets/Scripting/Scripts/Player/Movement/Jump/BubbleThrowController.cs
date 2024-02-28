@@ -5,19 +5,47 @@ public class BubbleThrowController : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] PlayerVarsSO playerVariables;
+    [SerializeField] PlayerMovementVariables playerVariables;
 
-    public void BubbleThrow(Vector2 direction)
+    [Header("Gravity")]
+    [SerializeField] GravityController GravityController;
+    [SerializeField] GravityStateVariable ActualGravity;
+    [SerializeField] GravityState SlingGravity;
+    [SerializeField] GravityState NormalGravity;
+
+    [Header("Throw Check")]
+    [SerializeField] BuffersController BuffersController;
+    [SerializeField] Buffer BubbleBuffer;
+    [SerializeField] MovementStateVariable ActualState;
+
+    [Header("Throw")]
+    [SerializeField] Vector2Variable ThrowDirection;
+
+
+    [Header("Sling Gravity Timer")]
+    [SerializeField] float slingGravityChangeTime;
+
+    private void Update()
     {
-        rb.AddForce(direction * playerVariables.bubbleThrowForce, ForceMode2D.Impulse);
+        BubbleCheck();
+    }
+    void BubbleCheck()
+    {
+        if (BubbleBuffer.ActivityInfo.Value() && ActualState.Value is BubbleState)
+            BubbleThrow();
+    }
+
+    public void BubbleThrow()
+    {
+        rb.AddForce(ThrowDirection.Value * playerVariables.BubbleThrowForce, ForceMode2D.Impulse);
         StartCoroutine(SlingGravityTimer());
     }
 
     IEnumerator SlingGravityTimer()
     {
-        //switch gravity sling(bubble)
-        yield return new WaitForSeconds(playerVariables.slingGravityChangeTime);
-        //if(gravityState = Sling && actualState is inAir)
-            //change to default gravity
+        GravityController.ChangeGravity(SlingGravity);
+        yield return new WaitForSeconds(slingGravityChangeTime);
+        if(ActualGravity.Value == SlingGravity && ActualState.Value is InAirMovementState)
+            GravityController.ChangeGravity(NormalGravity);
     }
 }

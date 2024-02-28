@@ -12,6 +12,10 @@ public class WallJumpController : MonoBehaviour
     [SerializeField] DirectionBool WallDetectionBool;
     [SerializeField] MovementStateVariable ActualState;
 
+    [Header("Gravity")]
+    [SerializeField] GravityController GravityController;
+    [SerializeField] GravityState NormalGravity;
+
     [Header("State Management")]
     [SerializeField] MovementStateMachine StateMachine;
     [SerializeField] MovementState InAirMovementState;
@@ -34,6 +38,8 @@ public class WallJumpController : MonoBehaviour
     {
         if (ActualState.Value is OnWallMovement)
             StateMachine.ChangeState(InAirMovementState);
+        
+        GravityController.ChangeGravity(NormalGravity);
 
         if(WallDetectionBool.Left)
             LeftJump();
