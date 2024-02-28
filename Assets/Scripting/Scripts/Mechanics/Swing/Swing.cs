@@ -8,55 +8,24 @@ public class Swing : MonoBehaviour
     [SerializeField] bool onCooldown;
     [SerializeField] Transform player;
     //tutaj jeszcze mo¿emy dodawaæ cooldowny albo (design idea) stworzyæ oddzielny swing z cooldownem i jeden bez
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && ActualState.Value is InAirMovementState)
-        {
-            Debug.Log(collision.gameObject.name);
-            player = collision.transform;
-        }
+            SetSwing(this);
     }
-
-    private void Update()
-    {
-        if (player == null || onCooldown)
-            return;
-
-        if (player.position.y < transform.position.y)
-            SetSwing(true);
-        else if (ActualSwing.Value != null && ActualState.Value is InAirMovementState)
-            SetSwing(false);
-    }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
-            ResetSwing();
+        if(collision.CompareTag("Player") && !(ActualState.Value is SwingMovementState) && ActualSwing.Value == this)
+            SetSwing(null);
     }
-
-    void ResetSwing()
+    void SetSwing(Swing actualSwing)
     {
-        SetSwing(false);
-        if(onCooldown)
-            RenewSwing();
+        ActualSwing.Value = actualSwing;
     }
-    void SetSwing(bool toActive)
-    {
-        if (toActive)
-            ActualSwing.Value ??= this;
-        else
-            ActualSwing.Value = null;
-    }
-    void RenewSwing()
-    {
-        onCooldown = false;
-    }
-
     public void OnPlayerRelease()
     {
-        onCooldown = true;
-        SetSwing(false);
+        SetSwing(null);
     }
 
     #region Gizmos

@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb37a41dbfaa4543b4dc05c482e65a5, type: 3}
   m_Name: On Wall Movement State
   m_EditorClassIdentifier: 
+  rb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  DetectedWalls: {fileID: 11400000, guid: 6f3b58e29241db441aa78742c31d17b9, type: 2}
+  X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  ExitOnWallEvent: {fileID: 11400000, guid: ff102ecab2cb15f44b9d9b20170885df, type: 2}
+  StateMachine: {fileID: 11400000, guid: a995653b8e4717b4ba2ca28cd717be3a, type: 2}
+  InAirMovementState: {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
+  OnWallMovementDisablerEvent: {fileID: 11400000, guid: 360166c1d5586294da7944afdf3a3a88, type: 2}

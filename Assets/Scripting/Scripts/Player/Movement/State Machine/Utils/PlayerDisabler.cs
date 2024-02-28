@@ -18,6 +18,16 @@ public class PlayerDisabler : MonoBehaviour
     [SerializeField] List<MonoBehaviour> SwingEnableScripts;
     [SerializeField] List<MonoBehaviour> SwingDisableScripts;
 
+    [Header("On Wall Movement")]
+    [SerializeField] DisablerEvent OnWallDisablerEvent;
+    [SerializeField] List<MonoBehaviour> OnWallEnableScripts;
+    [SerializeField] List<MonoBehaviour> OnWallDisableScripts;
+
+    [Header("Bubble State")]
+    [SerializeField] DisablerEvent BubbleDisablerEvent;
+    [SerializeField] List<MonoBehaviour> BubbleEnableScripts;
+    [SerializeField] List<MonoBehaviour> BubbleDisableScripts;
+
     #region Assignment
 
     private void OnEnable()
@@ -25,6 +35,8 @@ public class PlayerDisabler : MonoBehaviour
         AssignGroundMovement(true);
         AssignInAirMovement(true);
         AssignSwingMovement(true);
+        AssignOnWallMovement(true);
+        AssignBubbleMovement(true);
     }
 
     private void OnDisable()
@@ -32,6 +44,8 @@ public class PlayerDisabler : MonoBehaviour
         AssignGroundMovement(false);
         AssignInAirMovement(false);
         AssignSwingMovement(false);
+        AssignOnWallMovement(false);
+        AssignBubbleMovement(false);
     }
 
     #endregion
@@ -59,5 +73,21 @@ public class PlayerDisabler : MonoBehaviour
             SwingMovementDisablerEvent.AssignScripts(SwingEnableScripts, SwingDisableScripts);
         else
             SwingMovementDisablerEvent.NullScripts();
+    }
+
+    void AssignOnWallMovement(bool enabled)
+    {
+        if (enabled)
+            OnWallDisablerEvent.AssignScripts(OnWallEnableScripts, OnWallDisableScripts);
+        else
+            OnWallDisablerEvent.NullScripts();
+    }
+
+    void AssignBubbleMovement(bool enabled)
+    {
+        if (enabled)
+            BubbleDisablerEvent.AssignScripts(BubbleEnableScripts, BubbleDisableScripts);
+        else
+            BubbleDisablerEvent.NullScripts();
     }
 }

@@ -1003,6 +1003,7 @@ Transform:
   - {fileID: 47679066}
   - {fileID: 1361965045}
   - {fileID: 932563268}
+  - {fileID: 978611838}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &271881257
@@ -2021,6 +2022,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0d91f182c614c4bb354904764292ec, type: 3}
+--- !u!4 &896062805 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 97895274217609860, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
+  m_PrefabInstance: {fileID: 1699344460}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &932563267
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,11 +2081,13 @@ MonoBehaviour:
   - {fileID: 1867182828}
   - {fileID: 47679067}
   - {fileID: 1361965050}
+  - {fileID: 978611839}
   InAirDisableScripts:
   - {fileID: 1867182827}
   - {fileID: 1867182828}
   - {fileID: 47679067}
   - {fileID: 1361965050}
+  - {fileID: 978611839}
   SwingMovementDisablerEvent: {fileID: 11400000, guid: 6ea40096b543b074496bc163d820c317, type: 2}
   SwingEnableScripts:
   - {fileID: 1361965049}
@@ -2087,6 +2095,12 @@ MonoBehaviour:
   SwingDisableScripts:
   - {fileID: 1361965049}
   - {fileID: 1867182830}
+  OnWallDisablerEvent: {fileID: 11400000, guid: 360166c1d5586294da7944afdf3a3a88, type: 2}
+  OnWallEnableScripts: []
+  OnWallDisableScripts: []
+  BubbleDisablerEvent: {fileID: 11400000, guid: e8dec4cba3d6c15449dca293386503d1, type: 2}
+  BubbleEnableScripts: []
+  BubbleDisableScripts: []
 --- !u!1 &958094032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,6 +2185,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &978611837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 978611838}
+  - component: {fileID: 978611839}
+  m_Layer: 8
+  m_Name: Wall Grab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &978611838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978611837}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 271881256}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &978611839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978611837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ab836340661fa4eafd159b0a2a802e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DetectedWalls: {fileID: 11400000, guid: 6f3b58e29241db441aa78742c31d17b9, type: 2}
+  X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  rb: {fileID: 271881253}
+  StateMachine: {fileID: 1831899921}
+  OnWallMovementState: {fileID: 11400000, guid: 554d8a78cf7c7194cb4bb14ddd53bf34, type: 2}
+  GravityController: {fileID: 1501313883}
+  WallGrabGravity: {fileID: 11400000, guid: e45323e8aa452ce478b8035cad4bbdcf, type: 2}
+  initialStickForce: 2
 --- !u!1 &1079480491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,7 +2662,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255133428}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91316ac61ffe4144f8c729b8f7d6ca96, type: 3}
   m_Name: 
@@ -4071,12 +4137,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482419868}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 747.6578, y: -3.21735, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.000061035156, y: 1.9196501, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 896062805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1482419872
 MonoBehaviour:
@@ -4168,6 +4234,7 @@ GameObject:
   - component: {fileID: 1501313883}
   - component: {fileID: 1501313885}
   - component: {fileID: 1501313884}
+  - component: {fileID: 1501313886}
   m_Layer: 8
   m_Name: Gravity Controller
   m_TagString: Untagged
@@ -4246,6 +4313,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: 8077c973f9fdc224c801e1fb8a4b5e1c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1501313883}
+        m_TargetAssemblyTypeName: GravityController, Assembly-CSharp
+        m_MethodName: ChangeGravity
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
+          m_ObjectArgumentAssemblyTypeName: GravityState, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1501313886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501313881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cd74228b52d04d8b6bb376f90cb0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ff102ecab2cb15f44b9d9b20170885df, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -4941,7 +5036,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 97895274217609860, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1482419871}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a5d7c6bee520e14f9b288d0c218cee8, type: 3}
 --- !u!1 &1716906249
@@ -5378,6 +5476,7 @@ MonoBehaviour:
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   InitState: {fileID: 11400000, guid: a4b5b8ce9d97dca4f9ff9a30806d70fc, type: 2}
   BuffersController: {fileID: 1867182824}
+  RuntimeValue: {fileID: 11400000, guid: a995653b8e4717b4ba2ca28cd717be3a, type: 2}
 --- !u!1 &1867182822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5453,6 +5552,8 @@ MonoBehaviour:
   BuffersController: {fileID: 1867182824}
   WallDetectionBool: {fileID: 11400000, guid: 6f3b58e29241db441aa78742c31d17b9, type: 2}
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
+  GravityController: {fileID: 1501313883}
+  NormalGravity: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
   StateMachine: {fileID: 1831899921}
   InAirMovementState: {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
   WallDetection: {fileID: 47679069}
@@ -6155,7 +6256,6 @@ SceneRoots:
   - {fileID: 2040102645}
   - {fileID: 1748130877}
   - {fileID: 242971853}
-  - {fileID: 1482419871}
   - {fileID: 1699344460}
   - {fileID: 233258823}
   - {fileID: 356866235}

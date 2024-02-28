@@ -24,6 +24,9 @@ public class PlayerMovementVariables : ScriptableObject
     public float swingDecc;
     public float swingPower;
 
+    [Header("Wall Grab")]
+    public float wallGrabClamp;
+
     [Header("Basic Jump")]
     public float JumpForce;
     [Tooltip("Y Velocity multiplied by this variable is the force that's applied to the body on jump cut")]
@@ -32,5 +35,9 @@ public class PlayerMovementVariables : ScriptableObject
     [Header("Swing Jump")]
     public float SwingJumpForce;
     public float SwingJumpBalance;
+
+    [Header("Bubble Throw")]
+    public float BubbleThrowForce;
+    public float BubbleThrowMaxTime;
 
 }

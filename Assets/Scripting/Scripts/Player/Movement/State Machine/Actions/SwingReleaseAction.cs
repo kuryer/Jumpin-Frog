@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,7 +32,7 @@ public class SwingReleaseAction : MonoBehaviour
 
     public void InputSwingRelease(InputAction.CallbackContext context)
     {
-        if (context.canceled)
+        if (context.canceled && enabled)
             SwingRelease();
     }
 
