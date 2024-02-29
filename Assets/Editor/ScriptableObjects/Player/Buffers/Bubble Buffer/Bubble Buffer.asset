@@ -17,4 +17,6 @@ MonoBehaviour:
   ElapsedTime: 0
   ActiveState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   EveryStateValid: 1
-  ValidStates: []
+  ValidStates:
+  - {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
+  - {fileID: 11400000, guid: 6191330995ec8814889865f496d47620, type: 2}

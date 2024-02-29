@@ -1004,6 +1004,7 @@ Transform:
   - {fileID: 1361965045}
   - {fileID: 932563268}
   - {fileID: 978611838}
+  - {fileID: 1099271068}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &271881257
@@ -2100,7 +2101,8 @@ MonoBehaviour:
   OnWallDisableScripts: []
   BubbleDisablerEvent: {fileID: 11400000, guid: e8dec4cba3d6c15449dca293386503d1, type: 2}
   BubbleEnableScripts: []
-  BubbleDisableScripts: []
+  BubbleDisableScripts:
+  - {fileID: 1099271070}
 --- !u!1 &958094032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,6 +2301,85 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1099271067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1099271068}
+  - component: {fileID: 1099271070}
+  - component: {fileID: 1099271069}
+  m_Layer: 8
+  m_Name: Bubble
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1099271068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099271067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 271881256}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1099271069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099271067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6cc76c522987541847eaf21b7ac5ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 271881253}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  GravityController: {fileID: 1501313883}
+  ActualGravity: {fileID: 11400000, guid: 2e1a92015785b824f91a572ce80f5580, type: 2}
+  BubbleGravity: {fileID: 11400000, guid: 69b2df5c65394be49b1d19f6aa68949b, type: 2}
+  NormalGravity: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
+  BuffersController: {fileID: 1867182824}
+  BubbleBuffer: {fileID: 11400000, guid: fb83aec49ad96e54ba074fa6c8ffe1df, type: 2}
+  ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
+  ThrowDirection: {fileID: 11400000, guid: d7aaeec1b065e36489c6edde89c95e68, type: 2}
+  slingGravityChangeTime: 0.145
+--- !u!114 &1099271070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099271067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfef86bd343dea3449c15ad6de84e9ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 271881253}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  StateMachine: {fileID: 1831899921}
+  BubbleState: {fileID: 11400000, guid: 6191330995ec8814889865f496d47620, type: 2}
+  InAirMovementState: {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
+  GravityController: {fileID: 1501313883}
+  BubbleGravity: {fileID: 11400000, guid: 69b2df5c65394be49b1d19f6aa68949b, type: 2}
+  MoveTime: 0.5
+  MoveSpeed: 10
+  BubbleThrow: {fileID: 1099271069}
+  BubbleBuffer: {fileID: 11400000, guid: fb83aec49ad96e54ba074fa6c8ffe1df, type: 2}
 --- !u!1 &1110519603
 GameObject:
   m_ObjectHideFlags: 0

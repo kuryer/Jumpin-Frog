@@ -10,7 +10,7 @@ public class BubbleThrowController : MonoBehaviour
     [Header("Gravity")]
     [SerializeField] GravityController GravityController;
     [SerializeField] GravityStateVariable ActualGravity;
-    [SerializeField] GravityState SlingGravity;
+    [SerializeField] GravityState BubbleGravity;
     [SerializeField] GravityState NormalGravity;
 
     [Header("Throw Check")]
@@ -43,9 +43,9 @@ public class BubbleThrowController : MonoBehaviour
 
     IEnumerator SlingGravityTimer()
     {
-        GravityController.ChangeGravity(SlingGravity);
+        GravityController.ChangeGravity(BubbleGravity);
         yield return new WaitForSeconds(slingGravityChangeTime);
-        if(ActualGravity.Value == SlingGravity && ActualState.Value is InAirMovementState)
+        if(ActualGravity.Value == BubbleGravity && ActualState.Value is InAirMovementState)
             GravityController.ChangeGravity(NormalGravity);
     }
 }
