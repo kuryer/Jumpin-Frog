@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Bubble Buffer
   m_EditorClassIdentifier: 
   ActivityInfo: {fileID: 11400000, guid: 149276e756d76f54f99541def45d1ed6, type: 2}
-  MaxTime: 0.1
-  ElapsedTime: 0
+  MaxTime: 0.6
+  ElapsedTime: 0.6
   ActiveState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
-  EveryStateValid: 1
+  EveryStateValid: 0
   ValidStates:
   - {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
   - {fileID: 11400000, guid: 6191330995ec8814889865f496d47620, type: 2}

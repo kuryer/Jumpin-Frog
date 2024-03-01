@@ -92,7 +92,7 @@ public class BuffersController : MonoBehaviour
 
     public void SetSwingCatchBuffer(InputAction.CallbackContext context)
     {
-        if (!SwingCatchBuffer.ActivityInfo.SecondValue || !context.started)
+        if (!SwingCatchBuffer.ActivityInfo.SecondValue || !context.performed)
             return;
 
         Debug.Log("halo");
