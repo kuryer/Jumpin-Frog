@@ -14,8 +14,6 @@ public class BubbleThrowController : MonoBehaviour
     [SerializeField] GravityState NormalGravity;
 
     [Header("Throw Check")]
-    [SerializeField] BuffersController BuffersController;
-    [SerializeField] Buffer BubbleBuffer;
     [SerializeField] MovementStateVariable ActualState;
 
     [Header("Throw")]
@@ -24,16 +22,6 @@ public class BubbleThrowController : MonoBehaviour
 
     [Header("Sling Gravity Timer")]
     [SerializeField] float slingGravityChangeTime;
-
-    private void Update()
-    {
-        BubbleCheck();
-    }
-    void BubbleCheck()
-    {
-        if (BubbleBuffer.ActivityInfo.Value() && ActualState.Value is BubbleState)
-            BubbleThrow();
-    }
 
     public void BubbleThrow()
     {

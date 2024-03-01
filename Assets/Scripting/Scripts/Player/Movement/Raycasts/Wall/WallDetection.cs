@@ -73,7 +73,7 @@ public class WallDetection : MonoBehaviour
     void LeftWallJumpedCheck()
     {
         //tu mo¿na dla beki wsadzic podobny mechanizm co w ground detection, z tym "timerem"
-        if (RightWallCheck() == false)
+        if (LeftWallCheck() == false)
             LeftReturnToDefault();
     }
 

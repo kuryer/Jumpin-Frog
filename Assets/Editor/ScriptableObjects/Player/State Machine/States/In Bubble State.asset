@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba739a27bed710a48881a6fc6f96d2e7, type: 3}
   m_Name: In Bubble State
   m_EditorClassIdentifier: 
+  BubbleDisablerEvent: {fileID: 11400000, guid: e8dec4cba3d6c15449dca293386503d1, type: 2}

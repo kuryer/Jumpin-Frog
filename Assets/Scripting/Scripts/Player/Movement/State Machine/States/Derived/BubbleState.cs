@@ -5,22 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Scriptable Objects/Player/Movement States/In Bubble Movement")]
 public class BubbleState : MovementState
 {
+    [SerializeField] DisablerEvent BubbleDisablerEvent;
+    public override void OnEnter()
+    {
+        BubbleDisablerEvent.SetScripts(true);
+    }
+
     public override void OnFixedUpdate()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
     }
-    public override void OnEnter()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
+        BubbleDisablerEvent.SetScripts(false);
     }
 }

@@ -8,6 +8,7 @@ public class BubbleAction : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] PlayerMovementVariables playerVariables;
     Bubble activeBubble;
+    Vector2 bubblePositon;
 
     [Header("State Managment")]
     [SerializeField] MovementStateMachine StateMachine;
@@ -26,6 +27,7 @@ public class BubbleAction : MonoBehaviour
     [Header("Bubble Throw")]
     [SerializeField] BubbleThrowController BubbleThrow;
     [SerializeField] Buffer BubbleBuffer;
+    [SerializeField] BuffersController BuffersController;
     Coroutine ThrowTimerRoutine;
 
 
@@ -39,16 +41,19 @@ public class BubbleAction : MonoBehaviour
     public void InBubbleCall(Vector2 bubblePos, Bubble bubble)
     {
         activeBubble = bubble;
+        bubblePositon = bubblePos;
+        rb.velocity = Vector2.zero;
         StateMachine.ChangeState(BubbleState);
         GravityController.ChangeGravity(BubbleGravity);
-        StartCoroutine(MoveTowardsBubbleCenter(bubblePos));
+        StartCoroutine(MoveTowardsBubbleCenter());
     }
 
-    IEnumerator MoveTowardsBubbleCenter(Vector2 BubblePos)
+    IEnumerator MoveTowardsBubbleCenter()
     {
+        ElapsedMoveTime = MoveTime;
         while (ElapsedMoveTime > 0)
         {
-            rb.position = Vector2.MoveTowards(rb.position, BubblePos, MoveSpeed * Time.deltaTime);
+            rb.position = Vector2.MoveTowards(rb.position, bubblePositon, MoveSpeed * Time.deltaTime);
             ElapsedMoveTime -= Time.deltaTime;
             yield return null;
         }
@@ -65,7 +70,10 @@ public class BubbleAction : MonoBehaviour
     void CallBubbleThrow(bool isCoroutine)
     {
         if (!isCoroutine)
+        {
+            BuffersController.ResetBubbleBuffer();
             StopCoroutine(ThrowTimerRoutine);
+        }
         activeBubble.PopBubble();
         StateMachine.ChangeState(InAirMovementState);
         BubbleThrow.BubbleThrow();
