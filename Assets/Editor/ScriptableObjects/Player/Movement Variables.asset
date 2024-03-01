@@ -15,7 +15,8 @@ MonoBehaviour:
   maxSpeed: 8
   slowDownTreshold: 0.1
   acceleration: 3.5
-  decceleration: 3.5
+  decceleration: 4.2
+  overspeedDecceleration: 1.2
   InAirMaxSpeed: 12
   InAirAcc: 19
   InAirDecc: 1.5
@@ -25,7 +26,12 @@ MonoBehaviour:
   swingAcc: 5
   swingDecc: 0.7
   swingPower: 1
+  wallGrabClamp: 0
   JumpForce: 125
   JumpCutMultiplier: 1.3
   SwingJumpForce: 80
   SwingJumpBalance: 0.5
+  BubbleThrowForce: 175
+  BubbleThrowMaxTime: 1.5
+  XThrowModifier: 0.9
+  YThrowModifier: 0.95

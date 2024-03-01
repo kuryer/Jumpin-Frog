@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -44,7 +43,6 @@ public class SwingReleaseAction : MonoBehaviour
         TongueRenderer.TurnSpriteRenderer();
         TongueRenderer.StopCalculation();//tongue renderer
         StateMachine.ChangeState(InAirState);//change state
-        ActualSwing.Value.OnPlayerRelease();
     }
 
     #region Setup

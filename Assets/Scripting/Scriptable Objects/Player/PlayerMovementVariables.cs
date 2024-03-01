@@ -8,6 +8,10 @@ public class PlayerMovementVariables : ScriptableObject
     public float slowDownTreshold;
     [SerializeField] float acceleration;
     [SerializeField] float decceleration;
+    [Tooltip("Force that will be applied to slow down the player when its velocity will be higher than the maximum possible on ground Speed")]
+    [SerializeField] float overspeedDecceleration;
+
+    [HideInInspector] public float overDecc { get { return maxSpeed * overspeedDecceleration; } }
     [HideInInspector] public float acc { get { return maxSpeed * acceleration; } }
     [HideInInspector] public float decc { get { return maxSpeed * decceleration; } }
 
@@ -39,5 +43,6 @@ public class PlayerMovementVariables : ScriptableObject
     [Header("Bubble Throw")]
     public float BubbleThrowForce;
     public float BubbleThrowMaxTime;
-
+    public float XThrowModifier;
+    public float YThrowModifier;
 }

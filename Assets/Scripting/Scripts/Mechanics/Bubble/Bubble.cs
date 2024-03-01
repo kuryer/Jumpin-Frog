@@ -7,6 +7,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] CircleCollider2D BubbleCollider;
     [SerializeField] float Cooldown;
     [SerializeField] MovementStateVariable ActualState;
+    [SerializeField] BubbleActionRuntimeValue BubbleAction;
 
     [Header("Animation")]
     [SerializeField] Animator animator;
@@ -14,11 +15,9 @@ public class Bubble : MonoBehaviour
     {
         if (collision.CompareTag("Player") && ActualState.Value is InAirMovementState)
         {
-            collision.GetComponent<BubbleAction>().InBubbleCall(Position(), this);
-            //animator call
+            BubbleAction.Item.InBubbleCall(Position(), this);
+            PlayAnimation("EnterBubble");
         }
-
-        //Tutaj by sie przyda³a podmianka jednak na to Bubble Action Reference 
     }
     Vector2 Position()
     {
@@ -27,6 +26,7 @@ public class Bubble : MonoBehaviour
 
     public void PopBubble()
     {
+        PlayAnimation("ExitBubble");
         StartCoroutine(BubbleCooldown());
     }
 
@@ -34,6 +34,12 @@ public class Bubble : MonoBehaviour
     {
         BubbleCollider.enabled = false;
         yield return new WaitForSeconds(Cooldown);
+        PlayAnimation("Idle"); //RESPAWN
         BubbleCollider.enabled = true;
+    }
+
+    void PlayAnimation(string animationName)
+    {
+        animator.Play(animationName);
     }
 }

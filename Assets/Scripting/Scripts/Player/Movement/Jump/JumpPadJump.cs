@@ -17,6 +17,7 @@ public class JumpPadJump : MonoBehaviour
         BodyTypeCheck();
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        Debug.Log("rb.velocity right after jumpPad Call: " + rb.velocity);
         if (ActualState.Value is GroundMovementState)
             TransitionToInAir();
     }

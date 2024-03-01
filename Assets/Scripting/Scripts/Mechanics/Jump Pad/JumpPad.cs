@@ -7,6 +7,10 @@ public class JumpPad : MonoBehaviour
     float timePassed;
     SpriteRenderer spriteRenderer;
 
+    [Header("New Controller")]
+    [SerializeField] bool worksWithNewController;
+    [SerializeField] JumpPadControllerRuntimeValue JumpPadValue;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -23,8 +27,13 @@ public class JumpPad : MonoBehaviour
             return;
         if(collision != null && collision.gameObject.CompareTag("Player"))
         {
-            var playerMovement = collision.GetComponent<PlayerMovement>();
-            playerMovement.OnJumpPad(jumpForce);
+            if(worksWithNewController)
+                JumpPadValue.Item.Jump(jumpForce);
+            else
+            {
+                var playerMovement = collision.GetComponent<PlayerMovement>();
+                playerMovement.OnJumpPad(jumpForce);
+            }
             StartTimer();
         }
     }
