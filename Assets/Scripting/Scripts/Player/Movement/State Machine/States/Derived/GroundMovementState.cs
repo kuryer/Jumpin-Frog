@@ -8,7 +8,7 @@ public class GroundMovementState : MovementState
     [SerializeField] FloatVariable X;
     [SerializeField] PlayerMovementVariables playerVariables;
     [SerializeField] BoolVariable isOnSlopeVariable;
-    Rigidbody2D platformRB;
+    [SerializeField] Rigidbody2DRuntimeValue platformRbValue;
     [SerializeField] float velocity;
     bool StandOnSlope;
     
@@ -19,6 +19,8 @@ public class GroundMovementState : MovementState
     {
         velocity = rb.Item.velocity.x;
         GroundMovementDisablerEvent.SetScripts(true);
+        if (isOnSlopeVariable.Value && X.Value == 0)
+            SetKinematicBody();
     }
     public override void OnUpdate()
     {
@@ -41,9 +43,9 @@ public class GroundMovementState : MovementState
             SetVelocityAcc();
         if (StandOnSlope)
             return;
-        //float velocityX = platformRB is null ? velocity : velocity + platformRB.velocity.x;
+        float velocityX = platformRbValue.Item is null ? velocity : velocity + platformRbValue.Item.velocity.x;
         //to jest do poprawy bo mam unassignedReferenceException rzucany wiêc musze ten assignment ograæ jakoœ fajnie
-        rb.Item.velocity = new Vector2(velocity, rb.Item.velocity.y);
+        rb.Item.velocity = new Vector2(velocityX, rb.Item.velocity.y);
     }
 
     void SlowDownVelocity()
@@ -63,10 +65,7 @@ public class GroundMovementState : MovementState
         if (velocity == 0)
             if (isOnSlopeVariable.Value)
             {
-                rb.Item.bodyType = RigidbodyType2D.Kinematic;
-                rb.Item.velocity = Vector2.zero;
-                velocity = 0;
-                StandOnSlope = true;
+                SetKinematicBody();
                 return;
             }
             else
@@ -92,11 +91,26 @@ public class GroundMovementState : MovementState
         if (StandOnSlope)
             BackToDynamic();
 
-        float multiplier = Mathf.Sign(velocity) == X.Value ? playerVariables.acc : playerVariables.decc;
+        if (Mathf.Abs(velocity) > playerVariables.maxSpeed)
+        {
+            float multiplier = Mathf.Sign(velocity) == X.Value ? playerVariables.overDecc : playerVariables.decc;
+            velocity += (-Mathf.Sign(velocity)) * multiplier * Time.fixedDeltaTime;
+        }
+        else
+        {
+            float multiplier = Mathf.Sign(velocity) == X.Value ? playerVariables.acc : playerVariables.decc;
+            if (Mathf.Abs(velocity + (multiplier * X.Value * Time.fixedDeltaTime)) < playerVariables.maxSpeed)
+                velocity += (multiplier * X.Value * Time.fixedDeltaTime);
+            else velocity = playerVariables.maxSpeed * X.Value;
+        }
+    }
 
-        if (Mathf.Abs(velocity + (multiplier * X.Value * Time.fixedDeltaTime)) < playerVariables.maxSpeed)
-            velocity += (multiplier * X.Value * Time.fixedDeltaTime);
-        else velocity = playerVariables.maxSpeed * X.Value;
+    void SetKinematicBody()
+    {
+        rb.Item.bodyType = RigidbodyType2D.Kinematic;
+        rb.Item.velocity = Vector2.zero;
+        velocity = 0;
+        StandOnSlope = true;
     }
 
     void BackToDynamic()
