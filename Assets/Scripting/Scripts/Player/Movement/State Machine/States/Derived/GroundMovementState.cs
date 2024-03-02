@@ -14,7 +14,10 @@ public class GroundMovementState : MovementState
     
     [Header("Disabler")]
     [SerializeField] DisablerEvent GroundMovementDisablerEvent;
-    
+
+    //[Header("Animation")]
+
+
     public override void OnEnter()
     {
         velocity = rb.Item.velocity.x;

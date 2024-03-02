@@ -7,6 +7,9 @@ public class FallDetection : MonoBehaviour
     [SerializeField] BoolVariable isFalling;
     [SerializeField] MovementStateVariable ActualState;
 
+    [Header("Animation Management")]
+    [SerializeField] AnimationController AnimationController;
+
     void Update()
     {
         FallCheck();
