@@ -28,6 +28,11 @@ public class PlayerDisabler : MonoBehaviour
     [SerializeField] List<MonoBehaviour> BubbleEnableScripts;
     [SerializeField] List<MonoBehaviour> BubbleDisableScripts;
 
+    [Header("Dead State")]
+    [SerializeField] DisablerEvent DeadStateDisablerEvent;
+    [SerializeField] List<MonoBehaviour> DeadStateEnableScripts;
+    [SerializeField] List<MonoBehaviour> DeadStateDisableScripts;
+
     #region Assignment
 
     private void OnEnable()
@@ -37,6 +42,7 @@ public class PlayerDisabler : MonoBehaviour
         AssignSwingMovement(true);
         AssignOnWallMovement(true);
         AssignBubbleMovement(true);
+        AssignDeadMovement(true);
     }
 
     private void OnDisable()
@@ -46,6 +52,7 @@ public class PlayerDisabler : MonoBehaviour
         AssignSwingMovement(false);
         AssignOnWallMovement(false);
         AssignBubbleMovement(false);
+        AssignDeadMovement(false);
     }
 
     #endregion
@@ -89,5 +96,13 @@ public class PlayerDisabler : MonoBehaviour
             BubbleDisablerEvent.AssignScripts(BubbleEnableScripts, BubbleDisableScripts);
         else
             BubbleDisablerEvent.NullScripts();
+    }
+
+    void AssignDeadMovement(bool enabled)
+    {
+        if (enabled)
+            DeadStateDisablerEvent.AssignScripts(DeadStateEnableScripts, DeadStateDisableScripts);
+        else
+            DeadStateDisablerEvent.NullScripts();
     }
 }

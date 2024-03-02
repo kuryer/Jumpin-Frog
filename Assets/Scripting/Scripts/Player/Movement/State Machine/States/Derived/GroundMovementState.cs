@@ -21,6 +21,8 @@ public class GroundMovementState : MovementState
         GroundMovementDisablerEvent.SetScripts(true);
         if (isOnSlopeVariable.Value && X.Value == 0)
             SetKinematicBody();
+        else if (isOnSlopeVariable.Value)
+            rb.Item.velocity = new Vector2(playerVariables.maxSpeed * X.Value , rb.Item.velocity.y);
     }
     public override void OnUpdate()
     {

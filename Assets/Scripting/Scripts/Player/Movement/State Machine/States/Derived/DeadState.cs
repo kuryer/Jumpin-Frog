@@ -1,25 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Player/Movement States/Dead")]
 public class DeadState : MovementState
 {
+    [SerializeField] DisablerEvent DeadStateDisablerEvent;
+    public override void OnEnter()
+    {
+        DeadStateDisablerEvent.SetScripts(false);
+    }
     public override void OnFixedUpdate()
     {
-        throw new System.NotImplementedException();
     }
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
     }
-    public override void OnEnter()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
+        DeadStateDisablerEvent.SetScripts(true);
     }
 }

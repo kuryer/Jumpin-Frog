@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 774dd552803a79c4f8b7137e4d231375, type: 3}
-  m_Name: Test Vars
+  m_Script: {fileID: 11500000, guid: 2171d00a944f3f9429a28162cd60df39, type: 3}
+  m_Name: Respawn Info
   m_EditorClassIdentifier: 
-  maxSpeed: 7
-  acceleration: 3
-  decceleration: 3
+  Position: {x: 0, y: 0}
+  ActualRespawnPoint: {fileID: 0}
