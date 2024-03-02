@@ -1,22 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LethalCollision : MonoBehaviour
 {
-    public enum DeathType
+    [Header("New Controller")]
+    [SerializeField] bool worksWithNewController;
+    [SerializeField] GameEvent DeathEvent;
+    [SerializeField] MovementStateVariable ActualState;
+    [HideInInspector]public enum DeathType
     {
         SpikeDamage,
         FallDamage
         
     }
-    public DeathType killType;
+    [HideInInspector]public DeathType killType;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<PlayerHealth>(out PlayerHealth player))
-        {
-            player.KillPlayer((int)killType);
-        }
+        if (worksWithNewController && ActualState.Value is not DeadState)
+            DeathEvent.Raise();
+        else
+            if (collision.TryGetComponent<PlayerHealth>(out PlayerHealth player))
+            {
+                player.KillPlayer((int)killType);
+            }
     }
 }
