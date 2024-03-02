@@ -11,6 +11,10 @@ public class CoyoteJumpController : MonoBehaviour
     [SerializeField] Buffer CoyoteTime;
     [SerializeField] BuffersController BuffersController;
     [SerializeField] JumpCutController JumpCutController;
+
+    [Header("Animation Management")]
+    [SerializeField] AnimationController AnimationController;
+    [SerializeField] AnimationState JumpAnimationState;
     void Update()
     {
         CoyoteJumpCheck();
@@ -28,6 +32,7 @@ public class CoyoteJumpController : MonoBehaviour
         rb.AddForce(Vector2.up * playerVariables.JumpForce, ForceMode2D.Impulse);
         ResetBuffers();
         JumpCutController.enabled = true;
+        AnimationController.ChangeAnimation(JumpAnimationState);
     }
 
     void ResetBuffers()

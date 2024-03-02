@@ -6,11 +6,13 @@ public class PlayerReferenceCollector : MonoBehaviour
     [SerializeField] Rigidbody2DRuntimeValue Rigidbody2DValue;
     [SerializeField] BubbleActionRuntimeValue BubbleActionValue;
     [SerializeField] JumpPadControllerRuntimeValue JumpPadControllerValue;
+    [SerializeField] AnimationControllerRuntimeValue AnimationControllerValue;
 
     [Header("References")]
     [SerializeField] Rigidbody2D Rigidbody2D;
     [SerializeField] BubbleAction BubbleAction;
     [SerializeField] JumpPadJump JumpPadController;
+    [SerializeField] AnimationController AnimationController;
 
     [Header("To null")]
     [Tooltip("This thing is here only because it needs to be set to null by something to not crush in ground Movement State")]
@@ -28,12 +30,14 @@ public class PlayerReferenceCollector : MonoBehaviour
             Rigidbody2DValue.SetItem(Rigidbody2D);
             BubbleActionValue.SetItem(BubbleAction);
             JumpPadControllerValue.SetItem(JumpPadController);
+            AnimationControllerValue.SetItem(AnimationController);
         }
         else
         {
             Rigidbody2DValue.NullItem();
             BubbleActionValue.NullItem();
             JumpPadControllerValue.NullItem();
+            AnimationControllerValue.NullItem();
         }
     }
 

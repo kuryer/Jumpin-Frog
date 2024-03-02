@@ -19,4 +19,7 @@ MonoBehaviour:
   ExitOnWallEvent: {fileID: 11400000, guid: ff102ecab2cb15f44b9d9b20170885df, type: 2}
   StateMachine: {fileID: 11400000, guid: a995653b8e4717b4ba2ca28cd717be3a, type: 2}
   InAirMovementState: {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
+  AnimationControllerValue: {fileID: 11400000, guid: 6c5603df8dd8e2b4ead6df9697773fd0, type: 2}
+  OnWallAnimationState: {fileID: 11400000, guid: df43c6d3bffdf3246b7ae9adee075b96, type: 2}
+  JumpAnimationState: {fileID: 11400000, guid: f2c552d754901174483cc25a54ff27a9, type: 2}
   OnWallMovementDisablerEvent: {fileID: 11400000, guid: 360166c1d5586294da7944afdf3a3a88, type: 2}

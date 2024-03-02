@@ -19,6 +19,9 @@ public class BasicJumpController : MonoBehaviour
     [Header("Anti-Double Jump")]
     [SerializeField] GroundDetection GroundDetection;
 
+    [Header("Animation Management")]
+    [SerializeField] AnimationController AnimationController;
+    [SerializeField] AnimationState JumpAnimationState;
     void Update()
     {
         BasicJumpCheck();
@@ -35,11 +38,11 @@ public class BasicJumpController : MonoBehaviour
         BodyTypeCheck();
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        Debug.Log("rb.velocity right after basicJump Call: " + rb.velocity);
         BuffersController.ResetJumpBuffer();
         StateMachine.ChangeState(InAirMovementState);
         GroundDetection.PlayerJumpedCall(); // Anti-double Jump
         JumpCutController.enabled = true;
+        AnimationController.ChangeAnimation(JumpAnimationState);
     }
 
     void BodyTypeCheck()

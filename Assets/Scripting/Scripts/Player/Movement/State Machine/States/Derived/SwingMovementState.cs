@@ -27,11 +27,17 @@ public class SwingMovementState : MovementState
 
     [Header("Disabler")]
     [SerializeField] DisablerEvent SwingMovementDisablerEvent;
+
+    [Header("Animation Management")]
+    [SerializeField] AnimationControllerRuntimeValue AnimationControllerValue;
+    [SerializeField] AnimationState SwingAnimationState;
+    [SerializeField] AnimationState InAirRollAnimationState;
     public override void OnEnter()
     {
         transform = rb.Item.transform;
         GetSwingData();
         SwingMovementDisablerEvent.SetScripts(true);
+        AnimationControllerValue.Item.ChangeAnimation(SwingAnimationState);
     }
 
     void GetSwingData()
@@ -54,6 +60,7 @@ public class SwingMovementState : MovementState
     public override void OnExit()
     {
         SwingMovementDisablerEvent.SetScripts(false);
+        AnimationControllerValue.Item.ChangeAnimation(InAirRollAnimationState);
     }
 
 
@@ -81,7 +88,6 @@ public class SwingMovementState : MovementState
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVariables.swingPower) * Mathf.Sign(speedDif);
 
         rb.Item.AddForce(movement * transform.right);
-        //Debug.Log(movement * transform.right);
     }
 
     void SetSwingGravity()

@@ -23,6 +23,7 @@ public class BubbleAction : MonoBehaviour
     float ElapsedMoveTime;
     [SerializeField] float MoveTime;
     [SerializeField] float MoveSpeed;
+    [SerializeField] Vector2 PositionOffset;
 
     [Header("Bubble Throw")]
     [SerializeField] BubbleThrowController BubbleThrow;
@@ -30,7 +31,10 @@ public class BubbleAction : MonoBehaviour
     [SerializeField] BuffersController BuffersController;
     Coroutine ThrowTimerRoutine;
 
-
+    [Header("Animation Management")]
+    [SerializeField] AnimationController AnimationController;
+    [SerializeField] AnimationState InBubbleAnimation;
+    [SerializeField] AnimationState InAirRollAnimation;
     //enabled by bubble, disabled by onExit bubbleState
     private void Update()
     {
@@ -41,10 +45,11 @@ public class BubbleAction : MonoBehaviour
     public void InBubbleCall(Vector2 bubblePos, Bubble bubble)
     {
         activeBubble = bubble;
-        bubblePositon = bubblePos;
+        bubblePositon = bubblePos + PositionOffset;
         rb.velocity = Vector2.zero;
         StateMachine.ChangeState(BubbleState);
         GravityController.ChangeGravity(BubbleGravity);
+        AnimationController.ChangeAnimation(InBubbleAnimation);
         StartCoroutine(MoveTowardsBubbleCenter());
     }
 
@@ -75,6 +80,7 @@ public class BubbleAction : MonoBehaviour
             StopCoroutine(ThrowTimerRoutine);
         }
         activeBubble.PopBubble();
+        AnimationController.ChangeAnimation(InAirRollAnimation);
         StateMachine.ChangeState(InAirMovementState);
         BubbleThrow.BubbleThrow();
     }

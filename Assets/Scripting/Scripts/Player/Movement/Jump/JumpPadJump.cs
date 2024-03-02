@@ -10,14 +10,24 @@ public class JumpPadJump : MonoBehaviour
     [SerializeField] MovementStateMachine StateMachine;
     [SerializeField] MovementState InAirMovementState;
 
+    [Header("Gravity Management")]
+    [SerializeField] GravityController GravityController;
+    [SerializeField] GravityState NormalGravity;
+
     [Header("Anti-Double Jump")]
     [SerializeField] GroundDetection GroundDetection;
+
+    [Header("Animation Management")]
+    [SerializeField] AnimationController AnimationController;
+    [SerializeField] AnimationState JumpAnimationState;
+
     public void Jump(float jumpForce)
     {
         BodyTypeCheck();
+        GravityController.ChangeGravity(NormalGravity);
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        Debug.Log("rb.velocity right after jumpPad Call: " + rb.velocity);
+        AnimationController.ChangeAnimation(JumpAnimationState);
         if (ActualState.Value is GroundMovementState)
             TransitionToInAir();
     }

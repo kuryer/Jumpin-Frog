@@ -13,7 +13,7 @@ public class SwingCatchAction : MonoBehaviour
     [SerializeField] GravityController GravityController;
     [SerializeField] GravityState SwingGravity;
 
-    [Header("Scene Management")]
+    [Header("State Management")]
     [SerializeField] MovementStateMachine StateMachine;
     [SerializeField] MovementState SwingState;
 

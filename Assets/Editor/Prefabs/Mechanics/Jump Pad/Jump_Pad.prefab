@@ -145,3 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 170
   cooldown: 4
+  worksWithNewController: 1
+  JumpPadValue: {fileID: 11400000, guid: 4fb414e7f2c457c4fa9cfa498df7a0e1, type: 2}
