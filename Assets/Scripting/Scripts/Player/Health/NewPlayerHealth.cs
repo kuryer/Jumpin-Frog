@@ -42,7 +42,7 @@ public class NewPlayerHealth : MonoBehaviour
 
     public void PlayerDeath()
     {
-        //call animation
+        animationController.ChangeAnimation(DeathAnimation);
         playerCollider.enabled = false;
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.velocity = Vector2.zero;
@@ -66,10 +66,11 @@ public class NewPlayerHealth : MonoBehaviour
     }
     void Respawn()
     {
+        Debug.Log("Dzieñ dobry, tu Jano z przesz³oœci, tak wiem o tym bugu, naprawie go jak sie przerzucimy w 100% na nowy kontroler, ta rakieta");
         playerCollider.enabled = true;
         StateMachine.ChangeState(GroundMovementState);
         GravityController.ChangeGravity(NormalGravity);
         rb.bodyType = RigidbodyType2D.Dynamic;
-        //call animation
+        animationController.ChangeAnimation(RespawnAnimation);
     }
 }

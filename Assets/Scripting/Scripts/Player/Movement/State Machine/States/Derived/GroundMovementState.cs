@@ -15,8 +15,11 @@ public class GroundMovementState : MovementState
     [Header("Disabler")]
     [SerializeField] DisablerEvent GroundMovementDisablerEvent;
 
-    //[Header("Animation")]
-
+    [Header("Animation Management")]
+    [SerializeField] AnimationControllerRuntimeValue AnimationControllerValue;
+    [SerializeField] AnimationStateVariable ActualAnimationState;
+    [SerializeField] AnimationState IdleState;
+    [SerializeField] AnimationState RunState;
 
     public override void OnEnter()
     {
@@ -58,6 +61,8 @@ public class GroundMovementState : MovementState
         if (StandOnSlope)
             return;
 
+        if (ActualAnimationState.Value != IdleState)
+            AnimationControllerValue.Item.ChangeAnimation(IdleState); 
         //if (!StandOnSlope && isOnSlopeVariable.Value)
         //{
         //    rb.Item.bodyType = RigidbodyType2D.Kinematic;
@@ -79,17 +84,20 @@ public class GroundMovementState : MovementState
         if (Mathf.Abs(velocity) > playerVariables.slowDownTreshold)
         {
             velocity += (playerVariables.decc * -Mathf.Sign(velocity) * Time.fixedDeltaTime);
-            Debug.Log("slow down part");
+            //Debug.Log("slow down part");
         }
         else
         {
             velocity = 0;
-            Debug.Log("zero part");
+            //Debug.Log("zero part");
         }
     }
 
     void SetVelocityAcc()
     {
+        if (ActualAnimationState.Value != RunState)
+            AnimationControllerValue.Item.ChangeAnimation(RunState);
+
         if (velocity == playerVariables.maxSpeed * X.Value)
             return;
 
@@ -114,6 +122,7 @@ public class GroundMovementState : MovementState
     {
         rb.Item.bodyType = RigidbodyType2D.Kinematic;
         rb.Item.velocity = Vector2.zero;
+        AnimationControllerValue.Item.ChangeAnimation(IdleState);
         velocity = 0;
         StandOnSlope = true;
     }

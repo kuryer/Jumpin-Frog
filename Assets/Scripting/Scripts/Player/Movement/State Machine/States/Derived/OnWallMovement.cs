@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Player/Movement States/On Wall Movement")]
@@ -14,7 +15,10 @@ public class OnWallMovement : MovementState
     [SerializeField] MovementStateMachineRuntimeValue StateMachine;
     [SerializeField] MovementState InAirMovementState;
 
-
+    [Header("Animation Management")]
+    [SerializeField] AnimationControllerRuntimeValue AnimationControllerValue;
+    [SerializeField] AnimationState OnWallAnimationState;
+    [SerializeField] AnimationState JumpAnimationState;
 
     [Header("Disabler")]
     [SerializeField] DisablerEvent OnWallMovementDisablerEvent;
@@ -23,6 +27,7 @@ public class OnWallMovement : MovementState
     public override void OnEnter()
     {
         OnWallMovementDisablerEvent.SetScripts(true);
+        AnimationControllerValue.Item.ChangeAnimation(OnWallAnimationState);
     }
     public override void OnUpdate()
     {
@@ -38,6 +43,7 @@ public class OnWallMovement : MovementState
     {
         OnWallMovementDisablerEvent.SetScripts(false);
         ExitOnWallEvent.Raise(); //Changes gravity to normal
+        AnimationControllerValue.Item.ChangeAnimation(JumpAnimationState);
     }
 
     #region Wall Grab Check

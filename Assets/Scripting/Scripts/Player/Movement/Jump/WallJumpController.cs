@@ -22,7 +22,10 @@ public class WallJumpController : MonoBehaviour
 
     [Header("Anti-Double Jump")]
     [SerializeField] WallDetection WallDetection;
-    
+
+    [Header("Animation Management")]
+    [SerializeField] AnimationController AnimationController;
+    [SerializeField] AnimationState InAirRollAnimationState;
     void Update()
     {
         WallJumpCheck();
@@ -46,6 +49,7 @@ public class WallJumpController : MonoBehaviour
         else if(WallDetectionBool.Right)
             RightJump();
 
+        AnimationController.ChangeAnimation(InAirRollAnimationState);
         BuffersController.ResetWallJumpBuffer();
     }
 

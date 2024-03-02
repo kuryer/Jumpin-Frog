@@ -19,3 +19,7 @@ MonoBehaviour:
   platformRbValue: {fileID: 11400000, guid: 773a60c51d66b7841af49af6db9a11da, type: 2}
   velocity: 0
   GroundMovementDisablerEvent: {fileID: 11400000, guid: b1821e1ec56b2ea4391135862064a99a, type: 2}
+  AnimationControllerValue: {fileID: 11400000, guid: 6c5603df8dd8e2b4ead6df9697773fd0, type: 2}
+  ActualAnimationState: {fileID: 11400000, guid: df2cdd26310fd1148a2625a61ad7da76, type: 2}
+  IdleState: {fileID: 11400000, guid: 9559f282f62ab5543be4b111fd545d3a, type: 2}
+  RunState: {fileID: 11400000, guid: f34e31d8d48d948448b54c93c36959c7, type: 2}
