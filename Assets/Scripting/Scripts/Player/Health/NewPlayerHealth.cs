@@ -24,6 +24,11 @@ public class NewPlayerHealth : MonoBehaviour
     [SerializeField] MovementState GroundMovementState;
     [SerializeField] RespawnPointVariables RespawnInfo;
 
+    [Header("Animation Management")]
+    [SerializeField] AnimationController animationController;
+    [SerializeField] AnimationState DeathAnimation;
+    [SerializeField] AnimationState RespawnAnimation;
+
     private void Start()
     {
         if (RespawnInfo.ActualRespawnPoint is not NewRespawnPoint)
