@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 8
   slowDownTreshold: 0.2
-  acceleration: 3.5
-  decceleration: 5
+  acceleration: 5
+  decceleration: 7
   overspeedDecceleration: 1.2
   InAirMaxSpeed: 12
   InAirAcc: 19
