@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName ="Scriptable Objects/Player/Movement States/Ground Movement")]
 public class GroundMovementState : MovementState
@@ -25,6 +26,10 @@ public class GroundMovementState : MovementState
     {
         velocity = rb.Item.velocity.x;
         GroundMovementDisablerEvent.SetScripts(true);
+        if (X.Value == 0)
+            AnimationControllerValue.Item.ChangeAnimation(IdleState);
+        else
+            AnimationControllerValue.Item.ChangeAnimation(RunState);
         if (isOnSlopeVariable.Value && X.Value == 0)
             SetKinematicBody();
         else if (isOnSlopeVariable.Value)
@@ -89,7 +94,8 @@ public class GroundMovementState : MovementState
         else
         {
             velocity = 0;
-            //Debug.Log("zero part");
+            if (rb.Item.bodyType == RigidbodyType2D.Dynamic && platformRbValue.Item is null)
+                SetKinematicBody();
         }
     }
 
@@ -116,6 +122,19 @@ public class GroundMovementState : MovementState
                 velocity += (multiplier * X.Value * Time.fixedDeltaTime);
             else velocity = playerVariables.maxSpeed * X.Value;
         }
+    }
+
+    public void OnDirectionChangeVelocityCheck(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        float x = context.ReadValue<Vector2>().x;
+        if (x == 0)
+            return;
+
+        if (Mathf.Sign(x) != Mathf.Sign(velocity) && Mathf.Abs(rb.Item.velocity.x) < playerVariables.slowDownTreshold)
+            velocity = rb.Item.velocity.x;
     }
 
     void SetKinematicBody()
