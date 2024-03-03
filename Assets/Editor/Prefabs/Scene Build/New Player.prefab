@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7346958207031562706}
-  playerVariables: {fileID: 11400000, guid: c2d85ec264ce35d4f9d6be8d65ee0263, type: 2}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   WallJumpBuffer: {fileID: 11400000, guid: 84e9625abbf80934aa0cd459a2886fab, type: 2}
   BuffersController: {fileID: 4288184466530949380}
   WallDetectionBool: {fileID: 11400000, guid: 6f3b58e29241db441aa78742c31d17b9, type: 2}
