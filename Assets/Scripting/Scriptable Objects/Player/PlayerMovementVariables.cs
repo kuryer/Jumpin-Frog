@@ -31,6 +31,13 @@ public class PlayerMovementVariables : ScriptableObject
     [Header("Wall Grab")]
     public float wallGrabClamp;
 
+    [Header("Wall Jump")]
+    [Range(0.01f, 0.99f)]
+    [Tooltip("1 means only Y Velocity, 0 means only X velocity")]
+    public float wallJumpDirectionBalance;
+    public float wallJumpForce;
+
+
     [Header("Basic Jump")]
     public float JumpForce;
     [Tooltip("Y Velocity multiplied by this variable is the force that's applied to the body on jump cut")]
