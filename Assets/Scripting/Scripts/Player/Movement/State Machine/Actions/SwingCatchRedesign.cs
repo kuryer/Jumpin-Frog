@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwingCatchAction : MonoBehaviour
+public class SwingCatchRedesign : MonoBehaviour
 {
     [Header("Swing Check")]
     [SerializeField] Buffer SwingCatchBuffer;
@@ -30,7 +30,7 @@ public class SwingCatchAction : MonoBehaviour
         if (SwingCatchBuffer.ActivityInfo.Value() && transform.position.y < ActualSwing.Value.transform.position.y)
             SwingCatch();
     }
-    
+
     public void SwingCatch()
     {
         Vector3 swingPos = ActualSwing.Value.transform.position;

@@ -32,12 +32,19 @@ public class SwingMovementState : MovementState
     [SerializeField] AnimationControllerRuntimeValue AnimationControllerValue;
     [SerializeField] AnimationState SwingAnimationState;
     [SerializeField] AnimationState InAirRollAnimationState;
+
+
+    [Header("Swing Redesign")]
+    [SerializeField] bool RedesignedSwing;
+    [SerializeField] float Direction;
     public override void OnEnter()
     {
         transform = rb.Item.transform;
         GetSwingData();
         SwingMovementDisablerEvent.SetScripts(true);
         AnimationControllerValue.Item.ChangeAnimation(SwingAnimationState);
+        if(RedesignedSwing)
+            gravityController.Item.ChangeGravity(ActiveSwingState);
     }
 
     void GetSwingData()
@@ -54,13 +61,17 @@ public class SwingMovementState : MovementState
     public override void OnFixedUpdate()
     {
         SwingRotation();
-        SwingingMovement();
+        if(RedesignedSwing)
+            SwingingRedesignedMovement();
+        else
+            SwingingMovement();
     }
 
     public override void OnExit()
     {
         SwingMovementDisablerEvent.SetScripts(false);
         AnimationControllerValue.Item.ChangeAnimation(InAirRollAnimationState);
+        Direction = 0;
     }
 
 
@@ -90,6 +101,11 @@ public class SwingMovementState : MovementState
         rb.Item.AddForce(movement * transform.right);
     }
 
+    void SwingingRedesignedMovement()
+    {
+        rb.Item.AddForce(playerVariables.swingAcceleration * transform.right * Direction);
+    }
+
     void SetSwingGravity()
     {
         if (X.Value == 0)
@@ -97,6 +113,11 @@ public class SwingMovementState : MovementState
         else
             gravityController.Item.ChangeGravity(ActiveSwingState);
 
+    }
+
+    public void SetSwingDirection(float direction)
+    {
+        Direction = direction;
     }
     #endregion
 }

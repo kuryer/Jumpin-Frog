@@ -1448,6 +1448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwingCatchBuffer: {fileID: 11400000, guid: 7b7091fdb36525f498f54144b453f35b, type: 2}
   ActualSwing: {fileID: 11400000, guid: acd955f511423ee45a1c0ba9ed4965ae, type: 2}
+  rb: {fileID: 7346958207031562706}
   TongueRenderer: {fileID: 5493717548407796997}
   TongueJoint: {fileID: 3608075781272399135}
   BuffersController: {fileID: 4288184466530949380}
