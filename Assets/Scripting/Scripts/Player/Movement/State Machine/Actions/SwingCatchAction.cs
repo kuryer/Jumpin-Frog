@@ -48,6 +48,19 @@ public class SwingCatchAction : MonoBehaviour
 
     void SetSwingDirection()
     {
-        SwingState.SetSwingDirection(Mathf.Sign(rb.velocity.x));
+        float ySign = Mathf.Sign(rb.velocity.y);
+        float xSign = Mathf.Sign(rb.velocity.x);
+
+        float swingDist = transform.parent.position.x - ActualSwing.Value.transform.position.x;
+
+        if (ySign < 0f)
+        {
+            if (swingDist > 0f)
+                SwingState.SetSwingDirection(-1f);
+            else
+                SwingState.SetSwingDirection(1f);
+        }
+        else
+            SwingState.SetSwingDirection(xSign);
     }
 }
