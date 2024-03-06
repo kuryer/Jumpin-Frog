@@ -22,11 +22,15 @@ public class PlayerMovementVariables : ScriptableObject
     public float inAirPower;
 
     public float FallClampSpeed;
+
     [Header("Swing Movement")]
     public float swingMaxSpeed;
     public float swingAcc;
     public float swingDecc;
     public float swingPower;
+
+    [Header("Swing Movement Redesign")]
+    public float swingAcceleration;
 
     [Header("Wall Grab")]
     public float wallGrabClamp;
@@ -34,7 +38,7 @@ public class PlayerMovementVariables : ScriptableObject
     [Header("Wall Jump")]
     [Range(0.01f, 0.99f)]
     [Tooltip("1 means only Y Velocity, 0 means only X velocity")]
-    public float wallJumpDirectionBalance;
+    public float directionBalance;
     public float wallJumpForce;
 
 

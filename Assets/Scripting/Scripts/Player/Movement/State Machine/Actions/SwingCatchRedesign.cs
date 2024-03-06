@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwingCatchAction : MonoBehaviour
+public class SwingCatchRedesign : MonoBehaviour
 {
     [Header("Swing Check")]
     [SerializeField] Buffer SwingCatchBuffer;
@@ -30,7 +30,7 @@ public class SwingCatchAction : MonoBehaviour
         if (SwingCatchBuffer.ActivityInfo.Value() && transform.position.y < ActualSwing.Value.transform.position.y)
             SwingCatch();
     }
-    
+
     public void SwingCatch()
     {
         Vector3 swingPos = ActualSwing.Value.transform.position;
@@ -48,19 +48,6 @@ public class SwingCatchAction : MonoBehaviour
 
     void SetSwingDirection()
     {
-        float ySign = Mathf.Sign(rb.velocity.y);
-        float xSign = Mathf.Sign(rb.velocity.x);
-
-        float swingDist = transform.parent.position.x - ActualSwing.Value.transform.position.x;
-
-        if (ySign < 0f)
-        {
-            if (swingDist > 0f)
-                SwingState.SetSwingDirection(-1f);
-            else
-                SwingState.SetSwingDirection(1f);
-        }
-        else
-            SwingState.SetSwingDirection(xSign);
+        SwingState.SetSwingDirection(Mathf.Sign(rb.velocity.x));
     }
 }

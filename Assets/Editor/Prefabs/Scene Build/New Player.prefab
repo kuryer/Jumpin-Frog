@@ -659,9 +659,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2caef281bb8dd9409e76e7c9c42763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RayPosition: {x: -0.02, y: -0.5, z: 0}
+  RayPosition: {x: -0.05, y: -0.5, z: 0}
   RayOffset: {x: 0, y: -0.19, z: 0}
-  RayDistance: 0.7
+  RayDistance: 0.5
   WallLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -678,8 +678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ca9b43fdaa7024f9e2940875b03d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RayPosition: {x: 0, y: -0.7, z: 0}
-  RayOffset: {x: -0.22, y: 0, z: 0}
+  RayPosition: {x: -0.03, y: -0.7, z: 0}
+  RayOffset: {x: -0.2, y: 0, z: 0}
   RayDistance: 0.42
   GroundLayer:
     serializedVersion: 2
@@ -725,8 +725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da8a7a89c94dc84dbb606451870c860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RayPosition: {x: 0, y: -0.7, z: 0}
-  RayOffset: {x: -0.44, y: 0, z: 0}
+  RayPosition: {x: -0.03, y: -0.7, z: 0}
+  RayOffset: {x: -0.4, y: 0, z: 0}
   RayDistance: 0.38
   LeftShortLayer:
     serializedVersion: 2
@@ -1448,6 +1448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwingCatchBuffer: {fileID: 11400000, guid: 7b7091fdb36525f498f54144b453f35b, type: 2}
   ActualSwing: {fileID: 11400000, guid: acd955f511423ee45a1c0ba9ed4965ae, type: 2}
+  rb: {fileID: 7346958207031562706}
   TongueRenderer: {fileID: 5493717548407796997}
   TongueJoint: {fileID: 3608075781272399135}
   BuffersController: {fileID: 4288184466530949380}

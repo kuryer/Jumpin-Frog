@@ -11,7 +11,7 @@ public class GroundMovementState : MovementState
     [SerializeField] BoolVariable isOnSlopeVariable;
     [SerializeField] Rigidbody2DRuntimeValue platformRbValue;
     [SerializeField] float velocity;
-    bool StandOnSlope;
+    [SerializeField] bool StandOnSlope;
     
     [Header("Disabler")]
     [SerializeField] DisablerEvent GroundMovementDisablerEvent;
@@ -45,6 +45,8 @@ public class GroundMovementState : MovementState
     public override void OnExit()
     {
         GroundMovementDisablerEvent.SetScripts(false);
+        if (StandOnSlope)
+            StandOnSlope = false;
     }
 
     #region Core Movement
@@ -57,7 +59,6 @@ public class GroundMovementState : MovementState
         if (StandOnSlope)
             return;
         float velocityX = platformRbValue.Item is null ? velocity : velocity + platformRbValue.Item.velocity.x;
-        //to jest do poprawy bo mam unassignedReferenceException rzucany wiêc musze ten assignment ograæ jakoœ fajnie
         rb.Item.velocity = new Vector2(velocityX, rb.Item.velocity.y);
     }
 
@@ -68,14 +69,6 @@ public class GroundMovementState : MovementState
 
         if (ActualAnimationState.Value != IdleState)
             AnimationControllerValue.Item.ChangeAnimation(IdleState); 
-        //if (!StandOnSlope && isOnSlopeVariable.Value)
-        //{
-        //    rb.Item.bodyType = RigidbodyType2D.Kinematic;
-        //    rb.Item.velocity = Vector2.zero;
-        //    velocity = 0;
-        //    StandOnSlope = true;
-        //    return;
-        //}
 
         if (velocity == 0)
             if (isOnSlopeVariable.Value)
@@ -89,7 +82,6 @@ public class GroundMovementState : MovementState
         if (Mathf.Abs(velocity) > playerVariables.slowDownTreshold)
         {
             velocity += (playerVariables.decc * -Mathf.Sign(velocity) * Time.fixedDeltaTime);
-            //Debug.Log("slow down part");
         }
         else
         {
@@ -151,11 +143,5 @@ public class GroundMovementState : MovementState
         rb.Item.bodyType = RigidbodyType2D.Dynamic;
         StandOnSlope = false;
     }
-    #endregion
-
-    #region Platform Assign
-
-
-
     #endregion
 }

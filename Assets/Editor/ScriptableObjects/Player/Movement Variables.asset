@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Movement Variables
   m_EditorClassIdentifier: 
   maxSpeed: 8
-  slowDownTreshold: 0.2
+  slowDownTreshold: 0.25
   acceleration: 5
   decceleration: 7
   overspeedDecceleration: 1.2
@@ -26,8 +26,9 @@ MonoBehaviour:
   swingAcc: 5
   swingDecc: 0.7
   swingPower: 1
+  swingAcceleration: 125
   wallGrabClamp: 3
-  wallJumpDirectionBalance: 0.65
+  directionBalance: 0.65
   wallJumpForce: 162
   JumpForce: 125
   JumpCutMultiplier: 1.3
