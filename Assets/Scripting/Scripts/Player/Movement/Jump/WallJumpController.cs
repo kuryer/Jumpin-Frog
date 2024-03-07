@@ -44,6 +44,7 @@ public class WallJumpController : MonoBehaviour
         
         GravityController.ChangeGravity(NormalGravity);
 
+        rb.velocity = Vector2.zero;
         if(WallDetectionBool.Left)
             LeftJump();
         else if(WallDetectionBool.Right)

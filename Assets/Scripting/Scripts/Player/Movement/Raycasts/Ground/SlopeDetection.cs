@@ -29,8 +29,6 @@ public class SlopeDetection : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (ActualState.Value is not GroundMovementState)
-            return;
         isOnSlopeVariable.Value = Raycast();
         SlopeModifier.Value = ChooseModifier();
     }
@@ -94,5 +92,15 @@ public class SlopeDetection : MonoBehaviour
         Gizmos.DrawRay(transform.position + RayPosition, Vector3.down * RayDistance);
         Gizmos.DrawRay(transform.position + RayPosition - RayOffset, Vector3.down * RayDistance);
         Gizmos.DrawRay(transform.position + RayPosition + RayOffset, Vector3.down * RayDistance);
+    }
+
+    private void OnEnable()
+    {
+        isOnSlopeVariable.Value = Raycast();
+    }
+
+    private void OnDisable()
+    {
+        isOnSlopeVariable.Value = false;
     }
 }

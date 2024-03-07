@@ -2070,9 +2070,9 @@ MonoBehaviour:
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_SoftZoneHeight: 0.36
   m_BiasX: 0
-  m_BiasY: 0
+  m_BiasY: -0.481
   m_CenterOnActivate: 1
   m_GroupFramingMode: 2
   m_AdjustmentMode: 0
@@ -2242,6 +2242,10 @@ PrefabInstance:
     - target: {fileID: 990314785040037962, guid: 25b47ddea685ab84590fd6eb6cc5a0b4, type: 3}
       propertyPath: m_Name
       value: Jump_Pad_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 990314785040037962, guid: 25b47ddea685ab84590fd6eb6cc5a0b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 990314785040038068, guid: 25b47ddea685ab84590fd6eb6cc5a0b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7102,6 +7106,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3233951928845038206, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857487965768605099, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6306350216701523298, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}

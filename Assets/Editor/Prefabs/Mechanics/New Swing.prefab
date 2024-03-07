@@ -104,6 +104,8 @@ MonoBehaviour:
   SwingCollider: {fileID: 8815535776125882467}
   onCooldown: 0
   player: {fileID: 0}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  RayDistance: 9
 --- !u!58 &8815535776125882467
 CircleCollider2D:
   m_ObjectHideFlags: 0

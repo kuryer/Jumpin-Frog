@@ -19,12 +19,16 @@ public class AnimationController : MonoBehaviour
     public void SpriteFlipCheck(InputAction.CallbackContext context)
     {
         float x = context.ReadValue<Vector2>().x;
-        if (x == 0 || !context.performed || ActualState.Value is DeadState)
+        if (x == 0 || !context.performed || ActualState.Value is DeadState || ActualState.Value is SwingMovementState)
             return;
         if((SpriteRenderer.flipX && x > 0) || (!SpriteRenderer.flipX && x < 0))
             SpriteRenderer.flipX = !SpriteRenderer.flipX;
     }
 
+    public void SetSpriteFlip(bool newFlipX)
+    {
+        SpriteRenderer.flipX = newFlipX;
+    }
 
     public void ChangeAnimation(AnimationState animation)
     {
