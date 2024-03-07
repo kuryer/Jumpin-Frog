@@ -11,15 +11,16 @@ public class WallGrabAction : MonoBehaviour
 
     [Header("State Management")]
     [SerializeField] MovementStateMachine StateMachine;
-    [SerializeField] MovementState OnWallMovementState;
+    [SerializeField] OnWallMovement OnWallMovementState;
 
     [Header("Gravity")]
     [SerializeField] GravityController GravityController;
     [SerializeField] GravityState WallGrabGravity;
+    [SerializeField] GravityState WallGlideGravity;
 
     [Header("Stick To Wall")]
     [SerializeField] float initialStickForce;
-    // Update is called once per frame
+
     void Update()
     {
         if (IsGrabbingProperSide())
@@ -38,12 +39,20 @@ public class WallGrabAction : MonoBehaviour
     void WallGrab()
     {
         StickToWall();
-        GravityController.ChangeGravity(WallGrabGravity);
+        SetWallGravity();
         StateMachine.ChangeState(OnWallMovementState);
     }
 
     void StickToWall()
     {
-        rb.velocity = new Vector2(X.Value * initialStickForce, 0f);
+        rb.velocity = new Vector2(X.Value * initialStickForce, rb.velocity.y);
+    }
+
+    void SetWallGravity()
+    {
+        if (rb.velocity.y > 0f)
+            GravityController.ChangeGravity(WallGlideGravity);
+        else 
+            OnWallMovementState.ChangeWallGravityToGrab();
     }
 }

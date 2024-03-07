@@ -13,10 +13,14 @@ public class SwingCatchAction : MonoBehaviour
     [SerializeField] BuffersController BuffersController;
     [SerializeField] GravityController GravityController;
     [SerializeField] GravityState SwingGravity;
+    [SerializeField] PlayerMovementVariables playerVariables;
 
     [Header("State Management")]
     [SerializeField] MovementStateMachine StateMachine;
     [SerializeField] SwingMovementState SwingState;
+
+    [Header("Animation")]
+    [SerializeField] AnimationController animationController;
 
     private void Update()
     {
@@ -52,15 +56,31 @@ public class SwingCatchAction : MonoBehaviour
         float xSign = Mathf.Sign(rb.velocity.x);
 
         float swingDist = transform.parent.position.x - ActualSwing.Value.transform.position.x;
+        float redirection = ActualSwing.Value.transform.position.y - playerVariables.swingCatchYPosRedirection;
 
-        if (ySign < 0f)
+
+        if (ySign < 0f && transform.parent.position.y > redirection)
         {
             if (swingDist > 0f)
-                SwingState.SetSwingDirection(-1f);
+                SwingDirectionFunctionality(-1f);
             else
-                SwingState.SetSwingDirection(1f);
+                SwingDirectionFunctionality(1f);
         }
         else
-            SwingState.SetSwingDirection(xSign);
+            SwingDirectionFunctionality(xSign);
+    }
+
+    void SwingDirectionFunctionality(float direction)
+    {
+        if(direction > 0)
+        {
+            SwingState.SetSwingDirection(1f);
+            animationController.SetSpriteFlip(false);
+        }
+        else
+        {
+            SwingState.SetSwingDirection(-1f);
+            animationController.SetSpriteFlip(true);
+        }
     }
 }

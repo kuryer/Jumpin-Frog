@@ -27,14 +27,16 @@ MonoBehaviour:
   swingDecc: 0.7
   swingPower: 1
   swingAcceleration: 125
-  wallGrabClamp: 3
-  directionBalance: 0.65
-  wallJumpForce: 162
+  swingCatchYPosRedirection: 3
+  wallGrabClamp: 3.5
+  wallGravityVelocityChange: 0
+  directionBalance: 0.6
+  wallJumpForce: 200
   JumpForce: 125
   JumpCutMultiplier: 1.3
-  SwingJumpForce: 80
+  SwingJumpForce: 50
   SwingJumpBalance: 0.5
-  BubbleThrowForce: 175
+  BubbleThrowForce: 150
   BubbleThrowMaxTime: 1.5
   XThrowModifier: 0.9
   YThrowModifier: 0.95

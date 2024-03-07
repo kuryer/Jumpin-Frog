@@ -7,6 +7,11 @@ public class Swing : MonoBehaviour
     [SerializeField] CircleCollider2D SwingCollider;
     [SerializeField] bool onCooldown;
     [SerializeField] Transform player;
+
+    [Header("Gizmos")]
+    [SerializeField] PlayerMovementVariables playerVariables;
+    [SerializeField] float RayDistance;
+
     //tutaj jeszcze mo¿emy dodawaæ cooldowny albo (design idea) stworzyæ oddzielny swing z cooldownem i jeden bez
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,7 +34,15 @@ public class Swing : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, SwingCollider.radius * transform.localScale.x);
+        Gizmos.DrawLine(new Vector3(transform.position.x - (RayDistance / 2), transform.position.y - playerVariables.swingCatchYPosRedirection, transform.position.z),
+            new Vector3(transform.position.x + (RayDistance / 2), transform.position.y - playerVariables.swingCatchYPosRedirection, transform.position.z));
     }
+
+    #endregion
+
+    #region Cooldown
+
+
 
     #endregion
 }

@@ -15,6 +15,12 @@ public class OnWallMovement : MovementState
     [SerializeField] MovementStateMachineRuntimeValue StateMachine;
     [SerializeField] MovementState InAirMovementState;
 
+    [Header("Gravity")]
+    [SerializeField] GravityControllerRuntimeValue gravityController;
+    [SerializeField] GravityState WallGlideGravity;
+    [SerializeField] GravityState WallGrabGravity;
+    bool isFalling;
+
     [Header("Animation Management")]
     [SerializeField] AnimationControllerRuntimeValue AnimationControllerValue;
     [SerializeField] AnimationState OnWallAnimationState;
@@ -38,11 +44,13 @@ public class OnWallMovement : MovementState
     public override void OnFixedUpdate()
     {
         WallGrab();
+        WallGrabGravityCheck();
     }
     public override void OnExit()
     {
         OnWallMovementDisablerEvent.SetScripts(false);
         ExitOnWallEvent.Raise(); //Changes gravity to normal
+        isFalling = false;
         AnimationControllerValue.Item.ChangeAnimation(JumpAnimationState);
     }
 
@@ -68,6 +76,21 @@ public class OnWallMovement : MovementState
     {
         if (rb.Item.velocity.y < -playerVariables.wallGrabClamp)
             rb.Item.velocity = new Vector2(0f, -playerVariables.wallGrabClamp);
+    }
+
+    void WallGrabGravityCheck()
+    {
+        if (isFalling)
+            return;
+
+        if (rb.Item.velocity.y < playerVariables.wallGravityVelocityChange)
+            ChangeWallGravityToGrab();
+    }
+
+    public void ChangeWallGravityToGrab()
+    {
+        isFalling = true;
+        gravityController.Item.ChangeGravity(WallGrabGravity);
     }
 
     #endregion

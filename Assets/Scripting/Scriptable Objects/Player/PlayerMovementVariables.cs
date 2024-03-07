@@ -31,9 +31,11 @@ public class PlayerMovementVariables : ScriptableObject
 
     [Header("Swing Movement Redesign")]
     public float swingAcceleration;
+    public float swingCatchYPosRedirection;
 
     [Header("Wall Grab")]
     public float wallGrabClamp;
+    public float wallGravityVelocityChange;
 
     [Header("Wall Jump")]
     [Range(0.01f, 0.99f)]

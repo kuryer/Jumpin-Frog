@@ -51,6 +51,7 @@ MonoBehaviour:
   OnWallMovementState: {fileID: 11400000, guid: 554d8a78cf7c7194cb4bb14ddd53bf34, type: 2}
   GravityController: {fileID: 770699655851860217}
   WallGrabGravity: {fileID: 11400000, guid: e45323e8aa452ce478b8035cad4bbdcf, type: 2}
+  WallGlideGravity: {fileID: 11400000, guid: 8d889dd2b66bee24b85d692437eacff9, type: 2}
   initialStickForce: 2
 --- !u!1 &2383303175528563666
 GameObject:
@@ -661,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RayPosition: {x: -0.05, y: -0.5, z: 0}
   RayOffset: {x: 0, y: -0.19, z: 0}
-  RayDistance: 0.5
+  RayDistance: 0.6
   WallLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -792,8 +793,10 @@ MonoBehaviour:
   GroundMovementDisablerEvent: {fileID: 11400000, guid: b1821e1ec56b2ea4391135862064a99a, type: 2}
   GroundEnableScripts:
   - {fileID: 6507968066120179982}
+  - {fileID: 1646246098173237609}
   GroundDisableScripts:
   - {fileID: 6507968066120179982}
+  - {fileID: 1646246098173237609}
   InAirMovementDisablerEvent: {fileID: 11400000, guid: 7bf7350c2cea80442867871ff0bcc11d, type: 2}
   InAirEnableScripts:
   - {fileID: 1767983977923734243}
@@ -1412,6 +1415,7 @@ GameObject:
   - component: {fileID: 5493717548407796997}
   - component: {fileID: 3890340868709956393}
   - component: {fileID: 6836827513131682210}
+  - component: {fileID: 6971066803359346349}
   m_Layer: 8
   m_Name: Swing
   m_TagString: Untagged
@@ -1454,8 +1458,10 @@ MonoBehaviour:
   BuffersController: {fileID: 4288184466530949380}
   GravityController: {fileID: 770699655851860217}
   SwingGravity: {fileID: 11400000, guid: 3a5d104e49bc7fb4e9a41c162e836522, type: 2}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   StateMachine: {fileID: 3359117671504940329}
   SwingState: {fileID: 11400000, guid: dd47f4c7adf637f41ae747db4815765b, type: 2}
+  animationController: {fileID: 2111167583096790334}
 --- !u!114 &3280914791220826885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,6 +1652,51 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!61 &6971066803359346349
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123447506649150427}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 32759
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.051727295, y: -0.463058}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.625, y: 3.4375}
+    newSize: {x: 0.625, y: 3.4375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.90618896, y: 1.1277685}
+  m_EdgeRadius: 0
 --- !u!1 &7241763708231995993
 GameObject:
   m_ObjectHideFlags: 0
