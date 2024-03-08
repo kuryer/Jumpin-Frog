@@ -31,7 +31,7 @@ public class SwingCatchAction : MonoBehaviour
     {
         if (ActualSwing.Value is null)
             return;
-        if (SwingCatchBuffer.ActivityInfo.Value() && transform.position.y < ActualSwing.Value.transform.position.y)
+        if (SwingCatchBuffer.ActivityInfo.Value())
             SwingCatch();
     }
     

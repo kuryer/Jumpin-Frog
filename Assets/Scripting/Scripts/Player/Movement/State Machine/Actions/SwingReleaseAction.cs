@@ -43,6 +43,7 @@ public class SwingReleaseAction : MonoBehaviour
         TongueRenderer.TurnSpriteRenderer();
         TongueRenderer.StopCalculation();//tongue renderer
         ActualSwing.SetCanSwing(false);
+        ActualSwing.Value.SetUsed();
         StateMachine.ChangeState(InAirState);//change state
     }
 

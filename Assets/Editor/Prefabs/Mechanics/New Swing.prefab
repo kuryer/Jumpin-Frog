@@ -103,6 +103,8 @@ MonoBehaviour:
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   SwingCollider: {fileID: 8815535776125882467}
   onCooldown: 0
+  newDetection: 0
+  rb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
   player: {fileID: 0}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   RayDistance: 9

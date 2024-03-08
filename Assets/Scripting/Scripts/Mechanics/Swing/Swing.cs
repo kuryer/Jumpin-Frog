@@ -2,11 +2,24 @@ using UnityEngine;
 
 public class Swing : MonoBehaviour
 {
+
+
     [SerializeField] SwingVariable ActualSwing;
     [SerializeField] MovementStateVariable ActualState;
     [SerializeField] CircleCollider2D SwingCollider;
     [SerializeField] bool onCooldown;
+
+    [Header("Redesign Detection")]
+    [SerializeField] bool newDetection;
+    [SerializeField] Rigidbody2DRuntimeValue rb;
     [SerializeField] Transform player;
+    delegate void DetectionDelegate();
+    DetectionDelegate Detection;
+    bool swingExited;
+
+    [Header("Cooldown")]
+    [SerializeField] bool worksWithCooldown;
+    [SerializeField] float Cooldown;
 
     [Header("Gizmos")]
     [SerializeField] PlayerMovementVariables playerVariables;
@@ -14,22 +27,112 @@ public class Swing : MonoBehaviour
 
     //tutaj jeszcze mo¿emy dodawaæ cooldowny albo (design idea) stworzyæ oddzielny swing z cooldownem i jeden bez
 
+    private void Start()
+    {
+        player = rb.Item.gameObject.transform;
+        Detection = EnterDetection;
+        enabled = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && ActualState.Value is InAirMovementState)
+        if (newDetection)
         {
-            SetActualSwing(this);
-            SetCanSwing(true);
+            if (collision.CompareTag("Player"))
+            {
+                enabled = true;
+                EnterDetection();
+            }
+        }
+        else
+        {
+            if (collision.CompareTag("Player") && ActualState.Value is InAirMovementState)
+            {
+                SetActualSwing(this);
+                SetCanSwing(true);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && !(ActualState.Value is SwingMovementState) && ActualSwing.Value == this)
+        if (newDetection)
         {
-            SetCanSwing(false);
-            SetActualSwing(null);
+            if (collision.CompareTag("Player"))
+            {
+                PlayerExitedSwingArea();
+                enabled = false;
+            }
+        }
+        else
+        {
+            if (collision.CompareTag("Player") && !(ActualState.Value is SwingMovementState) && ActualSwing.Value == this)
+            {
+                SetCanSwing(false);
+                SetActualSwing(null);
+            }
         }
     }
+
+    private void OnDisable()
+    {
+        swingExited = false;
+        Detection = EnterDetection;
+    }
+
+    private void Update()
+    {
+        if(swingExited && ActualState.Value is not SwingMovementState)
+            enabled = false;
+        Detection();
+    }
+
+    void EnterDetection()
+    {
+        if (player.position.y < transform.position.y && ActualState.Value is InAirMovementState)
+            PlayerEnteredSwingArea();
+    }
+
+    void PlayerEnteredSwingArea()
+    {
+        Detection = ExitDetection;
+        SetActualSwing(this);
+    }
+
+    void ExitDetection()
+    {
+        if (ActualState.Value is SwingMovementState)
+            return;
+
+        if(player.position.y >= transform.position.y || ActualState.Value is not InAirMovementState)
+            PlayerExitedSwingArea();
+    }
+
+    void PlayerExitedSwingArea()
+    {
+        Detection = EnterDetection;
+        SetActualSwing(null);
+    }
+
+    public void SetUsed()
+    {
+        if (worksWithCooldown)
+            SetCooldown();
+        else 
+            Disable();
+    }
+
+    void Disable()
+    {
+        Detection = ExitDetection;
+        SetActualSwing(null);
+    }
+
+    void SetCooldown()
+    {
+
+    }
+
+    #region Obsolete
     void SetActualSwing(Swing actualSwing)
     {
         ActualSwing.Value = actualSwing;
@@ -39,6 +142,7 @@ public class Swing : MonoBehaviour
     {
         ActualSwing.CanSwing = canSwing;
     }
+    #endregion
 
     #region Gizmos
 
