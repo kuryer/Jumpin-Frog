@@ -15,7 +15,7 @@ public class Swing : MonoBehaviour
     [SerializeField] Transform player;
     delegate void DetectionDelegate();
     DetectionDelegate Detection;
-    bool swingExited;
+    bool playerInRange;
 
     [Header("Cooldown")]
     [SerializeField] bool worksWithCooldown;
@@ -41,6 +41,7 @@ public class Swing : MonoBehaviour
             if (collision.CompareTag("Player"))
             {
                 enabled = true;
+                playerInRange = true;
                 EnterDetection();
             }
         }
@@ -59,8 +60,15 @@ public class Swing : MonoBehaviour
         {
             if (collision.CompareTag("Player"))
             {
-                PlayerExitedSwingArea();
-                enabled = false;
+                if(ActualState.Value is SwingMovementState)
+                {
+                }
+                else
+                {
+                    PlayerExitedSwingArea();
+                    enabled = false;
+                }
+                playerInRange = false;
             }
         }
         else
@@ -75,14 +83,17 @@ public class Swing : MonoBehaviour
 
     private void OnDisable()
     {
-        swingExited = false;
+        playerInRange = false;
         Detection = EnterDetection;
     }
 
     private void Update()
     {
-        if(swingExited && ActualState.Value is not SwingMovementState)
+        if(!playerInRange && ActualState.Value is not SwingMovementState)
+        {
+            PlayerExitedSwingArea();
             enabled = false;
+        }
         Detection();
     }
 
