@@ -42,6 +42,7 @@ public class SwingReleaseAction : MonoBehaviour
         GravityController.ChangeGravity(NormalGravity);//gravity normal
         TongueRenderer.TurnSpriteRenderer();
         TongueRenderer.StopCalculation();//tongue renderer
+        ActualSwing.SetCanSwing(false);
         StateMachine.ChangeState(InAirState);//change state
     }
 
