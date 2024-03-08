@@ -17,16 +17,27 @@ public class Swing : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && ActualState.Value is InAirMovementState)
+        {
             SetActualSwing(this);
+            SetCanSwing(true);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.CompareTag("Player") && !(ActualState.Value is SwingMovementState) && ActualSwing.Value == this)
+        {
+            SetCanSwing(false);
             SetActualSwing(null);
+        }
     }
     void SetActualSwing(Swing actualSwing)
     {
         ActualSwing.Value = actualSwing;
+    }
+
+    void SetCanSwing(bool canSwing)
+    {
+        ActualSwing.CanSwing = canSwing;
     }
 
     #region Gizmos
