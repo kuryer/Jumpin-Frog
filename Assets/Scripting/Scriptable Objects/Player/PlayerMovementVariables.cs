@@ -24,13 +24,13 @@ public class PlayerMovementVariables : ScriptableObject
     public float FallClampSpeed;
 
     [Header("(Obsolete) Swing Movement")]
-    [SerializeField] float swingMaxSpeed;
-    [HideInInspector] public float swingMaxSpd { get { return swingMaxSpeed * swingMaxSpeed; } }
     public float swingAcc;
     public float swingDecc;
     public float swingPower;
 
     [Header("Swing Movement Redesign")]
+    [SerializeField] float swingMaxSpeed;
+    [HideInInspector] public float swingMaxSpd { get { return swingMaxSpeed * swingMaxSpeed; } }
     public float swingAcceleration;
     public float swingCatchYPosRedirection;
 
@@ -43,7 +43,6 @@ public class PlayerMovementVariables : ScriptableObject
     [Tooltip("1 means only Y Velocity, 0 means only X velocity")]
     public float directionBalance;
     public float wallJumpForce;
-
 
     [Header("Basic Jump")]
     public float JumpForce;
@@ -64,6 +63,11 @@ public class PlayerMovementVariables : ScriptableObject
     [HideInInspector] public float maxLeftAngle { get { return 180f - DetectionAreaAngle; } }
     [HideInInspector] public float maxRightAngle { get { return DetectionAreaAngle; } }
 
+    [Header("Swing Hang")]
+    [SerializeField] float hangAngle;
+    [HideInInspector] public float leftHangAngle { get { return 90 + hangAngle; } }
+    [HideInInspector] public float rightHangAngle { get { return 90 - hangAngle; } }
+    public float hangVelocityThreshold;
 
     [Header("Bubble Throw")]
     public float BubbleThrowForce;

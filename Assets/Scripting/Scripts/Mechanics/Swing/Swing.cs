@@ -177,6 +177,12 @@ public class Swing : MonoBehaviour
     {
         try
         {
+            if (!playerInRange)
+            {
+                onLeft = Color.white;
+                onRight = Color.white;
+                return;
+            }
             float angle = Vector2.Angle(player.position - transform.position, Vector2.right);
             if (angle > playerVariables.maxLeftAngle)
                 onLeft = Color.cyan;
@@ -199,6 +205,7 @@ public class Swing : MonoBehaviour
     {
         DrawRightDetection();
         DrawLeftDetection();
+        DrawHangDetection();
     }
 
     void DrawRightDetection()
@@ -221,6 +228,30 @@ public class Swing : MonoBehaviour
         angledPos *= SwingCollider.radius;
         Gizmos.DrawLine(transform.position, transform.position + angledPos);
         Gizmos.color = Color.white;
+    }
+
+    void DrawHangDetection()
+    {
+        DrawRightHangDetection();
+        DrawLeftHangDetection();
+    }
+
+    void DrawRightHangDetection()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(SwingCollider.radius, 0f));
+        Vector3 angledPos = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (playerVariables.rightHangAngle)),
+             Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.rightHangAngle)));
+        angledPos *= SwingCollider.radius;
+        Gizmos.DrawLine(transform.position, transform.position + angledPos);
+    }
+
+    void DrawLeftHangDetection()
+    {
+        Gizmos.DrawLine(transform.position, transform.position - new Vector3(SwingCollider.radius, 0f));
+        Vector3 angledPos = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (-playerVariables.leftHangAngle)),
+            Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.leftHangAngle)));
+        angledPos *= SwingCollider.radius;
+        Gizmos.DrawLine(transform.position, transform.position + angledPos);
     }
 
     #endregion

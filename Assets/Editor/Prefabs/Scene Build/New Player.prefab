@@ -1461,6 +1461,7 @@ MonoBehaviour:
   SwingGravity: {fileID: 11400000, guid: 3a5d104e49bc7fb4e9a41c162e836522, type: 2}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   angle: 0
+  InactiveSwingGravity: {fileID: 11400000, guid: 0048ac4467e408c499d9ad7be2f6418b, type: 2}
   StateMachine: {fileID: 3359117671504940329}
   SwingState: {fileID: 11400000, guid: dd47f4c7adf637f41ae747db4815765b, type: 2}
   animationController: {fileID: 2111167583096790334}
@@ -1602,8 +1603,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.011547089
+        value: 0.28494644
         inSlope: 0
         outSlope: 0
         tangentMode: 0

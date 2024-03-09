@@ -17,6 +17,7 @@ public class SwingCatchAction : MonoBehaviour
 
     [Header("Swing Hang")]
     [SerializeField] float angle;
+    [SerializeField] GravityState InactiveSwingGravity;
 
     [Header("State Management")]
     [SerializeField] MovementStateMachine StateMachine;
@@ -28,7 +29,6 @@ public class SwingCatchAction : MonoBehaviour
     private void Start()
     {
         ActualSwing.Value = null;
-        Debug.Log("Halo Swing Catch");
     }
 
     private void Update()
@@ -64,10 +64,16 @@ public class SwingCatchAction : MonoBehaviour
     {
         float ySign = Mathf.Sign(rb.velocity.y);
         float xSign = Mathf.Sign(rb.velocity.x);
-
+        Debug.Log(rb.velocity.x);
         float swingDist = transform.parent.position.x - ActualSwing.Value.transform.position.x;
         float redirection = ActualSwing.Value.transform.position.y - playerVariables.swingCatchYPosRedirection;
-
+        float angle = Vector2.Angle(transform.parent.position - ActualSwing.Value.transform.position, Vector2.right);
+        if(angle > playerVariables.rightHangAngle && angle < playerVariables.leftHangAngle &&
+            Mathf.Abs(rb.velocity.x) < playerVariables.hangVelocityThreshold)
+        {
+            SwingDirectionFunctionality(0f);
+            return;
+        }
 
         if (ySign < 0f && transform.parent.position.y > redirection)
         {
@@ -82,7 +88,13 @@ public class SwingCatchAction : MonoBehaviour
 
     void SwingDirectionFunctionality(float direction)
     {
-        if(direction > 0)
+        if(direction == 0)
+        {
+            SwingState.SetSwingDirection(0f);
+            GravityController.ChangeGravity(InactiveSwingGravity);
+            return;
+        }
+        if (direction > 0)
         {
             SwingState.SetSwingDirection(1f);
             animationController.SetSpriteFlip(false);
