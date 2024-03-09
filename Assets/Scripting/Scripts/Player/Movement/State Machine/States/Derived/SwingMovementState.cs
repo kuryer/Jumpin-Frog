@@ -43,8 +43,6 @@ public class SwingMovementState : MovementState
         GetSwingData();
         SwingMovementDisablerEvent.SetScripts(true);
         AnimationControllerValue.Item.ChangeAnimation(SwingAnimationState);
-        if(RedesignedSwing)
-            gravityController.Item.ChangeGravity(ActiveSwingState);
     }
 
     void GetSwingData()
