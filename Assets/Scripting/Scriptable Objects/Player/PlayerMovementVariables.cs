@@ -23,8 +23,9 @@ public class PlayerMovementVariables : ScriptableObject
 
     public float FallClampSpeed;
 
-    [Header("Swing Movement")]
-    public float swingMaxSpeed;
+    [Header("(Obsolete) Swing Movement")]
+    [SerializeField] float swingMaxSpeed;
+    [HideInInspector] public float swingMaxSpd { get { return swingMaxSpeed * swingMaxSpeed; } }
     public float swingAcc;
     public float swingDecc;
     public float swingPower;
@@ -52,6 +53,17 @@ public class PlayerMovementVariables : ScriptableObject
     [Header("Swing Jump")]
     public float SwingJumpForce;
     public float SwingJumpBalance;
+
+    [Header("Swing Jump Detection")]
+    [Tooltip("when checked player will be able to jump only in designated area if not player will jump depending on the Detected Velocity")]
+    public bool hasJumpArea;
+    [Tooltip("If players velocity is higher than this variable the player will be able to swing jump")]
+    [SerializeField] float ThresholdVelocity;
+    [HideInInspector]public float thresholdVel { get { return ThresholdVelocity * ThresholdVelocity; } }
+    public float DetectionAreaAngle;
+    [HideInInspector] public float maxLeftAngle { get { return 180f - DetectionAreaAngle; } }
+    [HideInInspector] public float maxRightAngle { get { return DetectionAreaAngle; } }
+
 
     [Header("Bubble Throw")]
     public float BubbleThrowForce;

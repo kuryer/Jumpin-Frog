@@ -88,8 +88,8 @@ public class SwingMovementState : MovementState
     {
         SetSwingGravity();
 
-        float maxSpeed = X.Value * playerVariables.swingMaxSpeed;
-        float realSpeed = rb.Item.velocity.magnitude * Mathf.Sign(rb.Item.velocity.x);
+        float maxSpeed = X.Value * playerVariables.swingMaxSpd;
+        float realSpeed = rb.Item.velocity.sqrMagnitude * Mathf.Sign(rb.Item.velocity.x);
         float speedDif = maxSpeed - realSpeed;
 
         speedDif = Mathf.Sign(speedDif) == Mathf.Sign(maxSpeed) ? speedDif : 0f;
@@ -103,7 +103,8 @@ public class SwingMovementState : MovementState
 
     void SwingingRedesignedMovement()
     {
-        rb.Item.AddForce(playerVariables.swingAcceleration * transform.right * Direction);
+        if(rb.Item.velocity.sqrMagnitude < playerVariables.swingMaxSpd)
+            rb.Item.AddForce(playerVariables.swingAcceleration * transform.right * Direction);
     }
 
     void SetSwingGravity()

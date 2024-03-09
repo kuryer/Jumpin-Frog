@@ -7017,7 +7017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3634708215220738707, guid: 1dd9574f01e2f70458cff33ab62ea174, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.63
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 3634708215220738707, guid: 1dd9574f01e2f70458cff33ab62ea174, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7056,12 +7056,20 @@ PrefabInstance:
       value: New Swing
       objectReference: {fileID: 0}
     - target: {fileID: 7565208155594044082, guid: 1dd9574f01e2f70458cff33ab62ea174, type: 3}
+      propertyPath: cooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565208155594044082, guid: 1dd9574f01e2f70458cff33ab62ea174, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7565208155594044082, guid: 1dd9574f01e2f70458cff33ab62ea174, type: 3}
       propertyPath: newDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565208155594044082, guid: 1dd9574f01e2f70458cff33ab62ea174, type: 3}
+      propertyPath: SwingAnglePoint
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7565208155594044082, guid: 1dd9574f01e2f70458cff33ab62ea174, type: 3}
       propertyPath: worksWithCooldown

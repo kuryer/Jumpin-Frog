@@ -36,6 +36,9 @@ MonoBehaviour:
   JumpCutMultiplier: 1.3
   SwingJumpForce: 50
   SwingJumpBalance: 0.5
+  hasJumpArea: 0
+  ThresholdVelocity: 0
+  DetectionAreaAngle: 13.9
   BubbleThrowForce: 150
   BubbleThrowMaxTime: 1.5
   XThrowModifier: 0.9
