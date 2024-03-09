@@ -230,7 +230,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7322066826270084857}
         m_TargetAssemblyTypeName: SwingJumpController, Assembly-CSharp
-        m_MethodName: SwingJump
+        m_MethodName: SwingJumpCall
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -585,6 +585,7 @@ MonoBehaviour:
   rb: {fileID: 7346958207031562706}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   SwingRelease: {fileID: 3280914791220826885}
+  ActualSwing: {fileID: 11400000, guid: acd955f511423ee45a1c0ba9ed4965ae, type: 2}
 --- !u!114 &8407648604434541403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,6 +1460,7 @@ MonoBehaviour:
   GravityController: {fileID: 770699655851860217}
   SwingGravity: {fileID: 11400000, guid: 3a5d104e49bc7fb4e9a41c162e836522, type: 2}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  angle: 0
   StateMachine: {fileID: 3359117671504940329}
   SwingState: {fileID: 11400000, guid: dd47f4c7adf637f41ae747db4815765b, type: 2}
   animationController: {fileID: 2111167583096790334}

@@ -1,16 +1,12 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Swing : MonoBehaviour
 {
-
-
+    [Header("Detection")]
     [SerializeField] SwingVariable ActualSwing;
     [SerializeField] MovementStateVariable ActualState;
-    [SerializeField] CircleCollider2D SwingCollider;
-    [SerializeField] bool onCooldown;
-
-    [Header("Redesign Detection")]
-    [SerializeField] bool newDetection;
     [SerializeField] Rigidbody2DRuntimeValue rb;
     [SerializeField] Transform player;
     delegate void DetectionDelegate();
@@ -19,11 +15,18 @@ public class Swing : MonoBehaviour
 
     [Header("Cooldown")]
     [SerializeField] bool worksWithCooldown;
-    [SerializeField] float Cooldown;
+    [SerializeField] float cooldown;
+    bool isOnCooldown;
 
     [Header("Gizmos")]
+    [SerializeField] CircleCollider2D SwingCollider;
     [SerializeField] PlayerMovementVariables playerVariables;
     [SerializeField] float RayDistance;
+    Color onRight;
+    Color onLeft;
+    [Header("Animation")]
+    [SerializeField] Animator animator;
+    string actualAnimation;
 
     //tutaj jeszcze mo¿emy dodawaæ cooldowny albo (design idea) stworzyæ oddzielny swing z cooldownem i jeden bez
 
@@ -36,76 +39,51 @@ public class Swing : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (newDetection)
+        if (collision.CompareTag("Player"))
         {
-            if (collision.CompareTag("Player"))
+            if(ActualState.Value is not SwingMovementState && !isOnCooldown)
             {
                 enabled = true;
-                playerInRange = true;
                 EnterDetection();
             }
-        }
-        else
-        {
-            if (collision.CompareTag("Player") && ActualState.Value is InAirMovementState)
-            {
-                SetActualSwing(this);
-                SetCanSwing(true);
-            }
+            playerInRange = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (newDetection)
+        if (collision.CompareTag("Player"))
         {
-            if (collision.CompareTag("Player"))
+            if(ActualState.Value is not SwingMovementState && !isOnCooldown)
             {
-                if(ActualState.Value is SwingMovementState)
-                {
-                }
-                else
-                {
-                    PlayerExitedSwingArea();
-                    enabled = false;
-                }
-                playerInRange = false;
+                PlayerExitedSwingArea();
+                enabled = false;
             }
-        }
-        else
-        {
-            if (collision.CompareTag("Player") && !(ActualState.Value is SwingMovementState) && ActualSwing.Value == this)
-            {
-                SetCanSwing(false);
-                SetActualSwing(null);
-            }
+            playerInRange = false;
         }
     }
 
     private void OnDisable()
     {
-        playerInRange = false;
         Detection = EnterDetection;
     }
 
     private void Update()
     {
-        if(!playerInRange && ActualState.Value is not SwingMovementState)
-        {
-            PlayerExitedSwingArea();
-            enabled = false;
-        }
         Detection();
     }
 
+
+
     void EnterDetection()
     {
-        if (player.position.y < transform.position.y && ActualState.Value is InAirMovementState)
+        if (ActualSwing.Value == null && player.position.y < transform.position.y && ActualState.Value is InAirMovementState)
             PlayerEnteredSwingArea();
     }
 
     void PlayerEnteredSwingArea()
     {
         Detection = ExitDetection;
+        ChangeAnimation("InRange");
         SetActualSwing(this);
     }
 
@@ -114,13 +92,26 @@ public class Swing : MonoBehaviour
         if (ActualState.Value is SwingMovementState)
             return;
 
-        if(player.position.y >= transform.position.y || ActualState.Value is not InAirMovementState)
+        if(ActualSwing.Value == this && (player.position.y >= transform.position.y || ActualState.Value is not InAirMovementState))
             PlayerExitedSwingArea();
+    }
+
+    void UsedDetection()
+    {
+        if (player.position.y >= transform.position.y || ActualState.Value is not InAirMovementState)
+            PlayerExitedUsedArea();
+    }
+
+    void PlayerExitedUsedArea()
+    {
+        Detection = EnterDetection;
+        ChangeAnimation("OutOfRange");
     }
 
     void PlayerExitedSwingArea()
     {
         Detection = EnterDetection;
+        ChangeAnimation("OutOfRange");
         SetActualSwing(null);
     }
 
@@ -134,41 +125,115 @@ public class Swing : MonoBehaviour
 
     void Disable()
     {
-        Detection = ExitDetection;
-        SetActualSwing(null);
+        if (playerInRange)
+        {
+            Detection = UsedDetection;
+            ChangeAnimation("Cooldown");
+            SetActualSwing(null);
+        }
+        else
+        {
+            PlayerExitedSwingArea();
+            enabled = false;
+        }
     }
 
     void SetCooldown()
     {
-
+        StartCoroutine(Cooldown());
     }
 
-    #region Obsolete
+    IEnumerator Cooldown()
+    {
+        PlayerExitedSwingArea();
+        ChangeAnimation("Cooldown");
+        enabled = false;
+        isOnCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        ChangeAnimation("OutOfRange");
+        if (playerInRange)
+            enabled = true;
+        isOnCooldown = false;
+    }
+
     void SetActualSwing(Swing actualSwing)
     {
+        Debug.Log("set swing: " + actualSwing);
         ActualSwing.Value = actualSwing;
     }
-
-    void SetCanSwing(bool canSwing)
-    {
-        ActualSwing.CanSwing = canSwing;
-    }
-    #endregion
 
     #region Gizmos
 
     private void OnDrawGizmos()
     {
+        SetDebugColors();
         Gizmos.DrawWireSphere(transform.position, SwingCollider.radius * transform.localScale.x);
         Gizmos.DrawLine(new Vector3(transform.position.x - (RayDistance / 2), transform.position.y - playerVariables.swingCatchYPosRedirection, transform.position.z),
             new Vector3(transform.position.x + (RayDistance / 2), transform.position.y - playerVariables.swingCatchYPosRedirection, transform.position.z));
+        DrawDetectionArea();
+    }
+
+    void SetDebugColors()
+    {
+        try
+        {
+            float angle = Vector2.Angle(player.position - transform.position, Vector2.right);
+            if (angle > playerVariables.maxLeftAngle)
+                onLeft = Color.cyan;
+            else
+                onLeft = Color.white;
+
+            if (angle < playerVariables.maxRightAngle)
+                onRight = Color.cyan;
+            else
+                onRight = Color.white;
+        }
+        catch
+        {
+            onLeft = Color.white;
+            onRight = Color.white;
+        }
+    }
+
+    void DrawDetectionArea()
+    {
+        DrawRightDetection();
+        DrawLeftDetection();
+    }
+
+    void DrawRightDetection()
+    {
+        Gizmos.color = onRight;
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(SwingCollider.radius, 0f));
+        Vector3 angledPos =new Vector3(Mathf.Cos(Mathf.Deg2Rad * (-playerVariables.DetectionAreaAngle)),
+             Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.DetectionAreaAngle)));
+        angledPos *= SwingCollider.radius;
+        Gizmos.DrawLine(transform.position, transform.position + angledPos);
+        Gizmos.color = Color.white;
+    }
+
+    void DrawLeftDetection()
+    {
+        Gizmos.color = onLeft;
+        Gizmos.DrawLine(transform.position, transform.position - new Vector3(SwingCollider.radius, 0f));
+        Vector3 angledPos = new Vector3(-Mathf.Cos(Mathf.Deg2Rad * (-playerVariables.DetectionAreaAngle)),
+             Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.DetectionAreaAngle)));
+        angledPos *= SwingCollider.radius;
+        Gizmos.DrawLine(transform.position, transform.position + angledPos);
+        Gizmos.color = Color.white;
     }
 
     #endregion
 
-    #region Cooldown
+    #region Animation
 
-
+    void ChangeAnimation(string newAnimationName)
+    {
+        if (newAnimationName.Equals(actualAnimation))
+            return;
+        animator.Play(newAnimationName);
+        actualAnimation = newAnimationName;
+    }
 
     #endregion
 }

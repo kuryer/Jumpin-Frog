@@ -15,12 +15,21 @@ public class SwingCatchAction : MonoBehaviour
     [SerializeField] GravityState SwingGravity;
     [SerializeField] PlayerMovementVariables playerVariables;
 
+    [Header("Swing Hang")]
+    [SerializeField] float angle;
+
     [Header("State Management")]
     [SerializeField] MovementStateMachine StateMachine;
     [SerializeField] SwingMovementState SwingState;
 
     [Header("Animation")]
     [SerializeField] AnimationController animationController;
+
+    private void Start()
+    {
+        ActualSwing.Value = null;
+        Debug.Log("Halo Swing Catch");
+    }
 
     private void Update()
     {
@@ -38,6 +47,7 @@ public class SwingCatchAction : MonoBehaviour
     public void SwingCatch()
     {
         Vector3 swingPos = ActualSwing.Value.transform.position;
+        angle = Vector2.Angle(transform.parent.position - ActualSwing.Value.transform.position, Vector2.right);
         BuffersController.ResetSwingCatchBuffer();
         TongueJoint.connectedAnchor = swingPos;
         TongueJoint.enabled = true;
