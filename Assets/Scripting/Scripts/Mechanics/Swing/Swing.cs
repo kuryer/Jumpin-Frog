@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Swing : MonoBehaviour
@@ -12,6 +11,7 @@ public class Swing : MonoBehaviour
     delegate void DetectionDelegate();
     DetectionDelegate Detection;
     bool playerInRange;
+    [SerializeField] float playerAngle;
 
     [Header("Cooldown")]
     [SerializeField] bool worksWithCooldown;
@@ -24,6 +24,7 @@ public class Swing : MonoBehaviour
     [SerializeField] float RayDistance;
     Color onRight;
     Color onLeft;
+
     [Header("Animation")]
     [SerializeField] Animator animator;
     string actualAnimation;
@@ -70,8 +71,13 @@ public class Swing : MonoBehaviour
     private void Update()
     {
         Detection();
+        CalculateAngle();
     }
 
+    void CalculateAngle()
+    {
+        playerAngle = Vector2.Angle(player.position - transform.position, Vector2.right);
+    }
 
 
     void EnterDetection()
@@ -168,9 +174,10 @@ public class Swing : MonoBehaviour
     {
         SetDebugColors();
         Gizmos.DrawWireSphere(transform.position, SwingCollider.radius * transform.localScale.x);
-        Gizmos.DrawLine(new Vector3(transform.position.x - (RayDistance / 2), transform.position.y - playerVariables.swingCatchYPosRedirection, transform.position.z),
-            new Vector3(transform.position.x + (RayDistance / 2), transform.position.y - playerVariables.swingCatchYPosRedirection, transform.position.z));
+        
         DrawDetectionArea();
+        DrawHangDetection();
+        DrawRedirectionBar();
     }
 
     void SetDebugColors()
@@ -185,12 +192,12 @@ public class Swing : MonoBehaviour
             }
             float angle = Vector2.Angle(player.position - transform.position, Vector2.right);
             if (angle > playerVariables.maxLeftAngle)
-                onLeft = Color.cyan;
+                onLeft = playerVariables.inSwingJumpAreaColor;
             else
                 onLeft = Color.white;
 
             if (angle < playerVariables.maxRightAngle)
-                onRight = Color.cyan;
+                onRight = playerVariables.inSwingJumpAreaColor;
             else
                 onRight = Color.white;
         }
@@ -203,9 +210,19 @@ public class Swing : MonoBehaviour
 
     void DrawDetectionArea()
     {
+        if (!playerVariables.showSwingJumpArea)
+            return;
+
         DrawRightDetection();
         DrawLeftDetection();
-        DrawHangDetection();
+    }
+
+    void DrawRedirectionBar()
+    {
+        if (!playerVariables.showRedirectionBar)
+            return;
+        Gizmos.DrawLine(new Vector3(transform.position.x - (RayDistance / 2), transform.position.y - playerVariables.swingCatchYPosRedirection, transform.position.z),
+            new Vector3(transform.position.x + (RayDistance / 2), transform.position.y - playerVariables.swingCatchYPosRedirection, transform.position.z));
     }
 
     void DrawRightDetection()
@@ -232,26 +249,32 @@ public class Swing : MonoBehaviour
 
     void DrawHangDetection()
     {
+        if (!playerVariables.showSwingHangArea)
+            return;
         DrawRightHangDetection();
         DrawLeftHangDetection();
     }
 
     void DrawRightHangDetection()
     {
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(SwingCollider.radius, 0f));
+        Vector3 hangPos = new Vector3(transform.position.x, transform.position.y - playerVariables.swingHangBar);
         Vector3 angledPos = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (playerVariables.rightHangAngle)),
              Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.rightHangAngle)));
-        angledPos *= SwingCollider.radius;
-        Gizmos.DrawLine(transform.position, transform.position + angledPos);
+        Vector3 hangPosDestination = new Vector3(-playerVariables.swingHangBar / Mathf.Tan(Mathf.Deg2Rad * -playerVariables.leftHangAngle), playerVariables.swingHangBar);
+        
+        Gizmos.DrawLine(hangPos, transform.position - hangPosDestination);
+        Gizmos.DrawLine(transform.position - hangPosDestination, transform.position + (angledPos * SwingCollider.radius));
     }
 
     void DrawLeftHangDetection()
     {
-        Gizmos.DrawLine(transform.position, transform.position - new Vector3(SwingCollider.radius, 0f));
+        Vector3 hangPos= new Vector3(transform.position.x, transform.position.y - playerVariables.swingHangBar);
         Vector3 angledPos = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (-playerVariables.leftHangAngle)),
             Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.leftHangAngle)));
-        angledPos *= SwingCollider.radius;
-        Gizmos.DrawLine(transform.position, transform.position + angledPos);
+        Vector3 hangPosDestination = new Vector3(playerVariables.swingHangBar / Mathf.Tan(Mathf.Deg2Rad * -playerVariables.leftHangAngle), playerVariables.swingHangBar);
+
+        Gizmos.DrawLine(hangPos, transform.position - hangPosDestination);
+        Gizmos.DrawLine(transform.position - hangPosDestination, transform.position + (angledPos * SwingCollider.radius));
     }
 
     #endregion

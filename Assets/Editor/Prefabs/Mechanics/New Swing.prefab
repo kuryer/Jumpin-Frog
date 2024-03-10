@@ -210,11 +210,12 @@ MonoBehaviour:
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   rb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
   player: {fileID: 0}
+  playerAngle: 0
   worksWithCooldown: 0
   cooldown: 0
   SwingCollider: {fileID: 8815535776125882467}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
-  RayDistance: 9
+  RayDistance: 10.04
   animator: {fileID: 327019620554159439}
 --- !u!58 &8815535776125882467
 CircleCollider2D:

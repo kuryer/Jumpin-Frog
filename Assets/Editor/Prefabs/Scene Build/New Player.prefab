@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DetectedWalls: {fileID: 11400000, guid: 6f3b58e29241db441aa78742c31d17b9, type: 2}
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   rb: {fileID: 7346958207031562706}
   StateMachine: {fileID: 3359117671504940329}
   OnWallMovementState: {fileID: 11400000, guid: 554d8a78cf7c7194cb4bb14ddd53bf34, type: 2}
@@ -1460,7 +1461,7 @@ MonoBehaviour:
   GravityController: {fileID: 770699655851860217}
   SwingGravity: {fileID: 11400000, guid: 3a5d104e49bc7fb4e9a41c162e836522, type: 2}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
-  angle: 0
+  playerAngle: 0
   InactiveSwingGravity: {fileID: 11400000, guid: 0048ac4467e408c499d9ad7be2f6418b, type: 2}
   StateMachine: {fileID: 3359117671504940329}
   SwingState: {fileID: 11400000, guid: dd47f4c7adf637f41ae747db4815765b, type: 2}
@@ -1603,8 +1604,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.011547089
-        value: 0.28494644
+        time: 0.005596161
+        value: 0.45488358
         inSlope: 0
         outSlope: 0
         tangentMode: 0

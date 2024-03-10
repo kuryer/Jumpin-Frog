@@ -5,7 +5,7 @@ public class WallGrabAction : MonoBehaviour
     [Header("WallGrab Check")]
     [SerializeField] DirectionBool DetectedWalls;
     [SerializeField] FloatVariable X;
-
+    [SerializeField] PlayerMovementVariables playerVariables;
     [Header("Wall Grab")]
     [SerializeField] Rigidbody2D rb;
 
@@ -45,7 +45,7 @@ public class WallGrabAction : MonoBehaviour
 
     void StickToWall()
     {
-        rb.velocity = new Vector2(X.Value * initialStickForce, rb.velocity.y);
+        rb.velocity = new Vector2(X.Value * initialStickForce, rb.velocity.y - playerVariables.slowValue);
     }
 
     void SetWallGravity()

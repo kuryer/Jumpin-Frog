@@ -34,9 +34,13 @@ public class PlayerMovementVariables : ScriptableObject
     public float swingAcceleration;
     public float swingCatchYPosRedirection;
 
+    [Header("Wall Glide")]
+    public float slowValue;
+
     [Header("Wall Grab")]
     public float wallGrabClamp;
     public float wallGravityVelocityChange;
+    public float wallGrabXForce;
 
     [Header("Wall Jump")]
     [Range(0.01f, 0.99f)]
@@ -67,7 +71,14 @@ public class PlayerMovementVariables : ScriptableObject
     [SerializeField] float hangAngle;
     [HideInInspector] public float leftHangAngle { get { return 90 + hangAngle; } }
     [HideInInspector] public float rightHangAngle { get { return 90 - hangAngle; } }
+    public float swingHangBar;
     public float hangVelocityThreshold;
+
+    [Header("Swing Debug")]
+    public bool showSwingJumpArea;
+    public Color inSwingJumpAreaColor;
+    public bool showSwingHangArea;
+    public bool showRedirectionBar;
 
     [Header("Bubble Throw")]
     public float BubbleThrowForce;

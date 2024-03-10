@@ -16,7 +16,7 @@ public class SwingCatchAction : MonoBehaviour
     [SerializeField] PlayerMovementVariables playerVariables;
 
     [Header("Swing Hang")]
-    [SerializeField] float angle;
+    [SerializeField] float playerAngle;
     [SerializeField] GravityState InactiveSwingGravity;
 
     [Header("State Management")]
@@ -47,7 +47,7 @@ public class SwingCatchAction : MonoBehaviour
     public void SwingCatch()
     {
         Vector3 swingPos = ActualSwing.Value.transform.position;
-        angle = Vector2.Angle(transform.parent.position - ActualSwing.Value.transform.position, Vector2.right);
+        playerAngle = Vector2.Angle(transform.parent.position - ActualSwing.Value.transform.position, Vector2.right);
         BuffersController.ResetSwingCatchBuffer();
         TongueJoint.connectedAnchor = swingPos;
         TongueJoint.enabled = true;
@@ -64,12 +64,11 @@ public class SwingCatchAction : MonoBehaviour
     {
         float ySign = Mathf.Sign(rb.velocity.y);
         float xSign = Mathf.Sign(rb.velocity.x);
-        Debug.Log(rb.velocity.x);
+
         float swingDist = transform.parent.position.x - ActualSwing.Value.transform.position.x;
         float redirection = ActualSwing.Value.transform.position.y - playerVariables.swingCatchYPosRedirection;
-        float angle = Vector2.Angle(transform.parent.position - ActualSwing.Value.transform.position, Vector2.right);
-        if(angle > playerVariables.rightHangAngle && angle < playerVariables.leftHangAngle &&
-            Mathf.Abs(rb.velocity.x) < playerVariables.hangVelocityThreshold)
+        
+        if(IsInHangRange() && Mathf.Abs(rb.velocity.x) < playerVariables.hangVelocityThreshold)
         {
             SwingDirectionFunctionality(0f);
             return;
@@ -84,6 +83,14 @@ public class SwingCatchAction : MonoBehaviour
         }
         else
             SwingDirectionFunctionality(xSign);
+    }
+
+    bool IsInHangRange()
+    {
+        float height = ActualSwing.Value.transform.position.y - playerVariables.swingHangBar;
+        float angle = Vector2.Angle(transform.parent.position - ActualSwing.Value.transform.position, Vector2.right);
+        return (angle > playerVariables.rightHangAngle && angle < playerVariables.leftHangAngle &&
+            transform.position.y < height);
     }
 
     void SwingDirectionFunctionality(float direction)
