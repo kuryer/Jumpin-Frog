@@ -75,9 +75,13 @@ public class OnWallMovement : MovementState
     void WallGrab()
     {
         if (rb.Item.velocity.y < -playerVariables.wallGrabClamp)
-            rb.Item.velocity = new Vector2(0f, -playerVariables.wallGrabClamp);
+            rb.Item.velocity = new Vector2(XGrabValue(), -playerVariables.wallGrabClamp);
     }
 
+    float XGrabValue()
+    {
+        return X.Value * playerVariables.wallGrabXForce;
+    }
     void WallGrabGravityCheck()
     {
         if (isFalling)

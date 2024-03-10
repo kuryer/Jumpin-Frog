@@ -27,9 +27,11 @@ MonoBehaviour:
   swingPower: 1
   swingMaxSpeed: 50
   swingAcceleration: 125
-  swingCatchYPosRedirection: 3
+  swingCatchYPosRedirection: 3.9
+  slowValue: 3
   wallGrabClamp: 3.5
   wallGravityVelocityChange: 0
+  wallGrabXForce: 0.5
   directionBalance: 0.6
   wallJumpForce: 200
   JumpForce: 125
@@ -38,9 +40,14 @@ MonoBehaviour:
   SwingJumpBalance: 0.5
   hasJumpArea: 1
   ThresholdVelocity: 0
-  DetectionAreaAngle: 21.8
-  hangAngle: 21.2
+  DetectionAreaAngle: 22.6
+  hangAngle: 37
+  swingHangBar: 3.23
   hangVelocityThreshold: 3.7
+  showSwingJumpArea: 1
+  inSwingJumpAreaColor: {r: 0.23300098, g: 0.7484276, b: 0.68394893, a: 1}
+  showSwingHangArea: 1
+  showRedirectionBar: 1
   BubbleThrowForce: 150
   BubbleThrowMaxTime: 1.5
   XThrowModifier: 0.9
