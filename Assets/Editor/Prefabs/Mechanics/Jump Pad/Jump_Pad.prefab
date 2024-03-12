@@ -49,7 +49,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32511
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -143,7 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a61555e75d09e746947ef9d048faabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpPadValue: {fileID: 11400000, guid: 4fb414e7f2c457c4fa9cfa498df7a0e1, type: 2}
+  spriteRenderer: {fileID: 990314785040038071}
   jumpForce: 170
   cooldown: 4
-  worksWithNewController: 1
-  JumpPadValue: {fileID: 11400000, guid: 4fb414e7f2c457c4fa9cfa498df7a0e1, type: 2}
+  inRange: 0
