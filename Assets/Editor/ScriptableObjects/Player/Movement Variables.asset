@@ -17,8 +17,8 @@ MonoBehaviour:
   acceleration: 5
   decceleration: 7
   overspeedDecceleration: 0.7
-  InAirMaxSpeed: 12
-  InAirAcc: 19
+  InAirMaxSpeed: 11
+  InAirAcc: 13
   InAirDecc: 1.5
   inAirPower: 1
   FallClampSpeed: 15.2
@@ -49,6 +49,6 @@ MonoBehaviour:
   showSwingHangArea: 1
   showRedirectionBar: 1
   BubbleThrowForce: 150
-  BubbleThrowMaxTime: 1.5
+  BubbleThrowMaxTime: 0.75
   XThrowModifier: 0.9
   YThrowModifier: 0.95
