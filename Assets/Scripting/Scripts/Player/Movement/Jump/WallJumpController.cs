@@ -52,6 +52,7 @@ public class WallJumpController : MonoBehaviour
 
         AnimationController.ChangeAnimation(InAirRollAnimationState);
         BuffersController.ResetWallJumpBuffer();
+        BuffersController.ResetBubbleBuffer();
     }
 
     void LeftJump()

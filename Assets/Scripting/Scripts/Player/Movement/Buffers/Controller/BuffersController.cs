@@ -40,7 +40,7 @@ public class BuffersController : MonoBehaviour
 
     public void ResetJumpBuffer()
     {
-        StopCoroutine(JumpBuffer.Coroutine);
+        if(JumpBuffer.ActivityInfo.FirstValue) StopCoroutine(JumpBuffer.Coroutine);
         JumpBuffer.ResetTimer();
     }
 
@@ -62,7 +62,7 @@ public class BuffersController : MonoBehaviour
 
     public void ResetCoyoteTime()
     {
-        StopCoroutine(CoyoteTime.Coroutine);
+        if(CoyoteTime.ActivityInfo.FirstValue) StopCoroutine(CoyoteTime.Coroutine);
         CoyoteTime.ResetTimer();
     }
 
@@ -83,7 +83,7 @@ public class BuffersController : MonoBehaviour
 
     public void ResetWallJumpBuffer()
     {
-        StopCoroutine(WallJumpBuffer.Coroutine);
+        if(WallJumpBuffer.ActivityInfo.FirstValue) StopCoroutine(WallJumpBuffer.Coroutine);
         WallJumpBuffer.ResetTimer();
     }
     #endregion
@@ -95,25 +95,15 @@ public class BuffersController : MonoBehaviour
         if (!SwingCatchBuffer.ActivityInfo.SecondValue || !context.performed)
             return;
 
-        Debug.Log("halo");
-
         if (!SwingCatchBuffer.ActivityInfo.FirstValue)
-        {
-            Debug.Log("1");
-
             SwingCatchBuffer.Coroutine = StartCoroutine(SwingCatchBuffer.StartTimerRoutine());
-        }
         else
-        {
-            Debug.Log("2");
-
             SwingCatchBuffer.RenewTimer();
-        }
     }
 
     public void ResetSwingCatchBuffer()
     {
-        StopCoroutine(SwingCatchBuffer.Coroutine);
+        if(SwingCatchBuffer.ActivityInfo.FirstValue) StopCoroutine(SwingCatchBuffer.Coroutine);
         SwingCatchBuffer.ResetTimer();
     }
 
@@ -134,7 +124,7 @@ public class BuffersController : MonoBehaviour
 
     public void ResetBubbleBuffer()
     {
-        StopCoroutine(BubbleBuffer.Coroutine);
+        if(BubbleBuffer.ActivityInfo.FirstValue) StopCoroutine(BubbleBuffer.Coroutine);
         BubbleBuffer.ResetTimer();
     }
 
@@ -155,7 +145,7 @@ public class BuffersController : MonoBehaviour
 
     public void ResetSwingJumpCoyoteTime()
     {
-        StopCoroutine(SwingJumpCoyoteTime.Coroutine);
+        if(SwingJumpCoyoteTime.ActivityInfo.FirstValue) StopCoroutine(SwingJumpCoyoteTime.Coroutine);
         SwingJumpCoyoteTime.ResetTimer();
     }
 
