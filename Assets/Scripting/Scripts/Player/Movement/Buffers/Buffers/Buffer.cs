@@ -17,7 +17,7 @@ public class Buffer : ScriptableObject
 
     public IEnumerator StartTimerRoutine()
     {
-        ActivityInfo.FirstValue = true;
+        ActivityInfo.SetFirstValue(true);
         while (ElapsedTime > 0f)
         {
             ElapsedTime -= Time.deltaTime;
@@ -33,7 +33,7 @@ public class Buffer : ScriptableObject
     public void ResetTimer()
     {
         ElapsedTime = MaxTime;
-        ActivityInfo.FirstValue = false;
+        ActivityInfo.SetFirstValue(false);
     }
 
     #endregion

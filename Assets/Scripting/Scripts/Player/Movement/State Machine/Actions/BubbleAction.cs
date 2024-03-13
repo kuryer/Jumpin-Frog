@@ -77,6 +77,7 @@ public class BubbleAction : MonoBehaviour
         if (!isCoroutine)
         {
             BuffersController.ResetBubbleBuffer();
+            BuffersController.ResetWallJumpBuffer();
             StopCoroutine(ThrowTimerRoutine);
         }
         activeBubble.PopBubble();
