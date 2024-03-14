@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5f267e745fe1343aaab46d731ab7f6, type: 3}
+  m_Name: Basic Camera State
+  m_EditorClassIdentifier: 
+  trackedTransform: {fileID: 11400000, guid: ac6ab56a0da71f04e94d667891d908a0, type: 2}
+  trackerTransform: {fileID: 11400000, guid: 0da26cf5fab4f3b40a3f4ce72132732f, type: 2}
+  trackedRb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
+  cameraVariables: {fileID: 11400000, guid: fca394da45219e943bf13c09065caec1, type: 2}

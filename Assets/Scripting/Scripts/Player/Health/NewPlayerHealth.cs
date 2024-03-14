@@ -66,7 +66,6 @@ public class NewPlayerHealth : MonoBehaviour
     }
     void Respawn()
     {
-        Debug.Log("Dzieñ dobry, tu Jano z przesz³oœci, tak wiem o tym bugu, naprawie go jak sie przerzucimy w 100% na nowy kontroler, ta rakieta");
         playerCollider.enabled = true;
         StateMachine.ChangeState(GroundMovementState);
         GravityController.ChangeGravity(NormalGravity);
