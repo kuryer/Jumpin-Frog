@@ -26,7 +26,7 @@ public class CameraStateMachine : MonoBehaviour
     }
 
 
-    void Update()
+    void LateUpdate()
     {
         ActualState.Value.OnUpdate();
     }

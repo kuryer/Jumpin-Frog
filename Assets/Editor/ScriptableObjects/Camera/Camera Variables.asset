@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef042d85a3f6c6a4a9412ccc7fdbd4b1, type: 3}
   m_Name: Camera Variables
   m_EditorClassIdentifier: 
+  maxGroundLookahead: 7
+  smoothingValue: 4
   lookaheadAcc: 4
-  lookaheadDecc: 0.2
-  minVelThreshold: 0.2
+  lookaheadDecc: 3
+  lookaheadStopDecc: 10
+  minVelThreshold: 0.5
