@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class CameraStateMachine : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Player Tracking")]
+    [SerializeField] Transform playerTransform;
+    [SerializeField] TransformRuntimeValue trackedTransform;
+    [SerializeField] TransformRuntimeValue trackerTransform;
+
+    [Header("State Management")]
+    [SerializeField] CameraState InitState;
+    [SerializeField] CameraStateVariable ActualState;
+    private void Start()
     {
-        
+        Initialize();
     }
 
-    // Update is called once per frame
+    void Initialize()
+    {
+        ActualState.Value = InitState;
+        ActualState.Value.OnEnter();
+        trackerTransform.SetItem(transform);
+        trackedTransform.SetItem(playerTransform);
+    }
+
+
     void Update()
     {
-        
+        ActualState.Value.OnUpdate();
+    }
+
+    public void ChangeState(CameraState state)
+    {
+        if (ActualState.Value == state)
+            return;
+        ActualState.Value.OnExit();
+        ActualState.Value = state;
+        ActualState.Value.OnEnter();
     }
 }
