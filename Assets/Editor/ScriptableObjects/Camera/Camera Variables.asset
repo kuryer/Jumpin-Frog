@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Camera Variables
   m_EditorClassIdentifier: 
   lookaheadAcc: 4
-  lookaheadDecc: 0.2
-  minVelThreshold: 0.2
+  lookaheadDecc: 3
+  lookaheadStopDecc: 18
+  minVelThreshold: 0.5

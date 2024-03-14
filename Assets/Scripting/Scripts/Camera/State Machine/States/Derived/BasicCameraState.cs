@@ -11,6 +11,7 @@ public class BasicCameraState : CameraState
 
     [Header("Lookahead")]
     [SerializeField] float lookaheadValue;
+    [SerializeField] FloatVariable X;
     public override void OnEnter()
     {
         lookaheadValue = 0;
@@ -38,15 +39,21 @@ public class BasicCameraState : CameraState
         if (ZeroVelocityCheck())
             return;
 
-        float velSign = Mathf.Sign(trackedRb.Item.velocity.x);
+        float velSign = trackedRb.Item.velocity.x == 0 ? 0f : Mathf.Sign(trackedRb.Item.velocity.x);
         float lookaheadSign = Mathf.Sign(lookaheadValue);
-        float addedLookahead = lookaheadSign == velSign ? cameraVariables.lookaheadAcc : cameraVariables.lookaheadDecc;
+        float addedLookahead = 0;
+
+        if (X.Value == 0)
+            addedLookahead = cameraVariables.lookaheadStopDecc;
+        else if(velSign != 0)
+            addedLookahead = lookaheadSign == velSign ? cameraVariables.lookaheadAcc : cameraVariables.lookaheadDecc;
+        
         addedLookahead *= Time.deltaTime;
         float velDiff = Mathf.Abs(trackedRb.Item.velocity.x) - Mathf.Abs(lookaheadValue);
         if (velDiff < addedLookahead && lookaheadSign == velSign)
             return;
 
-        addedLookahead *= velSign;
+        addedLookahead *= Mathf.Sign(trackedRb.Item.velocity.x - lookaheadValue);
         lookaheadValue += addedLookahead;
     }
 
