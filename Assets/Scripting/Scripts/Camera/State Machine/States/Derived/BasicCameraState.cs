@@ -10,6 +10,7 @@ public class BasicCameraState : CameraState
     [SerializeField] CameraVariables cameraVariables;
 
     [Header("Lookahead")]
+    [SerializeField] PlayerMovementVariables playerVariables;
     [SerializeField] float lookaheadValue;
     [SerializeField] FloatVariable X;
     public override void OnEnter()
@@ -18,7 +19,7 @@ public class BasicCameraState : CameraState
     }
     public override void OnUpdate()
     {
-        CalculateLookahead();
+        SmoothedCalulation();
         ApplyCalulations();
     }
 
@@ -57,6 +58,26 @@ public class BasicCameraState : CameraState
         lookaheadValue += addedLookahead;
     }
 
+    void SmoothedCalulation()
+    {
+        float rangePosition = Mathf.Abs(trackedRb.Item.velocity.x) / playerVariables.maxSpeed;
+        float lookaheadPosition = cameraVariables.maxGroundLookahead * SmoothPosition(rangePosition);
+
+        if (lookaheadPosition < cameraVariables.minVelThreshold)
+            lookaheadPosition = 0;
+
+        lookaheadPosition *= Mathf.Sign(trackedRb.Item.velocity.x);
+        lookaheadValue = lookaheadPosition;
+    }
+
+
+    float SmoothPosition(float rangePosition)
+    {
+        float result = rangePosition;
+        for (int i = 1; i < cameraVariables.smoothingValue; i++)
+            result *= rangePosition;
+        return result;
+    }
     bool ZeroVelocityCheck()
     {
         if(Mathf.Abs(trackedRb.Item.velocity.x) < cameraVariables.minVelThreshold)

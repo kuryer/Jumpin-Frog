@@ -4,6 +4,9 @@ using UnityEngine;
 public class CameraVariables : ScriptableObject
 {
     [Header("Basic Lookahead")]
+    public float maxGroundLookahead;
+    [Range(1,4)]
+    public int smoothingValue;
     public float lookaheadAcc;
     public float lookaheadDecc;
     public float lookaheadStopDecc;
