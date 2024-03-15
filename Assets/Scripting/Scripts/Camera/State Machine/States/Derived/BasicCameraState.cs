@@ -12,6 +12,7 @@ public class BasicCameraState : CameraState
     [Header("Lookahead")]
     [SerializeField] PlayerMovementVariables playerVariables;
     [SerializeField] float lookaheadValue;
+    float rangeValue;
     [SerializeField] FloatVariable X;
     public override void OnEnter()
     {
@@ -19,7 +20,7 @@ public class BasicCameraState : CameraState
     }
     public override void OnUpdate()
     {
-        SmoothedCalulation();
+        CalculateLookahead();
         ApplyCalulations();
     }
 
@@ -41,21 +42,31 @@ public class BasicCameraState : CameraState
             return;
 
         float velSign = trackedRb.Item.velocity.x == 0 ? 0f : Mathf.Sign(trackedRb.Item.velocity.x);
-        float lookaheadSign = Mathf.Sign(lookaheadValue);
-        float addedLookahead = 0;
+        float lookaheadSign = Mathf.Sign(rangeValue);
+        float addedLookahead;
 
         if (X.Value == 0)
             addedLookahead = cameraVariables.lookaheadStopDecc;
-        else if(velSign != 0)
+        else
             addedLookahead = lookaheadSign == velSign ? cameraVariables.lookaheadAcc : cameraVariables.lookaheadDecc;
         
         addedLookahead *= Time.deltaTime;
-        float velDiff = Mathf.Abs(trackedRb.Item.velocity.x) - Mathf.Abs(lookaheadValue);
+        float velDiff = Mathf.Abs(trackedRb.Item.velocity.x) - Mathf.Abs(rangeValue);
         if (velDiff < addedLookahead && lookaheadSign == velSign)
             return;
 
-        addedLookahead *= Mathf.Sign(trackedRb.Item.velocity.x - lookaheadValue);
-        lookaheadValue += addedLookahead;
+        addedLookahead *= Mathf.Sign(trackedRb.Item.velocity.x - rangeValue);
+        rangeValue += addedLookahead;
+
+        float range = Mathf.Abs(rangeValue/RangeLimit());
+        lookaheadValue = cameraVariables.maxGroundLookahead * SmoothPosition(range) * velSign;
+    }
+
+    float RangeLimit()
+    {
+        if (Mathf.Abs(trackedRb.Item.velocity.x) < cameraVariables.minVelThreshold)
+            return cameraVariables.minVelThreshold;
+        return trackedRb.Item.velocity.x;
     }
 
     void SmoothedCalulation()
@@ -70,6 +81,10 @@ public class BasicCameraState : CameraState
         lookaheadValue = lookaheadPosition;
     }
 
+    void Smoothing()
+    {
+        float range = Mathf.Abs(lookaheadValue) / Mathf.Abs(trackedRb.Item.velocity.x); 
+    }
 
     float SmoothPosition(float rangePosition)
     {

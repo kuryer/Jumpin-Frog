@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Camera Variables
   m_EditorClassIdentifier: 
   maxGroundLookahead: 7
-  smoothingValue: 4
+  smoothingValue: 2
   lookaheadAcc: 4
   lookaheadDecc: 3
   lookaheadStopDecc: 10
