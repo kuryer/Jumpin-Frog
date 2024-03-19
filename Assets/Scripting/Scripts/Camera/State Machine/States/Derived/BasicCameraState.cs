@@ -1,6 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Scriptable Objects/Camera/Camera States/Basic")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Camera/Camera States/Basic")]
 public class BasicCameraState : CameraState
 {
     [Header("Tracking")]
@@ -14,6 +15,12 @@ public class BasicCameraState : CameraState
     [SerializeField] float lookaheadValue;
     float rangeValue;
     [SerializeField] FloatVariable X;
+
+    //new Lookahead
+    [SerializeField] float lookaheadPosPercentage;
+    [SerializeField] float maxGroundedPosPercentage;
+    [SerializeField] float lookaheadPosition;
+    [SerializeField] float lookaheadRangePos;
     public override void OnEnter()
     {
         lookaheadValue = 0;
@@ -49,7 +56,7 @@ public class BasicCameraState : CameraState
             addedLookahead = cameraVariables.lookaheadStopDecc;
         else
             addedLookahead = lookaheadSign == velSign ? cameraVariables.lookaheadAcc : cameraVariables.lookaheadDecc;
-        
+
         addedLookahead *= Time.deltaTime;
         float velDiff = Mathf.Abs(trackedRb.Item.velocity.x) - Mathf.Abs(rangeValue);
         if (velDiff < addedLookahead && lookaheadSign == velSign)
@@ -58,7 +65,7 @@ public class BasicCameraState : CameraState
         addedLookahead *= Mathf.Sign(trackedRb.Item.velocity.x - rangeValue);
         rangeValue += addedLookahead;
 
-        float range = Mathf.Abs(rangeValue/RangeLimit());
+        float range = Mathf.Abs(rangeValue / RangeLimit());
         lookaheadValue = cameraVariables.maxGroundLookahead * SmoothPosition(range) * velSign;
     }
 
@@ -83,7 +90,7 @@ public class BasicCameraState : CameraState
 
     void Smoothing()
     {
-        float range = Mathf.Abs(lookaheadValue) / Mathf.Abs(trackedRb.Item.velocity.x); 
+        float range = Mathf.Abs(lookaheadValue) / Mathf.Abs(trackedRb.Item.velocity.x);
     }
 
     float SmoothPosition(float rangePosition)
@@ -95,8 +102,8 @@ public class BasicCameraState : CameraState
     }
     bool ZeroVelocityCheck()
     {
-        if(Mathf.Abs(trackedRb.Item.velocity.x) < cameraVariables.minVelThreshold)
-            if(Mathf.Abs(lookaheadValue) < cameraVariables.minVelThreshold)
+        if (Mathf.Abs(trackedRb.Item.velocity.x) < cameraVariables.minVelThreshold)
+            if (Mathf.Abs(lookaheadValue) < cameraVariables.minVelThreshold)
             {
                 lookaheadValue = 0;
                 return true;
@@ -104,5 +111,62 @@ public class BasicCameraState : CameraState
         return false;
     }
 
+    #endregion
+
+    #region New Lookahead
+
+
+
+    void CalculateLookaheadPercentage()
+    {
+        if (lookaheadPosPercentage > maxGroundedPosPercentage /* || X.Value == 0*/)
+            if (IsInVelocityDeadzone() || X.Value == 0 || SameVelAndPosDirection())
+                Decrease();
+            else
+                Increase();
+        else
+            EaseInMaxVel();
+
+        lookaheadRangePos = lookaheadPosPercentage / maxGroundedPosPercentage;
+    }
+
+    void Decrease()
+    {
+        if (lookaheadPosPercentage == 0)
+            return;
+
+        lookaheadPosPercentage -= cameraVariables.lookaheadDecc * Time.deltaTime;
+
+        if (IsInVelocityDeadzone() || lookaheadPosPercentage < 0)
+            lookaheadPosPercentage = 0;
+    }
+
+    void Increase()
+    {
+        if (lookaheadPosPercentage == maxGroundedPosPercentage)
+            return;
+
+        lookaheadPosPercentage += cameraVariables.lookaheadAcc * Time.deltaTime;
+
+        if(lookaheadPosPercentage >= maxGroundedPosPercentage)
+            lookaheadPosPercentage = maxGroundedPosPercentage;
+    }
+
+    void EaseInMaxVel()
+    {
+        lookaheadPosPercentage -= cameraVariables.lookaheadOverspeedDecc * Time.deltaTime;
+    }
+    bool IsInVelocityDeadzone()
+    {
+        return Mathf.Abs(trackedRb.Item.velocity.x) < cameraVariables.minVelThreshold;
+    }
+    bool SameVelAndPosDirection()
+    {
+        return Mathf.Sign(trackedRb.Item.velocity.x) == Mathf.Sign(lookaheadPosition);
+    }
+    void CalculateLookaheadValue()
+    {
+
+    }
     #endregion
 }
