@@ -19,3 +19,9 @@ MonoBehaviour:
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   lookaheadValue: 0
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  lookaheadPosPercentage: {fileID: 11400000, guid: c8eb2cc313070d145a35883e6dbcb8c1, type: 2}
+  actualMaxPosPercentage: {fileID: 11400000, guid: 5f46da6515be1d947b51f92bd5cd6008, type: 2}
+  lookaheadPosition: {fileID: 11400000, guid: f26cb07d9edff5a40976e92ebd43bb9f, type: 2}
+  maxPosPercentage: 6
+  maxLookahead: 6
+  lookaheadRangePos: 0
