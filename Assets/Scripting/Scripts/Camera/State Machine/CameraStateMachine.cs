@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraStateMachine : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class CameraStateMachine : MonoBehaviour
     [Header("State Management")]
     [SerializeField] CameraState InitState;
     [SerializeField] CameraStateVariable ActualState;
+
+    [Header("Debug")]
+    [SerializeField] InputAction HeightAction;
     private void Start()
     {
         Initialize();
     }
-
     void Initialize()
     {
         ActualState.Value = InitState;
@@ -26,7 +29,7 @@ public class CameraStateMachine : MonoBehaviour
     }
 
 
-    void LateUpdate()
+    void Update()
     {
         ActualState.Value.OnUpdate();
     }
@@ -38,5 +41,10 @@ public class CameraStateMachine : MonoBehaviour
         ActualState.Value.OnExit();
         ActualState.Value = state;
         ActualState.Value.OnEnter();
+    }
+
+    public void AddHeight()
+    {
+        transform.position += Vector3.up * 2;
     }
 }

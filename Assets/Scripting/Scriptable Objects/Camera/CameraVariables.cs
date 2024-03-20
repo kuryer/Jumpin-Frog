@@ -14,4 +14,5 @@ public class CameraVariables : ScriptableObject
     public float lookaheadStopDecc;
     [Tooltip("if velocity is less than this value lookahead will stay at 0")]
     public float minVelThreshold;
+    public float minPosThreshold;
 }

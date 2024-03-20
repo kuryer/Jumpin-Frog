@@ -1056,6 +1056,23 @@ MonoBehaviour:
   trackerTransform: {fileID: 11400000, guid: 0da26cf5fab4f3b40a3f4ce72132732f, type: 2}
   InitState: {fileID: 11400000, guid: c2d46bbfe5ca68b4b9701253b82c5e92, type: 2}
   ActualState: {fileID: 11400000, guid: a73c3655f6471f944911e93ce32c8ad0, type: 2}
+  HeightAction:
+    m_Name: Height
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b80dd71f-225c-42a1-98c9-9f3c6d09c1cd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d7efaf53-8083-4e30-a6f9-31365c8eae11
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Height
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &1079480491
 GameObject:
   m_ObjectHideFlags: 0
