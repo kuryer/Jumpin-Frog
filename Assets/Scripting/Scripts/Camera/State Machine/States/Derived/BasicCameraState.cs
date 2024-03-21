@@ -120,15 +120,15 @@ public class BasicCameraState : CameraState
 
     void CalculateLookaheadPercentage()
     {
-        if (actualMaxPosPercentage.Value > lookaheadPosPercentage.Value /* || X.Value == 0*/)
+        if (actualMaxPosPercentage.Value >= lookaheadPosPercentage.Value /* || X.Value == 0*/)
         {
             if (IsInVelocityDeadzone() || X.Value == 0 || !SameVelAndPosDirection)
                 Decrease();
             else
                 Increase();
         }
-        else
-            EaseInMaxVel();
+        //else
+        //    EaseInMaxVel();
 
         lookaheadRangePos = lookaheadPosPercentage.Value / actualMaxPosPercentage.Value;
     }
@@ -138,10 +138,8 @@ public class BasicCameraState : CameraState
         if (lookaheadPosPercentage.Value == 0)
             return;
 
-        lookaheadPosPercentage.Value -= cameraVariables.lookaheadDecc * Time.deltaTime;
-
-        decrease = true;
-        increase = false;
+        float decc = X.Value == 0 ? cameraVariables.lookaheadStopDecc : cameraVariables.lookaheadDecc;
+        lookaheadPosPercentage.Value -= decc * Time.deltaTime;
 
         moveDirection = Mathf.Sign(lookaheadPosition.Value);
 
@@ -154,9 +152,6 @@ public class BasicCameraState : CameraState
     {
         if (lookaheadPosPercentage.Value == actualMaxPosPercentage.Value)
             return;
-
-        increase = true;
-        decrease = false;
 
         lookaheadPosPercentage.Value += cameraVariables.lookaheadAcc * Time.deltaTime;
         moveDirection = X.Value;
@@ -176,7 +171,7 @@ public class BasicCameraState : CameraState
 
     bool IsInPositionDeadzone()
     {
-        return Mathf.Abs(lookaheadPosition.Value) < cameraVariables.minPosThreshold;
+        return Mathf.Abs(lookaheadPosition.Value) < cameraVariables.minPosThreshold && X.Value == 0;
     }
 
     bool IsInVelocityDeadzone()
@@ -197,12 +192,13 @@ public class BasicCameraState : CameraState
             return false;
         }
     }
+    [SerializeField] bool SmoothStopFunc;
+    [SerializeField] AnimationCurve function;
     void CalculateLookaheadValue()
     {
-        if(X.Value == 0)
-            SmoothStopFunction();
-        else
-            SmoothAccelerateFunction();
+        if(SmoothStopFunc)SmoothStopFunction();
+        else SmoothAccelerateFunction();
+
     }
 
     void SmoothStopFunction()
