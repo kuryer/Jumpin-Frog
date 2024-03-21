@@ -14488,7 +14488,7 @@ MonoBehaviour:
   m_SoftZoneHeight: 0.011
   m_BiasX: 0
   m_BiasY: -0.5
-  m_CenterOnActivate: 1
+  m_CenterOnActivate: 0
   m_GroupFramingMode: 2
   m_AdjustmentMode: 0
   m_GroupFramingSize: 0.8
