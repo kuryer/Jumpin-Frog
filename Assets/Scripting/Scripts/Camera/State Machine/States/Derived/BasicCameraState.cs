@@ -11,21 +11,16 @@ public class BasicCameraState : CameraState
 
     [Header("Lookahead")]
     [SerializeField] PlayerMovementVariables playerVariables;
-    [SerializeField] float lookaheadValue;
-    float rangeValue;
     [SerializeField] FloatVariable X;
-
-    //new Lookahead
     [SerializeField] FloatVariable lookaheadPosPercentage;
     [SerializeField] FloatVariable actualMaxPosPercentage;
     [SerializeField] FloatVariable lookaheadPosition;
     [SerializeField] float maxPosPercentage;
     [SerializeField] float maxLookahead;
     [SerializeField] float lookaheadRangePos;
+    [SerializeField] bool SmoothStopFunc;
     float moveDirection;
 
-    [SerializeField] bool increase;
-    [SerializeField] bool decrease;
     public override void OnEnter()
     {
         if (actualMaxPosPercentage.Value == 0)
@@ -48,76 +43,8 @@ public class BasicCameraState : CameraState
         trackerTransform.Item.position = trackedTransform.Item.position + lookaheadVector;
     }
 
-    #region Lookahead
-
-    //void CalculateLookahead()
-    //{
-    //    if (ZeroVelocityCheck())
-    //        return;
-
-    //    float velSign = trackedRb.Item.velocity.x == 0 ? 0f : Mathf.Sign(trackedRb.Item.velocity.x);
-    //    float lookaheadSign = Mathf.Sign(rangeValue);
-    //    float addedLookahead;
-
-    //    if (X.Value == 0)
-    //        addedLookahead = cameraVariables.lookaheadStopDecc;
-    //    else
-    //        addedLookahead = lookaheadSign == velSign ? cameraVariables.lookaheadAcc : cameraVariables.lookaheadDecc;
-
-    //    addedLookahead *= Time.deltaTime;
-    //    float velDiff = Mathf.Abs(trackedRb.Item.velocity.x) - Mathf.Abs(rangeValue);
-    //    if (velDiff < addedLookahead && lookaheadSign == velSign)
-    //        return;
-
-    //    addedLookahead *= Mathf.Sign(trackedRb.Item.velocity.x - rangeValue);
-    //    rangeValue += addedLookahead;
-
-    //    float range = Mathf.Abs(rangeValue / RangeLimit());
-    //    lookaheadValue = cameraVariables.maxGroundLookahead * SmoothPosition(range) * velSign;
-    //}
-
-    //float RangeLimit()
-    //{
-    //    if (Mathf.Abs(trackedRb.Item.velocity.x) < cameraVariables.minVelThreshold)
-    //        return cameraVariables.minVelThreshold;
-    //    return trackedRb.Item.velocity.x;
-    //}
-
-    //void SmoothedCalulation()
-    //{
-    //    float rangePosition = Mathf.Abs(trackedRb.Item.velocity.x) / playerVariables.maxSpeed;
-    //    float lookaheadPosition = cameraVariables.maxGroundLookahead * SmoothPosition(rangePosition);
-
-    //    if (lookaheadPosition < cameraVariables.minVelThreshold)
-    //        lookaheadPosition = 0;
-
-    //    lookaheadPosition *= Mathf.Sign(trackedRb.Item.velocity.x);
-    //    lookaheadValue = lookaheadPosition;
-    //}
-
-    //void Smoothing()
-    //{
-    //    float range = Mathf.Abs(lookaheadValue) / Mathf.Abs(trackedRb.Item.velocity.x);
-    //}
-
-
-    //bool ZeroVelocityCheck()
-    //{
-    //    if (Mathf.Abs(trackedRb.Item.velocity.x) < cameraVariables.minVelThreshold)
-    //        if (Mathf.Abs(lookaheadValue) < cameraVariables.minVelThreshold)
-    //        {
-    //            lookaheadValue = 0;
-    //            return true;
-    //        }
-    //    return false;
-    //}
-
-    #endregion
 
     #region New Lookahead
-
-
-
     void CalculateLookaheadPercentage()
     {
         if (actualMaxPosPercentage.Value >= lookaheadPosPercentage.Value /* || X.Value == 0*/)
@@ -127,8 +54,8 @@ public class BasicCameraState : CameraState
             else
                 Increase();
         }
-        //else
-        //    EaseInMaxVel();
+        else
+            EaseInMaxVel();
 
         lookaheadRangePos = lookaheadPosPercentage.Value / actualMaxPosPercentage.Value;
     }
@@ -192,8 +119,6 @@ public class BasicCameraState : CameraState
             return false;
         }
     }
-    [SerializeField] bool SmoothStopFunc;
-    [SerializeField] AnimationCurve function;
     void CalculateLookaheadValue()
     {
         if(SmoothStopFunc)SmoothStopFunction();

@@ -24,7 +24,10 @@ public class GroundDetection : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     private delegate void GroundCheckDelegate();
     GroundCheckDelegate groundCheckDelegate;
-    //Moge jeszcze zrobic tak ze bede wylaczal skrypt basic jumpa
+
+    [Header("Camera Playtesting")]
+    [SerializeField] CameraStateEvent GroundCameraStateEvent;
+    [SerializeField] CameraStateEvent InAirCameraStateEvent;
 
     private void Awake()
     {
@@ -50,6 +53,7 @@ public class GroundDetection : MonoBehaviour
         isGrounded.Value = true;
         StateMachine.ChangeState(GroundMovementState);
         OnGroundEvent.Raise();
+        GroundCameraStateEvent.Raise();
     }
 
     void InAirCall()
@@ -79,6 +83,7 @@ public class GroundDetection : MonoBehaviour
     {
         SetBasicJumpController(false);
         groundCheckDelegate = PlayerJumpCheck;
+        InAirCameraStateEvent.Raise();
         //InAirEvent.Raise();
     }
 
