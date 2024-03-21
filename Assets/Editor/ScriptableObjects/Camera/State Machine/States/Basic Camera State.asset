@@ -27,7 +27,7 @@ MonoBehaviour:
   lookaheadRangePos: 0
   increase: 0
   decrease: 0
-  SmoothStopFunc: 1
+  SmoothStopFunc: 0
   function:
     serializedVersion: 2
     m_Curve:
