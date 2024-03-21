@@ -16,7 +16,7 @@ MonoBehaviour:
   slowDownTreshold: 0.25
   acceleration: 5
   decceleration: 7
-  overspeedDecceleration: 0.7
+  overspeedDecceleration: 0.2
   InAirMaxSpeed: 11
   InAirAcc: 13
   InAirDecc: 1.5

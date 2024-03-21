@@ -15,6 +15,9 @@ public class CoyoteJumpController : MonoBehaviour
     [Header("Animation Management")]
     [SerializeField] AnimationController AnimationController;
     [SerializeField] AnimationState JumpAnimationState;
+
+    [Header("Camera Playtesting")]
+    [SerializeField] CameraStateEvent InAirCameraStateEvent;
     void Update()
     {
         CoyoteJumpCheck();
@@ -32,6 +35,7 @@ public class CoyoteJumpController : MonoBehaviour
         rb.AddForce(Vector2.up * playerVariables.JumpForce, ForceMode2D.Impulse);
         ResetBuffers();
         JumpCutController.enabled = true;
+        InAirCameraStateEvent.Raise();
         AnimationController.ChangeAnimation(JumpAnimationState);
     }
 
