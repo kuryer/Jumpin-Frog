@@ -17,56 +17,11 @@ MonoBehaviour:
   trackedRb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
   cameraVariables: {fileID: 11400000, guid: fca394da45219e943bf13c09065caec1, type: 2}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
-  lookaheadValue: 0
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
   lookaheadPosPercentage: {fileID: 11400000, guid: c8eb2cc313070d145a35883e6dbcb8c1, type: 2}
   actualMaxPosPercentage: {fileID: 11400000, guid: 5f46da6515be1d947b51f92bd5cd6008, type: 2}
   lookaheadPosition: {fileID: 11400000, guid: f26cb07d9edff5a40976e92ebd43bb9f, type: 2}
   maxPosPercentage: 6
-  maxLookahead: 6
+  maxLookahead: 11
   lookaheadRangePos: 0
-  increase: 0
-  decrease: 0
   SmoothStopFunc: 0
-  function:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.6200555
-      outSlope: 0.6200555
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5437472
-      value: 0.33715343
-      inSlope: 1.7443439
-      outSlope: 1.7443439
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.7832157
-      value: 0.5312883
-      inSlope: 2.513212
-      outSlope: 2.513212
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.02936233
-      outWeight: 0.12225338
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2.1621108
-      outSlope: 2.1621108
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
