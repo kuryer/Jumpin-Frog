@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class CameraStateMachine : MonoBehaviour
@@ -41,5 +42,11 @@ public class CameraStateMachine : MonoBehaviour
     public void ChangeAnimationState(string animationName)
     {
         animator.Play(animationName);
+    }
+
+    public void CMBrainEventGrabber(ICinemachineCamera cm1, ICinemachineCamera cm2)
+    {
+        if(cm1 != null)Debug.Log(cm1.Name);
+        if(cm2 != null)Debug.Log(cm2.Name);
     }
 }

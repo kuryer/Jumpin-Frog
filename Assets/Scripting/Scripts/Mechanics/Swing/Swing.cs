@@ -164,7 +164,6 @@ public class Swing : MonoBehaviour
 
     void SetActualSwing(Swing actualSwing)
     {
-        Debug.Log("set swing: " + actualSwing);
         ActualSwing.Value = actualSwing;
     }
 
