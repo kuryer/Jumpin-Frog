@@ -6,6 +6,9 @@ public class RespawnPoint : MonoBehaviour
 {
     Animator animator;
     [SerializeField] bool isSet;
+
+    [Header("New Controller")]
+    [SerializeField] bool worksWithNewController;
     enum AnimationState
     {
         RespawnPoint_SetIdle,

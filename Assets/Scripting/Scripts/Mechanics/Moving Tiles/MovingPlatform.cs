@@ -28,6 +28,9 @@ public class MovingPlatform : MonoBehaviour
     LayerMask destinationPointLayer;
     MovingTile.LoopModes loopMode;
 
+    [Header("New Controller")]
+    [SerializeField] bool worksWithNewController;
+    [SerializeField] Rigidbody2DRuntimeValue platformRbValue;
 
     #region Setup
 
@@ -224,7 +227,10 @@ public class MovingPlatform : MonoBehaviour
 
         if (!isStandingOnPlatform && hit.collider != null)
         {
-            Helpers.PlayerMovement.SetPlatformTransform(rb, true);
+            if (worksWithNewController)
+                platformRbValue.SetItem(rb);
+            else
+                Helpers.PlayerMovement.SetPlatformTransform(rb, true);
             isStandingOnPlatform = true;
             if (worksOnDetection)
             {
@@ -233,7 +239,10 @@ public class MovingPlatform : MonoBehaviour
         }
         else if (isStandingOnPlatform && hit.collider == null)
         {
-            Helpers.PlayerMovement.SetPlatformTransform(rb, false);
+            if(worksWithNewController)
+                platformRbValue.NullItem();
+            else
+                Helpers.PlayerMovement.SetPlatformTransform(rb, false);
             isStandingOnPlatform = false;
         }
     }

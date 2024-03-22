@@ -211,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
 
-    #region Events
+    #region Input Events
 
     void SubscribeForPlayerInputEvents()
     {
@@ -352,6 +352,7 @@ public class PlayerMovement : MonoBehaviour
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVars.swingMovementPower) * Mathf.Sign(speedDif);
 
         rb.AddForce(movement * transform.right);
+        Debug.Log(movement * transform.right);
     }
 
     void SetSwingGravity()
