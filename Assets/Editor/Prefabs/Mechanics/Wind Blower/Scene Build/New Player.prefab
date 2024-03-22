@@ -719,6 +719,7 @@ MonoBehaviour:
   ActualAnimationState: {fileID: 11400000, guid: df2cdd26310fd1148a2625a61ad7da76, type: 2}
   FallAnimationState: {fileID: 11400000, guid: d988453000ee6684e92df582897e02bb, type: 2}
   InAirRollState: {fileID: 11400000, guid: c422f0d1fbd13cc47a5298aa2c7810c5, type: 2}
+  FallingCameraStateEvent: {fileID: 11400000, guid: 6b5a923d384ed5a46b0a0a02685ed41d, type: 2}
 --- !u!114 &1646246098173237609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1655,8 +1656,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 61e395b89bd6830429bb364defca8f5a, type: 3}
   - {fileID: 8300000, guid: fb3708acc1e0f3641acb9847f8cf6e80, type: 3}
   - {fileID: 8300000, guid: 175a274ce53601043a5ab9477061358e, type: 3}
-  - {fileID: 8300000, guid: a42580013319f424f91e4d366397ff76, type: 3}
   - {fileID: 8300000, guid: c14d2b9894a77ae44937b63a0fcfe624, type: 3}
+  - {fileID: 8300000, guid: a42580013319f424f91e4d366397ff76, type: 3}
   stepStource: {fileID: 539257716455866596}
   steps:
   - {fileID: 8300000, guid: 883b9e23e1d13e4419fd29e6649bc62c, type: 3}
