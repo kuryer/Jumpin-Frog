@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a640035669ffd47b5a7751f7895254, type: 3}
+  m_Name: Ground Movement State
+  m_EditorClassIdentifier: 
+  rb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
+  X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  isOnSlopeVariable: {fileID: 11400000, guid: 8894445d99ef3ca4ea0357afbe13f9f5, type: 2}
+  platformRbValue: {fileID: 11400000, guid: 773a60c51d66b7841af49af6db9a11da, type: 2}
+  velocity: 0
+  GroundMovementDisablerEvent: {fileID: 11400000, guid: b1821e1ec56b2ea4391135862064a99a, type: 2}
+  AnimationControllerValue: {fileID: 11400000, guid: 6c5603df8dd8e2b4ead6df9697773fd0, type: 2}
+  ActualAnimationState: {fileID: 11400000, guid: df2cdd26310fd1148a2625a61ad7da76, type: 2}
+  IdleState: {fileID: 11400000, guid: 9559f282f62ab5543be4b111fd545d3a, type: 2}
+  RunState: {fileID: 11400000, guid: f34e31d8d48d948448b54c93c36959c7, type: 2}

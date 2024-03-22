@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a00948bc1d1da144da74f35ebb3a7357, type: 3}
+  m_Name: Swing Jump Coyote Time
+  m_EditorClassIdentifier: 
+  ActivityInfo: {fileID: 11400000, guid: 80483a6151a4e55478f9c526dfadc5a5, type: 2}
+  MaxTime: 0.1
+  ElapsedTime: 0
+  EveryStateValid: 0
+  ActiveState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
+  ValidStates:
+  - {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}

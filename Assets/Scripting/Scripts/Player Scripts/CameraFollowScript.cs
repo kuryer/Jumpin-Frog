@@ -6,15 +6,23 @@ public class CameraFollowScript : MonoBehaviour
 {
     Transform playerTransform;
     [SerializeField] float flipYRotationTime = 0.5f;
+    [SerializeField] GameObject Player;
     PlayerMovement player;
     bool isFacingRight;
 
     private void Awake()
     {
-        player = Helpers.PlayerMovement;
-        playerTransform = player.transform;
+        playerTransform = Player.transform;
+        isFacingRight = true;
 
-        isFacingRight = player.isFacingRight;
+        if(Player is null)
+        {
+            player = Helpers.PlayerMovement;
+            playerTransform = player.transform;
+            isFacingRight = player.isFacingRight;
+
+        }
+
     }
 
     void LateUpdate()

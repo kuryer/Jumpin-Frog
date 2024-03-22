@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Editor/Scenes/Start.unity
-    guid: 8a8726bd46997a5459ce06891fa0bf98
+    path: Assets/Editor/Scenes/Prototyping/Jano/Testing Environment.unity
+    guid: 7b8c241cc39ee554b89ca558a9d07160
   - enabled: 1
     path: Assets/Editor/Scenes/Additive/UI Scene.unity
     guid: f33265531a965e940bf2224d824ec807
@@ -15,12 +15,13 @@ EditorBuildSettings:
     path: Assets/Editor/Scenes/Additive/GM Scene.unity
     guid: 5e2e10a10e66f604bbc7291c699bad6b
   - enabled: 1
+    path: Assets/Editor/Scenes/Start.unity
+    guid: 8a8726bd46997a5459ce06891fa0bf98
+  - enabled: 0
     path: Assets/Editor/Scenes/Skela/Jebacbydgoszcz.unity
     guid: e93bcc93b1fa71d43ba57dcced8b6986
-  - enabled: 1
+  - enabled: 0
     path: Assets/Editor/Scenes/Skela/Jebackatowice.unity
     guid: 6a189381f981cd54db7941873a5bf683
-  - enabled: 1
-    path: Assets/Editor/Scenes/Prototyping/Jano/Some real Scenes/Testing Environment.unity
-    guid: 7b8c241cc39ee554b89ca558a9d07160
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 58521a0e8f035ac4ab5d8c8d981ffd46, type: 2}
