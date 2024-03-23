@@ -1175,7 +1175,7 @@ GameObject:
   - component: {fileID: 1024404006}
   - component: {fileID: 1024404007}
   m_Layer: 0
-  m_Name: Tracker
+  m_Name: Default Tracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1216,9 +1216,13 @@ MonoBehaviour:
   smoothStopFunc: 0
   lookaheadPosPercentage: 0
   heightBarHeight: 2.51
-  heightValue: 0
   groundLevel: 0
   isGrounded: {fileID: 11400000, guid: 0e9e328acd0c8e4439dd1113587d53a8, type: 2}
+  groundDifferenceDeadZone: 0.36
+  transitionDuration: 0.6
+  isFirstGroundCall: 0
+  isInTransition: 0
+  elapsedTime: 0
 --- !u!1 &1066743848
 GameObject:
   m_ObjectHideFlags: 3

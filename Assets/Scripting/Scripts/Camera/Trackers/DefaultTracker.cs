@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DefaultTracker : MonoBehaviour
@@ -22,10 +21,14 @@ public class DefaultTracker : MonoBehaviour
 
     [Header("Height Bar")]
     [SerializeField] float heightBarHeight;
-    [SerializeField] float heightValue;
     [SerializeField] float groundLevel;
     [SerializeField] BoolVariable isGrounded;
 
+    [Header("Height Diff Lerp")]
+    [SerializeField] float groundDifferenceDeadZone;
+    [SerializeField] float transitionDuration;
+    [SerializeField] bool isFirstGroundCall;
+    [SerializeField] bool isInTransition;
     private void Start()
     {
         transform.localPosition = playerTransform.Item.position;
@@ -42,7 +45,7 @@ public class DefaultTracker : MonoBehaviour
 
     void ApplyCalulations()
     {
-        Vector3 HeightBarVector = new Vector3 (0, groundLevel + heightValue, 0);
+        Vector3 HeightBarVector = new Vector3 (0, groundLevel /*+ heightValue*/, 0);
         Vector3 playerPosition = playerTransform.Item.position - transform.parent.position;
         transform.localPosition = new Vector3(playerPosition.x + lookaheadValue, HeightBarVector.y, playerPosition.z);
     }
@@ -158,20 +161,50 @@ public class DefaultTracker : MonoBehaviour
 
     void GroundCalculation()
     {
+        if (isFirstGroundCall)
+            GroundDifferenceCheck();
+        if (isInTransition)
+            return;
         groundLevel = playerTransform.Item.position.y;
-        heightValue = 0;
+    }
+
+    void GroundDifferenceCheck()
+    {
+        isFirstGroundCall = false;
+        Debug.Log(Mathf.Abs(groundLevel - playerTransform.Item.position.y));
+
+        if (Mathf.Abs(groundLevel - playerTransform.Item.position.y) <= groundDifferenceDeadZone
+            || playerTransform.Item.position.x < groundLevel)
+            return;
+        StartCoroutine(TransitionToNewGroundLevel());
+        isInTransition = true;
+    }
+    [SerializeField] float elapsedTime;
+    IEnumerator TransitionToNewGroundLevel()
+    {
+        elapsedTime = 0f;
+        while (elapsedTime <= transitionDuration)
+        {
+            groundLevel = Mathf.Lerp(groundLevel, playerTransform.Item.position.y , elapsedTime / transitionDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        isInTransition = false;
     }
 
     void InAirCalculation()
     {
+        if(!isFirstGroundCall)
+            isFirstGroundCall = true;
+
         float value = playerTransform.Item.position.y - groundLevel;
         if(value < 0)
         {
             groundLevel = playerTransform.Item.position.y;
-            heightValue = 0;
             return;
         }
-        heightValue = value < heightBarHeight ? 0 : value - heightBarHeight;
+        float heightValue = value < heightBarHeight ? 0 : value - heightBarHeight;
+        groundLevel += heightValue;
     }
 
     #endregion
