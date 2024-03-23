@@ -45,7 +45,7 @@ public class DefaultTracker : MonoBehaviour
 
     void ApplyCalulations()
     {
-        Vector3 HeightBarVector = new Vector3 (0, groundLevel /*+ heightValue*/, 0);
+        Vector3 HeightBarVector = new Vector3 (0, groundLevel, 0);
         Vector3 playerPosition = playerTransform.Item.position - transform.parent.position;
         transform.localPosition = new Vector3(playerPosition.x + lookaheadValue, HeightBarVector.y, playerPosition.z);
     }
