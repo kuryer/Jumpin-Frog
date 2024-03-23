@@ -25,8 +25,8 @@ public class CameraStateEventListener : MonoBehaviour
         Event.Register(this);
     }
 
-    public void OnEventRaised(string animationName)
+    public virtual void OnEventRaised(CameraState cameraState)
     {
-        StateMachine.ChangeAnimationState(animationName);
+        StateMachine.ChangeState(cameraState);
     }
 }
