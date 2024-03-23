@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84c835c21b6dfa43bcd4b1cdca0a87a, type: 3}
   m_Name: Ground Camera State Event
   m_EditorClassIdentifier: 
-  animationStateName: DefaultState
+  CameraState: {fileID: 11400000, guid: c2d46bbfe5ca68b4b9701253b82c5e92, type: 2}

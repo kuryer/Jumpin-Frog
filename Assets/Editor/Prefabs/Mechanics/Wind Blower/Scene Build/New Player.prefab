@@ -1489,10 +1489,12 @@ MonoBehaviour:
   BubbleActionValue: {fileID: 11400000, guid: cca7ed7ff973da14a94b9af01fdd97db, type: 2}
   JumpPadControllerValue: {fileID: 11400000, guid: 4fb414e7f2c457c4fa9cfa498df7a0e1, type: 2}
   AnimationControllerValue: {fileID: 11400000, guid: 6c5603df8dd8e2b4ead6df9697773fd0, type: 2}
+  PlayerTransformValue: {fileID: 11400000, guid: 51886accb557fa447aee83c288fde8f6, type: 2}
   Rigidbody2D: {fileID: 7346958207031562706}
   BubbleAction: {fileID: 6136546934787755309}
   JumpPadController: {fileID: 5883673875725368476}
   AnimationController: {fileID: 2111167583096790334}
+  PlayerTransform: {fileID: 3233951928845038206}
   platformRBValue: {fileID: 11400000, guid: 773a60c51d66b7841af49af6db9a11da, type: 2}
 --- !u!95 &4655260053776782787
 Animator:
