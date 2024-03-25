@@ -11,9 +11,11 @@ public class AnimationController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] AnimationStateVariable ActualAnimation;
     [SerializeField] AnimationState InitAnimationState;
+    [SerializeField] BoolVariable isInRespawnAnimation;
     void Start()
     {
         animator.Play(InitAnimationState.AnimationName);
+        ActualAnimation.Value = InitAnimationState;
     }
 
     public void SpriteFlipCheck(InputAction.CallbackContext context)
@@ -32,7 +34,7 @@ public class AnimationController : MonoBehaviour
 
     public void ChangeAnimation(AnimationState animation)
     {
-        if (animation == ActualAnimation.Value)
+        if (animation == ActualAnimation.Value || isInRespawnAnimation.Value)
             return;
         ActualAnimation.Value = animation;
         animator.Play(ActualAnimation.Value.AnimationName);

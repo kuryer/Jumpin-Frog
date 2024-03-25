@@ -12,6 +12,9 @@ public class FallDetection : MonoBehaviour
     [SerializeField] AnimationStateVariable ActualAnimationState;
     [SerializeField] AnimationState FallAnimationState;
     [SerializeField] AnimationState InAirRollState;
+
+    [Header("Camera Event")]
+    [SerializeField] CameraStateEvent FallingCameraStateEvent;
     void Update()
     {
         FallCheck();
@@ -32,10 +35,9 @@ public class FallDetection : MonoBehaviour
     {
         isFalling.Value = true;
         OnFallEvent.Raise();
+        FallingCameraStateEvent.Raise();
         if (!ActualAnimationState.Value.Equals(InAirRollState))
-        {
             AnimationController.ChangeAnimation(FallAnimationState);
-        }
     }
 
     private void OnDisable()

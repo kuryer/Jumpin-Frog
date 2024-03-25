@@ -7,7 +7,7 @@ public class CameraStateEvent : ScriptableObject
     private List<CameraStateEventListener> listeners
         = new List<CameraStateEventListener>();
 
-    [SerializeField] string animationStateName;
+    [SerializeField] CameraState CameraState;
     public void Register(CameraStateEventListener eventListener)
     {
         listeners.Add(eventListener);
@@ -21,6 +21,6 @@ public class CameraStateEvent : ScriptableObject
     public void Raise()
     {
         foreach (var listener in listeners)
-            listener.OnEventRaised(animationStateName);
+            listener.OnEventRaised(CameraState);
     }
 }

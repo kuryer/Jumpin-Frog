@@ -62,7 +62,6 @@ public class SwingReleaseAction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("elo");
         if (enabled)
             SwingRelease();
     }

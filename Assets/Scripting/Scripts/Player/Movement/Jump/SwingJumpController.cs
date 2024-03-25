@@ -55,7 +55,6 @@ public class SwingJumpController : MonoBehaviour
 
     void SwingJump()
     {
-        Debug.Log("Swing Jumped");
         Vector2 direction = new Vector2(SwingJumpDirectionX() * Mathf.Sign(rb.velocity.x) * playerVariables.SwingJumpBalance,
                 SwingJumpDirectionY() * (1f - playerVariables.SwingJumpBalance));
 

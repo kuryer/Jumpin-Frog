@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public abstract class CameraState : ScriptableObject
+[CreateAssetMenu(menuName ="Scriptable Objects/Camera/Camera State")]
+public class CameraState : ScriptableObject
 {
-    public abstract void OnEnter();
-    public abstract void OnUpdate();
-    public abstract void OnExit();
+    public string CameraAnimationState;
 }

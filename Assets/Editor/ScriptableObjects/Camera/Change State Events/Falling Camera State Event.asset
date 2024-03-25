@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352b99b37cbefcc4f8e07b12680cef68, type: 3}
-  m_Name: Tracked Transform
+  m_Script: {fileID: 11500000, guid: f84c835c21b6dfa43bcd4b1cdca0a87a, type: 3}
+  m_Name: Falling Camera State Event
   m_EditorClassIdentifier: 
-  Item: {fileID: 0}
+  animationStateName: FallingState

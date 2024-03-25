@@ -23,6 +23,8 @@ public class NewPlayerHealth : MonoBehaviour
     [Header("Respawn")]
     [SerializeField] MovementState GroundMovementState;
     [SerializeField] RespawnPointVariables RespawnInfo;
+    [SerializeField] BoolVariable isInRespawnAnimation;
+    [SerializeField] float respawnAnimationDuration;
 
     [Header("Animation Management")]
     [SerializeField] AnimationController animationController;
@@ -71,5 +73,14 @@ public class NewPlayerHealth : MonoBehaviour
         GravityController.ChangeGravity(NormalGravity);
         rb.bodyType = RigidbodyType2D.Dynamic;
         animationController.ChangeAnimation(RespawnAnimation);
+        isInRespawnAnimation.Value = true;
+        StartCoroutine(RespawnAnimationHandle());
     }
+
+    IEnumerator RespawnAnimationHandle()
+    {
+        yield return new WaitForSeconds(respawnAnimationDuration);
+        isInRespawnAnimation.Value = false;
+    }
+
 }
