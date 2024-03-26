@@ -1038,6 +1038,8 @@ MonoBehaviour:
   AnimationController: {fileID: 2111167583096790334}
   InBubbleAnimation: {fileID: 11400000, guid: f2c552d754901174483cc25a54ff27a9, type: 2}
   InAirRollAnimation: {fileID: 11400000, guid: c422f0d1fbd13cc47a5298aa2c7810c5, type: 2}
+  InBubbleCameraStateEvent: {fileID: 11400000, guid: 8f6be13d62bc47843a7b29f0d8090c67, type: 2}
+  OutBubbleCameraStateEvent: {fileID: 11400000, guid: e63b0f8c79f770247a6d974842e0d9b1, type: 2}
 --- !u!114 &6624990733378055936
 MonoBehaviour:
   m_ObjectHideFlags: 0

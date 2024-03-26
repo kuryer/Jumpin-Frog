@@ -35,6 +35,10 @@ public class BubbleAction : MonoBehaviour
     [SerializeField] AnimationController AnimationController;
     [SerializeField] AnimationState InBubbleAnimation;
     [SerializeField] AnimationState InAirRollAnimation;
+
+    [Header("Camera Management")]
+    [SerializeField] CameraStateEvent InBubbleCameraStateEvent;
+    [SerializeField] CameraStateEvent OutBubbleCameraStateEvent;
     //enabled by bubble, disabled by onExit bubbleState
     private void Update()
     {
@@ -49,6 +53,7 @@ public class BubbleAction : MonoBehaviour
         rb.velocity = Vector2.zero;
         StateMachine.ChangeState(BubbleState);
         GravityController.ChangeGravity(BubbleGravity);
+        InBubbleCameraStateEvent.Raise();
         AnimationController.ChangeAnimation(InBubbleAnimation);
         StartCoroutine(MoveTowardsBubbleCenter());
     }
@@ -83,6 +88,7 @@ public class BubbleAction : MonoBehaviour
         activeBubble.PopBubble();
         AnimationController.ChangeAnimation(InAirRollAnimation);
         StateMachine.ChangeState(InAirMovementState);
+        OutBubbleCameraStateEvent.Raise();
         BubbleThrow.BubbleThrow();
     }
 }

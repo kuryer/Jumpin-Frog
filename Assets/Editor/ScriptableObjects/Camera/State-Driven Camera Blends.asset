@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: '**ANY CAMERA**'
-    m_To: Falling Camera
+    m_To: Default Camera
     m_Blend:
       m_Style: 2
-      m_Time: 0.2
+      m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Falling Camera
-    m_To: Default Camera
+  - m_From: Default Camera
+    m_To: Bubble Camera
     m_Blend:
       m_Style: 2
-      m_Time: 0.5
+      m_Time: 1
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
