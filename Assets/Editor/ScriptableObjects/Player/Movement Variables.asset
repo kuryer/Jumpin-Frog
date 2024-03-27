@@ -49,6 +49,6 @@ MonoBehaviour:
   showSwingHangArea: 1
   showRedirectionBar: 1
   BubbleThrowForce: 150
-  BubbleThrowMaxTime: 0.75
+  BubbleThrowMaxTime: 4
   XThrowModifier: 0.9
   YThrowModifier: 0.95

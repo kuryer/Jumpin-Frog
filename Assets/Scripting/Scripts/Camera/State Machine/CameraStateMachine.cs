@@ -8,7 +8,7 @@ public class CameraStateMachine : MonoBehaviour
     [SerializeField] CameraState InitState;
     [SerializeField] CameraStateVariable ActualState;
     [SerializeField] Animator animator;
-
+    [SerializeField] string Threshold;
     private void Start()
     {
         Initialize();
@@ -16,6 +16,7 @@ public class CameraStateMachine : MonoBehaviour
     void Initialize()
     {
         ActualState.Value = InitState;
+        ChangeThreshold("S");
         ChangeAnimationState(ActualState.Value.CameraAnimationState);
     }
 
@@ -27,8 +28,16 @@ public class CameraStateMachine : MonoBehaviour
         ChangeAnimationState(ActualState.Value.CameraAnimationState);
     }
 
+    public void ChangeThreshold(string threshold)
+    {
+        if (Threshold.Equals(threshold))
+            return;
+        Threshold = threshold;
+        ChangeAnimationState(ActualState.Value.CameraAnimationState);
+    }
+
     void ChangeAnimationState(string animationName)
     {
-        animator.Play(animationName);
+        animator.Play(animationName + Threshold);
     }
 }
