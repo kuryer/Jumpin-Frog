@@ -11,11 +11,15 @@ public class Bubble : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField] Animator animator;
+
+    [Header("Bubble Arrow")]
+    [SerializeField] BubbleArrow Arrow;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && ActualState.Value is InAirMovementState)
         {
             BubbleAction.Item.InBubbleCall(Position(), this);
+            Arrow.Enable();
             PlayAnimation("EnterBubble");
         }
     }
@@ -27,6 +31,7 @@ public class Bubble : MonoBehaviour
     public void PopBubble()
     {
         PlayAnimation("ExitBubble");
+        Arrow.Disable();
         StartCoroutine(BubbleCooldown());
     }
 
