@@ -211,8 +211,8 @@ public class DefaultTracker : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 heightBar = new Vector3(playerTransform.Item.position.x, groundLevel + heightBarHeight, 0);
-        Vector3 groundLevelV = new Vector3(playerTransform.Item.position.x, groundLevel, 0);
-        Gizmos.DrawLine(groundLevelV, heightBar);
+        //Vector3 heightBar = new Vector3(playerTransform.Item.position.x, groundLevel + heightBarHeight, 0);
+        //Vector3 groundLevelV = new Vector3(playerTransform.Item.position.x, groundLevel, 0);
+        //Gizmos.DrawLine(groundLevelV, heightBar);
     }
 }
