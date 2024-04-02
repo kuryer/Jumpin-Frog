@@ -1222,6 +1222,15 @@ MonoBehaviour:
   maxLookahead: 9
   smoothStopFunc: 0
   lookaheadPosPercentage: 0
+  validLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  blockingLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  rayOffset: {x: 0, y: 0.51, z: 0}
+  raycastDistance: 8.53
+  isTouchingWall: 0
   heightBarHeight: 3.5
   groundLevel: 0
   isGrounded: {fileID: 11400000, guid: 0e9e328acd0c8e4439dd1113587d53a8, type: 2}
@@ -22121,24 +22130,24 @@ CompositeCollider2D:
         Y: -165475456
   - m_Collider: {fileID: 1975145343}
     m_ColliderPaths:
-    - - X: 1050504128
+    - - X: 1214813824
         Y: 289291264
       - X: 868363008
         Y: 289291264
       - X: 868363008
-        Y: -88997608
-      - X: 1050504128
-        Y: -88997608
+        Y: -169308736
+      - X: 1214813824
+        Y: -169308736
   m_CompositePaths:
     m_Paths:
-    - - {x: 87.26065, y: -16.547546}
-      - {x: 87.26071, y: -8.899761}
-      - {x: 105.050415, y: -8.899732}
-      - {x: 105.050385, y: 28.929127}
+    - - {x: 121.48136, y: -16.930874}
+      - {x: 121.48136, y: 28.929127}
       - {x: 87.26068, y: 28.929155}
       - {x: 87.26065, y: 28.940062}
       - {x: -101.83777, y: 28.940033}
       - {x: -101.83774, y: -16.547546}
+      - {x: 86.8363, y: -16.547575}
+      - {x: 86.836334, y: -16.930874}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -22247,7 +22256,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 95.94336, y: 10.014683}
+  m_Offset: {x: 104.158844, y: 5.9991255}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -22258,7 +22267,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 18.214111, y: 37.828888}
+  m_Size: {x: 34.64508, y: 45.86}
   m_EdgeRadius: 0
 --- !u!1001 &697806225682543170
 PrefabInstance:

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DefaultTracker : MonoBehaviour
@@ -18,6 +19,13 @@ public class DefaultTracker : MonoBehaviour
     float lookaheadPosValue;
     float lookaheadValue;
     float moveDirection;
+
+    [Header("Wall Raycast")]
+    [SerializeField] LayerMask validLayer;
+    [SerializeField] LayerMask blockingLayer;
+    [SerializeField] Vector3 rayOffset;
+    [SerializeField] float raycastDistance;
+    [SerializeField] bool isTouchingWall;
 
     [Header("Height Bar")]
     [SerializeField] float heightBarHeight;
@@ -41,6 +49,11 @@ public class DefaultTracker : MonoBehaviour
         CalculateLookaheadPercentage();
         CalculateLookaheadValue();
         ApplyCalulations();
+    }
+
+    private void FixedUpdate()
+    {
+        WallRaycast();
     }
 
     void ApplyCalulations()
@@ -80,7 +93,7 @@ public class DefaultTracker : MonoBehaviour
     {
         if (maxValueReachDuration >= lookaheadPosValue)
         {
-            if (IsInVelocityDeadzone() || X.Value == 0 || !SameVelAndPosDirection)
+            if (isTouchingWall || IsInVelocityDeadzone() || X.Value == 0 || !SameVelAndPosDirection)
                 Decrease();
             else
                 Increase();
@@ -96,7 +109,8 @@ public class DefaultTracker : MonoBehaviour
         if (lookaheadPosValue == 0)
             return;
 
-        float decc = X.Value == 0 ? cameraVariables.lookaheadStopDecc : cameraVariables.lookaheadDecc;
+        float decc = isTouchingWall ? cameraVariables.lookaheadWallDecc :
+            X.Value == 0 ? cameraVariables.lookaheadStopDecc : cameraVariables.lookaheadDecc;
         lookaheadPosValue -= decc * Time.deltaTime;
 
         moveDirection = Mathf.Sign(lookaheadValue);
@@ -145,6 +159,19 @@ public class DefaultTracker : MonoBehaviour
 
             return false;
         }
+    }
+
+    #endregion
+
+    #region Wall Lookahead
+
+    void WallRaycast()
+    {
+        RaycastHit2D hitR = Physics2D.Raycast(transform.position + rayOffset, Vector2.right, raycastDistance, validLayer);
+        bool castThruBlockerR = Physics2D.Raycast(transform.position + rayOffset, Vector2.right, raycastDistance, blockingLayer);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position + rayOffset, Vector2.left, raycastDistance, validLayer);
+        bool castThruBlockerL = Physics2D.Raycast(transform.position + rayOffset, Vector2.left, raycastDistance, blockingLayer);
+        isTouchingWall = (hitR.rigidbody != null && !castThruBlockerR) || (hitL.rigidbody != null && !castThruBlockerL);
     }
 
     #endregion
@@ -211,8 +238,7 @@ public class DefaultTracker : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        //Vector3 heightBar = new Vector3(playerTransform.Item.position.x, groundLevel + heightBarHeight, 0);
-        //Vector3 groundLevelV = new Vector3(playerTransform.Item.position.x, groundLevel, 0);
-        //Gizmos.DrawLine(groundLevelV, heightBar);
+        Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.right * raycastDistance);
+        Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.left * raycastDistance);
     }
 }
