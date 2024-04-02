@@ -16,7 +16,8 @@ MonoBehaviour:
   smoothingValue: 1
   lookaheadAcc: 3.5
   lookaheadDecc: 5
+  lookaheadWallDecc: 4
   lookaheadOverspeedDecc: 1
-  lookaheadStopDecc: 2.5
+  lookaheadStopDecc: 4
   minVelThreshold: 0.5
   minPosThreshold: 0.1

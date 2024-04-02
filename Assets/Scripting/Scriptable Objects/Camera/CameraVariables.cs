@@ -11,6 +11,8 @@ public class CameraVariables : ScriptableObject
     public float lookaheadAcc;
     [Tooltip("How fast lookahead will change the direction")]
     public float lookaheadDecc;
+    [Tooltip("This value is applied when lookahead is decreasing because of a near wall")]
+    public float lookaheadWallDecc;
     [Tooltip("How fast lookahead will come back if the value is bigger than maximum value")]
     public float lookaheadOverspeedDecc;
     [Tooltip("How fast lookahead will stop if the player stops")]
