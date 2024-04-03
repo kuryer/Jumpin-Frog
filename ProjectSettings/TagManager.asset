@@ -41,6 +41,9 @@ TagManager:
   - 
   - Destination Point
   m_SortingLayers:
+  - name: Enviro
+    uniqueID: 2474050663
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
