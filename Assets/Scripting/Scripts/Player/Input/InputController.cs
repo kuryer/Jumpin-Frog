@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
     [Header("Throw Direction")]
     [SerializeField] Vector2Variable ThrowDirection;
     [SerializeField] PlayerMovementVariables playerVariables;
+    [SerializeField] List<StickInputRange> InputRanges;
     public void OnMove(InputAction.CallbackContext context)
     {
         float x = context.ReadValue<Vector2>().x;
@@ -25,20 +26,32 @@ public class InputController : MonoBehaviour
     public void GetThrowDirection(InputAction.CallbackContext context)
     {
         Vector2 direction = context.ReadValue<Vector2>();
-        Debug.Log(direction);
         if (direction == Vector2.zero)
             return;
+        
+        direction = direction.normalized;
+        Debug.Log(direction);
 
-        if(direction.y == 0 || direction.x == 0)
+        foreach (StickInputRange range in InputRanges)
         {
-            ThrowDirection.Value = direction;
-            return;
+            if (range.IsInRange(direction))
+            {
+                ThrowDirection.Value = range.GetDirection();
+                break;
+            }
         }
-        else
-        {
-            ThrowDirection.Value = new Vector2(.71f * Mathf.Sign(direction.x), .71f * Mathf.Sign(direction.y));
-            ThrowDirection.Value.x *= playerVariables.XThrowModifier;
-            ThrowDirection.Value.y *= playerVariables.YThrowModifier;
-        }
+
+
+        //if(direction.y == 0 || direction.x == 0)
+        //{
+        //    ThrowDirection.Value = direction;
+        //    return;
+        //}
+        //else
+        //{
+        //    ThrowDirection.Value = new Vector2(.71f * Mathf.Sign(direction.x), .71f * Mathf.Sign(direction.y));
+        //    ThrowDirection.Value.x *= playerVariables.XThrowModifier;
+        //    ThrowDirection.Value.y *= playerVariables.YThrowModifier;
+        //}
     }
 }

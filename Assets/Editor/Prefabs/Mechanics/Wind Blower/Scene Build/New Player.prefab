@@ -102,6 +102,15 @@ MonoBehaviour:
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
   ThrowDirection: {fileID: 11400000, guid: d7aaeec1b065e36489c6edde89c95e68, type: 2}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
+  InputRanges:
+  - {fileID: 11400000, guid: 73e0b87b750fb8f43942f69356477a1d, type: 2}
+  - {fileID: 11400000, guid: 12742a07432b89a4385db0819bf50bf6, type: 2}
+  - {fileID: 11400000, guid: 6ce3b9a97937d9c47aeb42e1645e0ce3, type: 2}
+  - {fileID: 11400000, guid: beaa8c016a7cf0f4fabbc64084e6f354, type: 2}
+  - {fileID: 11400000, guid: 8782a56c69deeec48ace092d2c1914a8, type: 2}
+  - {fileID: 11400000, guid: 0cc98fdb89e91534ca6677dd51578d22, type: 2}
+  - {fileID: 11400000, guid: e5a7809cf20f9f34d84dbb54e85ae478, type: 2}
+  - {fileID: 11400000, guid: c02f4b84c93bda1408e34b5af4860d61, type: 2}
 --- !u!114 &2965052440935314692
 MonoBehaviour:
   m_ObjectHideFlags: 0
