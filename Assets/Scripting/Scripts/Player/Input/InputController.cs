@@ -25,7 +25,7 @@ public class InputController : MonoBehaviour
     public void GetThrowDirection(InputAction.CallbackContext context)
     {
         Vector2 direction = context.ReadValue<Vector2>();
-
+        Debug.Log(direction);
         if (direction == Vector2.zero)
             return;
 
