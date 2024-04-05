@@ -24,6 +24,28 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
+  - m_From: Bubble Camera M
+    m_To: Default Camera M
+    m_Blend:
+      m_Style: 2
+      m_Time: 0.5
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: Bubble Camera L
+    m_To: Bubble Camera L
+    m_Blend:
+      m_Style: 2
+      m_Time: 0.5
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
   - m_From: Default Camera S
     m_To: Bubble Camera S
     m_Blend:
@@ -35,11 +57,22 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Default Camera S
-    m_To: Bubble Camera S
+  - m_From: Default Camera M
+    m_To: Bubble Camera M
     m_Blend:
-      m_Style: 1
-      m_Time: 2
+      m_Style: 2
+      m_Time: 1
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: Default Camera L
+    m_To: Bubble Camera L
+    m_Blend:
+      m_Style: 2
+      m_Time: 1
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

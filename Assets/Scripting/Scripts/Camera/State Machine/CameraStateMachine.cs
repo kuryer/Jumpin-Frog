@@ -16,7 +16,7 @@ public class CameraStateMachine : MonoBehaviour
     void Initialize()
     {
         ActualState.Value = InitState;
-        ChangeThreshold("S");
+        ChangeThreshold("M");
         ChangeAnimationState(ActualState.Value.CameraAnimationState);
     }
 

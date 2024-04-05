@@ -167,10 +167,10 @@ public class DefaultTracker : MonoBehaviour
 
     void WallRaycast()
     {
-        RaycastHit2D hitR = Physics2D.Raycast(transform.position + rayOffset, Vector2.right, raycastDistance, validLayer);
-        bool castThruBlockerR = Physics2D.Raycast(transform.position + rayOffset, Vector2.right, raycastDistance, blockingLayer);
-        RaycastHit2D hitL = Physics2D.Raycast(transform.position + rayOffset, Vector2.left, raycastDistance, validLayer);
-        bool castThruBlockerL = Physics2D.Raycast(transform.position + rayOffset, Vector2.left, raycastDistance, blockingLayer);
+        RaycastHit2D hitR = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.right, raycastDistance, validLayer);
+        bool castThruBlockerR = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.right, raycastDistance, blockingLayer);
+        RaycastHit2D hitL = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.left, raycastDistance, validLayer);
+        bool castThruBlockerL = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.left, raycastDistance, blockingLayer);
         isTouchingWall = (hitR.rigidbody != null && !castThruBlockerR) || (hitL.rigidbody != null && !castThruBlockerL);
     }
 
@@ -198,10 +198,9 @@ public class DefaultTracker : MonoBehaviour
     void GroundDifferenceCheck()
     {
         isFirstGroundCall = false;
-        Debug.Log(Mathf.Abs(groundLevel - playerTransform.Item.position.y));
 
         if (Mathf.Abs(groundLevel - playerTransform.Item.position.y) <= groundDifferenceDeadZone
-            || playerTransform.Item.position.x < groundLevel)
+            || playerTransform.Item.position.y < groundLevel)
             return;
         StartCoroutine(TransitionToNewGroundLevel());
         isInTransition = true;
@@ -238,7 +237,10 @@ public class DefaultTracker : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.right * raycastDistance);
-        Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.left * raycastDistance);
+        if (playerTransform.Item != null)
+        {
+            Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.right * raycastDistance);
+            Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.left * raycastDistance);
+        }
     }
 }
