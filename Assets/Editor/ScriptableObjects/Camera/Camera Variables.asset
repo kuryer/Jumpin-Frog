@@ -18,6 +18,6 @@ MonoBehaviour:
   lookaheadDecc: 5
   lookaheadWallDecc: 4
   lookaheadOverspeedDecc: 1
-  lookaheadStopDecc: 4
+  lookaheadStopDecc: 5
   minVelThreshold: 0.5
   minPosThreshold: 0.1

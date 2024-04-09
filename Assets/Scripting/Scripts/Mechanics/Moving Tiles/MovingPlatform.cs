@@ -29,7 +29,6 @@ public class MovingPlatform : MonoBehaviour
     MovingTile.LoopModes loopMode;
 
     [Header("New Controller")]
-    [SerializeField] bool worksWithNewController;
     [SerializeField] Rigidbody2DRuntimeValue platformRbValue;
 
     #region Setup
@@ -60,14 +59,14 @@ public class MovingPlatform : MonoBehaviour
 
     void SubscribeOnPlayerDeath()
     {
-        if(worksOnDetection)
-            Helpers.PlayerHealth.OnPlayerDeath.AddListener(OnDetection_SetNextPoint);
+        //if(worksOnDetection)
+        //    Helpers.PlayerHealth.OnPlayerDeath.AddListener(OnDetection_SetNextPoint);
     }
 
     void UnsubscribeOnPlayerDeath()
     {
-        if(worksOnDetection)
-            Helpers.PlayerHealth.OnPlayerDeath.RemoveListener(OnDetection_SetNextPoint);
+        //if(worksOnDetection)
+        //    Helpers.PlayerHealth.OnPlayerDeath.RemoveListener(OnDetection_SetNextPoint);
     }
 
     private void Setup()
@@ -227,10 +226,8 @@ public class MovingPlatform : MonoBehaviour
 
         if (!isStandingOnPlatform && hit.collider != null)
         {
-            if (worksWithNewController)
-                platformRbValue.SetItem(rb);
-            else
-                Helpers.PlayerMovement.SetPlatformTransform(rb, true);
+            platformRbValue.SetItem(rb);
+
             isStandingOnPlatform = true;
             if (worksOnDetection)
             {
@@ -239,10 +236,7 @@ public class MovingPlatform : MonoBehaviour
         }
         else if (isStandingOnPlatform && hit.collider == null)
         {
-            if(worksWithNewController)
-                platformRbValue.NullItem();
-            else
-                Helpers.PlayerMovement.SetPlatformTransform(rb, false);
+            platformRbValue.NullItem();
             isStandingOnPlatform = false;
         }
     }
