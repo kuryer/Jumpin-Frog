@@ -22,7 +22,7 @@ public class DefaultTracker : MonoBehaviour
 
     [Header("Wall Raycast")]
     [SerializeField] LayerMask validLayer;
-    [SerializeField] LayerMask blockingLayer;
+    [SerializeField] int blockingLayer;
     [SerializeField] Vector3 rayOffset;
     [SerializeField] float raycastDistance;
     [SerializeField] bool isTouchingWall;
@@ -168,10 +168,16 @@ public class DefaultTracker : MonoBehaviour
     void WallRaycast()
     {
         RaycastHit2D hitR = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.right, raycastDistance, validLayer);
-        bool castThruBlockerR = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.right, raycastDistance, blockingLayer);
+        RaycastHit2D BlockerR = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.right, raycastDistance);
         RaycastHit2D hitL = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.left, raycastDistance, validLayer);
-        bool castThruBlockerL = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.left, raycastDistance, blockingLayer);
-        isTouchingWall = (hitR.rigidbody != null && !castThruBlockerR) || (hitL.rigidbody != null && !castThruBlockerL);
+        RaycastHit2D BlockerL = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.left, raycastDistance);
+
+        bool castThruBlockerR = BlockerR.collider.gameObject.layer == blockingLayer;
+        bool castThruBlockerL = BlockerL.collider.gameObject.layer == blockingLayer;
+
+        if (hitR.collider != null) Debug.Log(hitR.collider.gameObject.name);
+
+        isTouchingWall = (hitR.collider != null && !castThruBlockerR) || (hitL.collider != null && !castThruBlockerL);
     }
 
     #endregion
