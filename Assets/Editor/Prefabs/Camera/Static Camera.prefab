@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 2193994945071985770}
   - component: {fileID: 684390496827463919}
   m_Layer: 0
-  m_Name: Trigger
+  m_Name: Trigger R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 242561765791677056}
   - component: {fileID: 8599532447601500517}
   m_Layer: 0
-  m_Name: Trigger
+  m_Name: Trigger L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
