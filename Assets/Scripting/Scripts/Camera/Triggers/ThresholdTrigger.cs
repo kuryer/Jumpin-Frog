@@ -28,9 +28,9 @@ public class ThresholdTrigger : MonoBehaviour
     void ThresholdChange()
     {
         if (transform.position.x < playerTransform.Item.position.x)
-            leftSideThresholdEvent.Raise();
-        else
             rightSideThresholdEvent.Raise();
+        else
+            leftSideThresholdEvent.Raise();
         canChange = false;
     }
 
