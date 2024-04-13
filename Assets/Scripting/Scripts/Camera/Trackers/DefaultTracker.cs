@@ -216,7 +216,6 @@ public class DefaultTracker : MonoBehaviour
     IEnumerator TransitionToNewGroundLevel(float targetPosition)
     {
         float elapsedTime = 0f;
-        Debug.Log("XD");
         while (elapsedTime <= transitionDuration)
         {
             groundLevel = Mathf.Lerp(groundLevel, targetPosition, elapsedTime / transitionDuration);
