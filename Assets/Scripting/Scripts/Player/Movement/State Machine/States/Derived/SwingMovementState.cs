@@ -33,9 +33,7 @@ public class SwingMovementState : MovementState
     [SerializeField] AnimationState SwingAnimationState;
     [SerializeField] AnimationState InAirRollAnimationState;
 
-
     [Header("Swing Redesign")]
-    [SerializeField] bool RedesignedSwing;
     [SerializeField] float Direction;
     public override void OnEnter()
     {
@@ -59,10 +57,7 @@ public class SwingMovementState : MovementState
     public override void OnFixedUpdate()
     {
         SwingRotation();
-        if(RedesignedSwing)
-            SwingingRedesignedMovement();
-        else
-            SwingingMovement();
+        SwingingMovement();
     }
 
     public override void OnExit()
@@ -84,34 +79,8 @@ public class SwingMovementState : MovementState
     #region Swing Movement
     void SwingingMovement()
     {
-        SetSwingGravity();
-
-        float maxSpeed = X.Value * playerVariables.swingMaxSpd;
-        float realSpeed = rb.Item.velocity.sqrMagnitude * Mathf.Sign(rb.Item.velocity.x);
-        float speedDif = maxSpeed - realSpeed;
-
-        speedDif = Mathf.Sign(speedDif) == Mathf.Sign(maxSpeed) ? speedDif : 0f;
-
-        float accelRate = Mathf.Sign(realSpeed) == Mathf.Sign(maxSpeed) ? playerVariables.swingAcc : playerVariables.swingDecc;
-
-        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, playerVariables.swingPower) * Mathf.Sign(speedDif);
-
-        rb.Item.AddForce(movement * transform.right);
-    }
-
-    void SwingingRedesignedMovement()
-    {
         if(rb.Item.velocity.sqrMagnitude < playerVariables.swingMaxSpd)
             rb.Item.AddForce(playerVariables.swingAcceleration * transform.right * Direction);
-    }
-
-    void SetSwingGravity()
-    {
-        if (X.Value == 0)
-            gravityController.Item.ChangeGravity(InactiveSwingState);
-        else
-            gravityController.Item.ChangeGravity(ActiveSwingState);
-
     }
 
     public void SetSwingDirection(float direction)
