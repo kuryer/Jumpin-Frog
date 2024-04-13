@@ -8,6 +8,7 @@ public class NewPlayerHealth : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
 
     [Header("Death Sequence")]
+    [SerializeField] float deathWaitTime;
     [SerializeField] float teleportWaitTime;
     [SerializeField] float respawnWaitTime;
 
@@ -25,6 +26,7 @@ public class NewPlayerHealth : MonoBehaviour
     [SerializeField] RespawnPointVariables RespawnInfo;
     [SerializeField] BoolVariable isInRespawnAnimation;
     [SerializeField] float respawnAnimationDuration;
+    [SerializeField] GameEvent OnRespawnEvent;
 
     [Header("Animation Management")]
     [SerializeField] AnimationController animationController;
@@ -52,20 +54,24 @@ public class NewPlayerHealth : MonoBehaviour
         StateMachine.ChangeState(DeathState);
         StartCoroutine(RespawnTeleport());
     }
-
+    [SerializeField] GameEvent OnDeathTeleportEvent;
     IEnumerator RespawnTeleport()
     {
-        yield return new WaitForSeconds(teleportWaitTime);
-        TeleportToRespawnPoint();
+        float timeElapsed = 0f;
+        Vector3 cachedDeathPosition = transform.position;
+        Vector3 resp = RespawnInfo.GetPosition();
+        yield return new WaitForSeconds(deathWaitTime);
+        OnDeathTeleportEvent.Raise();
+        while (timeElapsed <= teleportWaitTime)
+        {
+            timeElapsed += Time.deltaTime;
+            transform.parent.position = Vector3.Lerp(cachedDeathPosition, resp, timeElapsed / teleportWaitTime);
+            yield return null;
+        }
         yield return new WaitForSeconds(respawnWaitTime);
         Respawn();
     }
 
-    void TeleportToRespawnPoint()
-    {
-        Vector2 resp = RespawnInfo.GetPosition();
-        transform.parent.position = new Vector3(resp.x, resp.y, transform.parent.position.z);
-    }
     void Respawn()
     {
         playerCollider.enabled = true;
@@ -80,6 +86,7 @@ public class NewPlayerHealth : MonoBehaviour
     IEnumerator RespawnAnimationHandle()
     {
         yield return new WaitForSeconds(respawnAnimationDuration);
+        OnRespawnEvent.Raise();
         isInRespawnAnimation.Value = false;
     }
 

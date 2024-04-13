@@ -31,12 +31,14 @@ public class DefaultTracker : MonoBehaviour
     [SerializeField] float heightBarHeight;
     [SerializeField] float groundLevel;
     [SerializeField] BoolVariable isGrounded;
+    [SerializeField] RespawnPointVariables respawnInfo;
 
     [Header("Height Diff Lerp")]
     [SerializeField] float groundDifferenceDeadZone;
     [SerializeField] float transitionDuration;
     [SerializeField] bool isFirstGroundCall;
     [SerializeField] bool isInTransition;
+    bool isDead;
     private void Start()
     {
         transform.localPosition = playerTransform.Item.position;
@@ -45,7 +47,7 @@ public class DefaultTracker : MonoBehaviour
 
     void Update()
     {
-        CalculateHeightBarValue();
+        if(!isDead)CalculateHeightBarValue();
         CalculateLookaheadPercentage();
         CalculateLookaheadValue();
         ApplyCalulations();
@@ -208,20 +210,32 @@ public class DefaultTracker : MonoBehaviour
         if (Mathf.Abs(groundLevel - playerTransform.Item.position.y) <= groundDifferenceDeadZone
             || playerTransform.Item.position.y < groundLevel)
             return;
-        StartCoroutine(TransitionToNewGroundLevel());
+        StartCoroutine(TransitionToNewGroundLevel(playerTransform.Item.position.y));
         isInTransition = true;
     }
-    [SerializeField] float elapsedTime;
-    IEnumerator TransitionToNewGroundLevel()
+    IEnumerator TransitionToNewGroundLevel(float targetPosition)
     {
-        elapsedTime = 0f;
+        float elapsedTime = 0f;
+        Debug.Log("XD");
         while (elapsedTime <= transitionDuration)
         {
-            groundLevel = Mathf.Lerp(groundLevel, playerTransform.Item.position.y , elapsedTime / transitionDuration);
+            groundLevel = Mathf.Lerp(groundLevel, targetPosition, elapsedTime / transitionDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         isInTransition = false;
+    }
+
+    public void OnDeathAlingment()
+    {
+        isInTransition = true;
+        isDead = true;
+        StartCoroutine(TransitionToNewGroundLevel(respawnInfo.GetPosition().y));
+    }
+
+    public void PlayerRespawned()
+    {
+        isDead = false;
     }
 
     void InAirCalculation()

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6030121619847788068}
   - component: {fileID: 166269779481442125}
+  - component: {fileID: 4165646313386730845}
+  - component: {fileID: 9001075435671610261}
   m_Layer: 0
   m_Name: Default Tracker
   m_TagString: Untagged
@@ -61,11 +63,67 @@ MonoBehaviour:
   heightBarHeight: 3.6
   groundLevel: 0
   isGrounded: {fileID: 11400000, guid: 0e9e328acd0c8e4439dd1113587d53a8, type: 2}
+  respawnInfo: {fileID: 11400000, guid: 6e872585aa70e89428edc01850a1e832, type: 2}
   groundDifferenceDeadZone: 0.36
   transitionDuration: 0.6
   isFirstGroundCall: 0
   isInTransition: 0
-  elapsedTime: 0
+--- !u!114 &4165646313386730845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257206130942937016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cd74228b52d04d8b6bb376f90cb0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cbdf1a9d78be43d40a1a28557c23089a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 166269779481442125}
+        m_TargetAssemblyTypeName: DefaultTracker, Assembly-CSharp
+        m_MethodName: OnDeathAlingment
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9001075435671610261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257206130942937016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cd74228b52d04d8b6bb376f90cb0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 3555e2cd2ca2f674ebff5810d2c03c37, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 166269779481442125}
+        m_TargetAssemblyTypeName: DefaultTracker, Assembly-CSharp
+        m_MethodName: PlayerRespawned
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &791096907853345283
 GameObject:
   m_ObjectHideFlags: 0

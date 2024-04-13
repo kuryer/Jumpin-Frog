@@ -894,6 +894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 2577360799944384555}
   rb: {fileID: 7346958207031562706}
+  deathWaitTime: 0.6
   teleportWaitTime: 0.6
   respawnWaitTime: 0.6
   GravityController: {fileID: 770699655851860217}
@@ -905,9 +906,11 @@ MonoBehaviour:
   RespawnInfo: {fileID: 11400000, guid: 6e872585aa70e89428edc01850a1e832, type: 2}
   isInRespawnAnimation: {fileID: 11400000, guid: 1e21de50aa0b8574793315f20e06a2b4, type: 2}
   respawnAnimationDuration: 0.6
+  OnRespawnEvent: {fileID: 11400000, guid: 3555e2cd2ca2f674ebff5810d2c03c37, type: 2}
   animationController: {fileID: 2111167583096790334}
   DeathAnimation: {fileID: 11400000, guid: ba21c2fb1019bb14cbbe326cd732fa45, type: 2}
   RespawnAnimation: {fileID: 11400000, guid: 48f6fee7a5e6fb1428f320e21b25439d, type: 2}
+  OnDeathTeleportEvent: {fileID: 11400000, guid: cbdf1a9d78be43d40a1a28557c23089a, type: 2}
 --- !u!114 &5068184556454038203
 MonoBehaviour:
   m_ObjectHideFlags: 0
