@@ -77895,6 +77895,14 @@ PrefabInstance:
       propertyPath: MaxDistance
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 4655260053776782787, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 53a439117a403a54ca4ad95575a7a323, type: 2}
+    - target: {fileID: 5857487965768605099, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6306350216701523298, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
       propertyPath: m_Name
       value: New Player
@@ -78166,6 +78174,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 166269779481442125, guid: 1ed27f50fac540a4ba24690edd02ad53, type: 3}
+      propertyPath: transitionDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 791096907853345283, guid: 1ed27f50fac540a4ba24690edd02ad53, type: 3}
       propertyPath: m_Name
       value: Camera Manager

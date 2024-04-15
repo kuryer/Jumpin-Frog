@@ -210,9 +210,22 @@ public class DefaultTracker : MonoBehaviour
         if (Mathf.Abs(groundLevel - playerTransform.Item.position.y) <= groundDifferenceDeadZone
             || playerTransform.Item.position.y < groundLevel)
             return;
-        StartCoroutine(TransitionToNewGroundLevel(playerTransform.Item.position.y));
+        StartCoroutine(TransitionToPlayerPosition());
         isInTransition = true;
     }
+
+    IEnumerator TransitionToPlayerPosition()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime <= transitionDuration)
+        {
+            groundLevel = Mathf.Lerp(groundLevel, playerTransform.Item.transform.position.y, elapsedTime / transitionDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        isInTransition = false;
+    }
+
     IEnumerator TransitionToNewGroundLevel(float targetPosition)
     {
         float elapsedTime = 0f;
