@@ -6,7 +6,7 @@ public class AnimationController : MonoBehaviour
     [Header("Sprite Flip")]
     [SerializeField] SpriteRenderer SpriteRenderer;
     [SerializeField] MovementStateVariable ActualState;
-
+    [SerializeField] bool RightFlipDefault;
     [Header("Animation Management")]
     [SerializeField] Animator animator;
     [SerializeField] AnimationStateVariable ActualAnimation;
@@ -23,8 +23,17 @@ public class AnimationController : MonoBehaviour
         float x = context.ReadValue<Vector2>().x;
         if (x == 0 || !context.performed || ActualState.Value is SwingMovementState)
             return;
-        if((SpriteRenderer.flipX && x > 0) || (!SpriteRenderer.flipX && x < 0))
-            SpriteRenderer.flipX = !SpriteRenderer.flipX;
+        if (RightFlipDefault)
+        {
+            if((SpriteRenderer.flipX && x > 0) || (!SpriteRenderer.flipX && x < 0))
+                SpriteRenderer.flipX = !SpriteRenderer.flipX;
+
+        }
+        else
+        {
+            if ((SpriteRenderer.flipX && x < 0) || (!SpriteRenderer.flipX && x > 0))
+                SpriteRenderer.flipX = !SpriteRenderer.flipX;
+        }
     }
 
     public void SetSpriteFlip(bool newFlipX)
