@@ -22,6 +22,10 @@ public class BasicJumpController : MonoBehaviour
     [Header("Animation Management")]
     [SerializeField] AnimationController AnimationController;
     [SerializeField] AnimationState JumpAnimationState;
+
+    [Header("Gravity Management")]
+    [SerializeField] GravityControllerRuntimeValue gravityController;
+    [SerializeField] GravityState InAirGravityState;
     void Update()
     {
         BasicJumpCheck();
@@ -36,6 +40,7 @@ public class BasicJumpController : MonoBehaviour
     public void BasicJump(float jumpForce)
     {
         BodyTypeCheck();
+        gravityController.Item.ChangeGravity(InAirGravityState);
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         BuffersController.ResetJumpBuffer();

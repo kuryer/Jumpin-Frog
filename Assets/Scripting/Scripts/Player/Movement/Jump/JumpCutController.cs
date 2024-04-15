@@ -9,7 +9,7 @@ public class JumpCutController : MonoBehaviour
 
     private void Awake()
     {
-        this.enabled = false;
+        enabled = false;
     }
 
     public void JumpCut(InputAction.CallbackContext context)
@@ -19,7 +19,7 @@ public class JumpCutController : MonoBehaviour
         if(rb.velocity.y > 0.1f)
         {
             rb.AddForce(Vector2.down * rb.velocity.y * playerVariables.JumpCutMultiplier, ForceMode2D.Impulse);
-            this.enabled = false;
+            enabled = false;
         }
     }
 }

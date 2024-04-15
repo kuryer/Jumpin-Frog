@@ -356,7 +356,7 @@ MonoBehaviour:
         m_MethodName: ChangeGravity
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: a4611af116efbeb4598f3a4966371bbf, type: 2}
           m_ObjectArgumentAssemblyTypeName: GravityState, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -499,6 +499,8 @@ MonoBehaviour:
   GroundDetection: {fileID: 2000967172125735426}
   AnimationController: {fileID: 2111167583096790334}
   JumpAnimationState: {fileID: 11400000, guid: f2c552d754901174483cc25a54ff27a9, type: 2}
+  gravityController: {fileID: 11400000, guid: f7714cdb46c0b55409c1a500a98099a2, type: 2}
+  InAirGravityState: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
 --- !u!114 &1767983977923734243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +710,8 @@ MonoBehaviour:
   rb: {fileID: 7346958207031562706}
   GroundCameraStateEvent: {fileID: 11400000, guid: e63b0f8c79f770247a6d974842e0d9b1, type: 2}
   InAirCameraStateEvent: {fileID: 11400000, guid: e4210de61a1d6b84e9a7ad7536de291e, type: 2}
+  gravityController: {fileID: 11400000, guid: f7714cdb46c0b55409c1a500a98099a2, type: 2}
+  InAirGravityState: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
 --- !u!114 &5769847918584991988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1419,7 +1423,7 @@ Rigidbody2D:
   m_Mass: 5
   m_LinearDrag: 0.8
   m_AngularDrag: 0
-  m_GravityScale: 1.8
+  m_GravityScale: 5
   m_Material: {fileID: 6200000, guid: 2419a0ced13671641942af835df0774b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1520,7 +1524,7 @@ Animator:
   m_GameObject: {fileID: 6306350216701523298}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 69d38345a9553d94c852e4f2f83485f3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 53a439117a403a54ca4ad95575a7a323, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
