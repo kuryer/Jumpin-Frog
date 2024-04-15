@@ -29,6 +29,10 @@ public class GroundDetection : MonoBehaviour
     [SerializeField] CameraStateEvent GroundCameraStateEvent;
     [SerializeField] CameraStateEvent InAirCameraStateEvent;
 
+    [Header("Gravity Management")]
+    [SerializeField] GravityControllerRuntimeValue gravityController;
+    [SerializeField] GravityState InAirGravityState;
+
     private void Awake()
     {
         groundCheckDelegate = DefaultCheck;
@@ -59,6 +63,7 @@ public class GroundDetection : MonoBehaviour
     void InAirCall()
     {
         BodyTypeCheck();
+        gravityController.Item.ChangeGravity(InAirGravityState);
         isGrounded.Value = false;
         StateMachine.ChangeState(InAirMovementState);
         InAirEvent.Raise();

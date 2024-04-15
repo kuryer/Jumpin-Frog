@@ -77851,6 +77851,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2000967172125735426, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: GroundedGravityState
+      value: 
+      objectReference: {fileID: 11400000, guid: a4611af116efbeb4598f3a4966371bbf, type: 2}
     - target: {fileID: 3233951928845038206, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
       propertyPath: m_LocalPosition.x
       value: 719.1
@@ -77895,10 +77899,6 @@ PrefabInstance:
       propertyPath: MaxDistance
       value: 500
       objectReference: {fileID: 0}
-    - target: {fileID: 4655260053776782787, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 53a439117a403a54ca4ad95575a7a323, type: 2}
     - target: {fileID: 5857487965768605099, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
       propertyPath: m_FlipX
       value: 0
