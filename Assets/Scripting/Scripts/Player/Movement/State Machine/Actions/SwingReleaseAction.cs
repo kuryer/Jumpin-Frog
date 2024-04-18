@@ -3,9 +3,11 @@ using UnityEngine.InputSystem;
 
 public class SwingReleaseAction : MonoBehaviour
 {
+    [SerializeField] PlayerMovementVariables playerVariables;
+
     [Header("Swing Data")]
     [SerializeField] SwingVariable ActualSwing;
-    Vector2 SwingPosition;
+    Vector3 SwingPosition;
     
     [Header("Swing Release")]
     [SerializeField] TongueRenderer TongueRenderer;
@@ -13,6 +15,7 @@ public class SwingReleaseAction : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] GravityController GravityController;
     [SerializeField] GravityState NormalGravity;
+    [SerializeField] float angle;
 
     [Header("Scene Management")]
     [SerializeField] MovementStateMachine StateMachine;
@@ -25,7 +28,9 @@ public class SwingReleaseAction : MonoBehaviour
 
     void SwingReleaseCheck()
     {
-        if (transform.position.y > SwingPosition.y)
+        Vector2 dir = transform.parent.position - SwingPosition;
+        angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (angle < playerVariables.maxLeftUpperAngle && angle > playerVariables.maxRightUpperAngle)
             SwingRelease();
     }
 
