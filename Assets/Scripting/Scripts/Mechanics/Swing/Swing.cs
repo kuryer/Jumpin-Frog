@@ -189,13 +189,14 @@ public class Swing : MonoBehaviour
                 onRight = Color.white;
                 return;
             }
-            float angle = Vector2.Angle(player.position - transform.position, Vector2.right);
-            if (angle > playerVariables.maxLeftAngle)
+            Vector2 dir = player.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            if (playerVariables.IsInLeftSwingJumpArea(angle))
                 onLeft = playerVariables.inSwingJumpAreaColor;
             else
                 onLeft = Color.white;
-
-            if (angle < playerVariables.maxRightAngle)
+            
+            if (playerVariables.IsInRightSwingJumpArea(angle))
                 onRight = playerVariables.inSwingJumpAreaColor;
             else
                 onRight = Color.white;
@@ -227,7 +228,10 @@ public class Swing : MonoBehaviour
     void DrawRightDetection()
     {
         Gizmos.color = onRight;
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(SwingCollider.radius, 0f));
+        Vector3 upperAngledPos = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (playerVariables.upperDetectionAreaAngle)),
+            Mathf.Sin(Mathf.Deg2Rad * (playerVariables.upperDetectionAreaAngle)));
+        upperAngledPos *= SwingCollider.radius;
+        Gizmos.DrawLine(transform.position, transform.position + upperAngledPos);
         Vector3 angledPos =new Vector3(Mathf.Cos(Mathf.Deg2Rad * (-playerVariables.DetectionAreaAngle)),
              Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.DetectionAreaAngle)));
         angledPos *= SwingCollider.radius;
@@ -238,7 +242,11 @@ public class Swing : MonoBehaviour
     void DrawLeftDetection()
     {
         Gizmos.color = onLeft;
-        Gizmos.DrawLine(transform.position, transform.position - new Vector3(SwingCollider.radius, 0f));
+        Vector3 upperAngledPos = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (-playerVariables.upperDetectionAreaAngle)),
+            Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.upperDetectionAreaAngle)));
+        upperAngledPos *= SwingCollider.radius;
+
+        Gizmos.DrawLine(transform.position, transform.position - upperAngledPos);
         Vector3 angledPos = new Vector3(-Mathf.Cos(Mathf.Deg2Rad * (-playerVariables.DetectionAreaAngle)),
              Mathf.Sin(Mathf.Deg2Rad * (-playerVariables.DetectionAreaAngle)));
         angledPos *= SwingCollider.radius;

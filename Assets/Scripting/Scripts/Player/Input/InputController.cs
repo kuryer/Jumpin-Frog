@@ -30,7 +30,6 @@ public class InputController : MonoBehaviour
             return;
         
         direction = direction.normalized;
-        Debug.Log(direction);
 
         foreach (StickInputRange range in InputRanges)
         {
@@ -40,18 +39,5 @@ public class InputController : MonoBehaviour
                 break;
             }
         }
-
-
-        //if(direction.y == 0 || direction.x == 0)
-        //{
-        //    ThrowDirection.Value = direction;
-        //    return;
-        //}
-        //else
-        //{
-        //    ThrowDirection.Value = new Vector2(.71f * Mathf.Sign(direction.x), .71f * Mathf.Sign(direction.y));
-        //    ThrowDirection.Value.x *= playerVariables.XThrowModifier;
-        //    ThrowDirection.Value.y *= playerVariables.YThrowModifier;
-        //}
     }
 }

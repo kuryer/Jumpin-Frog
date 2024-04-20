@@ -70,7 +70,7 @@ public class PlayerMovementVariables : ScriptableObject
 
     public bool IsInLeftSwingJumpArea(float angle)
     {
-        return angle > maxLeftUpperAngle && angle < -maxLeftAngle;
+        return angle > maxLeftUpperAngle || angle < -maxLeftAngle;
     }
 
     [Header("Swing Hang")]

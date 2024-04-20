@@ -33,9 +33,8 @@ public class SwingJumpController : MonoBehaviour
 
     bool AreaJumpCheck()
     {
-        //float angle = Vector2.Angle(transform.parent.position - ActualSwing.Value.transform.position, Vector2.right);
         Vector2 dir = transform.parent.position - ActualSwing.Value.transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         if (swingDirection.Value > 0)
             return playerVariables.IsInRightSwingJumpArea(angle);
         if(swingDirection.Value < 0)
@@ -47,6 +46,7 @@ public class SwingJumpController : MonoBehaviour
     {
         Vector2 direction = new Vector2(2 * swingDirection.Value * playerVariables.SwingJumpBalance,
                 2 * (1f - playerVariables.SwingJumpBalance));
+        Debug.Log("Swing Jump: " + direction * playerVariables.SwingJumpForce);
 
         rb.AddForce(direction * playerVariables.SwingJumpForce, ForceMode2D.Impulse);
     }

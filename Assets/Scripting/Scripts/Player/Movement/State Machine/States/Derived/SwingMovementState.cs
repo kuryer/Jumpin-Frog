@@ -63,7 +63,6 @@ public class SwingMovementState : MovementState
     {
         SwingMovementDisablerEvent.SetScripts(false);
         AnimationControllerValue.Item.ChangeAnimation(InAirRollAnimationState);
-        swingDirection.Value = 0;
     }
 
 
