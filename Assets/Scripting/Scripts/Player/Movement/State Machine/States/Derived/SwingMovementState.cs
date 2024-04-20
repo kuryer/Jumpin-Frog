@@ -18,6 +18,7 @@ public class SwingMovementState : MovementState
 
     [Header("Swing")]
     [SerializeField] SwingVariable ActualSwing;
+    [SerializeField] FloatVariable swingDirection;
     Rigidbody2D SwingRB;
     Transform SwingTransform;
     Vector2 SwingPosition;
@@ -33,8 +34,6 @@ public class SwingMovementState : MovementState
     [SerializeField] AnimationState SwingAnimationState;
     [SerializeField] AnimationState InAirRollAnimationState;
 
-    [Header("Swing Redesign")]
-    [SerializeField] float Direction;
     public override void OnEnter()
     {
         transform = rb.Item.transform;
@@ -64,7 +63,6 @@ public class SwingMovementState : MovementState
     {
         SwingMovementDisablerEvent.SetScripts(false);
         AnimationControllerValue.Item.ChangeAnimation(InAirRollAnimationState);
-        Direction = 0;
     }
 
 
@@ -80,12 +78,12 @@ public class SwingMovementState : MovementState
     void SwingingMovement()
     {
         if(rb.Item.velocity.sqrMagnitude < playerVariables.swingMaxSpd)
-            rb.Item.AddForce(playerVariables.swingAcceleration * transform.right * Direction);
+            rb.Item.AddForce(playerVariables.swingAcceleration * transform.right * swingDirection.Value);
     }
 
     public void SetSwingDirection(float direction)
     {
-        Direction = direction;
+        swingDirection.Value = direction;
     }
     #endregion
 }

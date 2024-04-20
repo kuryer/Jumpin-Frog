@@ -9,6 +9,7 @@ public class SwingJumpController : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] SwingReleaseAction SwingRelease;
+    [SerializeField] FloatVariable swingDirection;
 
     [Header("Jump Detection")]
     [SerializeField] SwingVariable ActualSwing;
@@ -23,56 +24,30 @@ public class SwingJumpController : MonoBehaviour
     {
         if (!context.started || !enabled)
             return;
-        bool swingCheck = SwingJumpCheck();
+        bool cached = AreaJumpCheck();
         SwingRelease.SwingRelease();
         //spawn Jump particles
-        if(swingCheck)
+        if(cached)
             SwingJump();
-    }
-
-    bool SwingJumpCheck()
-    {
-        if (playerVariables.hasJumpArea)
-            return AreaJumpCheck();
-        else
-            return VelocityJumpCheck();
     }
 
     bool AreaJumpCheck()
     {
-        float angle = Vector2.Angle(transform.parent.position - ActualSwing.Value.transform.position, Vector2.right);
-        if (angle > playerVariables.maxLeftAngle || angle < playerVariables.maxRightAngle)
-            return true;
-        return false;
-    }
-
-    bool VelocityJumpCheck()
-    {
-        if(rb.velocity.sqrMagnitude > playerVariables.thresholdVel)
-            return true;
+        Vector2 dir = transform.parent.position - ActualSwing.Value.transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (swingDirection.Value > 0)
+            return playerVariables.IsInRightSwingJumpArea(angle);
+        if(swingDirection.Value < 0)
+            return playerVariables.IsInLeftSwingJumpArea(angle);
         return false;
     }
 
     void SwingJump()
     {
-        Vector2 direction = new Vector2(SwingJumpDirectionX() * Mathf.Sign(rb.velocity.x) * playerVariables.SwingJumpBalance,
-                SwingJumpDirectionY() * (1f - playerVariables.SwingJumpBalance));
+        Vector2 direction = new Vector2(2 * swingDirection.Value * playerVariables.SwingJumpBalance,
+                2 * (1f - playerVariables.SwingJumpBalance));
+        Debug.Log("Swing Jump: " + direction * playerVariables.SwingJumpForce);
 
         rb.AddForce(direction * playerVariables.SwingJumpForce, ForceMode2D.Impulse);
-    }
-    float SwingJumpDirectionX()
-    {
-        if (Mathf.Abs(rb.velocity.x) > 2f)
-            return 2f;
-        else
-            return Mathf.Abs(rb.velocity.x);
-    }
-    float SwingJumpDirectionY()
-    {
-        if (rb.velocity.y < 0f)
-            return 0f;
-        if (rb.velocity.y > 2f)
-            return 2f;
-        return rb.velocity.y;
     }
 }

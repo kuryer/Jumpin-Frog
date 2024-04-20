@@ -77915,6 +77915,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7322066826270084857, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: swingDetection
+      value: 
+      objectReference: {fileID: 11400000, guid: 036fb7ebf5aa59d47b33b9b0305482ff, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

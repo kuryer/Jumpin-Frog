@@ -598,6 +598,7 @@ MonoBehaviour:
   rb: {fileID: 7346958207031562706}
   playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   SwingRelease: {fileID: 3280914791220826885}
+  swingDirection: {fileID: 11400000, guid: 036fb7ebf5aa59d47b33b9b0305482ff, type: 2}
   ActualSwing: {fileID: 11400000, guid: acd955f511423ee45a1c0ba9ed4965ae, type: 2}
 --- !u!114 &8407648604434541403
 MonoBehaviour:
@@ -1787,12 +1788,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8c786f45bd342439d9c8cfcf8a578d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerVariables: {fileID: 11400000, guid: fd63636eccfc88e4d90801ba777502a5, type: 2}
   ActualSwing: {fileID: 11400000, guid: acd955f511423ee45a1c0ba9ed4965ae, type: 2}
   TongueRenderer: {fileID: 5493717548407796997}
   TongueJoint: {fileID: 3608075781272399135}
   rb: {fileID: 7346958207031562706}
   GravityController: {fileID: 770699655851860217}
   NormalGravity: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
+  angle: 0
   StateMachine: {fileID: 3359117671504940329}
   InAirState: {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
 --- !u!114 &5493717548407796997

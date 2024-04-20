@@ -22,9 +22,6 @@ MonoBehaviour:
   InAirDecc: 1.5
   inAirPower: 1
   FallClampSpeed: 15.2
-  swingAcc: 5
-  swingDecc: 0.7
-  swingPower: 1
   swingMaxSpeed: 50
   swingAcceleration: 125
   swingCatchYPosRedirection: 3.9
@@ -38,9 +35,9 @@ MonoBehaviour:
   JumpCutMultiplier: 1.3
   SwingJumpForce: 50
   SwingJumpBalance: 0.5
-  hasJumpArea: 1
   ThresholdVelocity: 0
   DetectionAreaAngle: 22.6
+  upperDetectionAreaAngle: 13
   hangAngle: 37
   swingHangBar: 3.23
   hangVelocityThreshold: 3.7
