@@ -32,6 +32,7 @@ public class GroundDetection : MonoBehaviour
     [Header("Gravity Management")]
     [SerializeField] GravityControllerRuntimeValue gravityController;
     [SerializeField] GravityState InAirGravityState;
+    [SerializeField] CoyoteHangTimer coyoteHangTimer;
 
     private void Awake()
     {
@@ -63,7 +64,7 @@ public class GroundDetection : MonoBehaviour
     void InAirCall()
     {
         BodyTypeCheck();
-        gravityController.Item.ChangeGravity(InAirGravityState);
+        coyoteHangTimer.enabled = true;
         isGrounded.Value = false;
         StateMachine.ChangeState(InAirMovementState);
         InAirEvent.Raise();

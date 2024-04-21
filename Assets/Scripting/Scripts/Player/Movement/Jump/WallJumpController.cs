@@ -26,6 +26,8 @@ public class WallJumpController : MonoBehaviour
     [Header("Animation Management")]
     [SerializeField] AnimationController AnimationController;
     [SerializeField] AnimationState InAirRollAnimationState;
+
+
     void Update()
     {
         WallJumpCheck();
@@ -59,11 +61,13 @@ public class WallJumpController : MonoBehaviour
     {
         rb.AddForce(((Vector2.up * playerVariables.directionBalance) + (Vector2.right * (1f - playerVariables.directionBalance))) * playerVariables.wallJumpForce, ForceMode2D.Impulse);
         WallDetection.LeftWallJumped();
+        AnimationController.SetSpriteFlip(false);
     }
 
     void RightJump()
     {
         rb.AddForce(((Vector2.up * playerVariables.directionBalance) + (Vector2.left * (1f - playerVariables.directionBalance))) * playerVariables.wallJumpForce, ForceMode2D.Impulse);
         WallDetection.RightWallJumped();
+        AnimationController.SetSpriteFlip(true);
     }
 }

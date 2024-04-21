@@ -164,7 +164,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2111167583096790334}
         m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
-        m_MethodName: SpriteFlipCheck
+        m_MethodName: SpriteFlipCall
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -295,6 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3558393788252355272}
   - component: {fileID: 770699655851860217}
+  - component: {fileID: 6442767522492767349}
   - component: {fileID: 5867533713318305932}
   - component: {fileID: 4270925245155309400}
   - component: {fileID: 8015814489319676581}
@@ -335,6 +336,22 @@ MonoBehaviour:
   rb: {fileID: 7346958207031562706}
   ActualState: {fileID: 11400000, guid: 2e1a92015785b824f91a572ce80f5580, type: 2}
   RuntimeValue: {fileID: 11400000, guid: f7714cdb46c0b55409c1a500a98099a2, type: 2}
+--- !u!114 &6442767522492767349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2528701404712396250}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdaaf52769993b44a13eadf8a3b6cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hangTime: 0.12
+  gravityController: {fileID: 11400000, guid: f7714cdb46c0b55409c1a500a98099a2, type: 2}
+  coyoteHangGravity: {fileID: 11400000, guid: bdca80ddef87db342ae4673b4326aae4, type: 2}
+  inAirGravity: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
 --- !u!114 &5867533713318305932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +538,9 @@ MonoBehaviour:
   JumpCutController: {fileID: 6459244696061267953}
   AnimationController: {fileID: 2111167583096790334}
   JumpAnimationState: {fileID: 11400000, guid: f2c552d754901174483cc25a54ff27a9, type: 2}
+  gravityController: {fileID: 11400000, guid: f7714cdb46c0b55409c1a500a98099a2, type: 2}
+  InAirGravityState: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
+  hangTimer: {fileID: 6442767522492767349}
   InAirCameraStateEvent: {fileID: 11400000, guid: e4210de61a1d6b84e9a7ad7536de291e, type: 2}
 --- !u!114 &5883673875725368476
 MonoBehaviour:
@@ -713,6 +733,7 @@ MonoBehaviour:
   InAirCameraStateEvent: {fileID: 11400000, guid: e4210de61a1d6b84e9a7ad7536de291e, type: 2}
   gravityController: {fileID: 11400000, guid: f7714cdb46c0b55409c1a500a98099a2, type: 2}
   InAirGravityState: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
+  coyoteHangTimer: {fileID: 6442767522492767349}
 --- !u!114 &5769847918584991988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,6 +750,8 @@ MonoBehaviour:
   OnFallEvent: {fileID: 11400000, guid: ae9d2d9be0477044aa161ad78a158550, type: 2}
   isFalling: {fileID: 11400000, guid: 1346420021e25814e981e95cf049e1de, type: 2}
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
+  ActualGravityState: {fileID: 11400000, guid: 2e1a92015785b824f91a572ce80f5580, type: 2}
+  CoyoteHangGravity: {fileID: 11400000, guid: bdca80ddef87db342ae4673b4326aae4, type: 2}
   AnimationController: {fileID: 2111167583096790334}
   ActualAnimationState: {fileID: 11400000, guid: df2cdd26310fd1148a2625a61ad7da76, type: 2}
   FallAnimationState: {fileID: 11400000, guid: d988453000ee6684e92df582897e02bb, type: 2}
@@ -1398,7 +1421,7 @@ SpriteRenderer:
   m_SortingLayerID: 1184774389
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5c3c420c6a902984d9755219773f6d28, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 05f2ae14879ca25479ea4e48eab16774, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

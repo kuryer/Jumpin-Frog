@@ -19,6 +19,7 @@ public class OnWallMovement : MovementState
     [SerializeField] GravityControllerRuntimeValue gravityController;
     [SerializeField] GravityState WallGlideGravity;
     [SerializeField] GravityState WallGrabGravity;
+    [SerializeField] GravityState WallHangGravity;
     bool isFalling;
 
     [Header("Animation Management")]
@@ -52,6 +53,7 @@ public class OnWallMovement : MovementState
         ExitOnWallEvent.Raise(); //Changes gravity to normal
         isFalling = false;
         AnimationControllerValue.Item.ChangeAnimation(JumpAnimationState);
+        AnimationControllerValue.Item.SetSpriteFlip(DetectedWalls.Right);
     }
 
     #region Wall Grab Check
@@ -87,6 +89,9 @@ public class OnWallMovement : MovementState
         if (isFalling)
             return;
 
+        if (rb.Item.velocity.y < playerVariables.wallHangVelocity)
+            ChangeWallGravityToHang();
+
         if (rb.Item.velocity.y < playerVariables.wallGravityVelocityChange)
             ChangeWallGravityToGrab();
     }
@@ -95,6 +100,11 @@ public class OnWallMovement : MovementState
     {
         isFalling = true;
         gravityController.Item.ChangeGravity(WallGrabGravity);
+    }
+
+    void ChangeWallGravityToHang()
+    {
+        gravityController.Item.ChangeGravity(WallHangGravity);
     }
 
     #endregion

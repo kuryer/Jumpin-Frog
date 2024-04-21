@@ -6,6 +6,7 @@ public class AnimationController : MonoBehaviour
     [Header("Sprite Flip")]
     [SerializeField] SpriteRenderer SpriteRenderer;
     [SerializeField] MovementStateVariable ActualState;
+    float flipDirection;
     [Header("Animation Management")]
     [SerializeField] Animator animator;
     [SerializeField] AnimationStateVariable ActualAnimation;
@@ -17,13 +18,28 @@ public class AnimationController : MonoBehaviour
         ActualAnimation.Value = InitAnimationState;
     }
 
-    public void SpriteFlipCheck(InputAction.CallbackContext context)
+    private void Update()
     {
-        float x = context.ReadValue<Vector2>().x;
-        if (x == 0 || !context.performed || ActualState.Value is SwingMovementState)
+        SpriteFlipCheck();
+    }
+
+    public void SpriteFlipCall(InputAction.CallbackContext context)
+    {
+        flipDirection = context.ReadValue<Vector2>().x;
+    }
+
+    public void SpriteFlipCheck()
+    {
+        if (flipDirection == 0 || ActualState.Value is SwingMovementState)
             return;
-        if((SpriteRenderer.flipX && x > 0) || (!SpriteRenderer.flipX && x < 0))
+        if ((SpriteRenderer.flipX && flipDirection > 0) || (!SpriteRenderer.flipX && flipDirection < 0))
             SpriteRenderer.flipX = !SpriteRenderer.flipX;
+    }
+
+    public void SpriteFlipCheck(float flipDir)
+    {
+        flipDirection = flipDir;
+        SpriteFlipCheck();
     }
 
     public void SetSpriteFlip(bool newFlipX)
