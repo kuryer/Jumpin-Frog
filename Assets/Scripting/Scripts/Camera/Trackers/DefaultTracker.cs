@@ -11,11 +11,13 @@ public class DefaultTracker : MonoBehaviour
 
     [Header("Lookahead")]
     [SerializeField] FloatVariable X;
+    [SerializeField] MovementStateVariable ActualState;
     [Tooltip("No need for touching, do not touch")]
     float maxValueReachDuration = 6;
     [SerializeField] float maxLookahead;
     [SerializeField] bool smoothStopFunc;
     [SerializeField] float lookaheadPosPercentage;
+    [SerializeField] FloatVariable swingDirection;
     float lookaheadPosValue;
     float lookaheadValue;
     float moveDirection;
@@ -95,7 +97,7 @@ public class DefaultTracker : MonoBehaviour
     {
         if (maxValueReachDuration >= lookaheadPosValue)
         {
-            if (isTouchingWall || IsInVelocityDeadzone() || X.Value == 0 || !SameVelAndPosDirection)
+            if (isTouchingWall || IsInVelocityDeadzone() || X.Value == 0 || !SameVelAndPosDirection || (swingDirection.Value == 0 && ActualState.Value is SwingMovementState))
                 Decrease();
             else
                 Increase();
@@ -174,10 +176,8 @@ public class DefaultTracker : MonoBehaviour
         RaycastHit2D hitL = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.left, raycastDistance, validLayer);
         RaycastHit2D BlockerL = Physics2D.Raycast(playerTransform.Item.position + rayOffset, Vector2.left, raycastDistance);
 
-        bool castThruBlockerR = BlockerR.collider.gameObject.layer == blockingLayer;
-        bool castThruBlockerL = BlockerL.collider.gameObject.layer == blockingLayer;
-
-        if (hitR.collider != null) Debug.Log(hitR.collider.gameObject.name);
+        bool castThruBlockerR = BlockerR.collider is null ? false : BlockerR.collider.gameObject.layer == blockingLayer;
+        bool castThruBlockerL = BlockerL.collider is null ? false : BlockerL.collider.gameObject.layer == blockingLayer;
 
         isTouchingWall = (hitR.collider != null && !castThruBlockerR) || (hitL.collider != null && !castThruBlockerL);
     }

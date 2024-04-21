@@ -164,7 +164,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2111167583096790334}
         m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
-        m_MethodName: SpriteFlipCheck
+        m_MethodName: SpriteFlipCall
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

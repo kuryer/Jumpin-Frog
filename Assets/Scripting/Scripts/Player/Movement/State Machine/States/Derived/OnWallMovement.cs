@@ -52,6 +52,7 @@ public class OnWallMovement : MovementState
         ExitOnWallEvent.Raise(); //Changes gravity to normal
         isFalling = false;
         AnimationControllerValue.Item.ChangeAnimation(JumpAnimationState);
+        AnimationControllerValue.Item.SetSpriteFlip(DetectedWalls.Right);
     }
 
     #region Wall Grab Check

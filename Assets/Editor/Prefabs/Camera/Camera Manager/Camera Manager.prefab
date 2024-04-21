@@ -50,9 +50,11 @@ MonoBehaviour:
   playerRb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
   cameraVariables: {fileID: 11400000, guid: fca394da45219e943bf13c09065caec1, type: 2}
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
+  ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   maxLookahead: 8
   smoothStopFunc: 0
   lookaheadPosPercentage: 0
+  swingDirection: {fileID: 11400000, guid: 036fb7ebf5aa59d47b33b9b0305482ff, type: 2}
   validLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -65,7 +67,7 @@ MonoBehaviour:
   isGrounded: {fileID: 11400000, guid: 0e9e328acd0c8e4439dd1113587d53a8, type: 2}
   respawnInfo: {fileID: 11400000, guid: 6e872585aa70e89428edc01850a1e832, type: 2}
   groundDifferenceDeadZone: 0.36
-  transitionDuration: 0.6
+  transitionDuration: 1
   isFirstGroundCall: 0
   isInTransition: 0
 --- !u!114 &4165646313386730845

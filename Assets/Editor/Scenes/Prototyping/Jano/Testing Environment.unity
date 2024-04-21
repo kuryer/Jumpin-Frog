@@ -619,6 +619,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7401394233693290131, guid: 1ed27f50fac540a4ba24690edd02ad53, type: 3}
   m_PrefabInstance: {fileID: 7176581635172846016}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &945262845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2111167583096790334, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+  m_PrefabInstance: {fileID: 4984600480460488959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 272bce741e66a274ca506cfa3c83f1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1024404006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6030121619847788068, guid: 1ed27f50fac540a4ba24690edd02ad53, type: 3}
@@ -77855,6 +77866,42 @@ PrefabInstance:
       propertyPath: GroundedGravityState
       value: 
       objectReference: {fileID: 11400000, guid: a4611af116efbeb4598f3a4966371bbf, type: 2}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 945262845}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: a4b5b8ce9d97dca4f9ff9a30806d70fc, type: 2}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SpriteFlipCall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: OnDirectionChangeVelocityCheck
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: AnimationController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: GroundMovementState, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965052440935314692, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3233951928845038206, guid: b7097f7b9a6f1c14184e9f12fee66825, type: 3}
       propertyPath: m_LocalPosition.x
       value: 719.1
@@ -78178,10 +78225,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 166269779481442125, guid: 1ed27f50fac540a4ba24690edd02ad53, type: 3}
-      propertyPath: transitionDuration
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 791096907853345283, guid: 1ed27f50fac540a4ba24690edd02ad53, type: 3}
       propertyPath: m_Name
       value: Camera Manager
