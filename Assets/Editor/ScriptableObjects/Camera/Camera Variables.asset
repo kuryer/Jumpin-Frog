@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxGroundLookahead: 7
   smoothingValue: 1
-  lookaheadAcc: 3.5
-  lookaheadDecc: 5
+  lookaheadAcc: 2.5
+  lookaheadDecc: 2.5
   lookaheadWallDecc: 4
   lookaheadOverspeedDecc: 1
-  lookaheadStopDecc: 3.5
+  lookaheadStopDecc: 4.2
   minVelThreshold: 0.5
   minPosThreshold: 0.1

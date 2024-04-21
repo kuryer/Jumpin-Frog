@@ -12,10 +12,10 @@ public class DefaultTracker : MonoBehaviour
     [Header("Lookahead")]
     [SerializeField] FloatVariable X;
     [SerializeField] MovementStateVariable ActualState;
+    [SerializeField] AnimationCurve lookaheadCurve;
     [Tooltip("No need for touching, do not touch")]
     float maxValueReachDuration = 6;
     [SerializeField] float maxLookahead;
-    [SerializeField] bool smoothStopFunc;
     [SerializeField] float lookaheadPosPercentage;
     [SerializeField] FloatVariable swingDirection;
     float lookaheadPosValue;
@@ -71,28 +71,8 @@ public class DefaultTracker : MonoBehaviour
 
     void CalculateLookaheadValue()
     {
-        if (smoothStopFunc) SmoothStopFunction();
-        else SmoothAccelerateFunction();
+        lookaheadValue = maxLookahead * lookaheadCurve.Evaluate(lookaheadPosPercentage) * moveDirection;
     }
-
-    void SmoothStopFunction()
-    {
-        lookaheadValue = maxLookahead * (1 - SmoothPosition(1 - lookaheadPosPercentage)) * moveDirection;
-    }
-
-    void SmoothAccelerateFunction()
-    {
-        lookaheadValue = maxLookahead * SmoothPosition(lookaheadPosPercentage) * moveDirection;
-    }
-
-    float SmoothPosition(float rangePosition)
-    {
-        float result = rangePosition;
-        for (int i = 1; i < cameraVariables.smoothingValue; i++)
-            result *= rangePosition;
-        return result;
-    }
-
     void CalculateLookaheadPercentage()
     {
         if (maxValueReachDuration >= lookaheadPosValue)
