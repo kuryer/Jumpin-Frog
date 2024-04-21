@@ -27,10 +27,11 @@ MonoBehaviour:
   swingCatchYPosRedirection: 3.9
   slowValue: 3
   wallGrabClamp: 3.5
-  wallGravityVelocityChange: 0
+  wallGravityVelocityChange: -1.5
   wallGrabXForce: 0.5
   directionBalance: 0.6
   wallJumpForce: 200
+  wallHangVelocity: 0
   JumpForce: 125
   JumpCutMultiplier: 1.3
   SwingJumpForce: 50

@@ -26,6 +26,8 @@ public class WallJumpController : MonoBehaviour
     [Header("Animation Management")]
     [SerializeField] AnimationController AnimationController;
     [SerializeField] AnimationState InAirRollAnimationState;
+
+
     void Update()
     {
         WallJumpCheck();

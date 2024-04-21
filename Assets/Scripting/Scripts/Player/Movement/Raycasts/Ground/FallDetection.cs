@@ -6,7 +6,8 @@ public class FallDetection : MonoBehaviour
     [SerializeField] GameEvent OnFallEvent;
     [SerializeField] BoolVariable isFalling;
     [SerializeField] MovementStateVariable ActualState;
-
+    [SerializeField] GravityStateVariable ActualGravityState;
+    [SerializeField] GravityState CoyoteHangGravity;
     [Header("Animation Management")]
     [SerializeField] AnimationController AnimationController;
     [SerializeField] AnimationStateVariable ActualAnimationState;
@@ -17,6 +18,8 @@ public class FallDetection : MonoBehaviour
     [SerializeField] CameraStateEvent FallingCameraStateEvent;
     void Update()
     {
+        if (ActualGravityState.Value == CoyoteHangGravity)
+            return;
         FallCheck();
     }
 

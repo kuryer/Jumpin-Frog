@@ -16,6 +16,11 @@ public class CoyoteJumpController : MonoBehaviour
     [SerializeField] AnimationController AnimationController;
     [SerializeField] AnimationState JumpAnimationState;
 
+    [Header("Gravity Management")]
+    [SerializeField] GravityControllerRuntimeValue gravityController;
+    [SerializeField] GravityState InAirGravityState;
+    [SerializeField] CoyoteHangTimer hangTimer;
+
     [Header("Camera Playtesting")]
     [SerializeField] CameraStateEvent InAirCameraStateEvent;
     void Update()
@@ -31,7 +36,9 @@ public class CoyoteJumpController : MonoBehaviour
 
     void CoyoteJump()
     {
+        hangTimer.enabled = false;
         rb.velocity = new Vector2(rb.velocity.x, 0f);
+        gravityController.Item.ChangeGravity(InAirGravityState);
         rb.AddForce(Vector2.up * playerVariables.JumpForce, ForceMode2D.Impulse);
         ResetBuffers();
         JumpCutController.enabled = true;

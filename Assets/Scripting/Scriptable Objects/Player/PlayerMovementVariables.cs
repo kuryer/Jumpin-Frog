@@ -42,6 +42,7 @@ public class PlayerMovementVariables : ScriptableObject
     [Tooltip("1 means only Y Velocity, 0 means only X velocity")]
     public float directionBalance;
     public float wallJumpForce;
+    public float wallHangVelocity;
 
     [Header("Basic Jump")]
     public float JumpForce;

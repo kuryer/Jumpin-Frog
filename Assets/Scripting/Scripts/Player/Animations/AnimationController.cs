@@ -26,16 +26,12 @@ public class AnimationController : MonoBehaviour
     public void SpriteFlipCall(InputAction.CallbackContext context)
     {
         flipDirection = context.ReadValue<Vector2>().x;
-        //if (flipDirection == 0 || !context.performed || ActualState.Value is SwingMovementState)
-        //    return;
-        //SpriteFlipCheck();
     }
 
     public void SpriteFlipCheck()
     {
         if (flipDirection == 0 || ActualState.Value is SwingMovementState)
             return;
-        Debug.Log("halo");
         if ((SpriteRenderer.flipX && flipDirection > 0) || (!SpriteRenderer.flipX && flipDirection < 0))
             SpriteRenderer.flipX = !SpriteRenderer.flipX;
     }
