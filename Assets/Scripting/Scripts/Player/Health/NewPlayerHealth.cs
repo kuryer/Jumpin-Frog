@@ -1,10 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NewPlayerHealth : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] Collider2D playerCollider;
+    [SerializeField] List<Collider2D> playerColliders;
     [SerializeField] Rigidbody2D rb;
 
     [Header("Death Sequence")]
@@ -47,7 +48,7 @@ public class NewPlayerHealth : MonoBehaviour
     public void PlayerDeath()
     {
         animationController.ChangeAnimation(DeathAnimation);
-        playerCollider.enabled = false;
+        SetColliders(false);
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.velocity = Vector2.zero;
         GravityController.ChangeGravity(ZeroGravity);
@@ -74,7 +75,7 @@ public class NewPlayerHealth : MonoBehaviour
 
     void Respawn()
     {
-        playerCollider.enabled = true;
+        SetColliders(true);
         StateMachine.ChangeState(GroundMovementState);
         GravityController.ChangeGravity(NormalGravity);
         rb.bodyType = RigidbodyType2D.Dynamic;
@@ -88,6 +89,12 @@ public class NewPlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(respawnAnimationDuration);
         OnRespawnEvent.Raise();
         isInRespawnAnimation.Value = false;
+    }
+
+    void SetColliders(bool areActive)
+    {
+        foreach(Collider2D coll in playerColliders)
+            coll.enabled = areActive;
     }
 
 }

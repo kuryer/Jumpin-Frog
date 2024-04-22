@@ -11,10 +11,16 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] Vector3 rayPosition;
     [SerializeField] float onDetectionRayLength;
     [SerializeField] float interiorRayLength;
+    [SerializeField] Vector3 upperRaysOffset;
+    [SerializeField] float upperRaysLength;
 
     [Header("Platform Movement")]
-
-    [SerializeField] bool worksOnDetection; // znaczy ¿e dzia³a tylko jak sie na nim stoi
+    [Tooltip("Platform activates when the player steps on it")]
+    [SerializeField] bool worksOnDetection;
+    [Tooltip("If true immediately starts ggoing backwards, when player jumps of the platform")]
+    [SerializeField] bool isSensitive;
+    bool reachedEnd;
+    bool isAbovePlatform;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Vector3 moveTowardsPosition;
     [Range(1f, 4f)] [SerializeField]
@@ -47,27 +53,13 @@ public class MovingPlatform : MonoBehaviour
         loopMode = dataScript.loopMode;
     }
 
-    private void OnEnable()
+    public void OnPlayerDeath()
     {
-        SubscribeOnPlayerDeath();
+        if (worksOnDetection && !isGoingBack)
+            SetNextPoint();
     }
 
-    private void OnDisable()
-    {
-        UnsubscribeOnPlayerDeath();
-    }
-
-    void SubscribeOnPlayerDeath()
-    {
-        //if(worksOnDetection)
-        //    Helpers.PlayerHealth.OnPlayerDeath.AddListener(OnDetection_SetNextPoint);
-    }
-
-    void UnsubscribeOnPlayerDeath()
-    {
-        //if(worksOnDetection)
-        //    Helpers.PlayerHealth.OnPlayerDeath.RemoveListener(OnDetection_SetNextPoint);
-    }
+    bool isGoingBack;
 
     private void Setup()
     {
@@ -153,12 +145,13 @@ public class MovingPlatform : MonoBehaviour
 
     #region OnDetection
 
-
     void OnDetection_SetNextPoint_Forward()
     {
+        isGoingBack = false;
         if(currentPointNumber == lastPointNumber)
         {
             StopMoving();
+            reachedEnd = true;
             return;
         }
         currentPointNumber++;
@@ -168,6 +161,7 @@ public class MovingPlatform : MonoBehaviour
 
     void OnDetection_SetNextPoint_Backwards()
     {
+        isGoingBack = true;
         if (currentPointNumber == 0)
         {
             StopMoving();
@@ -175,30 +169,17 @@ public class MovingPlatform : MonoBehaviour
         }
         currentPointNumber--;
         currentPoint = destinationPoints[currentPointNumber];
+        reachedEnd = false;
         SetMoveTowardsPos();
     }
 
     void OnDetection_SetNextPoint()
     {
-        if (isStandingOnPlatform)
+        setNextPointUsed = false;
+        if (isStandingOnPlatform || isAbovePlatform)
             OnDetection_SetNextPoint_Forward();
         else OnDetection_SetNextPoint_Backwards();
     }
-    /*
-    //TO DO:
-        - getIndex, który nie moze zwrocic indexu poza tablic¹ <-- to bez sensu. Jakos wczesniej to sie powinno zablokowac
-        - 
-
-    int OnDetection_GetNextIndex(int direction)
-    {
-        if(direction > 0)
-        {
-
-        }
-    }
-    */
-
-
 
     #endregion
 
@@ -219,27 +200,39 @@ public class MovingPlatform : MonoBehaviour
 
 
     #region Raycast Detection
-
     void CastRay()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position + rayPosition, Vector3.right, onDetectionRayLength, player);
+
+        isAbovePlatform = Physics2D.Raycast(transform.position, Vector3.up, upperRaysLength, player) ||
+            Physics2D.Raycast(transform.position + upperRaysOffset, Vector3.up, upperRaysLength, player) ||
+            Physics2D.Raycast(transform.position - upperRaysOffset, Vector3.up, upperRaysLength, player) ||
+            Physics2D.Raycast(transform.position + (2 * upperRaysOffset), Vector3.up, upperRaysLength, player) ||
+            Physics2D.Raycast(transform.position - (2 * upperRaysOffset), Vector3.up, upperRaysLength, player) ||
+            Physics2D.Raycast(transform.position + (3 * upperRaysOffset), Vector3.up, upperRaysLength, player) ||
+            Physics2D.Raycast(transform.position - (3 * upperRaysOffset), Vector3.up, upperRaysLength, player);
 
         if (!isStandingOnPlatform && hit.collider != null)
         {
             platformRbValue.SetItem(rb);
 
             isStandingOnPlatform = true;
-            if (worksOnDetection)
+            if (worksOnDetection && !setNextPointUsed)
             {
                 SetNextPoint();
+                setNextPointUsed = true;
             }
         }
-        else if (isStandingOnPlatform && hit.collider == null)
+        else if (isStandingOnPlatform && hit.collider == null && !isAbovePlatform)
         {
             platformRbValue.NullItem();
             isStandingOnPlatform = false;
+            if (isSensitive || reachedEnd)
+                SetNextPoint();
         }
     }
+
+    bool setNextPointUsed;
 
     void CastInteriorRay()
     {
@@ -264,6 +257,16 @@ public class MovingPlatform : MonoBehaviour
         Vector3 addRadius = new Vector3(interiorRayLength / 2, 0f, 0f);
         Gizmos.DrawLine(transform.position + rayPosition, transform.position + rayPosition + addLength);
         Gizmos.DrawLine(transform.position - addRadius, transform.position + addRadius);
+        if (worksOnDetection)
+        {
+            Gizmos.DrawRay(transform.position, Vector3.up * upperRaysLength);
+            Gizmos.DrawRay(transform.position + upperRaysOffset, Vector3.up * upperRaysLength);
+            Gizmos.DrawRay(transform.position - upperRaysOffset, Vector3.up * upperRaysLength);
+            Gizmos.DrawRay(transform.position + (2 * upperRaysOffset), Vector3.up * upperRaysLength);
+            Gizmos.DrawRay(transform.position - (2 * upperRaysOffset), Vector3.up * upperRaysLength);
+            Gizmos.DrawRay(transform.position + (3 * upperRaysOffset), Vector3.up * upperRaysLength);
+            Gizmos.DrawRay(transform.position - (3 * upperRaysOffset), Vector3.up * upperRaysLength);    
+        }
     }
 
     #endregion
