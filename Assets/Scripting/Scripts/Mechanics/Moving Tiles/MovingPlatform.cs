@@ -17,8 +17,6 @@ public class MovingPlatform : MonoBehaviour
     [Header("Platform Movement")]
     [Tooltip("Platform activates when the player steps on it")]
     [SerializeField] bool worksOnDetection;
-    [Tooltip("If true immediately starts ggoing backwards, when player jumps of the platform")]
-    [SerializeField] bool isSensitive;
     bool reachedEnd;
     bool isAbovePlatform;
     [HideInInspector] public Rigidbody2D rb;
@@ -88,8 +86,8 @@ public class MovingPlatform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CastRay();
         CastInteriorRay();
+        CastRay();
     }
 
     #endregion
@@ -227,7 +225,7 @@ public class MovingPlatform : MonoBehaviour
         {
             platformRbValue.NullItem();
             isStandingOnPlatform = false;
-            if (isSensitive || reachedEnd)
+            if (reachedEnd)
                 SetNextPoint();
         }
     }
@@ -240,9 +238,7 @@ public class MovingPlatform : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(position, transform.right, interiorRayLength, destinationPointLayer);
 
         if (hit.collider != null && hit.collider.gameObject == currentPoint)
-        {
             SetNextPoint();
-        }
     }
 
     #endregion

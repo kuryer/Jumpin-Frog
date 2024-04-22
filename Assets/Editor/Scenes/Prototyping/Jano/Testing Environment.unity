@@ -638,6 +638,10 @@ PrefabInstance:
       propertyPath: destinationPoints.Array.data[3]
       value: 
       objectReference: {fileID: 56811997}
+    - target: {fileID: 7786775273934170580, guid: 524f681cef5e229499249425a0de9a96, type: 3}
+      propertyPath: isSensitive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7786775275155084890, guid: 524f681cef5e229499249425a0de9a96, type: 3}
       propertyPath: m_LocalPosition.x
       value: 772.74
