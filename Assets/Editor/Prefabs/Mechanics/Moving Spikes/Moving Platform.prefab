@@ -108,11 +108,13 @@ MonoBehaviour:
   rayPosition: {x: -1.75, y: 0.6, z: 0}
   onDetectionRayLength: 3.5
   interiorRayLength: 0.01
-  worksOnDetection: 0
+  upperRaysOffset: {x: 0.5, y: 0, z: 0}
+  upperRaysLength: 5.66
+  worksOnDetection: 1
+  isSensitive: 0
   rb: {fileID: 0}
   moveTowardsPosition: {x: 0, y: 0, z: 0}
   movingSpeed: 2
-  worksWithNewController: 1
   platformRbValue: {fileID: 11400000, guid: 773a60c51d66b7841af49af6db9a11da, type: 2}
 --- !u!114 &3016845966342129865
 MonoBehaviour:

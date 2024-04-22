@@ -920,7 +920,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feef37ad1cb64724fbfbbf18334ae841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollider: {fileID: 2577360799944384555}
+  playerColliders:
+  - {fileID: 2577360799944384555}
+  - {fileID: 2328060123997644015}
+  - {fileID: 6410034647057768951}
+  - {fileID: 6933341595321334598}
   rb: {fileID: 7346958207031562706}
   deathWaitTime: 0.6
   teleportWaitTime: 0.6

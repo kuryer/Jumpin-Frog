@@ -54,4 +54,9 @@ public class AnimationController : MonoBehaviour
         ActualAnimation.Value = animation;
         animator.Play(ActualAnimation.Value.AnimationName);
     }
+
+    private void OnDisable()
+    {
+        isInRespawnAnimation.Value = false;
+    }
 }
