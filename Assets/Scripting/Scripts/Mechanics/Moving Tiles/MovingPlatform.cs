@@ -81,6 +81,10 @@ public class MovingPlatform : MonoBehaviour
 
     #endregion
 
+    public void CallNextPoint()
+    {
+        SetNextPoint();
+    }
 
     #region Update
 
