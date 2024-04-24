@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformDetection : MonoBehaviour
@@ -8,7 +6,6 @@ public class PlatformDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Wpad³ w detection point");
         platformScript.CallNextPoint();
     }
 }

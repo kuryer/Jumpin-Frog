@@ -15,7 +15,7 @@ public class LethalCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (ActualState.Value is not DeadState)
+        if (collision.CompareTag("Player") || ActualState.Value is not DeadState)
             DeathEvent.Raise();
     }
 }

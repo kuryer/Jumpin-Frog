@@ -16,10 +16,14 @@ public class SwingReleaseAction : MonoBehaviour
     [SerializeField] GravityController GravityController;
     [SerializeField] GravityState NormalGravity;
     [SerializeField] float angle;
+    [SerializeField] int[] releaseCollisionLayers;
 
     [Header("Scene Management")]
     [SerializeField] MovementStateMachine StateMachine;
     [SerializeField] MovementState InAirState;
+
+    [Header("Death on Swing")]
+    [SerializeField] NewPlayerHealth playerHealth;
 
     void Update()
     {
@@ -65,9 +69,26 @@ public class SwingReleaseAction : MonoBehaviour
 
     #endregion
 
+    public void DeathOnSwing()
+    {
+        if (!enabled)
+            return;
+        SwingRelease();
+        playerHealth.PlayerDeath();
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (enabled)
-            SwingRelease();
+        if(!enabled)
+            return;
+
+        foreach(int i in releaseCollisionLayers)
+            if(collision.gameObject.layer == i)
+            { 
+                SwingRelease();
+                break; 
+            }
+
     }
 }

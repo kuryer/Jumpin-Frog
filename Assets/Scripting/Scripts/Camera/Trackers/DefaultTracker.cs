@@ -31,9 +31,12 @@ public class DefaultTracker : MonoBehaviour
 
     [Header("Height Bar")]
     [SerializeField] float heightBarHeight;
+    float heightBarValue;
     [SerializeField] float groundLevel;
     [SerializeField] BoolVariable isGrounded;
     [SerializeField] RespawnPointVariables respawnInfo;
+    [SerializeField] MovementStateVariable ActualMovementState;
+    [SerializeField] Rigidbody2DRuntimeValue platformRbValue;
 
     [Header("Height Diff Lerp")]
     [SerializeField] float groundDifferenceDeadZone;
@@ -41,15 +44,21 @@ public class DefaultTracker : MonoBehaviour
     [SerializeField] bool isFirstGroundCall;
     [SerializeField] bool isInTransition;
     bool isDead;
+
+    [Header("Debug Display")]
+    [SerializeField] bool isDebug;
+
     private void Start()
     {
         transform.localPosition = playerTransform.Item.position;
         groundLevel = transform.localPosition.y;
+        heightBarValue = heightBarHeight;
     }
 
     void Update()
     {
-        if(!isDead)CalculateHeightBarValue();
+        PlatformHeightBarCheck();
+        if (!isDead)CalculateHeightBarValue();
         CalculateLookaheadPercentage();
         CalculateLookaheadValue();
         ApplyCalulations();
@@ -166,9 +175,26 @@ public class DefaultTracker : MonoBehaviour
 
     #region Height Bar
 
+    void PlatformHeightBarCheck()
+    {
+        if(heightBarValue == heightBarHeight && platformRbValue.Item is not null)
+        {
+            heightBarValue = groundDifferenceDeadZone;
+            isFirstGroundCall = false;
+            StartCoroutine(TransitionToPlayerPosition());
+            isInTransition = true;
+            return;
+        }
+        if(heightBarValue == groundDifferenceDeadZone && platformRbValue.Item is null)
+        {
+            heightBarValue = heightBarHeight;
+            return;
+        }
+    }
+
     void CalculateHeightBarValue()
     {
-        if (isGrounded.Value)
+        if (ActualMovementState.Value is GroundMovementState && isGrounded.Value)
             GroundCalculation();
         else
             InAirCalculation();
@@ -186,7 +212,6 @@ public class DefaultTracker : MonoBehaviour
     void GroundDifferenceCheck()
     {
         isFirstGroundCall = false;
-
         if (Mathf.Abs(groundLevel - playerTransform.Item.position.y) <= groundDifferenceDeadZone
             || playerTransform.Item.position.y < groundLevel)
             return;
@@ -241,18 +266,23 @@ public class DefaultTracker : MonoBehaviour
             groundLevel = playerTransform.Item.position.y;
             return;
         }
-        float heightValue = value < heightBarHeight ? 0 : value - heightBarHeight;
+        float heightValue = value < heightBarValue ? 0 : value - heightBarValue;
         groundLevel += heightValue;
     }
 
     #endregion
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        if (playerTransform.Item != null)
+        if (isDebug)
         {
-            Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.right * raycastDistance);
-            Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.left * raycastDistance);
+            Gizmos.DrawRay(transform.position, new Vector3(0f, heightBarValue, 0f));
+
+            if (playerTransform.Item != null)
+            {
+                Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.right * raycastDistance);
+                Gizmos.DrawLine(transform.position + rayOffset, transform.position + rayOffset + Vector3.left * raycastDistance);
+            }
         }
     }
 }

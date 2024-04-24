@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3244810632458370170}
   - component: {fileID: 1411175822704827190}
   - component: {fileID: 681606079228789990}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Ground Left Small Slope
   m_TagString: Untagged
   m_Icon: {fileID: 0}

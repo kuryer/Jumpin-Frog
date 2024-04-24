@@ -44,6 +44,7 @@ public class MovingPlatform : MonoBehaviour
     }
     private void GetVariables()
     {
+        platformRbValue.NullItem();
         rb = GetComponent<Rigidbody2D>();
         var dataScript = GetComponent<MovingTile>();
         destinationPoints = dataScript.destinationPoints;
@@ -73,7 +74,6 @@ public class MovingPlatform : MonoBehaviour
                     SetNextPoint = Back2Back_SetNextPoint;
                     break;
             }
-            SetNextPoint();
             return;
         }
         SetNextPoint = OnDetection_SetNextPoint;
@@ -90,7 +90,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CastInteriorRay();
+        //CastInteriorRay();
         CastRay();
     }
 
@@ -179,7 +179,7 @@ public class MovingPlatform : MonoBehaviour
     {
         setNextPointUsed = false;
         if (isStandingOnPlatform || isAbovePlatform)
-            OnDetection_SetNextPoint_Forward();
+            OnDetection_SetNextPoint_Forward(); 
         else OnDetection_SetNextPoint_Backwards();
     }
 
@@ -235,15 +235,6 @@ public class MovingPlatform : MonoBehaviour
     }
 
     bool setNextPointUsed;
-
-    void CastInteriorRay()
-    {
-        Vector2 position = new Vector2(transform.position.x - (interiorRayLength / 2), transform.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(position, transform.right, interiorRayLength, destinationPointLayer);
-
-        if (hit.collider != null && hit.collider.gameObject == currentPoint)
-            SetNextPoint();
-    }
 
     #endregion
 
