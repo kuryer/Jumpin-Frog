@@ -94,14 +94,17 @@ MonoBehaviour:
   rayOffset: {x: 0, y: 0.51, z: 0}
   raycastDistance: 8.53
   isTouchingWall: 0
-  heightBarHeight: 3.6
+  heightBarHeight: 3.7
   groundLevel: 0
   isGrounded: {fileID: 11400000, guid: 0e9e328acd0c8e4439dd1113587d53a8, type: 2}
   respawnInfo: {fileID: 11400000, guid: 6e872585aa70e89428edc01850a1e832, type: 2}
+  ActualMovementState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
+  platformRbValue: {fileID: 11400000, guid: 773a60c51d66b7841af49af6db9a11da, type: 2}
   groundDifferenceDeadZone: 0.36
   transitionDuration: 1
   isFirstGroundCall: 0
   isInTransition: 0
+  isDebug: 0
 --- !u!114 &4165646313386730845
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -719,7 +719,7 @@ MonoBehaviour:
   RayDistance: 0.42
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 30728
+    m_Bits: 520
   isGrounded: {fileID: 11400000, guid: 0e9e328acd0c8e4439dd1113587d53a8, type: 2}
   OnGroundEvent: {fileID: 11400000, guid: 8077c973f9fdc224c801e1fb8a4b5e1c, type: 2}
   InAirEvent: {fileID: 11400000, guid: 65209257687e4c744accbc06e6f90a1d, type: 2}
@@ -772,23 +772,13 @@ MonoBehaviour:
   RayPosition: {x: -0.03, y: -0.7, z: 0}
   RayOffset: {x: -0.4, y: 0, z: 0}
   RayDistance: 0.38
-  LeftShortLayer:
+  SlopeLayer:
     serializedVersion: 2
-    m_Bits: 16384
-  RightShortLayer:
-    serializedVersion: 2
-    m_Bits: 8192
-  LeftLongLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  RightLongLayer:
-    serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 512
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   isOnSlopeVariable: {fileID: 11400000, guid: 8894445d99ef3ca4ea0357afbe13f9f5, type: 2}
   playerVariables: {fileID: 11400000, guid: c2d85ec264ce35d4f9d6be8d65ee0263, type: 2}
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
-  SlopeModifier: {fileID: 11400000, guid: 1c1dd13740697964a8399f2046eb6682, type: 2}
 --- !u!1 &3554780553980352100
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,6 +923,7 @@ MonoBehaviour:
   ZeroGravity: {fileID: 11400000, guid: 2ec8d41d53d6de3459d97757f4abe8a4, type: 2}
   NormalGravity: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
   StateMachine: {fileID: 3359117671504940329}
+  ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   DeathState: {fileID: 11400000, guid: 20863ced08dc8b74fbac0d2d6ef8d573, type: 2}
   GroundMovementState: {fileID: 11400000, guid: a4b5b8ce9d97dca4f9ff9a30806d70fc, type: 2}
   RespawnInfo: {fileID: 11400000, guid: 6e872585aa70e89428edc01850a1e832, type: 2}
@@ -1755,6 +1746,7 @@ GameObject:
   - component: {fileID: 3890340868709956393}
   - component: {fileID: 6836827513131682210}
   - component: {fileID: 6971066803359346349}
+  - component: {fileID: 8687451692523203871}
   m_Layer: 8
   m_Name: Swing
   m_TagString: Untagged
@@ -1823,8 +1815,10 @@ MonoBehaviour:
   GravityController: {fileID: 770699655851860217}
   NormalGravity: {fileID: 11400000, guid: e7cecbc79e136a0409230768a11ff40c, type: 2}
   angle: 0
+  releaseCollisionLayers: 030000000600000009000000
   StateMachine: {fileID: 3359117671504940329}
   InAirState: {fileID: 11400000, guid: 5f869ad21a458024699ee5ef3b0f7533, type: 2}
+  playerHealth: {fileID: 1154836497545800892}
 --- !u!114 &5493717548407796997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2040,6 +2034,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.90618896, y: 1.1277685}
   m_EdgeRadius: 0
+--- !u!114 &8687451692523203871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123447506649150427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26cd74228b52d04d8b6bb376f90cb0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ea475057504df9e4c90099cbda8d90eb, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3280914791220826885}
+        m_TargetAssemblyTypeName: SwingReleaseAction, Assembly-CSharp
+        m_MethodName: DeathOnSwing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7241763708231995993
 GameObject:
   m_ObjectHideFlags: 0

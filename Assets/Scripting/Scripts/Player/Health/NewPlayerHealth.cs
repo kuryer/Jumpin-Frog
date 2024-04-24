@@ -20,6 +20,7 @@ public class NewPlayerHealth : MonoBehaviour
 
     [Header("State Management")]
     [SerializeField] MovementStateMachine StateMachine;
+    [SerializeField] MovementStateVariable ActualState;
     [SerializeField] MovementState DeathState;
 
     [Header("Respawn")]
@@ -47,6 +48,8 @@ public class NewPlayerHealth : MonoBehaviour
 
     public void PlayerDeath()
     {
+        if (ActualState.Value is SwingMovementState)
+            return;
         animationController.ChangeAnimation(DeathAnimation);
         SetColliders(false);
         rb.bodyType = RigidbodyType2D.Kinematic;
