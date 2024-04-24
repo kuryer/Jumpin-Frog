@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1507682437318100038}
   - component: {fileID: 1507682437318100037}
   m_Layer: 3
-  m_Name: Crushin_Block
+  m_Name: OBSO_Crushin_Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
