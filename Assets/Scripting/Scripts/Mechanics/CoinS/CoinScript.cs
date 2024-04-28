@@ -29,7 +29,6 @@ public class CoinScript : MonoBehaviour
     {
         animator.Play(AnimationState.Coin_Collect.ToString());
         isCollected = true;
-        Helpers.DataManagerScript.AddCoin();
     }
 
     public void DeleteCoin()
