@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 5313153883182485299}
   - component: {fileID: 1006338970709784297}
   - component: {fileID: 7005002681870541329}
+  - component: {fileID: 5384604278902392927}
   m_Layer: 0
   m_Name: Camera Manager
   m_TagString: Untagged
@@ -293,6 +294,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: d02aab68a44b0da4ca6e4d74d668a23c, type: 2}
+  StateMachine: {fileID: 1508911916474208723}
+--- !u!114 &5384604278902392927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791096907853345283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc6ec18f40262b4491b2ebaa4ceba71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ea5f6e42943425d46bebbd146798a0a8, type: 2}
   StateMachine: {fileID: 1508911916474208723}
 --- !u!1 &7999595973878059765
 GameObject:
