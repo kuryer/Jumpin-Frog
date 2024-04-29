@@ -21,7 +21,7 @@ public class MovingPlatform : MonoBehaviour
     bool isAbovePlatform;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Vector3 moveTowardsPosition;
-    [Range(1f, 4f)] [SerializeField]
+    [Range(1f, 20f)] [SerializeField]
     float movingSpeed;
     int lastPointNumber;
     int currentPointNumber;
