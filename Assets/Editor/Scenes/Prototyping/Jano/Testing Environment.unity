@@ -263,6 +263,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1084351119
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 774.70593
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.1541677
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576478464664198582, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411643230276626485, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: rightSideThresholdEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: ea5f6e42943425d46bebbd146798a0a8, type: 2}
+    - target: {fileID: 6132486927792380596, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
+      propertyPath: m_Name
+      value: Camera Threshold Trigger
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3a1a51a48239f0b4b87ae65a3541ac51, type: 3}
 --- !u!1 &1093021567
 GameObject:
   m_ObjectHideFlags: 0
@@ -78087,3 +78148,4 @@ SceneRoots:
   - {fileID: 7176581635172846016}
   - {fileID: 6115903963135772927}
   - {fileID: 1079480492}
+  - {fileID: 1084351119}
