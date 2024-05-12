@@ -49,6 +49,7 @@ MonoBehaviour:
   playerTransform: {fileID: 11400000, guid: 51886accb557fa447aee83c288fde8f6, type: 2}
   playerRb: {fileID: 11400000, guid: 609499af0a381ba41b717dbdaf02546f, type: 2}
   cameraVariables: {fileID: 11400000, guid: fca394da45219e943bf13c09065caec1, type: 2}
+  trackerTransform: {fileID: 11400000, guid: 0da26cf5fab4f3b40a3f4ce72132732f, type: 2}
   X: {fileID: 11400000, guid: 91afdf62070cb1445bc74732407ecd79, type: 2}
   ActualState: {fileID: 11400000, guid: 6f05eab77a89e4a40bcfa0384485a272, type: 2}
   lookaheadCurve:
