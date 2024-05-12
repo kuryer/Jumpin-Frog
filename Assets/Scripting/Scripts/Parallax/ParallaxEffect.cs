@@ -21,8 +21,11 @@ public class ParallaxEffect : MonoBehaviour
 
     void Update()
     {
-        //transform.position = startPosition + travel * parallaxValue;
-        //smoothdamp na y tylko
-        transform.position = Vector3.SmoothDamp(transform.position, startPosition + travel * parallaxValue, ref velocity,smoothTime);
+        // nah stillo potrzebny damping na X ale oddzielny
+        Vector3 YPosition = new Vector3(0,transform.position.y, 0);
+        Vector3 YDifference = new Vector3(0, startPosition.y + travel.y * parallaxValue); 
+        float YDamp = Vector3.SmoothDamp(YPosition, YDifference, ref velocity, smoothTime).y;
+        float XPos = startPosition.x + travel.x * parallaxValue;
+        transform.position = new Vector3(XPos, YDamp, transform.position.z);
     }
 }
