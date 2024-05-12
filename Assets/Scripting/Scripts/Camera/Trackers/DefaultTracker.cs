@@ -53,6 +53,7 @@ public class DefaultTracker : MonoBehaviour
         transform.localPosition = playerTransform.Item.position;
         groundLevel = transform.localPosition.y;
         heightBarValue = heightBarHeight;
+
     }
 
     void Update()
